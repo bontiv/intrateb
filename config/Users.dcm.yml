@@ -1,0 +1,19 @@
+  Users:
+  type: entity
+  table: Users
+  id:
+    UserId:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    login:
+      type: string
+    password:
+      type: string
+    roles:
+      type: array
+    firstname:
+      type: string
+    lastname:
+      type: string

@@ -1,0 +1,10 @@
+{
+  "name": "bontiv",
+    "require": {
+        "doctrine/orm": "*",
+        "symfony/yaml": "2.*"
+    },
+    "autoload": {
+        "psr-0": {"": "src/"}
+    }
+}
