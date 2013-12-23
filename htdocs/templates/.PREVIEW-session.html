@@ -1,0 +1,41 @@
+<html><head>
+		<title>Session vendeur de machins</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+		</head><body>{literal}
+		<style type="text/css" >
+.active, .active a {
+	color:#FF00DB;
+	font-weight:bold;
+}
+
+</style>
+		{/literal}
+		<script type="text/javascript" >
+			function crytogun()
+			{ldelim}
+				var chain = My_Crypt(login.login.value + ":" + login.password.value);
+				login.password.value = My_Crypt(chain + "{$random}");
+			{rdelim}
+		</script>
+		<script type="text/javascript" src="crypt.js" >alert("Impossible de lancer l'algo de cryptage")</script>
+	
+	
+		{if $msg}
+			<p style="background-image:initial; background-repeat-x:no-repeat; background-repeat-y:no-repeat; background-repeat:no-repeat; background-attachment:initial; background-position:initial initial; background-position-x:initial; background-position-y:initial; background-origin:initial; background-clip:initial; background-color:#D26E7E; border-image:initial; border:1px solid #3F0009; padding:4px 3px 4px 3px; " >{$msg}</p>
+		{/if}
+		<form id="login" name="login" onsubmit="return crytogun()" method="POST" >
+			<table border="0" >
+				<tbody><tr>
+					<td>Utilisateur : </td>
+					<td><input type="text" name="login" /></td>
+				</tr>
+				<tr>
+					<td>Mot de passe : </td>
+					<td><input type="password" name="password" /></td>
+				</tr>
+			</tbody></table>
+			<input type="submit" value="OK" />
+		</form>
+	
+
+</body></html>
