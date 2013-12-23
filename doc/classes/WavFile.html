@@ -1,0 +1,1601 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>EpiceNote » \WavFile</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">EpiceNote</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/PHPMailer.html"><i class="icon-folder-open"></i> PHPMailer</a></li>
+<li><a href="../packages/PHPWavUtils.html"><i class="icon-folder-open"></i> PHPWavUtils</a></li>
+<li><a href="../packages/Securimage.html"><i class="icon-folder-open"></i> Securimage</a></li>
+<li><a href="../packages/Smarty.html"><i class="icon-folder-open"></i> Smarty</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">1085</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul>
+<li>todo 
+                <span class="label label-info">6</span>
+</li>
+<li>fixme 
+                <span class="label label-info">7</span>
+</li>
+</ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">7</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___clone" title="__clone :: "><span class="description">__clone()
+        </span><pre>__clone()</pre></a></li>
+<li class="method public "><a href="#method___construct" title="__construct :: WavFile Constructor."><span class="description">WavFile Constructor.</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method___destruct" title="__destruct :: "><span class="description">__destruct()
+        </span><pre>__destruct()</pre></a></li>
+<li class="method public "><a href="#method___toString" title="__toString :: Output the wav file headers and data."><span class="description">Output the wav file headers and data.</span><pre>__toString()</pre></a></li>
+<li class="method public "><a href="#method_appendWav" title="appendWav :: Append a wav file to the current wav."><span class="description">Append a wav file to the current wav.</span><pre>appendWav()</pre></a></li>
+<li class="method public "><a href="#method_closeWav" title="closeWav :: Close a with openWav() previously opened wav file or free the buffer of setWavData()."><span class="description">Close a with openWav() previously opened wav file or free the buffer of setWavData().</span><pre>closeWav()</pre></a></li>
+<li class="method public "><a href="#method_convertBitsPerSample" title="convertBitsPerSample :: Convert sample data to different bits per sample."><span class="description">Convert sample data to different bits per sample.</span><pre>convertBitsPerSample()</pre></a></li>
+<li class="method public "><a href="#method_degrade" title="degrade :: Degrade the quality of the wav file by introducing random noise."><span class="description">Degrade the quality of the wav file by introducing random noise.</span><pre>degrade()</pre></a></li>
+<li class="method public "><a href="#method_displayInfo" title="displayInfo :: Output information about the wav object."><span class="description">Output information about the wav object.</span><pre>displayInfo()</pre></a></li>
+<li class="method public "><a href="#method_filter" title="filter :: Run samples through audio processing filters."><span class="description">Run samples through audio processing filters.</span><pre>filter()</pre></a></li>
+<li class="method public "><a href="#method_generateNoise" title="generateNoise :: Generate noise at the end of the wav for the specified duration and volume."><span class="description">Generate noise at the end of the wav for the specified duration and volume.</span><pre>generateNoise()</pre></a></li>
+<li class="method public "><a href="#method_getActualSize" title="getActualSize :: "><span class="description">getActualSize()
+        </span><pre>getActualSize()</pre></a></li>
+<li class="method public "><a href="#method_getAudioFormat" title="getAudioFormat :: "><span class="description">getAudioFormat()
+        </span><pre>getAudioFormat()</pre></a></li>
+<li class="method public "><a href="#method_getAudioSubFormat" title="getAudioSubFormat :: "><span class="description">getAudioSubFormat()
+        </span><pre>getAudioSubFormat()</pre></a></li>
+<li class="method public "><a href="#method_getBitsPerSample" title="getBitsPerSample :: "><span class="description">getBitsPerSample()
+        </span><pre>getBitsPerSample()</pre></a></li>
+<li class="method public "><a href="#method_getBlockAlign" title="getBlockAlign :: "><span class="description">getBlockAlign()
+        </span><pre>getBlockAlign()</pre></a></li>
+<li class="method public "><a href="#method_getByteRate" title="getByteRate :: "><span class="description">getByteRate()
+        </span><pre>getByteRate()</pre></a></li>
+<li class="method public "><a href="#method_getChannelMask" title="getChannelMask :: "><span class="description">getChannelMask()
+        </span><pre>getChannelMask()</pre></a></li>
+<li class="method public "><a href="#method_getChunkSize" title="getChunkSize :: "><span class="description">getChunkSize()
+        </span><pre>getChunkSize()</pre></a></li>
+<li class="method public "><a href="#method_getDataOffset" title="getDataOffset :: "><span class="description">getDataOffset()
+        </span><pre>getDataOffset()</pre></a></li>
+<li class="method public "><a href="#method_getDataSize" title="getDataSize :: "><span class="description">getDataSize()
+        </span><pre>getDataSize()</pre></a></li>
+<li class="method public "><a href="#method_getDataSubchunk" title="getDataSubchunk :: Construct wav DATA chunk."><span class="description">Construct wav DATA chunk.</span><pre>getDataSubchunk()</pre></a></li>
+<li class="method public "><a href="#method_getFactChunkSize" title="getFactChunkSize :: "><span class="description">getFactChunkSize()
+        </span><pre>getFactChunkSize()</pre></a></li>
+<li class="method public "><a href="#method_getFmtChunkSize" title="getFmtChunkSize :: "><span class="description">getFmtChunkSize()
+        </span><pre>getFmtChunkSize()</pre></a></li>
+<li class="method public "><a href="#method_getFmtExtendedSize" title="getFmtExtendedSize :: "><span class="description">getFmtExtendedSize()
+        </span><pre>getFmtExtendedSize()</pre></a></li>
+<li class="method public "><a href="#method_getMaxAmplitude" title="getMaxAmplitude :: "><span class="description">getMaxAmplitude()
+        </span><pre>getMaxAmplitude()</pre></a></li>
+<li class="method public "><a href="#method_getMinAmplitude" title="getMinAmplitude :: "><span class="description">getMinAmplitude()
+        </span><pre>getMinAmplitude()</pre></a></li>
+<li class="method public "><a href="#method_getNumBlocks" title="getNumBlocks :: "><span class="description">getNumBlocks()
+        </span><pre>getNumBlocks()</pre></a></li>
+<li class="method public "><a href="#method_getNumChannels" title="getNumChannels :: "><span class="description">getNumChannels()
+        </span><pre>getNumChannels()</pre></a></li>
+<li class="method public "><a href="#method_getSampleBlock" title="getSampleBlock :: Return a single sample block from the file."><span class="description">Return a single sample block from the file.</span><pre>getSampleBlock()</pre></a></li>
+<li class="method public "><a href="#method_getSampleRate" title="getSampleRate :: "><span class="description">getSampleRate()
+        </span><pre>getSampleRate()</pre></a></li>
+<li class="method public "><a href="#method_getSampleValue" title="getSampleValue :: Get a float sample value for a specific sample block and channel number."><span class="description">Get a float sample value for a specific sample block and channel number.</span><pre>getSampleValue()</pre></a></li>
+<li class="method public "><a href="#method_getSamples" title="getSamples :: "><span class="description">getSamples()
+        </span><pre>getSamples()</pre></a></li>
+<li class="method public "><a href="#method_getValidBitsPerSample" title="getValidBitsPerSample :: "><span class="description">getValidBitsPerSample()
+        </span><pre>getValidBitsPerSample()</pre></a></li>
+<li class="method public "><a href="#method_getZeroAmplitude" title="getZeroAmplitude :: "><span class="description">getZeroAmplitude()
+        </span><pre>getZeroAmplitude()</pre></a></li>
+<li class="method public "><a href="#method_insertSilence" title="insertSilence :: Add silence to the wav file."><span class="description">Add silence to the wav file.</span><pre>insertSilence()</pre></a></li>
+<li class="method public "><a href="#method_makeHeader" title="makeHeader :: Construct a wav header from this object."><span class="description">Construct a wav header from this object.</span><pre>makeHeader()</pre></a></li>
+<li class="method public "><a href="#method_mergeWav" title="mergeWav :: Mix 2 wav files together."><span class="description">Mix 2 wav files together.</span><pre>mergeWav()</pre></a></li>
+<li class="method public "><a href="#method_normalizeSample" title="normalizeSample :: Normalizes a float audio sample."><span class="description">Normalizes a float audio sample.</span><pre>normalizeSample()</pre></a></li>
+<li class="method public "><a href="#method_openWav" title="openWav :: Reads a wav header and data from a file."><span class="description">Reads a wav header and data from a file.</span><pre>openWav()</pre></a></li>
+<li class="method public "><a href="#method_packSample" title="packSample :: Packs a single numeric sample to binary."><span class="description">Packs a single numeric sample to binary.</span><pre>packSample()</pre></a></li>
+<li class="method public "><a href="#method_packSampleBlock" title="packSampleBlock :: Packs an array of numeric channel samples to a binary sample block."><span class="description">Packs an array of numeric channel samples to a binary sample block.</span><pre>packSampleBlock()</pre></a></li>
+<li class="method public "><a href="#method_readWavData" title="readWavData :: Read the wav data from the file into the buffer."><span class="description">Read the wav data from the file into the buffer.</span><pre>readWavData()</pre></a></li>
+<li class="method public "><a href="#method_save" title="save :: Save the wav data to a file."><span class="description">Save the wav data to a file.</span><pre>save()</pre></a></li>
+<li class="method public "><a href="#method_setBitsPerSample" title="setBitsPerSample :: "><span class="description">setBitsPerSample()
+        </span><pre>setBitsPerSample()</pre></a></li>
+<li class="method public "><a href="#method_setChannelMask" title="setChannelMask :: "><span class="description">setChannelMask()
+        </span><pre>setChannelMask()</pre></a></li>
+<li class="method public "><a href="#method_setNumChannels" title="setNumChannels :: "><span class="description">setNumChannels()
+        </span><pre>setNumChannels()</pre></a></li>
+<li class="method public "><a href="#method_setSampleBlock" title="setSampleBlock :: Set a single sample block."><span class="description">Set a single sample block.</span><pre>setSampleBlock()</pre></a></li>
+<li class="method public "><a href="#method_setSampleRate" title="setSampleRate :: "><span class="description">setSampleRate()
+        </span><pre>setSampleRate()</pre></a></li>
+<li class="method public "><a href="#method_setSampleValue" title="setSampleValue :: Sets a float sample value for a specific sample block number and channel."><span class="description">Sets a float sample value for a specific sample block number and channel.</span><pre>setSampleValue()</pre></a></li>
+<li class="method public "><a href="#method_setSamples" title="setSamples :: "><span class="description">setSamples()
+        </span><pre>setSamples()</pre></a></li>
+<li class="method public "><a href="#method_setWavData" title="setWavData :: Set the wav file data and properties from a wav file in a string."><span class="description">Set the wav file data and properties from a wav file in a string.</span><pre>setWavData()</pre></a></li>
+<li class="method public "><a href="#method_unpackSample" title="unpackSample :: Unpacks a single binary sample to numeric value."><span class="description">Unpacks a single binary sample to numeric value.</span><pre>unpackSample()</pre></a></li>
+<li class="method public "><a href="#method_unpackSampleBlock" title="unpackSampleBlock :: Unpacks a binary sample block to numeric values."><span class="description">Unpacks a binary sample block to numeric values.</span><pre>unpackSampleBlock()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="method protected "><a href="#method_readWav" title="readWav :: Read wav file from a stream."><span class="description">Read wav file from a stream.</span><pre>readWav()</pre></a></li>
+<li class="method protected "><a href="#method_readWavHeader" title="readWavHeader :: Parse a wav header."><span class="description">Parse a wav header.</span><pre>readWavHeader()</pre></a></li>
+<li class="method protected "><a href="#method_setActualSize" title="setActualSize :: "><span class="description">setActualSize()
+        </span><pre>setActualSize()</pre></a></li>
+<li class="method protected "><a href="#method_setAudioFormat" title="setAudioFormat :: "><span class="description">setAudioFormat()
+        </span><pre>setAudioFormat()</pre></a></li>
+<li class="method protected "><a href="#method_setAudioSubFormat" title="setAudioSubFormat :: "><span class="description">setAudioSubFormat()
+        </span><pre>setAudioSubFormat()</pre></a></li>
+<li class="method protected "><a href="#method_setBlockAlign" title="setBlockAlign :: "><span class="description">setBlockAlign()
+        </span><pre>setBlockAlign()</pre></a></li>
+<li class="method protected "><a href="#method_setByteRate" title="setByteRate :: "><span class="description">setByteRate()
+        </span><pre>setByteRate()</pre></a></li>
+<li class="method protected "><a href="#method_setChunkSize" title="setChunkSize :: "><span class="description">setChunkSize()
+        </span><pre>setChunkSize()</pre></a></li>
+<li class="method protected "><a href="#method_setDataOffset" title="setDataOffset :: "><span class="description">setDataOffset()
+        </span><pre>setDataOffset()</pre></a></li>
+<li class="method protected "><a href="#method_setDataSize" title="setDataSize :: "><span class="description">setDataSize()
+        </span><pre>setDataSize()</pre></a></li>
+<li class="method protected "><a href="#method_setFactChunkSize" title="setFactChunkSize :: "><span class="description">setFactChunkSize()
+        </span><pre>setFactChunkSize()</pre></a></li>
+<li class="method protected "><a href="#method_setFmtChunkSize" title="setFmtChunkSize :: "><span class="description">setFmtChunkSize()
+        </span><pre>setFmtChunkSize()</pre></a></li>
+<li class="method protected "><a href="#method_setFmtExtendedSize" title="setFmtExtendedSize :: "><span class="description">setFmtExtendedSize()
+        </span><pre>setFmtExtendedSize()</pre></a></li>
+<li class="method protected "><a href="#method_setNumBlocks" title="setNumBlocks :: "><span class="description">setNumBlocks()
+        </span><pre>setNumBlocks()</pre></a></li>
+<li class="method protected "><a href="#method_setValidBitsPerSample" title="setValidBitsPerSample :: "><span class="description">setValidBitsPerSample()
+        </span><pre>setValidBitsPerSample()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul></ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="property protected "><a href="#property_LOOKUP_LOGBASE" title="$LOOKUP_LOGBASE :: "><span class="description">Log base modifier lookup table for a given threshold (in 0.05 steps) used by normalizeSample. Adjusts the slope (1st derivative) of the log function at the threshold to 1 for a smooth transition from linear to logarithmic amplitude output.</span><pre>$LOOKUP_LOGBASE</pre></a></li>
+<li class="property protected "><a href="#property__actualSize" title="$_actualSize :: "><span class="description">The actual physical file size</span><pre>$_actualSize</pre></a></li>
+<li class="property protected "><a href="#property__audioFormat" title="$_audioFormat :: "><span class="description">The audio format - WavFile::WAVE_FORMAT_*</span><pre>$_audioFormat</pre></a></li>
+<li class="property protected "><a href="#property__audioSubFormat" title="$_audioSubFormat :: "><span class="description">The audio subformat - WavFile::WAVE_SUBFORMAT_*</span><pre>$_audioSubFormat</pre></a></li>
+<li class="property protected "><a href="#property__bitsPerSample" title="$_bitsPerSample :: "><span class="description">Number of bits per sample</span><pre>$_bitsPerSample</pre></a></li>
+<li class="property protected "><a href="#property__blockAlign" title="$_blockAlign :: "><span class="description">NumChannels * BitsPerSample/8</span><pre>$_blockAlign</pre></a></li>
+<li class="property protected "><a href="#property__byteRate" title="$_byteRate :: "><span class="description">Bytes per second</span><pre>$_byteRate</pre></a></li>
+<li class="property protected "><a href="#property__channelMask" title="$_channelMask :: "><span class="description">The channel mask</span><pre>$_channelMask</pre></a></li>
+<li class="property protected "><a href="#property__chunkSize" title="$_chunkSize :: "><span class="description">The size of the file in RIFF header</span><pre>$_chunkSize</pre></a></li>
+<li class="property protected "><a href="#property__dataOffset" title="$_dataOffset :: "><span class="description">Starting offset of data chunk</span><pre>$_dataOffset</pre></a></li>
+<li class="property protected "><a href="#property__dataSize" title="$_dataSize :: "><span class="description">Size of the data chunk</span><pre>$_dataSize</pre></a></li>
+<li class="property protected "><a href="#property__dataSize_fp" title="$_dataSize_fp :: "><span class="description">Size of the data chunk in the opened wav file</span><pre>$_dataSize_fp</pre></a></li>
+<li class="property protected "><a href="#property__dataSize_valid" title="$_dataSize_valid :: "><span class="description">Does _dataSize really reflect strlen($_samples)? Case when a wav file is read with readData = false</span><pre>$_dataSize_valid</pre></a></li>
+<li class="property protected "><a href="#property__factChunkSize" title="$_factChunkSize :: "><span class="description">The size of the "fact" chunk</span><pre>$_factChunkSize</pre></a></li>
+<li class="property protected "><a href="#property__fmtChunkSize" title="$_fmtChunkSize :: "><span class="description">The size of the "fmt " chunk</span><pre>$_fmtChunkSize</pre></a></li>
+<li class="property protected "><a href="#property__fmtExtendedSize" title="$_fmtExtendedSize :: "><span class="description">The size of the extended "fmt " data</span><pre>$_fmtExtendedSize</pre></a></li>
+<li class="property protected "><a href="#property__fp" title="$_fp :: "><span class="description">The file pointer used for reading wavs from file or memory</span><pre>$_fp</pre></a></li>
+<li class="property protected "><a href="#property__numBlocks" title="$_numBlocks :: "><span class="description">Number of sample blocks</span><pre>$_numBlocks</pre></a></li>
+<li class="property protected "><a href="#property__numChannels" title="$_numChannels :: "><span class="description">Number of channels in the audio file</span><pre>$_numChannels</pre></a></li>
+<li class="property protected "><a href="#property__sampleRate" title="$_sampleRate :: "><span class="description">Samples per second</span><pre>$_sampleRate</pre></a></li>
+<li class="property protected "><a href="#property__samples" title="$_samples :: "><span class="description">Binary string of samples</span><pre>$_samples</pre></a></li>
+<li class="property protected "><a href="#property__validBitsPerSample" title="$_validBitsPerSample :: "><span class="description">Number of valid bits per sample</span><pre>$_validBitsPerSample</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-constant"></i> Constants
+                    <ul>
+<li class="constant  "><a href="#constant_FILTER_DEGRADE" title="FILTER_DEGRADE :: "><span class="description">&lt;p&gt;Filter flag for degrading audio data&lt;/p&gt;</span><pre>FILTER_DEGRADE</pre></a></li>
+<li class="constant  "><a href="#constant_FILTER_MIX" title="FILTER_MIX :: "><span class="description">&lt;p&gt;Filter flag for mixing two files&lt;/p&gt;</span><pre>FILTER_MIX</pre></a></li>
+<li class="constant  "><a href="#constant_FILTER_NORMALIZE" title="FILTER_NORMALIZE :: "><span class="description">&lt;p&gt;Filter flag for normalizing audio data&lt;/p&gt;</span><pre>FILTER_NORMALIZE</pre></a></li>
+<li class="constant  "><a href="#constant_MAX_CHANNEL" title="MAX_CHANNEL :: "><span class="description">&lt;p&gt;Maximum number of channels&lt;/p&gt;</span><pre>MAX_CHANNEL</pre></a></li>
+<li class="constant  "><a href="#constant_MAX_SAMPLERATE" title="MAX_SAMPLERATE :: "><span class="description">&lt;p&gt;Maximum sample rate&lt;/p&gt;</span><pre>MAX_SAMPLERATE</pre></a></li>
+<li class="constant  "><a href="#constant_SPEAKER_ALL" title="SPEAKER_ALL :: "><span class="description">SPEAKER_ALL</span><pre>SPEAKER_ALL</pre></a></li>
+<li class="constant  "><a href="#constant_SPEAKER_BACK_CENTER" title="SPEAKER_BACK_CENTER :: "><span class="description">SPEAKER_BACK_CENTER</span><pre>SPEAKER_BACK_CENTER</pre></a></li>
+<li class="constant  "><a href="#constant_SPEAKER_BACK_LEFT" title="SPEAKER_BACK_LEFT :: "><span class="description">SPEAKER_BACK_LEFT</span><pre>SPEAKER_BACK_LEFT</pre></a></li>
+<li class="constant  "><a href="#constant_SPEAKER_BACK_RIGHT" title="SPEAKER_BACK_RIGHT :: "><span class="description">SPEAKER_BACK_RIGHT</span><pre>SPEAKER_BACK_RIGHT</pre></a></li>
+<li class="constant  "><a href="#constant_SPEAKER_DEFAULT" title="SPEAKER_DEFAULT :: Channel Locations for ChannelMask"><span class="description">Channel Locations for ChannelMask</span><pre>SPEAKER_DEFAULT</pre></a></li>
+<li class="constant  "><a href="#constant_SPEAKER_FRONT_CENTER" title="SPEAKER_FRONT_CENTER :: "><span class="description">SPEAKER_FRONT_CENTER</span><pre>SPEAKER_FRONT_CENTER</pre></a></li>
+<li class="constant  "><a href="#constant_SPEAKER_FRONT_LEFT" title="SPEAKER_FRONT_LEFT :: "><span class="description">SPEAKER_FRONT_LEFT</span><pre>SPEAKER_FRONT_LEFT</pre></a></li>
+<li class="constant  "><a href="#constant_SPEAKER_FRONT_LEFT_OF_CENTER" title="SPEAKER_FRONT_LEFT_OF_CENTER :: "><span class="description">SPEAKER_FRONT_LEFT_OF_CENTER</span><pre>SPEAKER_FRONT_LEFT_OF_CENTER</pre></a></li>
+<li class="constant  "><a href="#constant_SPEAKER_FRONT_RIGHT" title="SPEAKER_FRONT_RIGHT :: "><span class="description">SPEAKER_FRONT_RIGHT</span><pre>SPEAKER_FRONT_RIGHT</pre></a></li>
+<li class="constant  "><a href="#constant_SPEAKER_FRONT_RIGHT_OF_CENTER" title="SPEAKER_FRONT_RIGHT_OF_CENTER :: "><span class="description">SPEAKER_FRONT_RIGHT_OF_CENTER</span><pre>SPEAKER_FRONT_RIGHT_OF_CENTER</pre></a></li>
+<li class="constant  "><a href="#constant_SPEAKER_LOW_FREQUENCY" title="SPEAKER_LOW_FREQUENCY :: "><span class="description">SPEAKER_LOW_FREQUENCY</span><pre>SPEAKER_LOW_FREQUENCY</pre></a></li>
+<li class="constant  "><a href="#constant_SPEAKER_SIDE_LEFT" title="SPEAKER_SIDE_LEFT :: "><span class="description">SPEAKER_SIDE_LEFT</span><pre>SPEAKER_SIDE_LEFT</pre></a></li>
+<li class="constant  "><a href="#constant_SPEAKER_SIDE_RIGHT" title="SPEAKER_SIDE_RIGHT :: "><span class="description">SPEAKER_SIDE_RIGHT</span><pre>SPEAKER_SIDE_RIGHT</pre></a></li>
+<li class="constant  "><a href="#constant_SPEAKER_TOP_BACK_CENTER" title="SPEAKER_TOP_BACK_CENTER :: "><span class="description">SPEAKER_TOP_BACK_CENTER</span><pre>SPEAKER_TOP_BACK_CENTER</pre></a></li>
+<li class="constant  "><a href="#constant_SPEAKER_TOP_BACK_LEFT" title="SPEAKER_TOP_BACK_LEFT :: "><span class="description">SPEAKER_TOP_BACK_LEFT</span><pre>SPEAKER_TOP_BACK_LEFT</pre></a></li>
+<li class="constant  "><a href="#constant_SPEAKER_TOP_BACK_RIGHT" title="SPEAKER_TOP_BACK_RIGHT :: "><span class="description">SPEAKER_TOP_BACK_RIGHT</span><pre>SPEAKER_TOP_BACK_RIGHT</pre></a></li>
+<li class="constant  "><a href="#constant_SPEAKER_TOP_CENTER" title="SPEAKER_TOP_CENTER :: "><span class="description">SPEAKER_TOP_CENTER</span><pre>SPEAKER_TOP_CENTER</pre></a></li>
+<li class="constant  "><a href="#constant_SPEAKER_TOP_FRONT_CENTER" title="SPEAKER_TOP_FRONT_CENTER :: "><span class="description">SPEAKER_TOP_FRONT_CENTER</span><pre>SPEAKER_TOP_FRONT_CENTER</pre></a></li>
+<li class="constant  "><a href="#constant_SPEAKER_TOP_FRONT_LEFT" title="SPEAKER_TOP_FRONT_LEFT :: "><span class="description">SPEAKER_TOP_FRONT_LEFT</span><pre>SPEAKER_TOP_FRONT_LEFT</pre></a></li>
+<li class="constant  "><a href="#constant_SPEAKER_TOP_FRONT_RIGHT" title="SPEAKER_TOP_FRONT_RIGHT :: "><span class="description">SPEAKER_TOP_FRONT_RIGHT</span><pre>SPEAKER_TOP_FRONT_RIGHT</pre></a></li>
+<li class="constant  "><a href="#constant_WAVE_FORMAT_EXTENSIBLE" title="WAVE_FORMAT_EXTENSIBLE :: "><span class="description">&lt;p&gt;EXTENSIBLE Audio Format - actual audio format defined by SubFormat&lt;/p&gt;
+</span><pre>WAVE_FORMAT_EXTENSIBLE</pre></a></li>
+<li class="constant  "><a href="#constant_WAVE_FORMAT_IEEE_FLOAT" title="WAVE_FORMAT_IEEE_FLOAT :: "><span class="description">&lt;p&gt;IEEE FLOAT Audio Format&lt;/p&gt;</span><pre>WAVE_FORMAT_IEEE_FLOAT</pre></a></li>
+<li class="constant  "><a href="#constant_WAVE_FORMAT_PCM" title="WAVE_FORMAT_PCM :: "><span class="description">&lt;p&gt;PCM Audio Format&lt;/p&gt;</span><pre>WAVE_FORMAT_PCM</pre></a></li>
+<li class="constant  "><a href="#constant_WAVE_SUBFORMAT_IEEE_FLOAT" title="WAVE_SUBFORMAT_IEEE_FLOAT :: "><span class="description">&lt;p&gt;IEEE FLOAT Audio Format SubType - LE hex representation of GUID {00000003-0000-0010-8000-00AA00389B71}&lt;/p&gt;
+</span><pre>WAVE_SUBFORMAT_IEEE_FLOAT</pre></a></li>
+<li class="constant  "><a href="#constant_WAVE_SUBFORMAT_PCM" title="WAVE_SUBFORMAT_PCM :: "><span class="description">&lt;p&gt;PCM Audio Format SubType - LE hex representation of GUID {00000001-0000-0010-8000-00AA00389B71}&lt;/p&gt;
+</span><pre>WAVE_SUBFORMAT_PCM</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\WavFile"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/global.html">global</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/WavFile.html">WavFile</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Project: PHPWavUtils: Classes for creating, reading, and manipulating WAV files in PHP<br />
+File: WavFile.php<br /></p>
+<div class="details">
+<div class="long_description"><p>Copyright (c) 2012, Drew Phillips
+All rights reserved.</p>
+
+<p>Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:</p>
+
+<ul>
+<li>Redistributions of source code must retain the above copyright notice,
+this list of conditions and the following disclaimer.</li>
+<li>Redistributions in binary form must reproduce the above copyright notice,
+this list of conditions and the following disclaimer in the documentation
+and/or other materials provided with the distribution.</li>
+</ul>
+
+<p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGE.</p>
+
+<p>Any modifications to the library should be indicated clearly in the source code
+to inform users that the changes are not a part of the original software.<br /><br /></p></div>
+<table class="table table-bordered">
+<tr>
+<th>copyright</th>
+<td>2012 Drew Phillips</td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:drew@drew-phillips.com">Drew Phillips</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="">Paul Voegler &lt;http://www.voegler.eu/&gt;</a></td>
+</tr>
+<tr>
+<th>version</th>
+<td>1.0 (October 2012)</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/PHPWavUtils.html">PHPWavUtils</a></td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="">BSD License
+Changelog:
+  1.0 (10/2/2012)
+    - Fix insertSilence() creating invalid block size
+  1.0 RC1 (4/20/2012)
+    - Initial release candidate
+    - Supports 8, 16, 24, 32 bit PCM, 32-bit IEEE FLOAT, Extensible Format
+    - Support for 18 channels of audio
+    - Ability to read an offset from a file to reduce memory footprint with large files
+    - Single-pass audio filter processing
+    - Highly accurate and efficient mix and normalization filters (http://www.voegler.eu/pub/audio/)
+    - Utility filters for degrading audio, and inserting silence
+  0.6 (4/12/2012)
+    - Support 8, 16, 24, 32 bit and PCM float (Paul Voegler)
+    - Add normalize filter, misc improvements and fixes (Paul Voegler)
+    - Normalize parameters to filter() to use filter constants as array indices
+    - Add option to mix filter to loop the target file if the source is longer
+  0.5 (4/3/2012)
+    - Fix binary pack routine (Paul Voegler)
+    - Add improved mixing function (Paul Voegler)</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___clone"></a><div class="element clickable method public method___clone" data-toggle="collapse" data-target=".method___clone .collapse">
+<h2>__clone()
+        </h2>
+<pre>__clone() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>WavFile Constructor.</h2>
+<pre>__construct(string | int $numChannelsOrFileName, int | bool $sampleRateOrReadData, int $bitsPerSample) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><pre><code>$wav1 = new WavFile(2, 44100, 16);         // new wav with 2 channels, at 44100 samples/sec and 16 bits per sample
+$wav2 = new WavFile('./audio/sound.wav');  // open and read wav file
+</code></pre></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$numChannelsOrFileName</h4>
+<code>string</code><code>int</code><p>(Optional) If string, the filename of the wav file to open. The number of channels otherwise. Defaults to 1.</p>
+</div>
+<div class="subelement argument">
+<h4>$sampleRateOrReadData</h4>
+<code>int</code><code>bool</code><p>(Optional) If opening a file and boolean, decides whether to read the data chunk or not. Defaults to true. The sample rate in samples per second otherwise. 8000 = standard telephone, 16000 = wideband telephone, 32000 = FM radio and 44100 = CD quality. Defaults to 8000.</p>
+</div>
+<div class="subelement argument">
+<h4>$bitsPerSample</h4>
+<code>int</code><p>(Optional) The number of bits per sample. Has to be 8, 16 or 24 for PCM audio or 32 for IEEE FLOAT audio. 8 = telephone, 16 = CD and 24 or 32 = studio quality. Defaults to 8.</p>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered">
+<tr>
+<th><code><a href="../classes/WavFormatException.html">\WavFormatException</a></code></th>
+<td></td>
+</tr>
+<tr>
+<th><code><a href="../classes/WavFileException.html">\WavFileException</a></code></th>
+<td></td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="method___destruct"></a><div class="element clickable method public method___destruct" data-toggle="collapse" data-target=".method___destruct .collapse">
+<h2>__destruct()
+        </h2>
+<pre>__destruct() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method___toString"></a><div class="element clickable method public method___toString" data-toggle="collapse" data-target=".method___toString .collapse">
+<h2>Output the wav file headers and data.</h2>
+<pre>__toString() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The encoded file.</div>
+</div></div>
+</div>
+<a id="method_appendWav"></a><div class="element clickable method public method_appendWav" data-toggle="collapse" data-target=".method_appendWav .collapse">
+<h2>Append a wav file to the current wav.</h2>
+<pre>appendWav(\WavFile $wav) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p><br />
+The wav files must have the same sample rate, number of bits per sample, and number of channels.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$wav</h4>
+<code><a href="../classes/WavFile.html">\WavFile</a></code><p>(Required) The wav file to append.</p>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/WavFileException.html">\WavFileException</a></code></th>
+<td></td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_closeWav"></a><div class="element clickable method public method_closeWav" data-toggle="collapse" data-target=".method_closeWav .collapse">
+<h2>Close a with openWav() previously opened wav file or free the buffer of setWavData().</h2>
+<pre>closeWav() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>Not necessary if the data has been read (readData = true) already.</p></div></div></div>
+</div>
+<a id="method_convertBitsPerSample"></a><div class="element clickable method public method_convertBitsPerSample" data-toggle="collapse" data-target=".method_convertBitsPerSample .collapse">
+<h2>Convert sample data to different bits per sample.</h2>
+<pre>convertBitsPerSample(int $bitsPerSample) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$bitsPerSample</h4>
+<code>int</code><p>(Required) The new number of bits per sample;</p>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/WavFileException.html">\WavFileException</a></code></th>
+<td></td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_degrade"></a><div class="element clickable method public method_degrade" data-toggle="collapse" data-target=".method_degrade .collapse">
+<h2>Degrade the quality of the wav file by introducing random noise.</h2>
+<pre>degrade(float $quality) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$quality</h4>
+<code>float</code><p>quality  (Optional) The quality relative to the amplitude. 1 = no noise, 0 = max. noise.</p>
+</div>
+</div></div>
+</div>
+<a id="method_displayInfo"></a><div class="element clickable method public method_displayInfo" data-toggle="collapse" data-target=".method_displayInfo .collapse">
+<h2>Output information about the wav object.</h2>
+<pre>displayInfo() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_filter"></a><div class="element clickable method public method_filter" data-toggle="collapse" data-target=".method_filter .collapse">
+<h2>Run samples through audio processing filters.</h2>
+<pre>filter(array $filters, int $blockOffset, int $numBlocks) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><pre><code>$wav->filter(
+     array(
+         WavFile::FILTER_MIX => array(          // Filter for mixing 2 WavFile instances.
+             'wav' => $wav2,                    // (Required) The WavFile to mix into this WhavFile. If no optional arguments are given, can be passed without the array.
+             'loop' => true,                    // (Optional) Loop the selected portion (with warping to the beginning at the end).
+             'blockOffset' => 0,                // (Optional) Block number to start mixing from.
+             'numBlocks' => null                // (Optional) Number of blocks to mix in or to select for looping. Defaults to the end or all data for looping.
+         ),
+         WavFile::FILTER_NORMALIZE => 0.6,      // (Required) Normalization of (mixed) audio samples - see threshold parameter for normalizeSample().
+         WavFile::FILTER_DEGRADE => 0.9         // (Required) Introduce random noise. The quality relative to the amplitude. 1 = no noise, 0 = max. noise.
+     ),
+     0,                                         // (Optional) The block number of this WavFile to start with.
+     null                                       // (Optional) The number of blocks to process.
+ );
+ </code></pre></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$filters</h4>
+<code>array</code><p>(Required) An array of 1 or more audio processing filters.</p>
+</div>
+<div class="subelement argument">
+<h4>$blockOffset</h4>
+<code>int</code><p>(Optional) The block number to start precessing from.</p>
+</div>
+<div class="subelement argument">
+<h4>$numBlocks</h4>
+<code>int</code><p>(Optional) The maximum  number of blocks to process.</p>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/WavFileException.html">\WavFileException</a></code></th>
+<td></td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_generateNoise"></a><div class="element clickable method public method_generateNoise" data-toggle="collapse" data-target=".method_generateNoise .collapse">
+<h2>Generate noise at the end of the wav for the specified duration and volume.</h2>
+<pre>generateNoise(float $duration, float $percent) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$duration</h4>
+<code>float</code><p>(Optional) Number of seconds of noise to generate.</p>
+</div>
+<div class="subelement argument">
+<h4>$percent</h4>
+<code>float</code><p>(Optional) The percentage of the maximum amplitude to use. 100 = full amplitude.</p>
+</div>
+</div></div>
+</div>
+<a id="method_getActualSize"></a><div class="element clickable method public method_getActualSize" data-toggle="collapse" data-target=".method_getActualSize .collapse">
+<h2>getActualSize()
+        </h2>
+<pre>getActualSize() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_getAudioFormat"></a><div class="element clickable method public method_getAudioFormat" data-toggle="collapse" data-target=".method_getAudioFormat .collapse">
+<h2>getAudioFormat()
+        </h2>
+<pre>getAudioFormat() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_getAudioSubFormat"></a><div class="element clickable method public method_getAudioSubFormat" data-toggle="collapse" data-target=".method_getAudioSubFormat .collapse">
+<h2>getAudioSubFormat()
+        </h2>
+<pre>getAudioSubFormat() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_getBitsPerSample"></a><div class="element clickable method public method_getBitsPerSample" data-toggle="collapse" data-target=".method_getBitsPerSample .collapse">
+<h2>getBitsPerSample()
+        </h2>
+<pre>getBitsPerSample() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_getBlockAlign"></a><div class="element clickable method public method_getBlockAlign" data-toggle="collapse" data-target=".method_getBlockAlign .collapse">
+<h2>getBlockAlign()
+        </h2>
+<pre>getBlockAlign() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_getByteRate"></a><div class="element clickable method public method_getByteRate" data-toggle="collapse" data-target=".method_getByteRate .collapse">
+<h2>getByteRate()
+        </h2>
+<pre>getByteRate() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_getChannelMask"></a><div class="element clickable method public method_getChannelMask" data-toggle="collapse" data-target=".method_getChannelMask .collapse">
+<h2>getChannelMask()
+        </h2>
+<pre>getChannelMask() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_getChunkSize"></a><div class="element clickable method public method_getChunkSize" data-toggle="collapse" data-target=".method_getChunkSize .collapse">
+<h2>getChunkSize()
+        </h2>
+<pre>getChunkSize() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_getDataOffset"></a><div class="element clickable method public method_getDataOffset" data-toggle="collapse" data-target=".method_getDataOffset .collapse">
+<h2>getDataOffset()
+        </h2>
+<pre>getDataOffset() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_getDataSize"></a><div class="element clickable method public method_getDataSize" data-toggle="collapse" data-target=".method_getDataSize .collapse">
+<h2>getDataSize()
+        </h2>
+<pre>getDataSize() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_getDataSubchunk"></a><div class="element clickable method public method_getDataSubchunk" data-toggle="collapse" data-target=".method_getDataSubchunk .collapse">
+<h2>Construct wav DATA chunk.</h2>
+<pre>getDataSubchunk() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The DATA header and chunk.</div>
+</div></div>
+</div>
+<a id="method_getFactChunkSize"></a><div class="element clickable method public method_getFactChunkSize" data-toggle="collapse" data-target=".method_getFactChunkSize .collapse">
+<h2>getFactChunkSize()
+        </h2>
+<pre>getFactChunkSize() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_getFmtChunkSize"></a><div class="element clickable method public method_getFmtChunkSize" data-toggle="collapse" data-target=".method_getFmtChunkSize .collapse">
+<h2>getFmtChunkSize()
+        </h2>
+<pre>getFmtChunkSize() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_getFmtExtendedSize"></a><div class="element clickable method public method_getFmtExtendedSize" data-toggle="collapse" data-target=".method_getFmtExtendedSize .collapse">
+<h2>getFmtExtendedSize()
+        </h2>
+<pre>getFmtExtendedSize() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_getMaxAmplitude"></a><div class="element clickable method public method_getMaxAmplitude" data-toggle="collapse" data-target=".method_getMaxAmplitude .collapse">
+<h2>getMaxAmplitude()
+        </h2>
+<pre>getMaxAmplitude() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_getMinAmplitude"></a><div class="element clickable method public method_getMinAmplitude" data-toggle="collapse" data-target=".method_getMinAmplitude .collapse">
+<h2>getMinAmplitude()
+        </h2>
+<pre>getMinAmplitude() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_getNumBlocks"></a><div class="element clickable method public method_getNumBlocks" data-toggle="collapse" data-target=".method_getNumBlocks .collapse">
+<h2>getNumBlocks()
+        </h2>
+<pre>getNumBlocks() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_getNumChannels"></a><div class="element clickable method public method_getNumChannels" data-toggle="collapse" data-target=".method_getNumChannels .collapse">
+<h2>getNumChannels()
+        </h2>
+<pre>getNumChannels() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_getSampleBlock"></a><div class="element clickable method public method_getSampleBlock" data-toggle="collapse" data-target=".method_getSampleBlock .collapse">
+<h2>Return a single sample block from the file.</h2>
+<pre>getSampleBlock(int $blockNum) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$blockNum</h4>
+<code>int</code><p>(Required) The sample block number. Zero based.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The binary sample block (all channels). Returns null if the sample block number was out of range.</div>
+</div></div>
+</div>
+<a id="method_getSampleRate"></a><div class="element clickable method public method_getSampleRate" data-toggle="collapse" data-target=".method_getSampleRate .collapse">
+<h2>getSampleRate()
+        </h2>
+<pre>getSampleRate() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_getSampleValue"></a><div class="element clickable method public method_getSampleValue" data-toggle="collapse" data-target=".method_getSampleValue .collapse">
+<h2>Get a float sample value for a specific sample block and channel number.</h2>
+<pre>getSampleValue(int $blockNum, int $channelNum) : float</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$blockNum</h4>
+<code>int</code><p>(Required) The sample block number to fetch. Zero based.</p>
+</div>
+<div class="subelement argument">
+<h4>$channelNum</h4>
+<code>int</code><p>(Required) The channel number within the sample block to fetch. First channel is 1.</p>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/WavFileException.html">\WavFileException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>float</code>The float sample value. Returns null if the sample block number was out of range.</div>
+</div></div>
+</div>
+<a id="method_getSamples"></a><div class="element clickable method public method_getSamples" data-toggle="collapse" data-target=".method_getSamples .collapse">
+<h2>getSamples()
+        </h2>
+<pre>getSamples() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_getValidBitsPerSample"></a><div class="element clickable method public method_getValidBitsPerSample" data-toggle="collapse" data-target=".method_getValidBitsPerSample .collapse">
+<h2>getValidBitsPerSample()
+        </h2>
+<pre>getValidBitsPerSample() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_getZeroAmplitude"></a><div class="element clickable method public method_getZeroAmplitude" data-toggle="collapse" data-target=".method_getZeroAmplitude .collapse">
+<h2>getZeroAmplitude()
+        </h2>
+<pre>getZeroAmplitude() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_insertSilence"></a><div class="element clickable method public method_insertSilence" data-toggle="collapse" data-target=".method_insertSilence .collapse">
+<h2>Add silence to the wav file.</h2>
+<pre>insertSilence(float $duration) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$duration</h4>
+<code>float</code><p>(Optional) How many seconds of silence. If negative, add to the beginning of the file. Defaults to 1s.</p>
+</div>
+</div></div>
+</div>
+<a id="method_makeHeader"></a><div class="element clickable method public method_makeHeader" data-toggle="collapse" data-target=".method_makeHeader .collapse">
+<h2>Construct a wav header from this object.</h2>
+<pre>makeHeader() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Includes "fact" chunk in necessary.
+http://www-mmsp.ece.mcgill.ca/documents/audioformats/wave/wave.html</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The RIFF header data.</div>
+</div></div>
+</div>
+<a id="method_mergeWav"></a><div class="element clickable method public method_mergeWav" data-toggle="collapse" data-target=".method_mergeWav .collapse">
+<h2>Mix 2 wav files together.</h2>
+<pre>mergeWav(\WavFile $wav, float $normalizeThreshold) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p><br />
+Both wavs must have the same sample rate and same number of channels.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$wav</h4>
+<code><a href="../classes/WavFile.html">\WavFile</a></code><p>(Required) The WavFile to mix.</p>
+</div>
+<div class="subelement argument">
+<h4>$normalizeThreshold</h4>
+<code>float</code><p>(Optional) See normalizeSample for an explanation.</p>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/WavFileException.html">\WavFileException</a></code></th>
+<td></td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_normalizeSample"></a><div class="element clickable method public method_normalizeSample" data-toggle="collapse" data-target=".method_normalizeSample .collapse">
+<h2>Normalizes a float audio sample.</h2>
+<pre>normalizeSample(float $sampleFloat, float $threshold) : float</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Maximum input range assumed for compression is [-2, 2].
+See http://www.voegler.eu/pub/audio/ for more information.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$sampleFloat</h4>
+<code>float</code><p>(Required) The float sample to normalize.</p>
+</div>
+<div class="subelement argument">
+<h4>$threshold</h4>
+<code>float</code><p>(Required) The threshold or gain factor for normalizing the amplitude.</p>
+
+<ul>
+    <li> >= 1 - Normalize by multiplying by the threshold (boost - positive gain). <br />
+           A value of 1 in effect means no normalization (and results in clipping). </li>
+    <li> <= -1 - Normalize by dividing by the the absolute value of threshold (attenuate - negative gain). <br />
+           A factor of 2 (-2) is about 6dB reduction in volume.</li>
+    <li> [0, 1) - (open inverval - not including 1) - The threshold
+           above which amplitudes are comressed logarithmically. <br />
+           e.g. 0.6 to leave amplitudes up to 60% "as is" and compress above. </li>
+    <li> (-1, 0) - (open inverval - not including -1 and 0) - The threshold
+           above which amplitudes are comressed linearly. <br />
+           e.g. -0.6 to leave amplitudes up to 60% "as is" and compress above. </li></ul>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>float</code>The normalized sample.</div>
+</div></div>
+</div>
+<a id="method_openWav"></a><div class="element clickable method public method_openWav" data-toggle="collapse" data-target=".method_openWav .collapse">
+<h2>Reads a wav header and data from a file.</h2>
+<pre>openWav(string $filename, bool $readData) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$filename</h4>
+<code>string</code><p>(Required) The path to the wav file to read.</p>
+</div>
+<div class="subelement argument">
+<h4>$readData</h4>
+<code>bool</code><p>(Optional) If true, also read the data chunk.</p>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered">
+<tr>
+<th><code><a href="../classes/WavFormatException.html">\WavFormatException</a></code></th>
+<td></td>
+</tr>
+<tr>
+<th><code><a href="../classes/WavFileException.html">\WavFileException</a></code></th>
+<td></td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="method_packSample"></a><div class="element clickable method public method_packSample" data-toggle="collapse" data-target=".method_packSample .collapse">
+<h2>Packs a single numeric sample to binary.</h2>
+<pre>packSample(int | float $sample, int $bitDepth) : string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$sample</h4>
+<code>int</code><code>float</code><p>(Required) The sample to encode. Has to be within valid range for $bitDepth. Float values only for 32 bits.</p>
+</div>
+<div class="subelement argument">
+<h4>$bitDepth</h4>
+<code>int</code><p>(Required) The bits per sample to encode with.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The encoded binary sample. Returns null for unsupported bit depths.</div>
+</div></div>
+</div>
+<a id="method_packSampleBlock"></a><div class="element clickable method public method_packSampleBlock" data-toggle="collapse" data-target=".method_packSampleBlock .collapse">
+<h2>Packs an array of numeric channel samples to a binary sample block.</h2>
+<pre>packSampleBlock(array $samples, int $bitDepth) : string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$samples</h4>
+<code>array</code><p>(Required) The array of channel sample values. Expects float values for 32 bits and integer otherwise.</p>
+</div>
+<div class="subelement argument">
+<h4>$bitDepth</h4>
+<code>int</code><p>(Required) The bits per sample to encode with.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The encoded binary sample block.</div>
+</div></div>
+</div>
+<a id="method_readWavData"></a><div class="element clickable method public method_readWavData" data-toggle="collapse" data-target=".method_readWavData .collapse">
+<h2>Read the wav data from the file into the buffer.</h2>
+<pre>readWavData($dataOffset, $dataSize) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$dataOffset</h4><p>(Optional) The byte offset to skip before starting to read. Must be a multiple of BlockAlign.</p>
+</div>
+<div class="subelement argument">
+<h4>$dataSize</h4><p>(Optional) The size of the data to read in bytes. Must be a multiple of BlockAlign. Defaults to all data.</p>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/WavFileException.html">\WavFileException</a></code></th>
+<td></td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_save"></a><div class="element clickable method public method_save" data-toggle="collapse" data-target=".method_save .collapse">
+<h2>Save the wav data to a file.</h2>
+<pre>save(string $filename) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$filename</h4>
+<code>string</code><p>(Required) The file path to save the wav to.</p>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/WavFileException.html">\WavFileException</a></code></th>
+<td></td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_setBitsPerSample"></a><div class="element clickable method public method_setBitsPerSample" data-toggle="collapse" data-target=".method_setBitsPerSample .collapse">
+<h2>setBitsPerSample()
+        </h2>
+<pre>setBitsPerSample($bitsPerSample) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$bitsPerSample</h4></div>
+</div></div>
+</div>
+<a id="method_setChannelMask"></a><div class="element clickable method public method_setChannelMask" data-toggle="collapse" data-target=".method_setChannelMask .collapse">
+<h2>setChannelMask()
+        </h2>
+<pre>setChannelMask($channelMask) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$channelMask</h4></div>
+</div></div>
+</div>
+<a id="method_setNumChannels"></a><div class="element clickable method public method_setNumChannels" data-toggle="collapse" data-target=".method_setNumChannels .collapse">
+<h2>setNumChannels()
+        </h2>
+<pre>setNumChannels($numChannels) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$numChannels</h4></div>
+</div></div>
+</div>
+<a id="method_setSampleBlock"></a><div class="element clickable method public method_setSampleBlock" data-toggle="collapse" data-target=".method_setSampleBlock .collapse">
+<h2>Set a single sample block.</h2>
+<pre>setSampleBlock(string $sampleBlock, int $blockNum) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p><br />
+Allows to append a sample block.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$sampleBlock</h4>
+<code>string</code><p>(Required) The binary sample block (all channels).</p>
+</div>
+<div class="subelement argument">
+<h4>$blockNum</h4>
+<code>int</code><p>(Required) The sample block number. Zero based.</p>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/WavFileException.html">\WavFileException</a></code></th>
+<td></td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_setSampleRate"></a><div class="element clickable method public method_setSampleRate" data-toggle="collapse" data-target=".method_setSampleRate .collapse">
+<h2>setSampleRate()
+        </h2>
+<pre>setSampleRate($sampleRate) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$sampleRate</h4></div>
+</div></div>
+</div>
+<a id="method_setSampleValue"></a><div class="element clickable method public method_setSampleValue" data-toggle="collapse" data-target=".method_setSampleValue .collapse">
+<h2>Sets a float sample value for a specific sample block number and channel.</h2>
+<pre>setSampleValue(float $sampleFloat, int $blockNum, int $channelNum) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p><br />
+Converts float values to appropriate integer values and clips properly. <br />
+Allows to append samples (in order).</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$sampleFloat</h4>
+<code>float</code><p>(Required) The float sample value to set. Converts float values and clips if necessary.</p>
+</div>
+<div class="subelement argument">
+<h4>$blockNum</h4>
+<code>int</code><p>(Required) The sample block number to set or append. Zero based.</p>
+</div>
+<div class="subelement argument">
+<h4>$channelNum</h4>
+<code>int</code><p>(Required) The channel number within the sample block to set or append. First channel is 1.</p>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/WavFileException.html">\WavFileException</a></code></th>
+<td></td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_setSamples"></a><div class="element clickable method public method_setSamples" data-toggle="collapse" data-target=".method_setSamples .collapse">
+<h2>setSamples()
+        </h2>
+<pre>setSamples($samples) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$samples</h4></div>
+</div></div>
+</div>
+<a id="method_setWavData"></a><div class="element clickable method public method_setWavData" data-toggle="collapse" data-target=".method_setWavData .collapse">
+<h2>Set the wav file data and properties from a wav file in a string.</h2>
+<pre>setWavData(string $data, bool $free) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$data</h4>
+<code>string</code><p>(Required) The wav file data. Passed by reference.</p>
+</div>
+<div class="subelement argument">
+<h4>$free</h4>
+<code>bool</code><p>(Optional) True to free the passed $data after copying.</p>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered">
+<tr>
+<th><code><a href="../classes/WavFormatException.html">\WavFormatException</a></code></th>
+<td></td>
+</tr>
+<tr>
+<th><code><a href="../classes/WavFileException.html">\WavFileException</a></code></th>
+<td></td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="method_unpackSample"></a><div class="element clickable method public method_unpackSample" data-toggle="collapse" data-target=".method_unpackSample .collapse">
+<h2>Unpacks a single binary sample to numeric value.</h2>
+<pre>unpackSample(string $sampleBinary, int $bitDepth) : int | float</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$sampleBinary</h4>
+<code>string</code><p>(Required) The sample to decode.</p>
+</div>
+<div class="subelement argument">
+<h4>$bitDepth</h4>
+<code>int</code><p>(Optional) The bits per sample to decode. If omitted, derives it from the length of $sampleBinary.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>int</code><code>float</code>The numeric sample value. Float for 32-bit samples. Returns null for unsupported bit depths.</div>
+</div></div>
+</div>
+<a id="method_unpackSampleBlock"></a><div class="element clickable method public method_unpackSampleBlock" data-toggle="collapse" data-target=".method_unpackSampleBlock .collapse">
+<h2>Unpacks a binary sample block to numeric values.</h2>
+<pre>unpackSampleBlock(string $sampleBlock, int $bitDepth, int $numChannels) : array</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$sampleBlock</h4>
+<code>string</code><p>(Required) The binary sample block (all channels).</p>
+</div>
+<div class="subelement argument">
+<h4>$bitDepth</h4>
+<code>int</code><p>(Required) The bits per sample to decode.</p>
+</div>
+<div class="subelement argument">
+<h4>$numChannels</h4>
+<code>int</code><p>(Optional) The number of channels to decode. If omitted, derives it from the length of $sampleBlock and $bitDepth.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>The sample values as an array of integers of floats for 32 bits. First channel is array index 1.</div>
+</div></div>
+</div>
+<a id="method_readWav"></a><div class="element clickable method protected method_readWav" data-toggle="collapse" data-target=".method_readWav .collapse">
+<h2>Read wav file from a stream.</h2>
+<pre>readWav($readData) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$readData</h4><p>(Optional) If true, also read the data chunk.</p>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered">
+<tr>
+<th><code><a href="../classes/WavFormatException.html">\WavFormatException</a></code></th>
+<td></td>
+</tr>
+<tr>
+<th><code><a href="../classes/WavFileException.html">\WavFileException</a></code></th>
+<td></td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="method_readWavHeader"></a><div class="element clickable method protected method_readWavHeader" data-toggle="collapse" data-target=".method_readWavHeader .collapse">
+<h2>Parse a wav header.</h2>
+<pre>readWavHeader() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>http://www-mmsp.ece.mcgill.ca/documents/audioformats/wave/wave.html</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered">
+<tr>
+<th><code><a href="../classes/WavFormatException.html">\WavFormatException</a></code></th>
+<td></td>
+</tr>
+<tr>
+<th><code><a href="../classes/WavFileException.html">\WavFileException</a></code></th>
+<td></td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="method_setActualSize"></a><div class="element clickable method protected method_setActualSize" data-toggle="collapse" data-target=".method_setActualSize .collapse">
+<h2>setActualSize()
+        </h2>
+<pre>setActualSize($actualSize) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$actualSize</h4></div>
+</div></div>
+</div>
+<a id="method_setAudioFormat"></a><div class="element clickable method protected method_setAudioFormat" data-toggle="collapse" data-target=".method_setAudioFormat .collapse">
+<h2>setAudioFormat()
+        </h2>
+<pre>setAudioFormat($audioFormat) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$audioFormat</h4></div>
+</div></div>
+</div>
+<a id="method_setAudioSubFormat"></a><div class="element clickable method protected method_setAudioSubFormat" data-toggle="collapse" data-target=".method_setAudioSubFormat .collapse">
+<h2>setAudioSubFormat()
+        </h2>
+<pre>setAudioSubFormat($audioSubFormat) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$audioSubFormat</h4></div>
+</div></div>
+</div>
+<a id="method_setBlockAlign"></a><div class="element clickable method protected method_setBlockAlign" data-toggle="collapse" data-target=".method_setBlockAlign .collapse">
+<h2>setBlockAlign()
+        </h2>
+<pre>setBlockAlign($blockAlign) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$blockAlign</h4></div>
+</div></div>
+</div>
+<a id="method_setByteRate"></a><div class="element clickable method protected method_setByteRate" data-toggle="collapse" data-target=".method_setByteRate .collapse">
+<h2>setByteRate()
+        </h2>
+<pre>setByteRate($byteRate) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$byteRate</h4></div>
+</div></div>
+</div>
+<a id="method_setChunkSize"></a><div class="element clickable method protected method_setChunkSize" data-toggle="collapse" data-target=".method_setChunkSize .collapse">
+<h2>setChunkSize()
+        </h2>
+<pre>setChunkSize($chunkSize) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$chunkSize</h4></div>
+</div></div>
+</div>
+<a id="method_setDataOffset"></a><div class="element clickable method protected method_setDataOffset" data-toggle="collapse" data-target=".method_setDataOffset .collapse">
+<h2>setDataOffset()
+        </h2>
+<pre>setDataOffset($dataOffset) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$dataOffset</h4></div>
+</div></div>
+</div>
+<a id="method_setDataSize"></a><div class="element clickable method protected method_setDataSize" data-toggle="collapse" data-target=".method_setDataSize .collapse">
+<h2>setDataSize()
+        </h2>
+<pre>setDataSize($dataSize) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$dataSize</h4></div>
+</div></div>
+</div>
+<a id="method_setFactChunkSize"></a><div class="element clickable method protected method_setFactChunkSize" data-toggle="collapse" data-target=".method_setFactChunkSize .collapse">
+<h2>setFactChunkSize()
+        </h2>
+<pre>setFactChunkSize($factChunkSize) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$factChunkSize</h4></div>
+</div></div>
+</div>
+<a id="method_setFmtChunkSize"></a><div class="element clickable method protected method_setFmtChunkSize" data-toggle="collapse" data-target=".method_setFmtChunkSize .collapse">
+<h2>setFmtChunkSize()
+        </h2>
+<pre>setFmtChunkSize($fmtChunkSize) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$fmtChunkSize</h4></div>
+</div></div>
+</div>
+<a id="method_setFmtExtendedSize"></a><div class="element clickable method protected method_setFmtExtendedSize" data-toggle="collapse" data-target=".method_setFmtExtendedSize .collapse">
+<h2>setFmtExtendedSize()
+        </h2>
+<pre>setFmtExtendedSize($fmtExtendedSize) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$fmtExtendedSize</h4></div>
+</div></div>
+</div>
+<a id="method_setNumBlocks"></a><div class="element clickable method protected method_setNumBlocks" data-toggle="collapse" data-target=".method_setNumBlocks .collapse">
+<h2>setNumBlocks()
+        </h2>
+<pre>setNumBlocks($numBlocks) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$numBlocks</h4></div>
+</div></div>
+</div>
+<a id="method_setValidBitsPerSample"></a><div class="element clickable method protected method_setValidBitsPerSample" data-toggle="collapse" data-target=".method_setValidBitsPerSample .collapse">
+<h2>setValidBitsPerSample()
+        </h2>
+<pre>setValidBitsPerSample($validBitsPerSample) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$validBitsPerSample</h4></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_LOOKUP_LOGBASE"> </a><div class="element clickable property protected property_LOOKUP_LOGBASE" data-toggle="collapse" data-target=".property_LOOKUP_LOGBASE .collapse">
+<h2>Log base modifier lookup table for a given threshold (in 0.05 steps) used by normalizeSample. Adjusts the slope (1st derivative) of the log function at the threshold to 1 for a smooth transition from linear to logarithmic amplitude output.</h2>
+<pre>$LOOKUP_LOGBASE : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__actualSize"> </a><div class="element clickable property protected property__actualSize" data-toggle="collapse" data-target=".property__actualSize .collapse">
+<h2>The actual physical file size</h2>
+<pre>$_actualSize : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__audioFormat"> </a><div class="element clickable property protected property__audioFormat" data-toggle="collapse" data-target=".property__audioFormat .collapse">
+<h2>The audio format - WavFile::WAVE_FORMAT_*</h2>
+<pre>$_audioFormat : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__audioSubFormat"> </a><div class="element clickable property protected property__audioSubFormat" data-toggle="collapse" data-target=".property__audioSubFormat .collapse">
+<h2>The audio subformat - WavFile::WAVE_SUBFORMAT_*</h2>
+<pre>$_audioSubFormat : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__bitsPerSample"> </a><div class="element clickable property protected property__bitsPerSample" data-toggle="collapse" data-target=".property__bitsPerSample .collapse">
+<h2>Number of bits per sample</h2>
+<pre>$_bitsPerSample : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__blockAlign"> </a><div class="element clickable property protected property__blockAlign" data-toggle="collapse" data-target=".property__blockAlign .collapse">
+<h2>NumChannels * BitsPerSample/8</h2>
+<pre>$_blockAlign : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__byteRate"> </a><div class="element clickable property protected property__byteRate" data-toggle="collapse" data-target=".property__byteRate .collapse">
+<h2>Bytes per second</h2>
+<pre>$_byteRate : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__channelMask"> </a><div class="element clickable property protected property__channelMask" data-toggle="collapse" data-target=".property__channelMask .collapse">
+<h2>The channel mask</h2>
+<pre>$_channelMask : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__chunkSize"> </a><div class="element clickable property protected property__chunkSize" data-toggle="collapse" data-target=".property__chunkSize .collapse">
+<h2>The size of the file in RIFF header</h2>
+<pre>$_chunkSize : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__dataOffset"> </a><div class="element clickable property protected property__dataOffset" data-toggle="collapse" data-target=".property__dataOffset .collapse">
+<h2>Starting offset of data chunk</h2>
+<pre>$_dataOffset : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__dataSize"> </a><div class="element clickable property protected property__dataSize" data-toggle="collapse" data-target=".property__dataSize .collapse">
+<h2>Size of the data chunk</h2>
+<pre>$_dataSize : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__dataSize_fp"> </a><div class="element clickable property protected property__dataSize_fp" data-toggle="collapse" data-target=".property__dataSize_fp .collapse">
+<h2>Size of the data chunk in the opened wav file</h2>
+<pre>$_dataSize_fp : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__dataSize_valid"> </a><div class="element clickable property protected property__dataSize_valid" data-toggle="collapse" data-target=".property__dataSize_valid .collapse">
+<h2>Does _dataSize really reflect strlen($_samples)? Case when a wav file is read with readData = false</h2>
+<pre>$_dataSize_valid : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__factChunkSize"> </a><div class="element clickable property protected property__factChunkSize" data-toggle="collapse" data-target=".property__factChunkSize .collapse">
+<h2>The size of the "fact" chunk</h2>
+<pre>$_factChunkSize : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__fmtChunkSize"> </a><div class="element clickable property protected property__fmtChunkSize" data-toggle="collapse" data-target=".property__fmtChunkSize .collapse">
+<h2>The size of the "fmt " chunk</h2>
+<pre>$_fmtChunkSize : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__fmtExtendedSize"> </a><div class="element clickable property protected property__fmtExtendedSize" data-toggle="collapse" data-target=".property__fmtExtendedSize .collapse">
+<h2>The size of the extended "fmt " data</h2>
+<pre>$_fmtExtendedSize : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__fp"> </a><div class="element clickable property protected property__fp" data-toggle="collapse" data-target=".property__fp .collapse">
+<h2>The file pointer used for reading wavs from file or memory</h2>
+<pre>$_fp : resource</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__numBlocks"> </a><div class="element clickable property protected property__numBlocks" data-toggle="collapse" data-target=".property__numBlocks .collapse">
+<h2>Number of sample blocks</h2>
+<pre>$_numBlocks : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__numChannels"> </a><div class="element clickable property protected property__numChannels" data-toggle="collapse" data-target=".property__numChannels .collapse">
+<h2>Number of channels in the audio file</h2>
+<pre>$_numChannels : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__sampleRate"> </a><div class="element clickable property protected property__sampleRate" data-toggle="collapse" data-target=".property__sampleRate .collapse">
+<h2>Samples per second</h2>
+<pre>$_sampleRate : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__samples"> </a><div class="element clickable property protected property__samples" data-toggle="collapse" data-target=".property__samples .collapse">
+<h2>Binary string of samples</h2>
+<pre>$_samples : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__validBitsPerSample"> </a><div class="element clickable property protected property__validBitsPerSample" data-toggle="collapse" data-target=".property__validBitsPerSample .collapse">
+<h2>Number of valid bits per sample</h2>
+<pre>$_validBitsPerSample : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<h3>
+<i class="icon-custom icon-constant"></i> Constants</h3>
+<a id="constant_FILTER_DEGRADE"> </a><div class="element clickable constant  constant_FILTER_DEGRADE" data-toggle="collapse" data-target=".constant_FILTER_DEGRADE .collapse">
+<h2>&lt;p&gt;Filter flag for degrading audio data&lt;/p&gt;</h2>
+<pre>FILTER_DEGRADE : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_FILTER_MIX"> </a><div class="element clickable constant  constant_FILTER_MIX" data-toggle="collapse" data-target=".constant_FILTER_MIX .collapse">
+<h2>&lt;p&gt;Filter flag for mixing two files&lt;/p&gt;</h2>
+<pre>FILTER_MIX : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_FILTER_NORMALIZE"> </a><div class="element clickable constant  constant_FILTER_NORMALIZE" data-toggle="collapse" data-target=".constant_FILTER_NORMALIZE .collapse">
+<h2>&lt;p&gt;Filter flag for normalizing audio data&lt;/p&gt;</h2>
+<pre>FILTER_NORMALIZE : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_MAX_CHANNEL"> </a><div class="element clickable constant  constant_MAX_CHANNEL" data-toggle="collapse" data-target=".constant_MAX_CHANNEL .collapse">
+<h2>&lt;p&gt;Maximum number of channels&lt;/p&gt;</h2>
+<pre>MAX_CHANNEL : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_MAX_SAMPLERATE"> </a><div class="element clickable constant  constant_MAX_SAMPLERATE" data-toggle="collapse" data-target=".constant_MAX_SAMPLERATE .collapse">
+<h2>&lt;p&gt;Maximum sample rate&lt;/p&gt;</h2>
+<pre>MAX_SAMPLERATE : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_SPEAKER_ALL"> </a><div class="element clickable constant  constant_SPEAKER_ALL" data-toggle="collapse" data-target=".constant_SPEAKER_ALL .collapse">
+<h2>SPEAKER_ALL</h2>
+<pre>SPEAKER_ALL </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_SPEAKER_BACK_CENTER"> </a><div class="element clickable constant  constant_SPEAKER_BACK_CENTER" data-toggle="collapse" data-target=".constant_SPEAKER_BACK_CENTER .collapse">
+<h2>SPEAKER_BACK_CENTER</h2>
+<pre>SPEAKER_BACK_CENTER </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_SPEAKER_BACK_LEFT"> </a><div class="element clickable constant  constant_SPEAKER_BACK_LEFT" data-toggle="collapse" data-target=".constant_SPEAKER_BACK_LEFT .collapse">
+<h2>SPEAKER_BACK_LEFT</h2>
+<pre>SPEAKER_BACK_LEFT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_SPEAKER_BACK_RIGHT"> </a><div class="element clickable constant  constant_SPEAKER_BACK_RIGHT" data-toggle="collapse" data-target=".constant_SPEAKER_BACK_RIGHT .collapse">
+<h2>SPEAKER_BACK_RIGHT</h2>
+<pre>SPEAKER_BACK_RIGHT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_SPEAKER_DEFAULT"> </a><div class="element clickable constant  constant_SPEAKER_DEFAULT" data-toggle="collapse" data-target=".constant_SPEAKER_DEFAULT .collapse">
+<h2>Channel Locations for ChannelMask</h2>
+<pre>SPEAKER_DEFAULT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_SPEAKER_FRONT_CENTER"> </a><div class="element clickable constant  constant_SPEAKER_FRONT_CENTER" data-toggle="collapse" data-target=".constant_SPEAKER_FRONT_CENTER .collapse">
+<h2>SPEAKER_FRONT_CENTER</h2>
+<pre>SPEAKER_FRONT_CENTER </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_SPEAKER_FRONT_LEFT"> </a><div class="element clickable constant  constant_SPEAKER_FRONT_LEFT" data-toggle="collapse" data-target=".constant_SPEAKER_FRONT_LEFT .collapse">
+<h2>SPEAKER_FRONT_LEFT</h2>
+<pre>SPEAKER_FRONT_LEFT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_SPEAKER_FRONT_LEFT_OF_CENTER"> </a><div class="element clickable constant  constant_SPEAKER_FRONT_LEFT_OF_CENTER" data-toggle="collapse" data-target=".constant_SPEAKER_FRONT_LEFT_OF_CENTER .collapse">
+<h2>SPEAKER_FRONT_LEFT_OF_CENTER</h2>
+<pre>SPEAKER_FRONT_LEFT_OF_CENTER </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_SPEAKER_FRONT_RIGHT"> </a><div class="element clickable constant  constant_SPEAKER_FRONT_RIGHT" data-toggle="collapse" data-target=".constant_SPEAKER_FRONT_RIGHT .collapse">
+<h2>SPEAKER_FRONT_RIGHT</h2>
+<pre>SPEAKER_FRONT_RIGHT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_SPEAKER_FRONT_RIGHT_OF_CENTER"> </a><div class="element clickable constant  constant_SPEAKER_FRONT_RIGHT_OF_CENTER" data-toggle="collapse" data-target=".constant_SPEAKER_FRONT_RIGHT_OF_CENTER .collapse">
+<h2>SPEAKER_FRONT_RIGHT_OF_CENTER</h2>
+<pre>SPEAKER_FRONT_RIGHT_OF_CENTER </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_SPEAKER_LOW_FREQUENCY"> </a><div class="element clickable constant  constant_SPEAKER_LOW_FREQUENCY" data-toggle="collapse" data-target=".constant_SPEAKER_LOW_FREQUENCY .collapse">
+<h2>SPEAKER_LOW_FREQUENCY</h2>
+<pre>SPEAKER_LOW_FREQUENCY </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_SPEAKER_SIDE_LEFT"> </a><div class="element clickable constant  constant_SPEAKER_SIDE_LEFT" data-toggle="collapse" data-target=".constant_SPEAKER_SIDE_LEFT .collapse">
+<h2>SPEAKER_SIDE_LEFT</h2>
+<pre>SPEAKER_SIDE_LEFT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_SPEAKER_SIDE_RIGHT"> </a><div class="element clickable constant  constant_SPEAKER_SIDE_RIGHT" data-toggle="collapse" data-target=".constant_SPEAKER_SIDE_RIGHT .collapse">
+<h2>SPEAKER_SIDE_RIGHT</h2>
+<pre>SPEAKER_SIDE_RIGHT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_SPEAKER_TOP_BACK_CENTER"> </a><div class="element clickable constant  constant_SPEAKER_TOP_BACK_CENTER" data-toggle="collapse" data-target=".constant_SPEAKER_TOP_BACK_CENTER .collapse">
+<h2>SPEAKER_TOP_BACK_CENTER</h2>
+<pre>SPEAKER_TOP_BACK_CENTER </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_SPEAKER_TOP_BACK_LEFT"> </a><div class="element clickable constant  constant_SPEAKER_TOP_BACK_LEFT" data-toggle="collapse" data-target=".constant_SPEAKER_TOP_BACK_LEFT .collapse">
+<h2>SPEAKER_TOP_BACK_LEFT</h2>
+<pre>SPEAKER_TOP_BACK_LEFT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_SPEAKER_TOP_BACK_RIGHT"> </a><div class="element clickable constant  constant_SPEAKER_TOP_BACK_RIGHT" data-toggle="collapse" data-target=".constant_SPEAKER_TOP_BACK_RIGHT .collapse">
+<h2>SPEAKER_TOP_BACK_RIGHT</h2>
+<pre>SPEAKER_TOP_BACK_RIGHT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_SPEAKER_TOP_CENTER"> </a><div class="element clickable constant  constant_SPEAKER_TOP_CENTER" data-toggle="collapse" data-target=".constant_SPEAKER_TOP_CENTER .collapse">
+<h2>SPEAKER_TOP_CENTER</h2>
+<pre>SPEAKER_TOP_CENTER </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_SPEAKER_TOP_FRONT_CENTER"> </a><div class="element clickable constant  constant_SPEAKER_TOP_FRONT_CENTER" data-toggle="collapse" data-target=".constant_SPEAKER_TOP_FRONT_CENTER .collapse">
+<h2>SPEAKER_TOP_FRONT_CENTER</h2>
+<pre>SPEAKER_TOP_FRONT_CENTER </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_SPEAKER_TOP_FRONT_LEFT"> </a><div class="element clickable constant  constant_SPEAKER_TOP_FRONT_LEFT" data-toggle="collapse" data-target=".constant_SPEAKER_TOP_FRONT_LEFT .collapse">
+<h2>SPEAKER_TOP_FRONT_LEFT</h2>
+<pre>SPEAKER_TOP_FRONT_LEFT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_SPEAKER_TOP_FRONT_RIGHT"> </a><div class="element clickable constant  constant_SPEAKER_TOP_FRONT_RIGHT" data-toggle="collapse" data-target=".constant_SPEAKER_TOP_FRONT_RIGHT .collapse">
+<h2>SPEAKER_TOP_FRONT_RIGHT</h2>
+<pre>SPEAKER_TOP_FRONT_RIGHT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_WAVE_FORMAT_EXTENSIBLE"> </a><div class="element clickable constant  constant_WAVE_FORMAT_EXTENSIBLE" data-toggle="collapse" data-target=".constant_WAVE_FORMAT_EXTENSIBLE .collapse">
+<h2>&lt;p&gt;EXTENSIBLE Audio Format - actual audio format defined by SubFormat&lt;/p&gt;
+</h2>
+<pre>WAVE_FORMAT_EXTENSIBLE : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_WAVE_FORMAT_IEEE_FLOAT"> </a><div class="element clickable constant  constant_WAVE_FORMAT_IEEE_FLOAT" data-toggle="collapse" data-target=".constant_WAVE_FORMAT_IEEE_FLOAT .collapse">
+<h2>&lt;p&gt;IEEE FLOAT Audio Format&lt;/p&gt;</h2>
+<pre>WAVE_FORMAT_IEEE_FLOAT : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_WAVE_FORMAT_PCM"> </a><div class="element clickable constant  constant_WAVE_FORMAT_PCM" data-toggle="collapse" data-target=".constant_WAVE_FORMAT_PCM .collapse">
+<h2>&lt;p&gt;PCM Audio Format&lt;/p&gt;</h2>
+<pre>WAVE_FORMAT_PCM : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_WAVE_SUBFORMAT_IEEE_FLOAT"> </a><div class="element clickable constant  constant_WAVE_SUBFORMAT_IEEE_FLOAT" data-toggle="collapse" data-target=".constant_WAVE_SUBFORMAT_IEEE_FLOAT .collapse">
+<h2>&lt;p&gt;IEEE FLOAT Audio Format SubType - LE hex representation of GUID {00000003-0000-0010-8000-00AA00389B71}&lt;/p&gt;
+</h2>
+<pre>WAVE_SUBFORMAT_IEEE_FLOAT : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_WAVE_SUBFORMAT_PCM"> </a><div class="element clickable constant  constant_WAVE_SUBFORMAT_PCM" data-toggle="collapse" data-target=".constant_WAVE_SUBFORMAT_PCM .collapse">
+<h2>&lt;p&gt;PCM Audio Format SubType - LE hex representation of GUID {00000001-0000-0010-8000-00AA00389B71}&lt;/p&gt;
+</h2>
+<pre>WAVE_SUBFORMAT_PCM : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-12-23T03:50:23+01:00.<br></footer></div>
+</div>
+</body>
+</html>

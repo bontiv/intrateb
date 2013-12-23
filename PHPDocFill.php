@@ -1,4 +1,6 @@
 <?php
+// Pour moi
+error_reporting(0);
 
 /**
  * PHPDocFill - Easily Document your PHP Scripts

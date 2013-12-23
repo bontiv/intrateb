@@ -1,0 +1,397 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>EpiceNote » \pi_barcode</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">EpiceNote</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/PHPMailer.html"><i class="icon-folder-open"></i> PHPMailer</a></li>
+<li><a href="../packages/PHPWavUtils.html"><i class="icon-folder-open"></i> PHPWavUtils</a></li>
+<li><a href="../packages/Securimage.html"><i class="icon-folder-open"></i> Securimage</a></li>
+<li><a href="../packages/Smarty.html"><i class="icon-folder-open"></i> Smarty</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">1085</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul>
+<li>todo 
+                <span class="label label-info">6</span>
+</li>
+<li>fixme 
+                <span class="label label-info">7</span>
+</li>
+</ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">7</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method_checkCode" title="checkCode :: "><span class="description">checkCode()
+        </span><pre>checkCode()</pre></a></li>
+<li class="method public "><a href="#method_encode" title="encode :: Encodage"><span class="description">Encodage</span><pre>encode()</pre></a></li>
+<li class="method public "><a href="#method_hideCodeType" title="hideCodeType :: Disable CodeType printing"><span class="description">Disable CodeType printing</span><pre>hideCodeType()</pre></a></li>
+<li class="method public "><a href="#method_pi_barcode" title="pi_barcode :: "><span class="description">pi_barcode()
+        </span><pre>pi_barcode()</pre></a></li>
+<li class="method public "><a href="#method_setCode" title="setCode :: Set Barcode String"><span class="description">Set Barcode String</span><pre>setCode()</pre></a></li>
+<li class="method public "><a href="#method_setColors" title="setColors :: Set Colors"><span class="description">Set Colors</span><pre>setColors()</pre></a></li>
+<li class="method public "><a href="#method_setFiletype" title="setFiletype :: Set File Type (PNG, GIF or JPG)"><span class="description">Set File Type (PNG, GIF or JPG)</span><pre>setFiletype()</pre></a></li>
+<li class="method public "><a href="#method_setSize" title="setSize :: Set Image Height and Extra-Width"><span class="description">Set Image Height and Extra-Width</span><pre>setSize()</pre></a></li>
+<li class="method public "><a href="#method_setText" title="setText :: Set the Printed Text under Bars"><span class="description">Set the Printed Text under Bars</span><pre>setText()</pre></a></li>
+<li class="method public "><a href="#method_setType" title="setType :: Set Barcode Type"><span class="description">Set Barcode Type</span><pre>setType()</pre></a></li>
+<li class="method public "><a href="#method_showBarcodeImage" title="showBarcodeImage :: Show Image"><span class="description">Show Image</span><pre>showBarcodeImage()</pre></a></li>
+<li class="method public "><a href="#method_writeBarcodeFile" title="writeBarcodeFile :: Save Image"><span class="description">Save Image</span><pre>writeBarcodeFile()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul>
+<li class="property public "><a href="#property_BACKGROUND" title="$BACKGROUND :: "><span class="description"></span><pre>$BACKGROUND</pre></a></li>
+<li class="property public "><a href="#property_C11" title="$C11 :: "><span class="description"></span><pre>$C11</pre></a></li>
+<li class="property public "><a href="#property_C128" title="$C128 :: "><span class="description"></span><pre>$C128</pre></a></li>
+<li class="property public "><a href="#property_C25" title="$C25 :: "><span class="description"></span><pre>$C25</pre></a></li>
+<li class="property public "><a href="#property_C39" title="$C39 :: "><span class="description"></span><pre>$C39</pre></a></li>
+<li class="property public "><a href="#property_CALMZONE" title="$CALMZONE :: "><span class="description"></span><pre>$CALMZONE</pre></a></li>
+<li class="property public "><a href="#property_CMC7" title="$CMC7 :: "><span class="description"></span><pre>$CMC7</pre></a></li>
+<li class="property public "><a href="#property_CODE" title="$CODE :: "><span class="description"></span><pre>$CODE</pre></a></li>
+<li class="property public "><a href="#property_CODEWIDTH" title="$CODEWIDTH :: "><span class="description"></span><pre>$CODEWIDTH</pre></a></li>
+<li class="property public "><a href="#property_EANbars" title="$EANbars :: "><span class="description"></span><pre>$EANbars</pre></a></li>
+<li class="property public "><a href="#property_EANparity" title="$EANparity :: "><span class="description"></span><pre>$EANparity</pre></a></li>
+<li class="property public "><a href="#property_ENCODED" title="$ENCODED :: "><span class="description"></span><pre>$ENCODED</pre></a></li>
+<li class="property public "><a href="#property_FILETYPE" title="$FILETYPE :: "><span class="description"></span><pre>$FILETYPE</pre></a></li>
+<li class="property public "><a href="#property_FOREGROUND" title="$FOREGROUND :: "><span class="description"></span><pre>$FOREGROUND</pre></a></li>
+<li class="property public "><a href="#property_FULLCODE" title="$FULLCODE :: "><span class="description"></span><pre>$FULLCODE</pre></a></li>
+<li class="property public "><a href="#property_HEIGHT" title="$HEIGHT :: "><span class="description"></span><pre>$HEIGHT</pre></a></li>
+<li class="property public "><a href="#property_HR" title="$HR :: "><span class="description"></span><pre>$HR</pre></a></li>
+<li class="property public "><a href="#property_IH" title="$IH :: "><span class="description"></span><pre>$IH</pre></a></li>
+<li class="property public "><a href="#property_MSI" title="$MSI :: "><span class="description"></span><pre>$MSI</pre></a></li>
+<li class="property public "><a href="#property_SHOWTYPE" title="$SHOWTYPE :: "><span class="description"></span><pre>$SHOWTYPE</pre></a></li>
+<li class="property public "><a href="#property_TYPE" title="$TYPE :: "><span class="description"></span><pre>$TYPE</pre></a></li>
+<li class="property public "><a href="#property_WIDTH" title="$WIDTH :: "><span class="description"></span><pre>$WIDTH</pre></a></li>
+<li class="property public "><a href="#property_codabar" title="$codabar :: "><span class="description"></span><pre>$codabar</pre></a></li>
+<li class="property public "><a href="#property_kix" title="$kix :: "><span class="description"></span><pre>$kix</pre></a></li>
+<li class="property public "><a href="#property_postnet" title="$postnet :: "><span class="description"></span><pre>$postnet</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\pi_barcode"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/global.html">global</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/pi_barcode.html">pi_barcode</a>
+</li>
+</ul>
+<div class="element class"><div class="details">
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method_checkCode"></a><div class="element clickable method public method_checkCode" data-toggle="collapse" data-target=".method_checkCode .collapse">
+<h2>checkCode()
+        </h2>
+<pre>checkCode() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_encode"></a><div class="element clickable method public method_encode" data-toggle="collapse" data-target=".method_encode .collapse">
+<h2>Encodage</h2>
+<pre>encode() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>Encode des symboles (a-Z, 0-9, ...) vers des barres</p></div></div></div>
+</div>
+<a id="method_hideCodeType"></a><div class="element clickable method public method_hideCodeType" data-toggle="collapse" data-target=".method_hideCodeType .collapse">
+<h2>Disable CodeType printing</h2>
+<pre>hideCodeType() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_pi_barcode"></a><div class="element clickable method public method_pi_barcode" data-toggle="collapse" data-target=".method_pi_barcode .collapse">
+<h2>pi_barcode()
+        </h2>
+<pre>pi_barcode() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_setCode"></a><div class="element clickable method public method_setCode" data-toggle="collapse" data-target=".method_setCode .collapse">
+<h2>Set Barcode String</h2>
+<pre>setCode($code) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$code</h4></div>
+</div></div>
+</div>
+<a id="method_setColors"></a><div class="element clickable method public method_setColors" data-toggle="collapse" data-target=".method_setColors .collapse">
+<h2>Set Colors</h2>
+<pre>setColors($fg, $bg) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$fg</h4></div>
+<div class="subelement argument"><h4>$bg</h4></div>
+</div></div>
+</div>
+<a id="method_setFiletype"></a><div class="element clickable method public method_setFiletype" data-toggle="collapse" data-target=".method_setFiletype .collapse">
+<h2>Set File Type (PNG, GIF or JPG)</h2>
+<pre>setFiletype($ft) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$ft</h4></div>
+</div></div>
+</div>
+<a id="method_setSize"></a><div class="element clickable method public method_setSize" data-toggle="collapse" data-target=".method_setSize .collapse">
+<h2>Set Image Height and Extra-Width</h2>
+<pre>setSize($height, $width, $calmZone) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$height</h4></div>
+<div class="subelement argument"><h4>$width</h4></div>
+<div class="subelement argument"><h4>$calmZone</h4></div>
+</div></div>
+</div>
+<a id="method_setText"></a><div class="element clickable method public method_setText" data-toggle="collapse" data-target=".method_setText .collapse">
+<h2>Set the Printed Text under Bars</h2>
+<pre>setText($text) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$text</h4></div>
+</div></div>
+</div>
+<a id="method_setType"></a><div class="element clickable method public method_setType" data-toggle="collapse" data-target=".method_setType .collapse">
+<h2>Set Barcode Type</h2>
+<pre>setType($type) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$type</h4></div>
+</div></div>
+</div>
+<a id="method_showBarcodeImage"></a><div class="element clickable method public method_showBarcodeImage" data-toggle="collapse" data-target=".method_showBarcodeImage .collapse">
+<h2>Show Image</h2>
+<pre>showBarcodeImage() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_writeBarcodeFile"></a><div class="element clickable method public method_writeBarcodeFile" data-toggle="collapse" data-target=".method_writeBarcodeFile .collapse">
+<h2>Save Image</h2>
+<pre>writeBarcodeFile($file) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$file</h4></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_BACKGROUND"> </a><div class="element clickable property public property_BACKGROUND" data-toggle="collapse" data-target=".property_BACKGROUND .collapse">
+<h2></h2>
+<pre>$BACKGROUND </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_C11"> </a><div class="element clickable property public property_C11" data-toggle="collapse" data-target=".property_C11 .collapse">
+<h2></h2>
+<pre>$C11 </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_C128"> </a><div class="element clickable property public property_C128" data-toggle="collapse" data-target=".property_C128 .collapse">
+<h2></h2>
+<pre>$C128 </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_C25"> </a><div class="element clickable property public property_C25" data-toggle="collapse" data-target=".property_C25 .collapse">
+<h2></h2>
+<pre>$C25 </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_C39"> </a><div class="element clickable property public property_C39" data-toggle="collapse" data-target=".property_C39 .collapse">
+<h2></h2>
+<pre>$C39 </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_CALMZONE"> </a><div class="element clickable property public property_CALMZONE" data-toggle="collapse" data-target=".property_CALMZONE .collapse">
+<h2></h2>
+<pre>$CALMZONE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_CMC7"> </a><div class="element clickable property public property_CMC7" data-toggle="collapse" data-target=".property_CMC7 .collapse">
+<h2></h2>
+<pre>$CMC7 </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_CODE"> </a><div class="element clickable property public property_CODE" data-toggle="collapse" data-target=".property_CODE .collapse">
+<h2></h2>
+<pre>$CODE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_CODEWIDTH"> </a><div class="element clickable property public property_CODEWIDTH" data-toggle="collapse" data-target=".property_CODEWIDTH .collapse">
+<h2></h2>
+<pre>$CODEWIDTH </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_EANbars"> </a><div class="element clickable property public property_EANbars" data-toggle="collapse" data-target=".property_EANbars .collapse">
+<h2></h2>
+<pre>$EANbars </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_EANparity"> </a><div class="element clickable property public property_EANparity" data-toggle="collapse" data-target=".property_EANparity .collapse">
+<h2></h2>
+<pre>$EANparity </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_ENCODED"> </a><div class="element clickable property public property_ENCODED" data-toggle="collapse" data-target=".property_ENCODED .collapse">
+<h2></h2>
+<pre>$ENCODED </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_FILETYPE"> </a><div class="element clickable property public property_FILETYPE" data-toggle="collapse" data-target=".property_FILETYPE .collapse">
+<h2></h2>
+<pre>$FILETYPE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_FOREGROUND"> </a><div class="element clickable property public property_FOREGROUND" data-toggle="collapse" data-target=".property_FOREGROUND .collapse">
+<h2></h2>
+<pre>$FOREGROUND </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_FULLCODE"> </a><div class="element clickable property public property_FULLCODE" data-toggle="collapse" data-target=".property_FULLCODE .collapse">
+<h2></h2>
+<pre>$FULLCODE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_HEIGHT"> </a><div class="element clickable property public property_HEIGHT" data-toggle="collapse" data-target=".property_HEIGHT .collapse">
+<h2></h2>
+<pre>$HEIGHT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_HR"> </a><div class="element clickable property public property_HR" data-toggle="collapse" data-target=".property_HR .collapse">
+<h2></h2>
+<pre>$HR </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_IH"> </a><div class="element clickable property public property_IH" data-toggle="collapse" data-target=".property_IH .collapse">
+<h2></h2>
+<pre>$IH </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_MSI"> </a><div class="element clickable property public property_MSI" data-toggle="collapse" data-target=".property_MSI .collapse">
+<h2></h2>
+<pre>$MSI </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_SHOWTYPE"> </a><div class="element clickable property public property_SHOWTYPE" data-toggle="collapse" data-target=".property_SHOWTYPE .collapse">
+<h2></h2>
+<pre>$SHOWTYPE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_TYPE"> </a><div class="element clickable property public property_TYPE" data-toggle="collapse" data-target=".property_TYPE .collapse">
+<h2></h2>
+<pre>$TYPE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_WIDTH"> </a><div class="element clickable property public property_WIDTH" data-toggle="collapse" data-target=".property_WIDTH .collapse">
+<h2></h2>
+<pre>$WIDTH </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_codabar"> </a><div class="element clickable property public property_codabar" data-toggle="collapse" data-target=".property_codabar .collapse">
+<h2></h2>
+<pre>$codabar </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_kix"> </a><div class="element clickable property public property_kix" data-toggle="collapse" data-target=".property_kix .collapse">
+<h2></h2>
+<pre>$kix </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_postnet"> </a><div class="element clickable property public property_postnet" data-toggle="collapse" data-target=".property_postnet .collapse">
+<h2></h2>
+<pre>$postnet </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div></div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-12-23T03:50:23+01:00.<br></footer></div>
+</div>
+</body>
+</html>

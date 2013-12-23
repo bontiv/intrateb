@@ -1,0 +1,414 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>EpiceNote » \TTFParser</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">EpiceNote</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/PHPMailer.html"><i class="icon-folder-open"></i> PHPMailer</a></li>
+<li><a href="../packages/PHPWavUtils.html"><i class="icon-folder-open"></i> PHPWavUtils</a></li>
+<li><a href="../packages/Securimage.html"><i class="icon-folder-open"></i> Securimage</a></li>
+<li><a href="../packages/Smarty.html"><i class="icon-folder-open"></i> Smarty</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">1085</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul>
+<li>todo 
+                <span class="label label-info">6</span>
+</li>
+<li>fixme 
+                <span class="label label-info">7</span>
+</li>
+</ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">7</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method_Error" title="Error :: "><span class="description">Error()
+        </span><pre>Error()</pre></a></li>
+<li class="method public "><a href="#method_Parse" title="Parse :: "><span class="description">Parse()
+        </span><pre>Parse()</pre></a></li>
+<li class="method public "><a href="#method_ParseCmap" title="ParseCmap :: "><span class="description">ParseCmap()
+        </span><pre>ParseCmap()</pre></a></li>
+<li class="method public "><a href="#method_ParseHead" title="ParseHead :: "><span class="description">ParseHead()
+        </span><pre>ParseHead()</pre></a></li>
+<li class="method public "><a href="#method_ParseHhea" title="ParseHhea :: "><span class="description">ParseHhea()
+        </span><pre>ParseHhea()</pre></a></li>
+<li class="method public "><a href="#method_ParseHmtx" title="ParseHmtx :: "><span class="description">ParseHmtx()
+        </span><pre>ParseHmtx()</pre></a></li>
+<li class="method public "><a href="#method_ParseMaxp" title="ParseMaxp :: "><span class="description">ParseMaxp()
+        </span><pre>ParseMaxp()</pre></a></li>
+<li class="method public "><a href="#method_ParseName" title="ParseName :: "><span class="description">ParseName()
+        </span><pre>ParseName()</pre></a></li>
+<li class="method public "><a href="#method_ParseOS2" title="ParseOS2 :: "><span class="description">ParseOS2()
+        </span><pre>ParseOS2()</pre></a></li>
+<li class="method public "><a href="#method_ParsePost" title="ParsePost :: "><span class="description">ParsePost()
+        </span><pre>ParsePost()</pre></a></li>
+<li class="method public "><a href="#method_Read" title="Read :: "><span class="description">Read()
+        </span><pre>Read()</pre></a></li>
+<li class="method public "><a href="#method_ReadShort" title="ReadShort :: "><span class="description">ReadShort()
+        </span><pre>ReadShort()</pre></a></li>
+<li class="method public "><a href="#method_ReadULong" title="ReadULong :: "><span class="description">ReadULong()
+        </span><pre>ReadULong()</pre></a></li>
+<li class="method public "><a href="#method_ReadUShort" title="ReadUShort :: "><span class="description">ReadUShort()
+        </span><pre>ReadUShort()</pre></a></li>
+<li class="method public "><a href="#method_Seek" title="Seek :: "><span class="description">Seek()
+        </span><pre>Seek()</pre></a></li>
+<li class="method public "><a href="#method_Skip" title="Skip :: "><span class="description">Skip()
+        </span><pre>Skip()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul>
+<li class="property public "><a href="#property_Bold" title="$Bold :: "><span class="description"></span><pre>$Bold</pre></a></li>
+<li class="property public "><a href="#property_Embeddable" title="$Embeddable :: "><span class="description"></span><pre>$Embeddable</pre></a></li>
+<li class="property public "><a href="#property_capHeight" title="$capHeight :: "><span class="description"></span><pre>$capHeight</pre></a></li>
+<li class="property public "><a href="#property_chars" title="$chars :: "><span class="description"></span><pre>$chars</pre></a></li>
+<li class="property public "><a href="#property_f" title="$f :: "><span class="description"></span><pre>$f</pre></a></li>
+<li class="property public "><a href="#property_isFixedPitch" title="$isFixedPitch :: "><span class="description"></span><pre>$isFixedPitch</pre></a></li>
+<li class="property public "><a href="#property_italicAngle" title="$italicAngle :: "><span class="description"></span><pre>$italicAngle</pre></a></li>
+<li class="property public "><a href="#property_numGlyphs" title="$numGlyphs :: "><span class="description"></span><pre>$numGlyphs</pre></a></li>
+<li class="property public "><a href="#property_numberOfHMetrics" title="$numberOfHMetrics :: "><span class="description"></span><pre>$numberOfHMetrics</pre></a></li>
+<li class="property public "><a href="#property_postScriptName" title="$postScriptName :: "><span class="description"></span><pre>$postScriptName</pre></a></li>
+<li class="property public "><a href="#property_tables" title="$tables :: "><span class="description"></span><pre>$tables</pre></a></li>
+<li class="property public "><a href="#property_typoAscender" title="$typoAscender :: "><span class="description"></span><pre>$typoAscender</pre></a></li>
+<li class="property public "><a href="#property_typoDescender" title="$typoDescender :: "><span class="description"></span><pre>$typoDescender</pre></a></li>
+<li class="property public "><a href="#property_underlinePosition" title="$underlinePosition :: "><span class="description"></span><pre>$underlinePosition</pre></a></li>
+<li class="property public "><a href="#property_underlineThickness" title="$underlineThickness :: "><span class="description"></span><pre>$underlineThickness</pre></a></li>
+<li class="property public "><a href="#property_unitsPerEm" title="$unitsPerEm :: "><span class="description"></span><pre>$unitsPerEm</pre></a></li>
+<li class="property public "><a href="#property_widths" title="$widths :: "><span class="description"></span><pre>$widths</pre></a></li>
+<li class="property public "><a href="#property_xMax" title="$xMax :: "><span class="description"></span><pre>$xMax</pre></a></li>
+<li class="property public "><a href="#property_xMin" title="$xMin :: "><span class="description"></span><pre>$xMin</pre></a></li>
+<li class="property public "><a href="#property_yMax" title="$yMax :: "><span class="description"></span><pre>$yMax</pre></a></li>
+<li class="property public "><a href="#property_yMin" title="$yMin :: "><span class="description"></span><pre>$yMin</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\TTFParser"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/global.html">global</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/TTFParser.html">TTFParser</a>
+</li>
+</ul>
+<div class="element class"><div class="details">
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method_Error"></a><div class="element clickable method public method_Error" data-toggle="collapse" data-target=".method_Error .collapse">
+<h2>Error()
+        </h2>
+<pre>Error($msg) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$msg</h4></div>
+</div></div>
+</div>
+<a id="method_Parse"></a><div class="element clickable method public method_Parse" data-toggle="collapse" data-target=".method_Parse .collapse">
+<h2>Parse()
+        </h2>
+<pre>Parse($file) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$file</h4></div>
+</div></div>
+</div>
+<a id="method_ParseCmap"></a><div class="element clickable method public method_ParseCmap" data-toggle="collapse" data-target=".method_ParseCmap .collapse">
+<h2>ParseCmap()
+        </h2>
+<pre>ParseCmap() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_ParseHead"></a><div class="element clickable method public method_ParseHead" data-toggle="collapse" data-target=".method_ParseHead .collapse">
+<h2>ParseHead()
+        </h2>
+<pre>ParseHead() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_ParseHhea"></a><div class="element clickable method public method_ParseHhea" data-toggle="collapse" data-target=".method_ParseHhea .collapse">
+<h2>ParseHhea()
+        </h2>
+<pre>ParseHhea() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_ParseHmtx"></a><div class="element clickable method public method_ParseHmtx" data-toggle="collapse" data-target=".method_ParseHmtx .collapse">
+<h2>ParseHmtx()
+        </h2>
+<pre>ParseHmtx() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_ParseMaxp"></a><div class="element clickable method public method_ParseMaxp" data-toggle="collapse" data-target=".method_ParseMaxp .collapse">
+<h2>ParseMaxp()
+        </h2>
+<pre>ParseMaxp() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_ParseName"></a><div class="element clickable method public method_ParseName" data-toggle="collapse" data-target=".method_ParseName .collapse">
+<h2>ParseName()
+        </h2>
+<pre>ParseName() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_ParseOS2"></a><div class="element clickable method public method_ParseOS2" data-toggle="collapse" data-target=".method_ParseOS2 .collapse">
+<h2>ParseOS2()
+        </h2>
+<pre>ParseOS2() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_ParsePost"></a><div class="element clickable method public method_ParsePost" data-toggle="collapse" data-target=".method_ParsePost .collapse">
+<h2>ParsePost()
+        </h2>
+<pre>ParsePost() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_Read"></a><div class="element clickable method public method_Read" data-toggle="collapse" data-target=".method_Read .collapse">
+<h2>Read()
+        </h2>
+<pre>Read($n) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$n</h4></div>
+</div></div>
+</div>
+<a id="method_ReadShort"></a><div class="element clickable method public method_ReadShort" data-toggle="collapse" data-target=".method_ReadShort .collapse">
+<h2>ReadShort()
+        </h2>
+<pre>ReadShort() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_ReadULong"></a><div class="element clickable method public method_ReadULong" data-toggle="collapse" data-target=".method_ReadULong .collapse">
+<h2>ReadULong()
+        </h2>
+<pre>ReadULong() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_ReadUShort"></a><div class="element clickable method public method_ReadUShort" data-toggle="collapse" data-target=".method_ReadUShort .collapse">
+<h2>ReadUShort()
+        </h2>
+<pre>ReadUShort() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_Seek"></a><div class="element clickable method public method_Seek" data-toggle="collapse" data-target=".method_Seek .collapse">
+<h2>Seek()
+        </h2>
+<pre>Seek($tag) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$tag</h4></div>
+</div></div>
+</div>
+<a id="method_Skip"></a><div class="element clickable method public method_Skip" data-toggle="collapse" data-target=".method_Skip .collapse">
+<h2>Skip()
+        </h2>
+<pre>Skip($n) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$n</h4></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_Bold"> </a><div class="element clickable property public property_Bold" data-toggle="collapse" data-target=".property_Bold .collapse">
+<h2></h2>
+<pre>$Bold </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_Embeddable"> </a><div class="element clickable property public property_Embeddable" data-toggle="collapse" data-target=".property_Embeddable .collapse">
+<h2></h2>
+<pre>$Embeddable </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_capHeight"> </a><div class="element clickable property public property_capHeight" data-toggle="collapse" data-target=".property_capHeight .collapse">
+<h2></h2>
+<pre>$capHeight </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_chars"> </a><div class="element clickable property public property_chars" data-toggle="collapse" data-target=".property_chars .collapse">
+<h2></h2>
+<pre>$chars </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_f"> </a><div class="element clickable property public property_f" data-toggle="collapse" data-target=".property_f .collapse">
+<h2></h2>
+<pre>$f </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_isFixedPitch"> </a><div class="element clickable property public property_isFixedPitch" data-toggle="collapse" data-target=".property_isFixedPitch .collapse">
+<h2></h2>
+<pre>$isFixedPitch </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_italicAngle"> </a><div class="element clickable property public property_italicAngle" data-toggle="collapse" data-target=".property_italicAngle .collapse">
+<h2></h2>
+<pre>$italicAngle </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_numGlyphs"> </a><div class="element clickable property public property_numGlyphs" data-toggle="collapse" data-target=".property_numGlyphs .collapse">
+<h2></h2>
+<pre>$numGlyphs </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_numberOfHMetrics"> </a><div class="element clickable property public property_numberOfHMetrics" data-toggle="collapse" data-target=".property_numberOfHMetrics .collapse">
+<h2></h2>
+<pre>$numberOfHMetrics </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_postScriptName"> </a><div class="element clickable property public property_postScriptName" data-toggle="collapse" data-target=".property_postScriptName .collapse">
+<h2></h2>
+<pre>$postScriptName </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_tables"> </a><div class="element clickable property public property_tables" data-toggle="collapse" data-target=".property_tables .collapse">
+<h2></h2>
+<pre>$tables </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_typoAscender"> </a><div class="element clickable property public property_typoAscender" data-toggle="collapse" data-target=".property_typoAscender .collapse">
+<h2></h2>
+<pre>$typoAscender </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_typoDescender"> </a><div class="element clickable property public property_typoDescender" data-toggle="collapse" data-target=".property_typoDescender .collapse">
+<h2></h2>
+<pre>$typoDescender </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_underlinePosition"> </a><div class="element clickable property public property_underlinePosition" data-toggle="collapse" data-target=".property_underlinePosition .collapse">
+<h2></h2>
+<pre>$underlinePosition </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_underlineThickness"> </a><div class="element clickable property public property_underlineThickness" data-toggle="collapse" data-target=".property_underlineThickness .collapse">
+<h2></h2>
+<pre>$underlineThickness </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_unitsPerEm"> </a><div class="element clickable property public property_unitsPerEm" data-toggle="collapse" data-target=".property_unitsPerEm .collapse">
+<h2></h2>
+<pre>$unitsPerEm </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_widths"> </a><div class="element clickable property public property_widths" data-toggle="collapse" data-target=".property_widths .collapse">
+<h2></h2>
+<pre>$widths </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_xMax"> </a><div class="element clickable property public property_xMax" data-toggle="collapse" data-target=".property_xMax .collapse">
+<h2></h2>
+<pre>$xMax </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_xMin"> </a><div class="element clickable property public property_xMin" data-toggle="collapse" data-target=".property_xMin .collapse">
+<h2></h2>
+<pre>$xMin </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_yMax"> </a><div class="element clickable property public property_yMax" data-toggle="collapse" data-target=".property_yMax .collapse">
+<h2></h2>
+<pre>$yMax </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_yMin"> </a><div class="element clickable property public property_yMin" data-toggle="collapse" data-target=".property_yMin .collapse">
+<h2></h2>
+<pre>$yMin </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div></div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-12-23T03:50:17+01:00.<br></footer></div>
+</div>
+</body>
+</html>
