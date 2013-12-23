@@ -34,9 +34,18 @@
 {/acl}
 {acl level="GUEST"}
                     <li><a href="{mkurl action="section"}">Sections</a></li>
+                    <li><a href="{mkurl action="event"}">Events</a></li>
 {/acl}
 {acl level="USER"}
-                    <li><a href="{mkurl action="reclam"}">Réclamations</a></li>
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Notation
+                            <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{mkurl action="note"}">Notes</a></li>
+                            <li><a href="{mkurl action="bulletin"}">Bulletin</a></li>
+                            <li><a href="{mkurl action="reclam"}">Reclamation</a></li>
+                        </ul>
+                    </li>
 {/acl}
 {acl level="ADMINISTRATOR"}
                     <li class="dropdown">
