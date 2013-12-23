@@ -1,6 +1,6 @@
 {include "head.tpl"}
 <h1>La notation</h1>
-
+<hr/>
 <h2>Qu'est ce que ce site ?</h2>
 <p>Ce site est le site qui va vous permettre de vous inscrire en tant que staff
   sur les événements de l'association.</p>
@@ -12,8 +12,8 @@ attribuer une note.</p>
 <h2>Comment la notation fonctionne ?</h2>
 <p>Sur ce site vous avez deux notes attribués :</p>
 <ul>
-  <li>La note d'investissement <em>noté NI sur ce site</em></li>
-  <li>La note de soin du travail <em>noté NST sur ce site</em></li>
+  <li>La note d'investissement <em>noté <b>NI</b> sur ce site</em></li>
+  <li>La note de soin du travail <em>noté <b>NST</b> sur ce site</em></li>
 </ul>
 <p>La note d'investissement est en pourcentage. Elle peut dépasser 100% !
 Cette note est le multiplicateur de la note de soin du travail. La NI évolue

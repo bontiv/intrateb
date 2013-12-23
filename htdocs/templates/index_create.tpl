@@ -16,49 +16,69 @@
         </p>
 </div>
 
-<form method="POST" action="{mkurl action="index" page="create"}">
-    <p>
-        Pseudo :<br/>
-        <input type="text" name="user_name" />
-    </p>
-    <p>
-        Nom :<br/>
-        <input type="text" name="user_lastname" />
-    </p>
-    <p>
-        Prénom :<br/>
-        <input type="text" name="user_firstname" />
-    </p>
-    <p>
-        Mot de passe :<br/>
-        <input type="password" name="user_pass" />
-    </p>
-    <p>
-        Confirmez le mot de passe :<br/>
-        <input type="password" name="confirmPassword" />
-    </p>
-    <p>
-        Type :<br/>
-        <select name="user_type">
-        {foreach from=$types item="t"}
-            <option value="{$t.ut_id}">{$t.ut_name}</option>
-        {/foreach}
-        </select>
-    </p>
-    <p>
-        Login IONIS :<br/>
-        <input type="text" name="user_login" />
-    </p>
-    <p>
-        Email :<br/>
-        <input type="text" name="user_email" />
-    </p>
-    <p>
-        Téléphone :<br/>
-        <input type="text" name="user_phone" />
-    </p>
-    <p>
-        <input type="submit" name="Inscription" class="btn btn-default" />
-    </p>
-</form>
+<div class="container col-lg-12">
+    <form method="POST" action="{mkurl action="index" page="create"}">
+        <div class="col-lg-3">
+            <div class="input-group">
+                <span class="input-group-addon">Pseudo</span>
+                <input class="form-control" type="text" name="user_name" />
+            </div>
+            <br/>
+            <div class="input-group">
+                <span class="input-group-addon">Nom</span>
+                <input class="form-control" type="text" name="user_lastname" />
+            </div>
+            <br/>
+            <div class="input-group">
+                <span class="input-group-addon">Prénom</span>
+                <input class="form-control" type="text" name="user_firstname" />
+            </div>
+            <br/>
+            <div class="input-group">
+                <span class="input-group-addon">Mot de passe</span>
+                <input class="form-control" type="password" name="user_pass" />
+            </div>
+            <br/>
+                <input class="form-control" type="password" name="confirmPassword" placeholder="Confirmez le mot de passe" />
+            <br/>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="input-group">
+                <span class="input-group-addon">Type</span>
+                <select name="user_type" class="form-control">
+                {foreach from=$types item="t"}
+                    <option value="{$t.ut_id}">{$t.ut_name}</option>
+                {/foreach}
+                </select>
+            </div>
+            <br/>
+            <div class="input-group">
+                <span class="input-group-addon">Login IONIS</span>
+                <input class="form-control" type="text" name="user_login" />
+            </div>
+            <br/>
+            <div class="input-group">
+                <span class="input-group-addon">Email</span>
+                <input class="form-control" type="text" name="user_email" />
+            </div>
+            <br/>
+            <div class="input-group">
+                <span class="input-group-addon">Téléphone</span>
+                <input class="form-control" type="text" name="user_phone" />
+            </div>
+            <br/>
+        </div>
+        <div class="col-lg-4">
+            <div class="btn btn-default btn-disable">
+                Captcha <br/>
+                <!-- Captcha ICI !!! -->
+            </div>
+            <br/><br/>
+            <div>
+                <input type="submit" name="Inscription" class="btn btn-success" />
+            </div>
+        </div>
+    </form>
+</div>
 {include "foot.tpl"}
