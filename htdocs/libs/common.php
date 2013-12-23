@@ -30,14 +30,12 @@ function aclFromText($txt) {
  * @param type $acl
  * @return type
  */
-function hasAcl($acl)
-{
+function hasAcl($acl) {
     if (!isset($_SESSION['user']) || $_SESSION['user'] == false || !isset($_SESSION['user']['role']))
         $user = ACL_ANNONYMOUS;
     else
         $user = $_SESSION['user']['role'];
     return $user >= $acl;
-    
 }
 
 /**
@@ -47,7 +45,7 @@ function hasAcl($acl)
  */
 function needAcl($acl) {
     if (!hasAcl($acl))
-        modexec ('syscore', 'forbidden');
+        modexec('syscore', 'forbidden');
 }
 
 /**
@@ -58,14 +56,13 @@ function needAcl($acl) {
  * @param type $repeat
  * @return type
  */
-function acl_smarty ($params, $content, $smarty, &$repeat)
-{
-  if (isset($content)) {
-      if (hasAcl(aclFromText($params['level'])))
-        return $content;
-      else
-          return '';
-  }
+function acl_smarty($params, $content, $smarty, &$repeat) {
+    if (isset($content)) {
+        if (hasAcl(aclFromText($params['level'])))
+            return $content;
+        else
+            return '';
+    }
 }
 
 /**
@@ -79,15 +76,17 @@ function getAclLevel($action, $page) {
     global $pdo;
 
     //Pour certain cas c'est vu d'avance
-    if ($action == "admin") return ACL_ADMINISTRATOR;
-    if ($action == "index") return ACL_ANNONYMOUS;
-    
+    if ($action == "admin")
+        return ACL_ADMINISTRATOR;
+    if ($action == "index")
+        return ACL_ANNONYMOUS;
+
     //Pour le reste ...
     $sql = $pdo->prepare('SELECT * FROM acces WHERE acl_action = ? AND acl_page = ?');
     $sql->bindValue(1, $action);
     $sql->bindValue(2, $page);
     $sql->execute();
-    
+
     if ($acl = $sql->fetch()) {
         return aclFromText($acl['acl_acces']);
     } else {
@@ -134,6 +133,11 @@ function mkurl_smarty($params, $smarty) {
         $page = $params['page'];
         unset($params['page']);
     }
+
+    //Petit troll pour les accès refusés :
+    if (!hasAcl(getAclLevel($action, $page)))
+        return '#';
+
     return mkurl($action, $page, $params);
 }
 
@@ -161,14 +165,14 @@ function redirect($action, $page = 'index', $options = null) {
  * @param type $action
  * @param type $page
  */
-function modsecu($action, $page='index') {
+function modsecu($action, $page = 'index') {
     global $root;
 
     include_once $root . 'action' . DS . $action . '.php';
 
     if (function_exists($action . '_security')) {
         call_user_func($action . '_security', $page);
-    }    
+    }
 }
 
 /**

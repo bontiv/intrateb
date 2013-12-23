@@ -3,6 +3,15 @@
 <h1>Administration</h1>
 <h2>Section {$section.section_name}</h2>
 <p>Section crée par {$section.user_name}. C'est une {if $section.section_type="primary"}section principale{else}sous section{/if}.</p>
+
+<div class="btn-group">
+{if $section.inType}
+    <a href="{mkurl action="section" page="goout" section=$section.section_id}" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Quitter</a>
+    {else}
+    <a href="{mkurl action="section" page="goin" section=$section.section_id}" class="btn btn-info"><i class="glyphicon glyphicon-heart"></i> Adhérer</a>
+    {/if}
+    <a href="{mkurl action="section" page="mkevent" section=$section.section_id}" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Créer event</a>
+</div>
 <h3>Membres</h3>
 <table class="table table-striped table-hover">
     <thead>
@@ -35,8 +44,8 @@
                 <td>{$line.user_phone}</td>
                 <td>
                     <div class="btn-group">
-                    <a href="{mkurl action="section" page="reject" user=$line.user_id section=$section.section_id}" class="btn btn-danger"><span class="glyphicon-remove glyphicon"></span></a>
-                    <a href="{mkurl action="section" page="manager" user=$line.user_id section=$section.section_id}" class="btn btn-warning"><span class="glyphicon-thumbs-up glyphicon"></span></a>
+                        <a href="{mkurl action="section" page="reject" user=$line.user_id section=$section.section_id}" class="btn btn-danger"><span class="glyphicon-remove glyphicon"></span></a>
+                        <a href="{mkurl action="section" page="manager" user=$line.user_id section=$section.section_id}" class="btn btn-warning"><span class="glyphicon-thumbs-up glyphicon"></span></a>
                     </div>
                 </td>
             </tr>
@@ -50,8 +59,8 @@
                 <td>{$line.user_phone}</td>
                 <td>
                     <div class="btn-group">
-                    <a href="{mkurl action="section" page="reject" user=$line.user_id section=$section.section_id}" class="btn btn-danger"><span class="glyphicon-remove glyphicon"></span></a>
-                    <a href="{mkurl action="section" page="accept" user=$line.user_id section=$section.section_id}" class="btn btn-primary"><span class="glyphicon-plus glyphicon"></span></a>
+                        <a href="{mkurl action="section" page="reject" user=$line.user_id section=$section.section_id}" class="btn btn-danger"><span class="glyphicon-remove glyphicon"></span></a>
+                        <a href="{mkurl action="section" page="accept" user=$line.user_id section=$section.section_id}" class="btn btn-primary"><span class="glyphicon-plus glyphicon"></span></a>
                     </div>
                 </td>
             </tr>

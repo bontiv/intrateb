@@ -1,5 +1,12 @@
 <?php
 
+function section_mkevent() {
+    global $pdo, $tpl;
+    
+    $tpl->display('section_mkevent.tpl');
+    quit();
+}
+
 function section_index() {
     global $pdo, $tpl;
 
