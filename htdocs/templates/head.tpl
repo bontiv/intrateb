@@ -26,17 +26,19 @@
 
             <div class="collapse navbar-collapse navbar-ex1-collapse" >
                 <ul class="nav navbar-nav">
-{acl level="USER"}
+{acl action="user"}
                     <li><a href="{mkurl action="user"}">Utilisateurs</a></li>
 {/acl}
-{acl level="ADMINISTRATOR"}
+{acl action="ecole"}
                     <li><a href="{mkurl action="ecole"}">Ecoles</a></li>
 {/acl}
-{acl level="GUEST"}
+{acl action="section"}
                     <li><a href="{mkurl action="section"}">Sections</a></li>
+{/acl}
+{acl action="event"}
                     <li><a href="{mkurl action="event"}">Events</a></li>
 {/acl}
-{acl level="USER"}
+{acl action="note"}
                     <li class="dropdown">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle">Notation
                             <b class="caret"></b></a>
@@ -47,7 +49,7 @@
                         </ul>
                     </li>
 {/acl}
-{acl level="ADMINISTRATOR"}
+{acl action="admin"}
                     <li class="dropdown">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle">Admin
                             <b class="caret"></b></a>

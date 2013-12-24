@@ -50,6 +50,18 @@ function needAcl($acl) {
 
 /**
  * Permet de cacher quelque chose en fonction de l'accréditation
+ * 
+ * __Dans le template __
+ * SYNTAXE1 :
+ * {acl level="ADMINISTRATOR"}...{/acl}
+ * Pour s'afficher il faut le niveau demandé. Level peut être :
+ * ADMINISTRATOR, SUPERUSER, USER, GUEST, ANNONYMOUS
+ * 
+ * SYNTAXE2:
+ * {acl action="act" page="pge"}..{/acl}
+ * Pour s'afficher, l'utilisateur doit avoir les accès à la page pge de l'action
+ * act.
+ * 
  * @param type $params
  * @param type $content
  * @param type $smarty
@@ -58,7 +70,15 @@ function needAcl($acl) {
  */
 function acl_smarty($params, $content, $smarty, &$repeat) {
     if (isset($content)) {
-        if (hasAcl(aclFromText($params['level'])))
+        $need = ACL_ADMINISTRATOR;
+        if (isset($params['level']))
+            $need = aclFromText($params['level']);
+        if (!isset($params['page']))
+            $params['page'] = 'index';
+        if (isset($params['action']))
+            $need = getAclLevel ($params['action'], $params['page']);
+
+        if (hasAcl($need))
             return $content;
         else
             return '';
