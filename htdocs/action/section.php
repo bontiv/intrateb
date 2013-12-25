@@ -2,6 +2,38 @@
 
 function section_mkevent() {
     global $pdo, $tpl;
+   
+    $tpl->assign('error', false);
+    $tpl->assign('succes', false);
+    $tpl->assign('section', $_GET['section']);
+    
+    if (isset($_POST['event_name'])) {
+        $dateStart = new DateTime($_POST['event_start']);
+        $dateEnd = new DateTime($_POST['event_end']);
+        $sevenDays = new DateInterval('P7D');
+        $dateLock = new DateTime($dateStart->format('Y-m-d H:i:s'));
+        $dateLock->sub($sevenDays);
+        $dateNote1 = new DateTime($dateEnd->format('Y-m-d H:i:s'));
+        $dateNote1->add($sevenDays);
+        $dateNote2 = new DateTime($dateNote1->format('Y-m-d H:i:s'));
+        $dateNote2->add($sevenDays);
+        
+        $extra = array(
+            'event_start' => $dateStart->format('Y-m-d H:i:s'),
+            'event_end' => $dateEnd->format('Y-m-d H:i:s'),
+            'event_lock' => $dateLock->format('Y-m-d H:i:s'),
+            'event_note1' => $dateNote1->format('Y-m-d H:i:s'),
+            'event_note2' => $dateNote2->format('Y-m-d H:i:s'),
+            'event_coef' => 1,
+            'event_section' => $_GET['section'],
+            'event_owner' => $_SESSION['user']['user_id'],
+        );
+        
+        if (autoInsert('events', 'event_', $extra))
+            $tpl->assign('succes', true);
+        else
+            $tpl->assign('error', true);
+    }
     
     $tpl->display('section_mkevent.tpl');
     quit();
