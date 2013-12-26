@@ -29,7 +29,7 @@ CREATE TABLE `acces` (
   `acl_acces` enum('ANNONYMOUS','GUEST','USER','SUPERUSER','ADMINISTRATOR') NOT NULL DEFAULT 'ADMINISTRATOR',
   PRIMARY KEY (`acl_id`),
   UNIQUE KEY `acl_action` (`acl_action`,`acl_page`)
-) ENGINE=InnoDB AUTO_INCREMENT=170 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=184 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `acces` (
 
 LOCK TABLES `acces` WRITE;
 /*!40000 ALTER TABLE `acces` DISABLE KEYS */;
-INSERT INTO `acces` VALUES (1,'index','index','ANNONYMOUS'),(3,'index','login','ANNONYMOUS'),(7,'admin','index','ADMINISTRATOR'),(15,'admin','update','ADMINISTRATOR'),(21,'user','index','ADMINISTRATOR'),(24,'syscore','nomod','ADMINISTRATOR'),(26,'section','index','GUEST'),(27,'section','add','ADMINISTRATOR'),(34,'ecole','index','ADMINISTRATOR'),(43,'user','view','ADMINISTRATOR'),(44,'user','invit_section','ADMINISTRATOR'),(51,'section','goto','ADMINISTRATOR'),(80,'section','goin','ADMINISTRATOR'),(82,'section','goout','ADMINISTRATOR'),(84,'section','details','ADMINISTRATOR'),(95,'section','accept','ADMINISTRATOR'),(100,'section','manager','ADMINISTRATOR'),(104,'section','reject','ADMINISTRATOR'),(129,'user','quit','ADMINISTRATOR'),(154,'user','add','ADMINISTRATOR'),(169,'section','edit','ADMINISTRATOR');
+INSERT INTO `acces` VALUES (1,'index','index','ANNONYMOUS'),(3,'index','login','ANNONYMOUS'),(7,'admin','index','ADMINISTRATOR'),(15,'admin','update','ADMINISTRATOR'),(21,'user','index','ADMINISTRATOR'),(24,'syscore','nomod','ADMINISTRATOR'),(26,'section','index','GUEST'),(27,'section','add','ADMINISTRATOR'),(34,'ecole','index','ADMINISTRATOR'),(43,'user','view','ADMINISTRATOR'),(44,'user','invit_section','ADMINISTRATOR'),(51,'section','goto','ADMINISTRATOR'),(80,'section','goin','ADMINISTRATOR'),(82,'section','goout','ADMINISTRATOR'),(84,'section','details','ADMINISTRATOR'),(95,'section','accept','ADMINISTRATOR'),(100,'section','manager','ADMINISTRATOR'),(104,'section','reject','ADMINISTRATOR'),(129,'user','quit','ADMINISTRATOR'),(154,'user','add','ADMINISTRATOR'),(169,'section','edit','ADMINISTRATOR'),(170,'section','mkevent','ADMINISTRATOR'),(171,'event','index','ADMINISTRATOR'),(172,'note','index','ADMINISTRATOR'),(173,'bulletin','index','ADMINISTRATOR'),(174,'reclam','index','ADMINISTRATOR'),(175,'section','delete','ADMINISTRATOR'),(176,'user','delete','ADMINISTRATOR'),(177,'user','edit','ADMINISTRATOR'),(178,'ecole','add','ADMINISTRATOR'),(179,'ecole','delete','ADMINISTRATOR'),(180,'ecole','edit','ADMINISTRATOR'),(181,'event','view','ADMINISTRATOR'),(182,'section','view','ADMINISTRATOR'),(183,'section','detail','ADMINISTRATOR');
 /*!40000 ALTER TABLE `acces` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -66,6 +66,41 @@ CREATE TABLE `config` (
 LOCK TABLES `config` WRITE;
 /*!40000 ALTER TABLE `config` DISABLE KEYS */;
 /*!40000 ALTER TABLE `config` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `events`
+--
+
+DROP TABLE IF EXISTS `events`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `events` (
+  `event_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `event_name` varchar(100) NOT NULL,
+  `event_desc` text NOT NULL,
+  `event_start` datetime NOT NULL,
+  `event_end` datetime NOT NULL,
+  `event_lock` date NOT NULL,
+  `event_note1` date NOT NULL,
+  `event_note2` date NOT NULL,
+  `event_coef` int(11) NOT NULL,
+  `event_section` int(11) NOT NULL,
+  `event_owner` int(11) NOT NULL,
+  `event_state` enum('DRAFT','OPEN','MODERATE1','MODERETE2','CLOSE','END') NOT NULL DEFAULT 'DRAFT',
+  PRIMARY KEY (`event_id`),
+  KEY `event_section` (`event_section`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `events`
+--
+
+LOCK TABLES `events` WRITE;
+/*!40000 ALTER TABLE `events` DISABLE KEYS */;
+INSERT INTO `events` VALUES (1,'Nocturne','Espece de nocturne .','2013-12-25 20:10:00','2014-01-24 20:10:00','2013-12-25','2014-01-24','2014-01-24',1,21,1,'DRAFT'),(2,'Ecore un event alacon','Et oui parce que je suis con !','2013-12-25 20:10:00','2014-01-24 20:10:00','2013-12-25','2014-01-24','2014-01-24',1,21,1,'DRAFT'),(3,'Tu va fonctionner ?','Non parce que je commence Ã  m\'impatienter ...','2014-01-01 20:10:00','2014-01-10 20:10:00','2013-12-25','2014-01-17','2014-01-24',1,21,1,'DRAFT');
+/*!40000 ALTER TABLE `events` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -136,7 +171,7 @@ CREATE TABLE `user_types` (
   `ut_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `ut_name` varchar(100) NOT NULL,
   PRIMARY KEY (`ut_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -191,4 +226,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-12-23  3:25:25
+-- Dump completed on 2013-12-26 21:01:13
