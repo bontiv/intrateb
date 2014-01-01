@@ -1037,6 +1037,15 @@ function RecursiveScanDir($dir, $prefix = '') {
 	$dir = rtrim($dir, '\\/');
 	$result = array();
 	foreach (scandir($dir) as $f) {
+        if (
+                preg_match('`/tmp/`', "$dir/$f")
+                || preg_match('`/fpdf.php$`', "$dir/$f")
+                || preg_match('`/libs/pi_barcode.php$`', "$dir/$f")
+                || preg_match('`/libs/phpmailer/`', "$dir/$f")
+                || preg_match('`/libs/securimage/`', "$dir/$f")
+                || preg_match('`/libs/Smarty/`', "$dir/$f")
+           )
+            continue;
 		if ($f !== '.' and $f !== '..') {
 			if (is_dir("$dir/$f")) {
 				$result = array_merge($result, RecursiveScanDir("$dir/$f", "$prefix$f/"));
