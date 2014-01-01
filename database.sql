@@ -29,7 +29,7 @@ CREATE TABLE `acces` (
   `acl_acces` enum('ANNONYMOUS','GUEST','USER','SUPERUSER','ADMINISTRATOR') NOT NULL DEFAULT 'ADMINISTRATOR',
   PRIMARY KEY (`acl_id`),
   UNIQUE KEY `acl_action` (`acl_action`,`acl_page`)
-) ENGINE=InnoDB AUTO_INCREMENT=184 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=188 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `acces` (
 
 LOCK TABLES `acces` WRITE;
 /*!40000 ALTER TABLE `acces` DISABLE KEYS */;
-INSERT INTO `acces` VALUES (1,'index','index','ANNONYMOUS'),(3,'index','login','ANNONYMOUS'),(7,'admin','index','ADMINISTRATOR'),(15,'admin','update','ADMINISTRATOR'),(21,'user','index','ADMINISTRATOR'),(24,'syscore','nomod','ADMINISTRATOR'),(26,'section','index','GUEST'),(27,'section','add','ADMINISTRATOR'),(34,'ecole','index','ADMINISTRATOR'),(43,'user','view','ADMINISTRATOR'),(44,'user','invit_section','ADMINISTRATOR'),(51,'section','goto','ADMINISTRATOR'),(80,'section','goin','ADMINISTRATOR'),(82,'section','goout','ADMINISTRATOR'),(84,'section','details','ADMINISTRATOR'),(95,'section','accept','ADMINISTRATOR'),(100,'section','manager','ADMINISTRATOR'),(104,'section','reject','ADMINISTRATOR'),(129,'user','quit','ADMINISTRATOR'),(154,'user','add','ADMINISTRATOR'),(169,'section','edit','ADMINISTRATOR'),(170,'section','mkevent','ADMINISTRATOR'),(171,'event','index','ADMINISTRATOR'),(172,'note','index','ADMINISTRATOR'),(173,'bulletin','index','ADMINISTRATOR'),(174,'reclam','index','ADMINISTRATOR'),(175,'section','delete','ADMINISTRATOR'),(176,'user','delete','ADMINISTRATOR'),(177,'user','edit','ADMINISTRATOR'),(178,'ecole','add','ADMINISTRATOR'),(179,'ecole','delete','ADMINISTRATOR'),(180,'ecole','edit','ADMINISTRATOR'),(181,'event','view','ADMINISTRATOR'),(182,'section','view','ADMINISTRATOR'),(183,'section','detail','ADMINISTRATOR');
+INSERT INTO `acces` VALUES (1,'index','index','ANNONYMOUS'),(3,'index','login','ANNONYMOUS'),(7,'admin','index','ADMINISTRATOR'),(15,'admin','update','ADMINISTRATOR'),(21,'user','index','ADMINISTRATOR'),(24,'syscore','nomod','ADMINISTRATOR'),(26,'section','index','GUEST'),(27,'section','add','ADMINISTRATOR'),(34,'ecole','index','ADMINISTRATOR'),(43,'user','view','ADMINISTRATOR'),(44,'user','invit_section','ADMINISTRATOR'),(51,'section','goto','ADMINISTRATOR'),(80,'section','goin','ADMINISTRATOR'),(82,'section','goout','ADMINISTRATOR'),(84,'section','details','ADMINISTRATOR'),(95,'section','accept','ADMINISTRATOR'),(100,'section','manager','ADMINISTRATOR'),(104,'section','reject','ADMINISTRATOR'),(129,'user','quit','ADMINISTRATOR'),(154,'user','add','ADMINISTRATOR'),(169,'section','edit','ADMINISTRATOR'),(170,'section','mkevent','ADMINISTRATOR'),(171,'event','index','ADMINISTRATOR'),(172,'note','index','ADMINISTRATOR'),(173,'bulletin','index','ADMINISTRATOR'),(174,'reclam','index','ADMINISTRATOR'),(175,'section','delete','ADMINISTRATOR'),(176,'user','delete','ADMINISTRATOR'),(177,'user','edit','ADMINISTRATOR'),(178,'ecole','add','ADMINISTRATOR'),(179,'ecole','delete','ADMINISTRATOR'),(180,'ecole','edit','ADMINISTRATOR'),(181,'event','view','ADMINISTRATOR'),(182,'section','view','ADMINISTRATOR'),(183,'section','detail','ADMINISTRATOR'),(184,'event','addsection','ADMINISTRATOR'),(185,'event','viewz','ADMINISTRATOR'),(186,'event','delsection','ADMINISTRATOR'),(187,'event','staff','ADMINISTRATOR');
 /*!40000 ALTER TABLE `acces` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -66,6 +66,58 @@ CREATE TABLE `config` (
 LOCK TABLES `config` WRITE;
 /*!40000 ALTER TABLE `config` DISABLE KEYS */;
 /*!40000 ALTER TABLE `config` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `event_sections`
+--
+
+DROP TABLE IF EXISTS `event_sections`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `event_sections` (
+  `es_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `es_event` int(10) unsigned NOT NULL,
+  `es_section` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`es_id`),
+  KEY `es_event` (`es_event`),
+  KEY `es_section` (`es_section`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `event_sections`
+--
+
+LOCK TABLES `event_sections` WRITE;
+/*!40000 ALTER TABLE `event_sections` DISABLE KEYS */;
+INSERT INTO `event_sections` VALUES (1,1,10),(2,1,11),(3,1,13),(4,1,15),(5,1,18);
+/*!40000 ALTER TABLE `event_sections` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `event_staff`
+--
+
+DROP TABLE IF EXISTS `event_staff`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `event_staff` (
+  `est_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `est_user` int(10) unsigned NOT NULL,
+  `est_event` int(10) unsigned NOT NULL,
+  `est_section` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`est_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `event_staff`
+--
+
+LOCK TABLES `event_staff` WRITE;
+/*!40000 ALTER TABLE `event_staff` DISABLE KEYS */;
+/*!40000 ALTER TABLE `event_staff` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -226,4 +278,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-12-26 21:01:13
+-- Dump completed on 2014-01-01 20:37:04
