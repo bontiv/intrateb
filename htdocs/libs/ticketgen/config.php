@@ -1,4 +1,11 @@
 <?php
+
+/**
+ * Fichier de la bibliothèque ticketgen
+ * @package ticketgen
+ */
+
+
 $config['default'] = array(
 'img' => 'prevente_halloween_ext.jpg',
 //	'gamma' => 1.9,

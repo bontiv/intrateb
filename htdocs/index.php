@@ -1,11 +1,23 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Page de déparrage du framework
+ * @package FrameTool
+ */
+
+/**
+ * Cosntante annonçant que le framework est instancié
  */
 define('NPE_INDEX', true);
+
+/**
+ * Racourci pour le DIRECTORY_SEPARATOR
+ */
 define('DS', DIRECTORY_SEPARATOR);
+
+/**
+ * Répertoire racine du projet
+ */
 $root = dirname(__FILE__) . DS;
 
 session_start();

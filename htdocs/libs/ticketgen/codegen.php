@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Fichier de la bibliothèque ticketgen
+ * @package ticketgen
+ */
+
+
 function checksum(&$code)
 {
 	$long = strlen( $code ) ;

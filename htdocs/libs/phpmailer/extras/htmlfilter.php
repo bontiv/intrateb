@@ -25,10 +25,12 @@
  *
  * @Author	Konstantin Riabitsev <icon@linux.duke.edu>
  * @Version 1.1 ($Date: 2011-07-04 14:02:23 -0400 (Mon, 04 Jul 2011) $)
+ * @package PHPMailer_htmlfilter
  */
 
 /**
  * @Author  Jim Jagielski <jim@jaguNET.com / jimjag@gmail.com>
+ * @package PHPMailer_htmlfilter
  */
 
 /**

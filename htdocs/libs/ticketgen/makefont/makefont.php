@@ -1,4 +1,8 @@
 <?php
+/**
+ * Makefont
+ * @package makefont
+ */
 /*******************************************************************************
 * Utility to generate font definition files                                    *
 *                                                                              *

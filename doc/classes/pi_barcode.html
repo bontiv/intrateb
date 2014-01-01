@@ -21,10 +21,14 @@
                                     API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a>Packages</a></li>
 <li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/FPDF.html"><i class="icon-folder-open"></i> FPDF</a></li>
+<li><a href="../packages/FrameTool.html"><i class="icon-folder-open"></i> FrameTool</a></li>
 <li><a href="../packages/PHPMailer.html"><i class="icon-folder-open"></i> PHPMailer</a></li>
 <li><a href="../packages/PHPWavUtils.html"><i class="icon-folder-open"></i> PHPWavUtils</a></li>
 <li><a href="../packages/Securimage.html"><i class="icon-folder-open"></i> Securimage</a></li>
 <li><a href="../packages/Smarty.html"><i class="icon-folder-open"></i> Smarty</a></li>
+<li><a href="../packages/makefont.html"><i class="icon-folder-open"></i> makefont</a></li>
+<li><a href="../packages/ticketgen.html"><i class="icon-folder-open"></i> ticketgen</a></li>
 </ul>
 </li>
 <li class="dropdown" id="charts-menu">
@@ -35,7 +39,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">1085</span></a></li>
+                <span class="label label-info">1078</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul>
 <li>todo 
@@ -67,12 +71,10 @@
 <li class="nav-header">
 <i class="icon-custom icon-method"></i> Methods
                     <ul>
-<li class="method public "><a href="#method_checkCode" title="checkCode :: "><span class="description">checkCode()
-        </span><pre>checkCode()</pre></a></li>
+<li class="method public "><a href="#method_checkCode" title="checkCode :: V�rification du Code"><span class="description">V�rification du Code</span><pre>checkCode()</pre></a></li>
 <li class="method public "><a href="#method_encode" title="encode :: Encodage"><span class="description">Encodage</span><pre>encode()</pre></a></li>
 <li class="method public "><a href="#method_hideCodeType" title="hideCodeType :: Disable CodeType printing"><span class="description">Disable CodeType printing</span><pre>hideCodeType()</pre></a></li>
-<li class="method public "><a href="#method_pi_barcode" title="pi_barcode :: "><span class="description">pi_barcode()
-        </span><pre>pi_barcode()</pre></a></li>
+<li class="method public "><a href="#method_pi_barcode" title="pi_barcode :: Constructeur // est appel� automatiquement � l'instanciation de l'objet"><span class="description">Constructeur // est appel� automatiquement � l'instanciation de l'objet</span><pre>pi_barcode()</pre></a></li>
 <li class="method public "><a href="#method_setCode" title="setCode :: Set Barcode String"><span class="description">Set Barcode String</span><pre>setCode()</pre></a></li>
 <li class="method public "><a href="#method_setColors" title="setColors :: Set Colors"><span class="description">Set Colors</span><pre>setColors()</pre></a></li>
 <li class="method public "><a href="#method_setFiletype" title="setFiletype :: Set File Type (PNG, GIF or JPG)"><span class="description">Set File Type (PNG, GIF or JPG)</span><pre>setFiletype()</pre></a></li>
@@ -88,12 +90,12 @@
                     <ul>
 <li class="property public "><a href="#property_BACKGROUND" title="$BACKGROUND :: "><span class="description"></span><pre>$BACKGROUND</pre></a></li>
 <li class="property public "><a href="#property_C11" title="$C11 :: "><span class="description"></span><pre>$C11</pre></a></li>
-<li class="property public "><a href="#property_C128" title="$C128 :: "><span class="description"></span><pre>$C128</pre></a></li>
+<li class="property public "><a href="#property_C128" title="$C128 :: D�finition des symbologies"><span class="description"></span><pre>$C128</pre></a></li>
 <li class="property public "><a href="#property_C25" title="$C25 :: "><span class="description"></span><pre>$C25</pre></a></li>
 <li class="property public "><a href="#property_C39" title="$C39 :: "><span class="description"></span><pre>$C39</pre></a></li>
 <li class="property public "><a href="#property_CALMZONE" title="$CALMZONE :: "><span class="description"></span><pre>$CALMZONE</pre></a></li>
 <li class="property public "><a href="#property_CMC7" title="$CMC7 :: "><span class="description"></span><pre>$CMC7</pre></a></li>
-<li class="property public "><a href="#property_CODE" title="$CODE :: "><span class="description"></span><pre>$CODE</pre></a></li>
+<li class="property public "><a href="#property_CODE" title="$CODE :: ***** D�finition des variables *****"><span class="description"></span><pre>$CODE</pre></a></li>
 <li class="property public "><a href="#property_CODEWIDTH" title="$CODEWIDTH :: "><span class="description"></span><pre>$CODEWIDTH</pre></a></li>
 <li class="property public "><a href="#property_EANbars" title="$EANbars :: "><span class="description"></span><pre>$EANbars</pre></a></li>
 <li class="property public "><a href="#property_EANparity" title="$EANparity :: "><span class="description"></span><pre>$EANparity</pre></a></li>
@@ -129,11 +131,10 @@
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
 <a id="method_checkCode"></a><div class="element clickable method public method_checkCode" data-toggle="collapse" data-target=".method_checkCode .collapse">
-<h2>checkCode()
-        </h2>
+<h2>V�rification du Code</h2>
 <pre>checkCode() </pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>calcul ou v�rification du Checksum</p></div></div></div>
 </div>
 <a id="method_encode"></a><div class="element clickable method public method_encode" data-toggle="collapse" data-target=".method_encode .collapse">
 <h2>Encodage</h2>
@@ -148,8 +149,7 @@
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="method_pi_barcode"></a><div class="element clickable method public method_pi_barcode" data-toggle="collapse" data-target=".method_pi_barcode .collapse">
-<h2>pi_barcode()
-        </h2>
+<h2>Constructeur // est appel� automatiquement � l'instanciation de l'objet</h2>
 <pre>pi_barcode() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
@@ -391,7 +391,7 @@
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-12-23T03:50:23+01:00.<br></footer></div>
+            generated on 2014-01-01T22:49:40+01:00.<br></footer></div>
 </div>
 </body>
 </html>

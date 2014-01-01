@@ -21,10 +21,14 @@
                                     API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a>Packages</a></li>
 <li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/FPDF.html"><i class="icon-folder-open"></i> FPDF</a></li>
+<li><a href="../packages/FrameTool.html"><i class="icon-folder-open"></i> FrameTool</a></li>
 <li><a href="../packages/PHPMailer.html"><i class="icon-folder-open"></i> PHPMailer</a></li>
 <li><a href="../packages/PHPWavUtils.html"><i class="icon-folder-open"></i> PHPWavUtils</a></li>
 <li><a href="../packages/Securimage.html"><i class="icon-folder-open"></i> Securimage</a></li>
 <li><a href="../packages/Smarty.html"><i class="icon-folder-open"></i> Smarty</a></li>
+<li><a href="../packages/makefont.html"><i class="icon-folder-open"></i> makefont</a></li>
+<li><a href="../packages/ticketgen.html"><i class="icon-folder-open"></i> ticketgen</a></li>
 </ul>
 </li>
 <li class="dropdown" id="charts-menu">
@@ -35,7 +39,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">1085</span></a></li>
+                <span class="label label-info">1078</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul>
 <li>todo 
@@ -71,72 +75,35 @@
 </li>
 <li class="nav-header">
 <i class="icon-custom icon-function"></i> Functions</li>
-<li class="function  "><a href="#function_Error" title="Error :: "><span class="description">Error()
-        </span><pre>Error</pre></a></li>
-<li class="function  "><a href="#function_GetInfoFromTrueType" title="GetInfoFromTrueType :: "><span class="description">GetInfoFromTrueType()
-        </span><pre>GetInfoFromTrueType</pre></a></li>
-<li class="function  "><a href="#function_GetInfoFromType1" title="GetInfoFromType1 :: "><span class="description">GetInfoFromType1()
-        </span><pre>GetInfoFromType1</pre></a></li>
-<li class="function  "><a href="#function_HTMLFilter" title="HTMLFilter :: "><span class="description">HTMLFilter()
-        </span><pre>HTMLFilter</pre></a></li>
-<li class="function  "><a href="#function_LoadMap" title="LoadMap :: "><span class="description">LoadMap()
-        </span><pre>LoadMap</pre></a></li>
-<li class="function  "><a href="#function_MakeDefinitionFile" title="MakeDefinitionFile :: "><span class="description">MakeDefinitionFile()
-        </span><pre>MakeDefinitionFile</pre></a></li>
-<li class="function  "><a href="#function_MakeFont" title="MakeFont :: "><span class="description">MakeFont()
-        </span><pre>MakeFont</pre></a></li>
-<li class="function  "><a href="#function_MakeFontDescriptor" title="MakeFontDescriptor :: "><span class="description">MakeFontDescriptor()
-        </span><pre>MakeFontDescriptor</pre></a></li>
-<li class="function  "><a href="#function_MakeFontEncoding" title="MakeFontEncoding :: "><span class="description">MakeFontEncoding()
-        </span><pre>MakeFontEncoding</pre></a></li>
-<li class="function  "><a href="#function_MakeWidthArray" title="MakeWidthArray :: "><span class="description">MakeWidthArray()
-        </span><pre>MakeWidthArray</pre></a></li>
-<li class="function  "><a href="#function_Message" title="Message :: "><span class="description">Message()
-        </span><pre>Message</pre></a></li>
-<li class="function  "><a href="#function_Notice" title="Notice :: "><span class="description">Notice()
-        </span><pre>Notice</pre></a></li>
-<li class="function  "><a href="#function_SaveToFile" title="SaveToFile :: "><span class="description">SaveToFile()
-        </span><pre>SaveToFile</pre></a></li>
-<li class="function  "><a href="#function_Warning" title="Warning :: "><span class="description">Warning()
-        </span><pre>Warning</pre></a></li>
-<li class="function  "><a href="#function_aclFromText" title="aclFromText :: Pour récupérer la valeur numérique associé à un rôle"><span class="description">Pour récupérer la valeur numérique associé à un rôle</span><pre>aclFromText</pre></a></li>
-<li class="function  "><a href="#function_acl_smarty" title="acl_smarty :: Permet de cacher quelque chose en fonction de l'accréditation"><span class="description">Permet de cacher quelque chose en fonction de l'accréditation</span><pre>acl_smarty</pre></a></li>
 <li class="function  "><a href="#function_admin_index" title="admin_index :: "><span class="description">admin_index()
         </span><pre>admin_index</pre></a></li>
 <li class="function  "><a href="#function_admin_update" title="admin_update :: "><span class="description">admin_update()
         </span><pre>admin_update</pre></a></li>
-<li class="function  "><a href="#function_autoInsert" title="autoInsert :: Cette fonction un peu pratique permet d'insérer en BDD des données
-à partir d'un formulaire."><span class="description">Cette fonction un peu pratique permet d'insérer en BDD des données
-à partir d'un formulaire.</span><pre>autoInsert</pre></a></li>
-<li class="function  "><a href="#function_checksum" title="checksum :: "><span class="description">checksum()
-        </span><pre>checksum</pre></a></li>
 <li class="function  "><a href="#function_ecole_add" title="ecole_add :: "><span class="description">ecole_add()
         </span><pre>ecole_add</pre></a></li>
 <li class="function  "><a href="#function_ecole_delete" title="ecole_delete :: "><span class="description">ecole_delete()
         </span><pre>ecole_delete</pre></a></li>
 <li class="function  "><a href="#function_ecole_index" title="ecole_index :: "><span class="description">ecole_index()
         </span><pre>ecole_index</pre></a></li>
-<li class="function  "><a href="#function_getAclLevel" title="getAclLevel :: Récupère le niveau nécessaire pour aller effectuer une action"><span class="description">Récupère le niveau nécessaire pour aller effectuer une action</span><pre>getAclLevel</pre></a></li>
-<li class="function  "><a href="#function_hasAcl" title="hasAcl :: Test si l'utilisateur a un niveau d'accès"><span class="description">Test si l'utilisateur a un niveau d'accès</span><pre>hasAcl</pre></a></li>
+<li class="function  "><a href="#function_event_addsection" title="event_addsection :: "><span class="description">event_addsection()
+        </span><pre>event_addsection</pre></a></li>
+<li class="function  "><a href="#function_event_delsection" title="event_delsection :: "><span class="description">event_delsection()
+        </span><pre>event_delsection</pre></a></li>
+<li class="function  "><a href="#function_event_index" title="event_index :: "><span class="description">event_index()
+        </span><pre>event_index</pre></a></li>
+<li class="function  "><a href="#function_event_staff" title="event_staff :: "><span class="description">event_staff()
+        </span><pre>event_staff</pre></a></li>
+<li class="function  "><a href="#function_event_view" title="event_view :: "><span class="description">event_view()
+        </span><pre>event_view</pre></a></li>
 <li class="function  "><a href="#function_index_create" title="index_create :: "><span class="description">index_create()
         </span><pre>index_create</pre></a></li>
 <li class="function  "><a href="#function_index_index" title="index_index :: Petite page de présentation du projet"><span class="description">Petite page de présentation du projet</span><pre>index_index</pre></a></li>
 <li class="function  "><a href="#function_index_login" title="index_login :: Permet de connecter un utilisateur"><span class="description">Permet de connecter un utilisateur</span><pre>index_login</pre></a></li>
 <li class="function  "><a href="#function_index_logout" title="index_logout :: Ferme une session utilisateur"><span class="description">Ferme une session utilisateur</span><pre>index_logout</pre></a></li>
-<li class="function  "><a href="#function_mkurl" title="mkurl :: Permet de créer des URL pour le framework"><span class="description">Permet de créer des URL pour le framework</span><pre>mkurl</pre></a></li>
-<li class="function  "><a href="#function_mkurl_smarty" title="mkurl_smarty :: "><span class="description">mkurl_smarty()
-        </span><pre>mkurl_smarty</pre></a></li>
-<li class="function  "><a href="#function_modexec" title="modexec :: Execute un controleur"><span class="description">Execute un controleur</span><pre>modexec</pre></a></li>
-<li class="function  "><a href="#function_modsecu" title="modsecu :: Laisser la possibilité à un module de gérer sa sécurité"><span class="description">Laisser la possibilité à un module de gérer sa sécurité</span><pre>modsecu</pre></a></li>
-<li class="function  "><a href="#function_needAcl" title="needAcl :: Affiche une page d'erreur si le niveau d'accès de l'utilisateur
-est trop faible"><span class="description">Affiche une page d'erreur si le niveau d'accès de l'utilisateur
-est trop faible</span><pre>needAcl</pre></a></li>
 <li class="function  "><a href="#function_process_si_contact_form" title="process_si_contact_form :: "><span class="description">process_si_contact_form()
         </span><pre>process_si_contact_form</pre></a></li>
 <li class="function  "><a href="#function_process_si_contact_form" title="process_si_contact_form :: "><span class="description">process_si_contact_form()
         </span><pre>process_si_contact_form</pre></a></li>
-<li class="function  "><a href="#function_quit" title="quit :: Permet de quitter proprement le CMS"><span class="description">Permet de quitter proprement le CMS</span><pre>quit</pre></a></li>
-<li class="function  "><a href="#function_redirect" title="redirect :: Redirige l'utilisateur."><span class="description">Redirige l'utilisateur.</span><pre>redirect</pre></a></li>
 <li class="function  "><a href="#function_section_accept" title="section_accept :: Ho Oui ! Un staff"><span class="description">Ho Oui ! Un staff</span><pre>section_accept</pre></a></li>
 <li class="function  "><a href="#function_section_add" title="section_add :: "><span class="description">section_add()
         </span><pre>section_add</pre></a></li>
@@ -151,32 +118,11 @@ est trop faible</span><pre>needAcl</pre></a></li>
 <li class="function  "><a href="#function_section_index" title="section_index :: "><span class="description">section_index()
         </span><pre>section_index</pre></a></li>
 <li class="function  "><a href="#function_section_manager" title="section_manager :: Promotion manager"><span class="description">Promotion manager</span><pre>section_manager</pre></a></li>
+<li class="function  "><a href="#function_section_mkevent" title="section_mkevent :: "><span class="description">section_mkevent()
+        </span><pre>section_mkevent</pre></a></li>
 <li class="function  "><a href="#function_section_reject" title="section_reject :: Bye le membre ."><span class="description">Bye le membre .</span><pre>section_reject</pre></a></li>
 <li class="function  "><a href="#function_syscore_autoload" title="syscore_autoload :: "><span class="description">syscore_autoload()
         </span><pre>syscore_autoload</pre></a></li>
-<li class="function  "><a href="#function_tln_casenormalize" title="tln_casenormalize :: A small helper function to use with array_walk."><span class="description">A small helper function to use with array_walk.</span><pre>tln_casenormalize</pre></a></li>
-<li class="function  "><a href="#function_tln_deent" title="tln_deent :: Translates entities into literal values so they can be checked."><span class="description">Translates entities into literal values so they can be checked.</span><pre>tln_deent</pre></a></li>
-<li class="function  "><a href="#function_tln_defang" title="tln_defang :: This function checks attribute values for entity-encoded values
-and returns them translated into 8-bit strings so we can run
-checks on them."><span class="description">This function checks attribute values for entity-encoded values
-and returns them translated into 8-bit strings so we can run
-checks on them.</span><pre>tln_defang</pre></a></li>
-<li class="function  "><a href="#function_tln_findnxreg" title="tln_findnxreg :: This function takes a PCRE-style regexp and tries to match it
-within the string."><span class="description">This function takes a PCRE-style regexp and tries to match it
-within the string.</span><pre>tln_findnxreg</pre></a></li>
-<li class="function  "><a href="#function_tln_findnxstr" title="tln_findnxstr :: This function looks for the next character within a string."><span class="description">This function looks for the next character within a string.</span><pre>tln_findnxstr</pre></a></li>
-<li class="function  "><a href="#function_tln_fixatts" title="tln_fixatts :: This function runs various checks against the attributes."><span class="description">This function runs various checks against the attributes.</span><pre>tln_fixatts</pre></a></li>
-<li class="function  "><a href="#function_tln_getnxtag" title="tln_getnxtag :: This function looks for the next tag."><span class="description">This function looks for the next tag.</span><pre>tln_getnxtag</pre></a></li>
-<li class="function  "><a href="#function_tln_sanitize" title="tln_sanitize :: "><span class="description">tln_sanitize()
-        </span><pre>tln_sanitize</pre></a></li>
-<li class="function  "><a href="#function_tln_skipspace" title="tln_skipspace :: This function skips any whitespace from the current position within
-a string and to the next non-whitespace value."><span class="description">This function skips any whitespace from the current position within
-a string and to the next non-whitespace value.</span><pre>tln_skipspace</pre></a></li>
-<li class="function  "><a href="#function_tln_tagprint" title="tln_tagprint :: This function returns the final tag out of the tag name, an array
-of attributes, and the type of the tag."><span class="description">This function returns the final tag out of the tag name, an array
-of attributes, and the type of the tag.</span><pre>tln_tagprint</pre></a></li>
-<li class="function  "><a href="#function_tln_unspace" title="tln_unspace :: Kill any tabs, newlines, or carriage returns."><span class="description">Kill any tabs, newlines, or carriage returns.</span><pre>tln_unspace</pre></a></li>
-<li class="function  "><a href="#function_urldup" title="urldup :: Génère une URL de la même page avec des paramètres différents"><span class="description">Génère une URL de la même page avec des paramètres différents</span><pre>urldup</pre></a></li>
 <li class="function  "><a href="#function_user_add" title="user_add :: "><span class="description">user_add()
         </span><pre>user_add</pre></a></li>
 <li class="function  "><a href="#function_user_delete" title="user_delete :: "><span class="description">user_delete()
@@ -189,12 +135,9 @@ of attributes, and the type of the tag.</span><pre>tln_tagprint</pre></a></li>
         </span><pre>user_quit</pre></a></li>
 <li class="function  "><a href="#function_user_view" title="user_view :: "><span class="description">user_view()
         </span><pre>user_view</pre></a></li>
-<li class="function  "><a href="#function_writecode" title="writecode :: "><span class="description">writecode()
-        </span><pre>writecode</pre></a></li>
 <li class="nav-header">
 <i class="icon-custom icon-class"></i> Classes</li>
 <li><a href="#TicketGen" title="">TicketGen</a></li>
-<li><a href="#TTFParser" title="">TTFParser</a></li>
 <li><a href="#FPDF" title="">FPDF</a></li>
 <li><a href="#GenSerie" title="">GenSerie</a></li>
 <li><a href="#Smarty_Security" title="This class does contain the security settings">Smarty_Security</a></li>
@@ -213,16 +156,7 @@ facilement.">SimplePager</a></li>
 <li><a href="#pi_barcode" title="">pi_barcode</a></li>
 <li class="nav-header">
 <i class="icon-custom icon-constant"></i> Constants</li>
-<li class="constant  "><a href="#constant_ACL_ADMINISTRATOR" title="ACL_ADMINISTRATOR :: "><span class="description">ACL_ADMINISTRATOR</span><pre>ACL_ADMINISTRATOR</pre></a></li>
-<li class="constant  "><a href="#constant_ACL_ANNONYMOUS" title="ACL_ANNONYMOUS :: "><span class="description">ACL_ANNONYMOUS</span><pre>ACL_ANNONYMOUS</pre></a></li>
-<li class="constant  "><a href="#constant_ACL_GUEST" title="ACL_GUEST :: "><span class="description">ACL_GUEST</span><pre>ACL_GUEST</pre></a></li>
-<li class="constant  "><a href="#constant_ACL_SUPERUSER" title="ACL_SUPERUSER :: "><span class="description">ACL_SUPERUSER</span><pre>ACL_SUPERUSER</pre></a></li>
-<li class="constant  "><a href="#constant_ACL_USER" title="ACL_USER :: "><span class="description">ACL_USER</span><pre>ACL_USER</pre></a></li>
-<li class="constant  "><a href="#constant_DS" title="DS :: "><span class="description">DS</span><pre>DS</pre></a></li>
-<li class="constant  "><a href="#constant_FPDF_FONTPATH" title="FPDF_FONTPATH :: "><span class="description">FPDF_FONTPATH</span><pre>FPDF_FONTPATH</pre></a></li>
 <li class="constant  "><a href="#constant_FPDF_VERSION" title="FPDF_VERSION :: "><span class="description">FPDF_VERSION</span><pre>FPDF_VERSION</pre></a></li>
-<li class="constant  "><a href="#constant_FPDF_VERSION" title="FPDF_VERSION :: "><span class="description">FPDF_VERSION</span><pre>FPDF_VERSION</pre></a></li>
-<li class="constant  "><a href="#constant_NPE_INDEX" title="NPE_INDEX :: "><span class="description">NPE_INDEX</span><pre>NPE_INDEX</pre></a></li>
 <li class="constant  "><a href="#constant_SASL_NTLM_STATE_DONE" title="SASL_NTLM_STATE_DONE :: "><span class="description">SASL_NTLM_STATE_DONE</span><pre>SASL_NTLM_STATE_DONE</pre></a></li>
 <li class="constant  "><a href="#constant_SASL_NTLM_STATE_IDENTIFY_DOMAIN" title="SASL_NTLM_STATE_IDENTIFY_DOMAIN :: "><span class="description">SASL_NTLM_STATE_IDENTIFY_DOMAIN</span><pre>SASL_NTLM_STATE_IDENTIFY_DOMAIN</pre></a></li>
 <li class="constant  "><a href="#constant_SASL_NTLM_STATE_RESPOND_CHALLENGE" title="SASL_NTLM_STATE_RESPOND_CHALLENGE :: "><span class="description">SASL_NTLM_STATE_RESPOND_CHALLENGE</span><pre>SASL_NTLM_STATE_RESPOND_CHALLENGE</pre></a></li>
@@ -236,216 +170,6 @@ facilement.">SimplePager</a></li>
 <div class="package-indent">
 <h3>
 <i class="icon-custom icon-function"></i> Functions</h3>
-<a id="function_Error"></a><div class="element clickable function  function_Error" data-toggle="collapse" data-target=".function_Error .collapse">
-<h2>Error()
-        </h2>
-<pre>Error($txt) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$txt</h4></div>
-</div></div>
-</div>
-<a id="function_GetInfoFromTrueType"></a><div class="element clickable function  function_GetInfoFromTrueType" data-toggle="collapse" data-target=".function_GetInfoFromTrueType .collapse">
-<h2>GetInfoFromTrueType()
-        </h2>
-<pre>GetInfoFromTrueType($file, $embed, $map) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$file</h4></div>
-<div class="subelement argument"><h4>$embed</h4></div>
-<div class="subelement argument"><h4>$map</h4></div>
-</div></div>
-</div>
-<a id="function_GetInfoFromType1"></a><div class="element clickable function  function_GetInfoFromType1" data-toggle="collapse" data-target=".function_GetInfoFromType1 .collapse">
-<h2>GetInfoFromType1()
-        </h2>
-<pre>GetInfoFromType1($file, $embed, $map) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$file</h4></div>
-<div class="subelement argument"><h4>$embed</h4></div>
-<div class="subelement argument"><h4>$map</h4></div>
-</div></div>
-</div>
-<a id="function_HTMLFilter"></a><div class="element clickable function  function_HTMLFilter" data-toggle="collapse" data-target=".function_HTMLFilter .collapse">
-<h2>HTMLFilter()
-        </h2>
-<pre>HTMLFilter($body, $trans_image_path, $block_external_images) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$body</h4></div>
-<div class="subelement argument"><h4>$trans_image_path</h4></div>
-<div class="subelement argument"><h4>$block_external_images</h4></div>
-</div></div>
-</div>
-<a id="function_LoadMap"></a><div class="element clickable function  function_LoadMap" data-toggle="collapse" data-target=".function_LoadMap .collapse">
-<h2>LoadMap()
-        </h2>
-<pre>LoadMap($enc) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$enc</h4></div>
-</div></div>
-</div>
-<a id="function_MakeDefinitionFile"></a><div class="element clickable function  function_MakeDefinitionFile" data-toggle="collapse" data-target=".function_MakeDefinitionFile .collapse">
-<h2>MakeDefinitionFile()
-        </h2>
-<pre>MakeDefinitionFile($file, $type, $enc, $embed, $map, $info) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$file</h4></div>
-<div class="subelement argument"><h4>$type</h4></div>
-<div class="subelement argument"><h4>$enc</h4></div>
-<div class="subelement argument"><h4>$embed</h4></div>
-<div class="subelement argument"><h4>$map</h4></div>
-<div class="subelement argument"><h4>$info</h4></div>
-</div></div>
-</div>
-<a id="function_MakeFont"></a><div class="element clickable function  function_MakeFont" data-toggle="collapse" data-target=".function_MakeFont .collapse">
-<h2>MakeFont()
-        </h2>
-<pre>MakeFont($fontfile, $enc, $embed) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$fontfile</h4></div>
-<div class="subelement argument"><h4>$enc</h4></div>
-<div class="subelement argument"><h4>$embed</h4></div>
-</div></div>
-</div>
-<a id="function_MakeFontDescriptor"></a><div class="element clickable function  function_MakeFontDescriptor" data-toggle="collapse" data-target=".function_MakeFontDescriptor .collapse">
-<h2>MakeFontDescriptor()
-        </h2>
-<pre>MakeFontDescriptor($info) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$info</h4></div>
-</div></div>
-</div>
-<a id="function_MakeFontEncoding"></a><div class="element clickable function  function_MakeFontEncoding" data-toggle="collapse" data-target=".function_MakeFontEncoding .collapse">
-<h2>MakeFontEncoding()
-        </h2>
-<pre>MakeFontEncoding($map) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$map</h4></div>
-</div></div>
-</div>
-<a id="function_MakeWidthArray"></a><div class="element clickable function  function_MakeWidthArray" data-toggle="collapse" data-target=".function_MakeWidthArray .collapse">
-<h2>MakeWidthArray()
-        </h2>
-<pre>MakeWidthArray($widths) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$widths</h4></div>
-</div></div>
-</div>
-<a id="function_Message"></a><div class="element clickable function  function_Message" data-toggle="collapse" data-target=".function_Message .collapse">
-<h2>Message()
-        </h2>
-<pre>Message($txt, $severity) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$txt</h4></div>
-<div class="subelement argument"><h4>$severity</h4></div>
-</div></div>
-</div>
-<a id="function_Notice"></a><div class="element clickable function  function_Notice" data-toggle="collapse" data-target=".function_Notice .collapse">
-<h2>Notice()
-        </h2>
-<pre>Notice($txt) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$txt</h4></div>
-</div></div>
-</div>
-<a id="function_SaveToFile"></a><div class="element clickable function  function_SaveToFile" data-toggle="collapse" data-target=".function_SaveToFile .collapse">
-<h2>SaveToFile()
-        </h2>
-<pre>SaveToFile($file, $s, $mode) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$file</h4></div>
-<div class="subelement argument"><h4>$s</h4></div>
-<div class="subelement argument"><h4>$mode</h4></div>
-</div></div>
-</div>
-<a id="function_Warning"></a><div class="element clickable function  function_Warning" data-toggle="collapse" data-target=".function_Warning .collapse">
-<h2>Warning()
-        </h2>
-<pre>Warning($txt) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$txt</h4></div>
-</div></div>
-</div>
-<a id="function_aclFromText"></a><div class="element clickable function  function_aclFromText" data-toggle="collapse" data-target=".function_aclFromText .collapse">
-<h2>Pour récupérer la valeur numérique associé à un rôle</h2>
-<pre>aclFromText(\type $txt) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$txt</h4>
-<code>\type</code>
-</div>
-</div></div>
-</div>
-<a id="function_acl_smarty"></a><div class="element clickable function  function_acl_smarty" data-toggle="collapse" data-target=".function_acl_smarty .collapse">
-<h2>Permet de cacher quelque chose en fonction de l'accréditation</h2>
-<pre>acl_smarty(\type $params, \type $content, \type $smarty, \type $repeat) : \type</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$params</h4>
-<code>\type</code>
-</div>
-<div class="subelement argument">
-<h4>$content</h4>
-<code>\type</code>
-</div>
-<div class="subelement argument">
-<h4>$smarty</h4>
-<code>\type</code>
-</div>
-<div class="subelement argument">
-<h4>$repeat</h4>
-<code>\type</code>
-</div>
-<h3>Returns</h3>
-<div class="subelement response"><code>\type</code></div>
-</div></div>
-</div>
 <a id="function_admin_index"></a><div class="element clickable function  function_admin_index" data-toggle="collapse" data-target=".function_admin_index .collapse">
 <h2>admin_index()
         </h2>
@@ -459,45 +183,6 @@ facilement.">SimplePager</a></li>
 <pre>admin_update() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="function_autoInsert"></a><div class="element clickable function  function_autoInsert" data-toggle="collapse" data-target=".function_autoInsert .collapse">
-<h2>Cette fonction un peu pratique permet d'insérer en BDD des données
-à partir d'un formulaire.</h2>
-<pre>autoInsert(\type $table, \type $prefix, array $extra) : \type</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered"><tr>
-<th>global</th>
-<td>type $pdo</td>
-</tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$table</h4>
-<code>\type</code>
-</div>
-<div class="subelement argument">
-<h4>$prefix</h4>
-<code>\type</code>
-</div>
-<div class="subelement argument">
-<h4>$extra</h4>
-<code>array</code>
-</div>
-<h3>Returns</h3>
-<div class="subelement response"><code>\type</code></div>
-</div></div>
-</div>
-<a id="function_checksum"></a><div class="element clickable function  function_checksum" data-toggle="collapse" data-target=".function_checksum .collapse">
-<h2>checksum()
-        </h2>
-<pre>checksum($code) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$code</h4></div>
-</div></div>
 </div>
 <a id="function_ecole_add"></a><div class="element clickable function  function_ecole_add" data-toggle="collapse" data-target=".function_ecole_add .collapse">
 <h2>ecole_add()
@@ -520,43 +205,40 @@ facilement.">SimplePager</a></li>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
-<a id="function_getAclLevel"></a><div class="element clickable function  function_getAclLevel" data-toggle="collapse" data-target=".function_getAclLevel .collapse">
-<h2>Récupère le niveau nécessaire pour aller effectuer une action</h2>
-<pre>getAclLevel(\type $action, \type $page) : string</pre>
+<a id="function_event_addsection"></a><div class="element clickable function  function_event_addsection" data-toggle="collapse" data-target=".function_event_addsection .collapse">
+<h2>event_addsection()
+        </h2>
+<pre>event_addsection() </pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered"><tr>
-<th>global</th>
-<td>type $pdo</td>
-</tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$action</h4>
-<code>\type</code>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
-<div class="subelement argument">
-<h4>$page</h4>
-<code>\type</code>
-</div>
-<h3>Returns</h3>
-<div class="subelement response"><code>string</code></div>
-</div></div>
-</div>
-<a id="function_hasAcl"></a><div class="element clickable function  function_hasAcl" data-toggle="collapse" data-target=".function_hasAcl .collapse">
-<h2>Test si l'utilisateur a un niveau d'accès</h2>
-<pre>hasAcl(\type $acl) : \type</pre>
+<a id="function_event_delsection"></a><div class="element clickable function  function_event_delsection" data-toggle="collapse" data-target=".function_event_delsection .collapse">
+<h2>event_delsection()
+        </h2>
+<pre>event_delsection() </pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$acl</h4>
-<code>\type</code>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
-<h3>Returns</h3>
-<div class="subelement response"><code>\type</code></div>
-</div></div>
+<a id="function_event_index"></a><div class="element clickable function  function_event_index" data-toggle="collapse" data-target=".function_event_index .collapse">
+<h2>event_index()
+        </h2>
+<pre>event_index() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="function_event_staff"></a><div class="element clickable function  function_event_staff" data-toggle="collapse" data-target=".function_event_staff .collapse">
+<h2>event_staff()
+        </h2>
+<pre>event_staff() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="function_event_view"></a><div class="element clickable function  function_event_view" data-toggle="collapse" data-target=".function_event_view .collapse">
+<h2>event_view()
+        </h2>
+<pre>event_view() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="function_index_create"></a><div class="element clickable function  function_index_create" data-toggle="collapse" data-target=".function_index_create .collapse">
 <h2>index_create()
@@ -607,104 +289,6 @@ facilement.">SimplePager</a></li>
 </tr></table>
 </div></div>
 </div>
-<a id="function_mkurl"></a><div class="element clickable function  function_mkurl" data-toggle="collapse" data-target=".function_mkurl .collapse">
-<h2>Permet de créer des URL pour le framework</h2>
-<pre>mkurl($action, \type $page, \type $options) : string</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>global</th>
-<td>type $urlops</td>
-</tr>
-<tr>
-<th>global</th>
-<td>type $urlbase</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$action</h4></div>
-<div class="subelement argument">
-<h4>$page</h4>
-<code>\type</code>
-</div>
-<div class="subelement argument">
-<h4>$options</h4>
-<code>\type</code>
-</div>
-<h3>Returns</h3>
-<div class="subelement response"><code>string</code></div>
-</div></div>
-</div>
-<a id="function_mkurl_smarty"></a><div class="element clickable function  function_mkurl_smarty" data-toggle="collapse" data-target=".function_mkurl_smarty .collapse">
-<h2>mkurl_smarty()
-        </h2>
-<pre>mkurl_smarty($params, $smarty) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$params</h4></div>
-<div class="subelement argument"><h4>$smarty</h4></div>
-</div></div>
-</div>
-<a id="function_modexec"></a><div class="element clickable function  function_modexec" data-toggle="collapse" data-target=".function_modexec .collapse">
-<h2>Execute un controleur</h2>
-<pre>modexec(\type $action, \type $page) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered"><tr>
-<th>global</th>
-<td>type $root</td>
-</tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$action</h4>
-<code>\type</code>
-</div>
-<div class="subelement argument">
-<h4>$page</h4>
-<code>\type</code>
-</div>
-</div></div>
-</div>
-<a id="function_modsecu"></a><div class="element clickable function  function_modsecu" data-toggle="collapse" data-target=".function_modsecu .collapse">
-<h2>Laisser la possibilité à un module de gérer sa sécurité</h2>
-<pre>modsecu(\type $action, \type $page) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered"><tr>
-<th>global</th>
-<td>type $root</td>
-</tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$action</h4>
-<code>\type</code>
-</div>
-<div class="subelement argument">
-<h4>$page</h4>
-<code>\type</code>
-</div>
-</div></div>
-</div>
-<a id="function_needAcl"></a><div class="element clickable function  function_needAcl" data-toggle="collapse" data-target=".function_needAcl .collapse">
-<h2>Affiche une page d'erreur si le niveau d'accès de l'utilisateur
-est trop faible</h2>
-<pre>needAcl(\type $acl) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$acl</h4>
-<code>\type</code>
-</div>
-</div></div>
-</div>
 <a id="function_process_si_contact_form"></a><div class="element clickable function  function_process_si_contact_form" data-toggle="collapse" data-target=".function_process_si_contact_form .collapse">
 <h2>process_si_contact_form()
         </h2>
@@ -718,30 +302,6 @@ est trop faible</h2>
 <pre>process_si_contact_form() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="function_quit"></a><div class="element clickable function  function_quit" data-toggle="collapse" data-target=".function_quit .collapse">
-<h2>Permet de quitter proprement le CMS</h2>
-<pre>quit() </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="function_redirect"></a><div class="element clickable function  function_redirect" data-toggle="collapse" data-target=".function_redirect .collapse">
-<h2>Redirige l'utilisateur.</h2>
-<pre>redirect($action, \type $page, \type $options) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$action</h4></div>
-<div class="subelement argument">
-<h4>$page</h4>
-<code>\type</code>
-</div>
-<div class="subelement argument">
-<h4>$options</h4>
-<code>\type</code>
-</div>
-</div></div>
 </div>
 <a id="function_section_accept"></a><div class="element clickable function  function_section_accept" data-toggle="collapse" data-target=".function_section_accept .collapse">
 <h2>Ho Oui ! Un staff</h2>
@@ -809,6 +369,13 @@ est trop faible</h2>
 </tr></table>
 </div></div>
 </div>
+<a id="function_section_mkevent"></a><div class="element clickable function  function_section_mkevent" data-toggle="collapse" data-target=".function_section_mkevent .collapse">
+<h2>section_mkevent()
+        </h2>
+<pre>section_mkevent() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
 <a id="function_section_reject"></a><div class="element clickable function  function_section_reject" data-toggle="collapse" data-target=".function_section_reject .collapse">
 <h2>Bye le membre .</h2>
 <pre>section_reject() </pre>
@@ -830,245 +397,6 @@ est trop faible</h2>
 <div class="long_description"></div>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$page</h4></div>
-</div></div>
-</div>
-<a id="function_tln_casenormalize"></a><div class="element clickable function  function_tln_casenormalize" data-toggle="collapse" data-target=".function_tln_casenormalize .collapse">
-<h2>A small helper function to use with array_walk.</h2>
-<pre>tln_casenormalize($val) : void</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>Modifies a by-ref
-value and makes it lowercase.</p></div>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$val</h4><p>a value passed by-ref.</p>
-</div>
-</div></div>
-</div>
-<a id="function_tln_deent"></a><div class="element clickable function  function_tln_deent" data-toggle="collapse" data-target=".function_tln_deent .collapse">
-<h2>Translates entities into literal values so they can be checked.</h2>
-<pre>tln_deent($attvalue, $regex, $hex) : True</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$attvalue</h4><p>the by-ref value to check.</p>
-</div>
-<div class="subelement argument">
-<h4>$regex</h4><p>the regular expression to check against.</p></div>
-<div class="subelement argument">
-<h4>$hex</h4><p>whether the entites are hexadecimal.</p></div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>True</code>or False depending on whether there were matches.</div>
-</div></div>
-</div>
-<a id="function_tln_defang"></a><div class="element clickable function  function_tln_defang" data-toggle="collapse" data-target=".function_tln_defang .collapse">
-<h2>This function checks attribute values for entity-encoded values
-and returns them translated into 8-bit strings so we can run
-checks on them.</h2>
-<pre>tln_defang($attvalue) : \Nothing,</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$attvalue</h4><p>A string to run entity check against.</p></div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>\Nothing,</code>modifies a reference value.</div>
-</div></div>
-</div>
-<a id="function_tln_findnxreg"></a><div class="element clickable function  function_tln_findnxreg" data-toggle="collapse" data-target=".function_tln_findnxreg .collapse">
-<h2>This function takes a PCRE-style regexp and tries to match it
-within the string.</h2>
-<pre>tln_findnxreg($body, $offset, $reg) : \Returns</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$body</h4><p>The string to look for needle in.</p></div>
-<div class="subelement argument">
-<h4>$offset</h4><p>Start looking from here.</p></div>
-<div class="subelement argument">
-<h4>$reg</h4><p>A PCRE-style regex to match.</p>
-</div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>\Returns</code>a false if no matches found, or an array
-			   with the following members:
-			   - integer with the location of the match within $body
-			   - string with whatever content between offset and the match
-			   - string with whatever it is we matched</div>
-</div></div>
-</div>
-<a id="function_tln_findnxstr"></a><div class="element clickable function  function_tln_findnxstr" data-toggle="collapse" data-target=".function_tln_findnxstr .collapse">
-<h2>This function looks for the next character within a string.</h2>
-<pre>tln_findnxstr($body, $offset, $needle) : \location</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>It's
-really just a glorified "strpos", except it catches the failures
-nicely.</p></div>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$body</h4><p>The string to look for needle in.</p></div>
-<div class="subelement argument">
-<h4>$offset</h4><p>Start looking from this position.</p></div>
-<div class="subelement argument">
-<h4>$needle</h4><p>The character/string to look for.</p>
-</div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>\location</code>of the next occurance of the needle, or
-			   strlen($body) if needle wasn't found.</div>
-</div></div>
-</div>
-<a id="function_tln_fixatts"></a><div class="element clickable function  function_tln_fixatts" data-toggle="collapse" data-target=".function_tln_fixatts .collapse">
-<h2>This function runs various checks against the attributes.</h2>
-<pre>tln_fixatts($tagname, $attary, $rm_attnames, $bad_attvals, $add_attr_to_tag) : Array</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$tagname</h4><p>String with the name of the tag.</p></div>
-<div class="subelement argument">
-<h4>$attary</h4><p>Array with all tag attributes.</p></div>
-<div class="subelement argument">
-<h4>$rm_attnames</h4><p>See description for tln_sanitize</p></div>
-<div class="subelement argument">
-<h4>$bad_attvals</h4><p>See description for tln_sanitize</p></div>
-<div class="subelement argument">
-<h4>$add_attr_to_tag</h4><p>See description for tln_sanitize</p></div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>Array</code>with modified attributes.</div>
-</div></div>
-</div>
-<a id="function_tln_getnxtag"></a><div class="element clickable function  function_tln_getnxtag" data-toggle="collapse" data-target=".function_tln_getnxtag .collapse">
-<h2>This function looks for the next tag.</h2>
-<pre>tln_getnxtag($body, $offset) : false</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$body</h4><p>String where to look for the next tag.</p></div>
-<div class="subelement argument">
-<h4>$offset</h4><p>Start looking from here.</p></div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>false</code>if no more tags exist in the body, or
-			   an array with the following members:
-			   - string with the name of the tag
-			   - array with attributes and their values
-			   - integer with tag type (1, 2, or 3)
-			   - integer where the tag starts (starting "<")
-			   - integer where the tag ends (ending ">")
-			   first three members will be false, if the tag is invalid.</div>
-</div></div>
-</div>
-<a id="function_tln_sanitize"></a><div class="element clickable function  function_tln_sanitize" data-toggle="collapse" data-target=".function_tln_sanitize .collapse">
-<h2>tln_sanitize()
-        </h2>
-<pre>tln_sanitize($body, $tag_list, $rm_tags_with_content, $self_closing_tags, $force_tag_closing, $rm_attnames, $bad_attvals, $add_attr_to_tag) : \tln_sanitized</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$body</h4><p>the string with HTML you wish to filter</p></div>
-<div class="subelement argument">
-<h4>$tag_list</h4><p>see description above</p></div>
-<div class="subelement argument">
-<h4>$rm_tags_with_content</h4><p>see description above</p></div>
-<div class="subelement argument">
-<h4>$self_closing_tags</h4><p>see description above</p></div>
-<div class="subelement argument">
-<h4>$force_tag_closing</h4><p>see description above</p></div>
-<div class="subelement argument">
-<h4>$rm_attnames</h4><p>see description above</p></div>
-<div class="subelement argument">
-<h4>$bad_attvals</h4><p>see description above</p></div>
-<div class="subelement argument">
-<h4>$add_attr_to_tag</h4><p>see description above</p></div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>\tln_sanitized</code>html safe to show on your pages.</div>
-</div></div>
-</div>
-<a id="function_tln_skipspace"></a><div class="element clickable function  function_tln_skipspace" data-toggle="collapse" data-target=".function_tln_skipspace .collapse">
-<h2>This function skips any whitespace from the current position within
-a string and to the next non-whitespace value.</h2>
-<pre>tln_skipspace($body, $offset) : \the</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$body</h4><p>the string</p></div>
-<div class="subelement argument">
-<h4>$offset</h4><p>the offset within the string where we should start
-               looking for the next non-whitespace character.</p>
-</div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>\the</code>location within the $body where the next
-			   non-whitespace char is located.</div>
-</div></div>
-</div>
-<a id="function_tln_tagprint"></a><div class="element clickable function  function_tln_tagprint" data-toggle="collapse" data-target=".function_tln_tagprint .collapse">
-<h2>This function returns the final tag out of the tag name, an array
-of attributes, and the type of the tag.</h2>
-<pre>tln_tagprint($tagname, $attary, $tagtype) : \a</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>This function is called by
-tln_sanitize internally.</p></div>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$tagname</h4><p>the name of the tag.</p></div>
-<div class="subelement argument">
-<h4>$attary</h4><p>the array of attributes and their values</p></div>
-<div class="subelement argument">
-<h4>$tagtype</h4><p>The type of the tag (see in comments).</p>
-</div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>\a</code>string with the final tag representation.</div>
-</div></div>
-</div>
-<a id="function_tln_unspace"></a><div class="element clickable function  function_tln_unspace" data-toggle="collapse" data-target=".function_tln_unspace .collapse">
-<h2>Kill any tabs, newlines, or carriage returns.</h2>
-<pre>tln_unspace(\attvalue $attvalue) : \attvalue</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>Our friends the
-makers of the browser with 95% market value decided that it'd
-be funny to make "java[tab]script" be just as good as "javascript".</p></div>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$attvalue</h4>
-<code>\attvalue</code><p>The attribute value before extraneous spaces removed.</p></div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>\attvalue</code>Nothing, modifies a reference value.</div>
-</div></div>
-</div>
-<a id="function_urldup"></a><div class="element clickable function  function_urldup" data-toggle="collapse" data-target=".function_urldup .collapse">
-<h2>Génère une URL de la même page avec des paramètres différents</h2>
-<pre>urldup(\type $options) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$options</h4>
-<code>\type</code>
-</div>
 </div></div>
 </div>
 <a id="function_user_add"></a><div class="element clickable function  function_user_add" data-toggle="collapse" data-target=".function_user_add .collapse">
@@ -1112,19 +440,6 @@ be funny to make "java[tab]script" be just as good as "javascript".</p></div>
 <pre>user_view() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="function_writecode"></a><div class="element clickable function  function_writecode" data-toggle="collapse" data-target=".function_writecode .collapse">
-<h2>writecode()
-        </h2>
-<pre>writecode($img, $conf, $code) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$img</h4></div>
-<div class="subelement argument"><h4>$conf</h4></div>
-<div class="subelement argument"><h4>$code</h4></div>
-</div></div>
 </div>
 <h3>
 <i class="icon-custom icon-class"></i> Classes and interfaces</h3>
@@ -1206,13 +521,6 @@ facilement.</p>
 <div class="details collapse"></div>
 <a href="../classes/TP_yyStackEntry.html" class="more">« More »</a>
 </div>
-<div id="TTFParser" class="element ajax clickable class">
-<h1>TTFParser<a href="../classes/TTFParser.html">¶</a>
-</h1>
-<p class="short_description"></p>
-<div class="details collapse"></div>
-<a href="../classes/TTFParser.html" class="more">« More »</a>
-</div>
 <div id="TicketGen" class="element ajax clickable class">
 <h1>TicketGen<a href="../classes/TicketGen.html">¶</a>
 </h1>
@@ -1250,63 +558,9 @@ facilement.</p>
 </div>
 <h3>
 <i class="icon-custom icon-constant"></i> Constants</h3>
-<a id="constant_ACL_ADMINISTRATOR"> </a><div class="element clickable constant  constant_ACL_ADMINISTRATOR" data-toggle="collapse" data-target=".constant_ACL_ADMINISTRATOR .collapse">
-<h2>ACL_ADMINISTRATOR</h2>
-<pre>ACL_ADMINISTRATOR </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="constant_ACL_ANNONYMOUS"> </a><div class="element clickable constant  constant_ACL_ANNONYMOUS" data-toggle="collapse" data-target=".constant_ACL_ANNONYMOUS .collapse">
-<h2>ACL_ANNONYMOUS</h2>
-<pre>ACL_ANNONYMOUS </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="constant_ACL_GUEST"> </a><div class="element clickable constant  constant_ACL_GUEST" data-toggle="collapse" data-target=".constant_ACL_GUEST .collapse">
-<h2>ACL_GUEST</h2>
-<pre>ACL_GUEST </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="constant_ACL_SUPERUSER"> </a><div class="element clickable constant  constant_ACL_SUPERUSER" data-toggle="collapse" data-target=".constant_ACL_SUPERUSER .collapse">
-<h2>ACL_SUPERUSER</h2>
-<pre>ACL_SUPERUSER </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="constant_ACL_USER"> </a><div class="element clickable constant  constant_ACL_USER" data-toggle="collapse" data-target=".constant_ACL_USER .collapse">
-<h2>ACL_USER</h2>
-<pre>ACL_USER </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="constant_DS"> </a><div class="element clickable constant  constant_DS" data-toggle="collapse" data-target=".constant_DS .collapse">
-<h2>DS</h2>
-<pre>DS </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="constant_FPDF_FONTPATH"> </a><div class="element clickable constant  constant_FPDF_FONTPATH" data-toggle="collapse" data-target=".constant_FPDF_FONTPATH .collapse">
-<h2>FPDF_FONTPATH</h2>
-<pre>FPDF_FONTPATH </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
 <a id="constant_FPDF_VERSION"> </a><div class="element clickable constant  constant_FPDF_VERSION" data-toggle="collapse" data-target=".constant_FPDF_VERSION .collapse">
 <h2>FPDF_VERSION</h2>
 <pre>FPDF_VERSION </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="constant_FPDF_VERSION"> </a><div class="element clickable constant  constant_FPDF_VERSION" data-toggle="collapse" data-target=".constant_FPDF_VERSION .collapse">
-<h2>FPDF_VERSION</h2>
-<pre>FPDF_VERSION </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="constant_NPE_INDEX"> </a><div class="element clickable constant  constant_NPE_INDEX" data-toggle="collapse" data-target=".constant_NPE_INDEX .collapse">
-<h2>NPE_INDEX</h2>
-<pre>NPE_INDEX </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
@@ -1340,7 +594,7 @@ facilement.</p>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-12-23T03:50:16+01:00.<br></footer></div>
+            generated on 2014-01-01T22:49:24+01:00.<br></footer></div>
 </div>
 </body>
 </html>

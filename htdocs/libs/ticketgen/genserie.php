@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Fichier de la bibliothèque ticketgen
+ * @package ticketgen
+ */
+
 require_once dirname(__FILE__) . '/' . 'gen.php';
 
 

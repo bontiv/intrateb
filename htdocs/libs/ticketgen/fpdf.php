@@ -7,6 +7,14 @@
 * Author:  Olivier PLATHEY                                                     *
 *******************************************************************************/
 
+/**
+ * Fichier de la bibliothèque fpdf
+ * @package FPDF
+ */
+
+/**
+ * Version de FPDF
+ */
 define('FPDF_VERSION','1.7');
 
 class FPDF

@@ -6,7 +6,9 @@
 * Date:    2011-06-18                                                          *
 * Author:  Olivier PLATHEY                                                     *
 *******************************************************************************/
-
+/**
+ * @package FPDF
+ */
 define('FPDF_VERSION','1.7');
 
 class FPDF

@@ -21,10 +21,14 @@
                                     API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a>Packages</a></li>
 <li><a href="packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="packages/FPDF.html"><i class="icon-folder-open"></i> FPDF</a></li>
+<li><a href="packages/FrameTool.html"><i class="icon-folder-open"></i> FrameTool</a></li>
 <li><a href="packages/PHPMailer.html"><i class="icon-folder-open"></i> PHPMailer</a></li>
 <li><a href="packages/PHPWavUtils.html"><i class="icon-folder-open"></i> PHPWavUtils</a></li>
 <li><a href="packages/Securimage.html"><i class="icon-folder-open"></i> Securimage</a></li>
 <li><a href="packages/Smarty.html"><i class="icon-folder-open"></i> Smarty</a></li>
+<li><a href="packages/makefont.html"><i class="icon-folder-open"></i> makefont</a></li>
+<li><a href="packages/ticketgen.html"><i class="icon-folder-open"></i> ticketgen</a></li>
 </ul>
 </li>
 <li class="dropdown" id="charts-menu">
@@ -35,7 +39,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">1085</span></a></li>
+                <span class="label label-info">1078</span></a></li>
 <li><a href="markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul>
 <li>todo 
@@ -65,6 +69,7 @@
 <button class="btn critical">Critical</button><button class="btn error">Error</button><button class="btn notice">Notice</button>
 </div></li>
 <li class="nav-header">Navigation</li>
+<li><a href="#action/event.php"><i class="icon-file"></i>action/event.php</a></li>
 <li><a href="#action/index.php"><i class="icon-file"></i>action/index.php</a></li>
 <li><a href="#action/user.php"><i class="icon-file"></i>action/user.php</a></li>
 <li><a href="#action/ecole.php"><i class="icon-file"></i>action/ecole.php</a></li>
@@ -72,11 +77,9 @@
 <li><a href="#action/section.php"><i class="icon-file"></i>action/section.php</a></li>
 <li><a href="#action/syscore.php"><i class="icon-file"></i>action/syscore.php</a></li>
 <li><a href="#config.php"><i class="icon-file"></i>config.php</a></li>
-<li><a href="#index.php"><i class="icon-file"></i>index.php</a></li>
 <li><a href="#ticketgen/gen.php"><i class="icon-file"></i>ticketgen/gen.php</a></li>
 <li><a href="#ticketgen/makefont/ttfparser.php"><i class="icon-file"></i>ticketgen/makefont/ttfparser.php</a></li>
 <li><a href="#ticketgen/makefont/makefont.php"><i class="icon-file"></i>ticketgen/makefont/makefont.php</a></li>
-<li><a href="#ticketgen/config.php"><i class="icon-file"></i>ticketgen/config.php</a></li>
 <li><a href="#ticketgen/fpdf.php"><i class="icon-file"></i>ticketgen/fpdf.php</a></li>
 <li><a href="#ticketgen/genserie.php"><i class="icon-file"></i>ticketgen/genserie.php</a></li>
 <li><a href="#ticketgen/codegen.php"><i class="icon-file"></i>ticketgen/codegen.php</a></li>
@@ -144,6 +147,50 @@
 </li>
 <li>Compilation Errors</li>
 </ul>
+<div class="package-contents">
+<a name="action/event.php" id="action/event.php"></a><h3>
+<i class="icon-file"></i>action/event.php<small style="float: right;padding-right: 10px;">6</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>0</td>
+<td>No page-level DocBlock was found in file action/event.php</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>3</td>
+<td>No DocBlock was found for function \event_index()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>14</td>
+<td>No DocBlock was found for function \event_view()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>44</td>
+<td>No DocBlock was found for function \event_addsection()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>55</td>
+<td>No DocBlock was found for function \event_delsection()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>66</td>
+<td>No DocBlock was found for function \event_staff()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
 <div class="package-contents">
 <a name="action/index.php" id="action/index.php"></a><h3>
 <i class="icon-file"></i>action/index.php<small style="float: right;padding-right: 10px;">2</small>
@@ -282,7 +329,7 @@
 </div>
 <div class="package-contents">
 <a name="action/section.php" id="action/section.php"></a><h3>
-<i class="icon-file"></i>action/section.php<small style="float: right;padding-right: 10px;">7</small>
+<i class="icon-file"></i>action/section.php<small style="float: right;padding-right: 10px;">8</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -299,31 +346,36 @@
 <tr class="error">
 <td>error</td>
 <td>3</td>
+<td>No DocBlock was found for function \section_mkevent()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>42</td>
 <td>No DocBlock was found for function \section_index()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>25</td>
+<td>64</td>
 <td>No DocBlock was found for function \section_add()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>46</td>
+<td>85</td>
 <td>No DocBlock was found for function \section_delete()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>57</td>
+<td>96</td>
 <td>No DocBlock was found for function \section_details()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>94</td>
+<td>133</td>
 <td>No DocBlock was found for function \section_goin()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>104</td>
+<td>143</td>
 <td>No DocBlock was found for function \section_goout()</td>
 </tr>
 </tbody>
@@ -370,26 +422,10 @@
 </tr></tbody>
 </table></div>
 </div>
-<div class="package-contents">
-<a name="index.php" id="index.php"></a><h3>
-<i class="icon-file"></i>index.php<small style="float: right;padding-right: 10px;">1</small>
-</h3>
-<div><table class="table markers table-bordered">
-<thead><tr>
-<th>Type</th>
-<th>Line</th>
-<th>Description</th>
-</tr></thead>
-<tbody><tr class="error">
-<td>error</td>
-<td>0</td>
-<td>No page-level DocBlock was found in file index.php</td>
-</tr></tbody>
-</table></div>
-</div>
+<div class="package-contents"></div>
 <div class="package-contents">
 <a name="ticketgen/gen.php" id="ticketgen/gen.php"></a><h3>
-<i class="icon-file"></i>ticketgen/gen.php<small style="float: right;padding-right: 10px;">16</small>
+<i class="icon-file"></i>ticketgen/gen.php<small style="float: right;padding-right: 10px;">15</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -400,82 +436,77 @@
 <tbody>
 <tr class="error">
 <td>error</td>
-<td>0</td>
-<td>No page-level DocBlock was found in file ticketgen/gen.php</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>9</td>
+<td>15</td>
 <td>No DocBlock was found for \TicketGen</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>11</td>
+<td>17</td>
 <td>No DocBlock was found for property $conf</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>12</td>
+<td>18</td>
 <td>No DocBlock was found for property $img</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>13</td>
+<td>19</td>
 <td>No DocBlock was found for property $pdf</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>15</td>
+<td>21</td>
 <td>No DocBlock was found for method __construct()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>19</td>
+<td>25</td>
 <td>No DocBlock was found for method reload_conf()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>28</td>
+<td>34</td>
 <td>No DocBlock was found for method getimg()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>42</td>
+<td>48</td>
 <td>No DocBlock was found for method colordecode()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>51</td>
+<td>57</td>
 <td>No DocBlock was found for method addtext()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>72</td>
+<td>78</td>
 <td>No DocBlock was found for method addblank()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>91</td>
+<td>97</td>
 <td>No DocBlock was found for method mkticket()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>118</td>
+<td>124</td>
 <td>No DocBlock was found for method display()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>124</td>
+<td>130</td>
 <td>No DocBlock was found for method writeto()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>129</td>
+<td>135</td>
 <td>No DocBlock was found for method addptext()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>164</td>
+<td>170</td>
 <td>No DocBlock was found for method mkpdf()</td>
 </tr>
 </tbody>
@@ -483,7 +514,7 @@
 </div>
 <div class="package-contents">
 <a name="ticketgen/makefont/ttfparser.php" id="ticketgen/makefont/ttfparser.php"></a><h3>
-<i class="icon-file"></i>ticketgen/makefont/ttfparser.php<small style="float: right;padding-right: 10px;">39</small>
+<i class="icon-file"></i>ticketgen/makefont/ttfparser.php<small style="float: right;padding-right: 10px;">38</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -499,192 +530,187 @@
 </tr>
 <tr class="error">
 <td>error</td>
-<td>10</td>
-<td>No DocBlock was found for \TTFParser</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>12</td>
+<td>16</td>
 <td>No DocBlock was found for property $f</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>13</td>
+<td>17</td>
 <td>No DocBlock was found for property $tables</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>14</td>
+<td>18</td>
 <td>No DocBlock was found for property $unitsPerEm</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>15</td>
+<td>19</td>
 <td>No DocBlock was found for property $xMin</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>15</td>
+<td>19</td>
 <td>No DocBlock was found for property $yMin</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>15</td>
+<td>19</td>
 <td>No DocBlock was found for property $xMax</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>15</td>
+<td>19</td>
 <td>No DocBlock was found for property $yMax</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>16</td>
+<td>20</td>
 <td>No DocBlock was found for property $numberOfHMetrics</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>17</td>
+<td>21</td>
 <td>No DocBlock was found for property $numGlyphs</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>18</td>
+<td>22</td>
 <td>No DocBlock was found for property $widths</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>19</td>
+<td>23</td>
 <td>No DocBlock was found for property $chars</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>20</td>
+<td>24</td>
 <td>No DocBlock was found for property $postScriptName</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>21</td>
+<td>25</td>
 <td>No DocBlock was found for property $Embeddable</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>22</td>
+<td>26</td>
 <td>No DocBlock was found for property $Bold</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>23</td>
+<td>27</td>
 <td>No DocBlock was found for property $typoAscender</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>24</td>
+<td>28</td>
 <td>No DocBlock was found for property $typoDescender</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>25</td>
+<td>29</td>
 <td>No DocBlock was found for property $capHeight</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>26</td>
+<td>30</td>
 <td>No DocBlock was found for property $italicAngle</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>27</td>
+<td>31</td>
 <td>No DocBlock was found for property $underlinePosition</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>28</td>
+<td>32</td>
 <td>No DocBlock was found for property $underlineThickness</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>29</td>
+<td>33</td>
 <td>No DocBlock was found for property $isFixedPitch</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>31</td>
+<td>35</td>
 <td>No DocBlock was found for method Parse()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>66</td>
+<td>70</td>
 <td>No DocBlock was found for method ParseHead()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>82</td>
+<td>86</td>
 <td>No DocBlock was found for method ParseHhea()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>89</td>
+<td>93</td>
 <td>No DocBlock was found for method ParseMaxp()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>96</td>
+<td>100</td>
 <td>No DocBlock was found for method ParseHmtx()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>113</td>
+<td>117</td>
 <td>No DocBlock was found for method ParseCmap()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>181</td>
+<td>185</td>
 <td>No DocBlock was found for method ParseName()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>210</td>
+<td>214</td>
 <td>No DocBlock was found for method ParseOS2()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>232</td>
+<td>236</td>
 <td>No DocBlock was found for method ParsePost()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>243</td>
+<td>247</td>
 <td>No DocBlock was found for method Error()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>251</td>
+<td>255</td>
 <td>No DocBlock was found for method Seek()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>258</td>
+<td>262</td>
 <td>No DocBlock was found for method Skip()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>263</td>
+<td>267</td>
 <td>No DocBlock was found for method Read()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>268</td>
+<td>272</td>
 <td>No DocBlock was found for method ReadUShort()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>274</td>
+<td>278</td>
 <td>No DocBlock was found for method ReadShort()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>283</td>
+<td>287</td>
 <td>No DocBlock was found for method ReadULong()</td>
 </tr>
 </tbody>
@@ -692,7 +718,7 @@
 </div>
 <div class="package-contents">
 <a name="ticketgen/makefont/makefont.php" id="ticketgen/makefont/makefont.php"></a><h3>
-<i class="icon-file"></i>ticketgen/makefont/makefont.php<small style="float: right;padding-right: 10px;">14</small>
+<i class="icon-file"></i>ticketgen/makefont/makefont.php<small style="float: right;padding-right: 10px;">13</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -703,97 +729,76 @@
 <tbody>
 <tr class="error">
 <td>error</td>
-<td>0</td>
-<td>No page-level DocBlock was found in file ticketgen/makefont/makefont.php</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>12</td>
+<td>16</td>
 <td>No DocBlock was found for function \Message()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>28</td>
+<td>32</td>
 <td>No DocBlock was found for function \Notice()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>33</td>
+<td>37</td>
 <td>No DocBlock was found for function \Warning()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>38</td>
+<td>42</td>
 <td>No DocBlock was found for function \Error()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>44</td>
+<td>48</td>
 <td>No DocBlock was found for function \LoadMap()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>62</td>
+<td>66</td>
 <td>No DocBlock was found for function \GetInfoFromTrueType()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>105</td>
+<td>109</td>
 <td>No DocBlock was found for function \GetInfoFromType1()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>196</td>
+<td>200</td>
 <td>No DocBlock was found for function \MakeFontDescriptor()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>233</td>
+<td>237</td>
 <td>No DocBlock was found for function \MakeWidthArray()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>256</td>
+<td>260</td>
 <td>No DocBlock was found for function \MakeFontEncoding()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>275</td>
+<td>279</td>
 <td>No DocBlock was found for function \SaveToFile()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>284</td>
+<td>288</td>
 <td>No DocBlock was found for function \MakeDefinitionFile()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>312</td>
+<td>316</td>
 <td>No DocBlock was found for function \MakeFont()</td>
 </tr>
 </tbody>
 </table></div>
 </div>
-<div class="package-contents">
-<a name="ticketgen/config.php" id="ticketgen/config.php"></a><h3>
-<i class="icon-file"></i>ticketgen/config.php<small style="float: right;padding-right: 10px;">1</small>
-</h3>
-<div><table class="table markers table-bordered">
-<thead><tr>
-<th>Type</th>
-<th>Line</th>
-<th>Description</th>
-</tr></thead>
-<tbody><tr class="error">
-<td>error</td>
-<td>0</td>
-<td>No page-level DocBlock was found in file ticketgen/config.php</td>
-</tr></tbody>
-</table></div>
-</div>
+<div class="package-contents"></div>
 <div class="package-contents">
 <a name="ticketgen/fpdf.php" id="ticketgen/fpdf.php"></a><h3>
-<i class="icon-file"></i>ticketgen/fpdf.php<small style="float: right;padding-right: 10px;">139</small>
+<i class="icon-file"></i>ticketgen/fpdf.php<small style="float: right;padding-right: 10px;">138</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -804,697 +809,692 @@
 <tbody>
 <tr class="error">
 <td>error</td>
-<td>0</td>
-<td>No page-level DocBlock was found in file ticketgen/fpdf.php</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>12</td>
+<td>20</td>
 <td>No DocBlock was found for \FPDF</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>14</td>
+<td>22</td>
 <td>No DocBlock was found for property $page</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>15</td>
+<td>23</td>
 <td>No DocBlock was found for property $n</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>16</td>
+<td>24</td>
 <td>No DocBlock was found for property $offsets</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>17</td>
+<td>25</td>
 <td>No DocBlock was found for property $buffer</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>18</td>
+<td>26</td>
 <td>No DocBlock was found for property $pages</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>19</td>
+<td>27</td>
 <td>No DocBlock was found for property $state</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>20</td>
+<td>28</td>
 <td>No DocBlock was found for property $compress</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>21</td>
+<td>29</td>
 <td>No DocBlock was found for property $k</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>22</td>
+<td>30</td>
 <td>No DocBlock was found for property $DefOrientation</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>23</td>
+<td>31</td>
 <td>No DocBlock was found for property $CurOrientation</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>24</td>
+<td>32</td>
 <td>No DocBlock was found for property $StdPageSizes</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>25</td>
+<td>33</td>
 <td>No DocBlock was found for property $DefPageSize</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>26</td>
+<td>34</td>
 <td>No DocBlock was found for property $CurPageSize</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>27</td>
+<td>35</td>
 <td>No DocBlock was found for property $PageSizes</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>28</td>
+<td>36</td>
 <td>No DocBlock was found for property $wPt</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>28</td>
+<td>36</td>
 <td>No DocBlock was found for property $hPt</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>29</td>
+<td>37</td>
 <td>No DocBlock was found for property $w</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>29</td>
+<td>37</td>
 <td>No DocBlock was found for property $h</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>30</td>
+<td>38</td>
 <td>No DocBlock was found for property $lMargin</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>31</td>
+<td>39</td>
 <td>No DocBlock was found for property $tMargin</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>32</td>
+<td>40</td>
 <td>No DocBlock was found for property $rMargin</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>33</td>
+<td>41</td>
 <td>No DocBlock was found for property $bMargin</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>34</td>
+<td>42</td>
 <td>No DocBlock was found for property $cMargin</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>35</td>
+<td>43</td>
 <td>No DocBlock was found for property $x</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>35</td>
+<td>43</td>
 <td>No DocBlock was found for property $y</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>36</td>
+<td>44</td>
 <td>No DocBlock was found for property $lasth</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>37</td>
+<td>45</td>
 <td>No DocBlock was found for property $LineWidth</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>38</td>
+<td>46</td>
 <td>No DocBlock was found for property $fontpath</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>39</td>
+<td>47</td>
 <td>No DocBlock was found for property $CoreFonts</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>40</td>
+<td>48</td>
 <td>No DocBlock was found for property $fonts</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>41</td>
+<td>49</td>
 <td>No DocBlock was found for property $FontFiles</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>42</td>
+<td>50</td>
 <td>No DocBlock was found for property $diffs</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>43</td>
+<td>51</td>
 <td>No DocBlock was found for property $FontFamily</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>44</td>
+<td>52</td>
 <td>No DocBlock was found for property $FontStyle</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>45</td>
+<td>53</td>
 <td>No DocBlock was found for property $underline</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>46</td>
+<td>54</td>
 <td>No DocBlock was found for property $CurrentFont</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>47</td>
+<td>55</td>
 <td>No DocBlock was found for property $FontSizePt</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>48</td>
+<td>56</td>
 <td>No DocBlock was found for property $FontSize</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>49</td>
+<td>57</td>
 <td>No DocBlock was found for property $DrawColor</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>50</td>
+<td>58</td>
 <td>No DocBlock was found for property $FillColor</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>51</td>
+<td>59</td>
 <td>No DocBlock was found for property $TextColor</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>52</td>
+<td>60</td>
 <td>No DocBlock was found for property $ColorFlag</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>53</td>
+<td>61</td>
 <td>No DocBlock was found for property $ws</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>54</td>
+<td>62</td>
 <td>No DocBlock was found for property $images</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>55</td>
+<td>63</td>
 <td>No DocBlock was found for property $PageLinks</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>56</td>
+<td>64</td>
 <td>No DocBlock was found for property $links</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>57</td>
+<td>65</td>
 <td>No DocBlock was found for property $AutoPageBreak</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>58</td>
+<td>66</td>
 <td>No DocBlock was found for property $PageBreakTrigger</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>59</td>
+<td>67</td>
 <td>No DocBlock was found for property $InHeader</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>60</td>
+<td>68</td>
 <td>No DocBlock was found for property $InFooter</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>61</td>
+<td>69</td>
 <td>No DocBlock was found for property $ZoomMode</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>62</td>
+<td>70</td>
 <td>No DocBlock was found for property $LayoutMode</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>63</td>
+<td>71</td>
 <td>No DocBlock was found for property $title</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>64</td>
+<td>72</td>
 <td>No DocBlock was found for property $subject</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>65</td>
+<td>73</td>
 <td>No DocBlock was found for property $author</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>66</td>
+<td>74</td>
 <td>No DocBlock was found for property $keywords</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>67</td>
+<td>75</td>
 <td>No DocBlock was found for property $creator</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>68</td>
+<td>76</td>
 <td>No DocBlock was found for property $AliasNbPages</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>69</td>
+<td>77</td>
 <td>No DocBlock was found for property $PDFVersion</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>76</td>
+<td>84</td>
 <td>No DocBlock was found for method FPDF()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>170</td>
+<td>178</td>
 <td>No DocBlock was found for method SetMargins()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>180</td>
+<td>188</td>
 <td>No DocBlock was found for method SetLeftMargin()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>188</td>
+<td>196</td>
 <td>No DocBlock was found for method SetTopMargin()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>194</td>
+<td>202</td>
 <td>No DocBlock was found for method SetRightMargin()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>200</td>
+<td>208</td>
 <td>No DocBlock was found for method SetAutoPageBreak()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>208</td>
+<td>216</td>
 <td>No DocBlock was found for method SetDisplayMode()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>221</td>
+<td>229</td>
 <td>No DocBlock was found for method SetCompression()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>230</td>
+<td>238</td>
 <td>No DocBlock was found for method SetTitle()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>238</td>
+<td>246</td>
 <td>No DocBlock was found for method SetSubject()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>246</td>
+<td>254</td>
 <td>No DocBlock was found for method SetAuthor()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>254</td>
+<td>262</td>
 <td>No DocBlock was found for method SetKeywords()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>262</td>
+<td>270</td>
 <td>No DocBlock was found for method SetCreator()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>270</td>
+<td>278</td>
 <td>No DocBlock was found for method AliasNbPages()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>276</td>
+<td>284</td>
 <td>No DocBlock was found for method Error()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>282</td>
+<td>290</td>
 <td>No DocBlock was found for method Open()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>288</td>
+<td>296</td>
 <td>No DocBlock was found for method Close()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>305</td>
+<td>313</td>
 <td>No DocBlock was found for method AddPage()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>374</td>
+<td>382</td>
 <td>No DocBlock was found for method Header()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>379</td>
+<td>387</td>
 <td>No DocBlock was found for method Footer()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>384</td>
+<td>392</td>
 <td>No DocBlock was found for method PageNo()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>390</td>
+<td>398</td>
 <td>No DocBlock was found for method SetDrawColor()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>401</td>
+<td>409</td>
 <td>No DocBlock was found for method SetFillColor()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>413</td>
+<td>421</td>
 <td>No DocBlock was found for method SetTextColor()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>423</td>
+<td>431</td>
 <td>No DocBlock was found for method GetStringWidth()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>435</td>
+<td>443</td>
 <td>No DocBlock was found for method SetLineWidth()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>443</td>
+<td>451</td>
 <td>No DocBlock was found for method Line()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>449</td>
+<td>457</td>
 <td>No DocBlock was found for method Rect()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>461</td>
+<td>469</td>
 <td>No DocBlock was found for method AddFont()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>497</td>
+<td>505</td>
 <td>No DocBlock was found for method SetFont()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>547</td>
+<td>555</td>
 <td>No DocBlock was found for method SetFontSize()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>558</td>
+<td>566</td>
 <td>No DocBlock was found for method AddLink()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>566</td>
+<td>574</td>
 <td>No DocBlock was found for method SetLink()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>576</td>
+<td>584</td>
 <td>No DocBlock was found for method Link()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>582</td>
+<td>590</td>
 <td>No DocBlock was found for method Text()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>593</td>
+<td>601</td>
 <td>No DocBlock was found for method AcceptPageBreak()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>599</td>
+<td>607</td>
 <td>No DocBlock was found for method Cell()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>678</td>
+<td>686</td>
 <td>No DocBlock was found for method MultiCell()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>791</td>
+<td>799</td>
 <td>No DocBlock was found for method Write()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>872</td>
+<td>880</td>
 <td>No DocBlock was found for method Ln()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>882</td>
+<td>890</td>
 <td>No DocBlock was found for method Image()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>945</td>
+<td>953</td>
 <td>No DocBlock was found for method GetX()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>951</td>
+<td>959</td>
 <td>No DocBlock was found for method SetX()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>960</td>
+<td>968</td>
 <td>No DocBlock was found for method GetY()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>966</td>
+<td>974</td>
 <td>No DocBlock was found for method SetY()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>976</td>
+<td>984</td>
 <td>No DocBlock was found for method SetXY()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>983</td>
+<td>991</td>
 <td>No DocBlock was found for method Output()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1045</td>
+<td>1053</td>
 <td>No DocBlock was found for method _dochecks()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1058</td>
+<td>1066</td>
 <td>No DocBlock was found for method _checkoutput()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1078</td>
+<td>1086</td>
 <td>No DocBlock was found for method _getpagesize()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1097</td>
+<td>1105</td>
 <td>No DocBlock was found for method _beginpage()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1137</td>
+<td>1145</td>
 <td>No DocBlock was found for method _endpage()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1142</td>
+<td>1150</td>
 <td>No DocBlock was found for method _loadfont()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1152</td>
+<td>1160</td>
 <td>No DocBlock was found for method _escape()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1162</td>
+<td>1170</td>
 <td>No DocBlock was found for method _textstring()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1168</td>
+<td>1176</td>
 <td>No DocBlock was found for method _UTF8toUTF16()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1201</td>
+<td>1209</td>
 <td>No DocBlock was found for method _dounderline()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1210</td>
+<td>1218</td>
 <td>No DocBlock was found for method _parsejpg()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1229</td>
+<td>1237</td>
 <td>No DocBlock was found for method _parsepng()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1240</td>
+<td>1248</td>
 <td>No DocBlock was found for method _parsepngstream()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1365</td>
+<td>1373</td>
 <td>No DocBlock was found for method _readstream()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1382</td>
+<td>1390</td>
 <td>No DocBlock was found for method _readint()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1389</td>
+<td>1397</td>
 <td>No DocBlock was found for method _parsegif()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1428</td>
+<td>1436</td>
 <td>No DocBlock was found for method _newobj()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1436</td>
+<td>1444</td>
 <td>No DocBlock was found for method _putstream()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1443</td>
+<td>1451</td>
 <td>No DocBlock was found for method _out()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1452</td>
+<td>1460</td>
 <td>No DocBlock was found for method _putpages()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1525</td>
+<td>1533</td>
 <td>No DocBlock was found for method _putfonts()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1619</td>
+<td>1627</td>
 <td>No DocBlock was found for method _putimages()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1629</td>
+<td>1637</td>
 <td>No DocBlock was found for method _putimage()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1681</td>
+<td>1689</td>
 <td>No DocBlock was found for method _putxobjectdict()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1687</td>
+<td>1695</td>
 <td>No DocBlock was found for method _putresourcedict()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1699</td>
+<td>1707</td>
 <td>No DocBlock was found for method _putresources()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1712</td>
+<td>1720</td>
 <td>No DocBlock was found for method _putinfo()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1728</td>
+<td>1736</td>
 <td>No DocBlock was found for method _putcatalog()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1748</td>
+<td>1756</td>
 <td>No DocBlock was found for method _putheader()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1753</td>
+<td>1761</td>
 <td>No DocBlock was found for method _puttrailer()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>1760</td>
+<td>1768</td>
 <td>No DocBlock was found for method _enddoc()</td>
 </tr>
 </tbody>
@@ -1502,7 +1502,7 @@
 </div>
 <div class="package-contents">
 <a name="ticketgen/genserie.php" id="ticketgen/genserie.php"></a><h3>
-<i class="icon-file"></i>ticketgen/genserie.php<small style="float: right;padding-right: 10px;">19</small>
+<i class="icon-file"></i>ticketgen/genserie.php<small style="float: right;padding-right: 10px;">18</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -1513,97 +1513,92 @@
 <tbody>
 <tr class="error">
 <td>error</td>
-<td>0</td>
-<td>No page-level DocBlock was found in file ticketgen/genserie.php</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>6</td>
+<td>11</td>
 <td>No DocBlock was found for \GenSerie</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>8</td>
+<td>13</td>
 <td>No DocBlock was found for property $date</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>9</td>
+<td>14</td>
 <td>No DocBlock was found for property $serie</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>10</td>
+<td>15</td>
 <td>No DocBlock was found for property $proprio</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>11</td>
+<td>16</td>
 <td>No DocBlock was found for property $conf</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>12</td>
+<td>17</td>
 <td>No DocBlock was found for property $posy</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>13</td>
+<td>18</td>
 <td>No DocBlock was found for property $tickets</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>14</td>
+<td>19</td>
 <td>No DocBlock was found for property $header</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>15</td>
+<td>20</td>
 <td>No DocBlock was found for property $border</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>17</td>
+<td>22</td>
 <td>No DocBlock was found for method init()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>25</td>
+<td>30</td>
 <td>No DocBlock was found for method Header()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>54</td>
+<td>59</td>
 <td>No DocBlock was found for method reload_conf()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>62</td>
+<td>67</td>
 <td>No DocBlock was found for method colordecode()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>71</td>
+<td>76</td>
 <td>No DocBlock was found for method addptext()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>106</td>
+<td>111</td>
 <td>No DocBlock was found for method __construct()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>116</td>
+<td>121</td>
 <td>No DocBlock was found for method out()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>121</td>
+<td>126</td>
 <td>No DocBlock was found for method mkticket()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>139</td>
+<td>144</td>
 <td>No DocBlock was found for method mktable()</td>
 </tr>
 </tbody>
@@ -1611,7 +1606,7 @@
 </div>
 <div class="package-contents">
 <a name="ticketgen/codegen.php" id="ticketgen/codegen.php"></a><h3>
-<i class="icon-file"></i>ticketgen/codegen.php<small style="float: right;padding-right: 10px;">3</small>
+<i class="icon-file"></i>ticketgen/codegen.php<small style="float: right;padding-right: 10px;">2</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -1622,17 +1617,12 @@
 <tbody>
 <tr class="error">
 <td>error</td>
-<td>0</td>
-<td>No page-level DocBlock was found in file ticketgen/codegen.php</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>3</td>
+<td>9</td>
 <td>No DocBlock was found for function \checksum()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>45</td>
+<td>51</td>
 <td>No DocBlock was found for function \writecode()</td>
 </tr>
 </tbody>
@@ -5231,12 +5221,12 @@
 <tbody>
 <tr class="error">
 <td>error</td>
-<td>580</td>
+<td>582</td>
 <td>No short description for function \tln_sanitize()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>725</td>
+<td>727</td>
 <td>No DocBlock was found for function \HTMLFilter()</td>
 </tr>
 </tbody>
@@ -6337,7 +6327,7 @@
 <div class="package-contents"></div>
 <div class="package-contents">
 <a name="libs/common.php" id="libs/common.php"></a><h3>
-<i class="icon-file"></i>libs/common.php<small style="float: right;padding-right: 10px;">9</small>
+<i class="icon-file"></i>libs/common.php<small style="float: right;padding-right: 10px;">8</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -6348,47 +6338,42 @@
 <tbody>
 <tr class="error">
 <td>error</td>
-<td>0</td>
-<td>No page-level DocBlock was found in file libs/common.php</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>104</td>
+<td>128</td>
 <td>Name of argument $action does not match with the DocBlock's name $page in \mkurl()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>104</td>
+<td>128</td>
 <td>Name of argument $page does not match with the DocBlock's name $options in \mkurl()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>104</td>
+<td>128</td>
 <td>Argument $options is missing from the Docblock of \mkurl()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>129</td>
+<td>153</td>
 <td>No DocBlock was found for function \mkurl_smarty()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>147</td>
+<td>176</td>
 <td>Name of argument $action does not match with the DocBlock's name $page in \redirect()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>147</td>
+<td>176</td>
 <td>Name of argument $page does not match with the DocBlock's name $options in \redirect()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>147</td>
+<td>176</td>
 <td>Argument $options is missing from the Docblock of \redirect()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>337</td>
+<td>366</td>
 <td>Argument $tpl is missing from the Docblock of run()</td>
 </tr>
 </tbody>
@@ -6396,7 +6381,7 @@
 </div>
 <div class="package-contents">
 <a name="libs/pi_barcode.php" id="libs/pi_barcode.php"></a><h3>
-<i class="icon-file"></i>libs/pi_barcode.php<small style="float: right;padding-right: 10px;">39</small>
+<i class="icon-file"></i>libs/pi_barcode.php<small style="float: right;padding-right: 10px;">34</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -6407,197 +6392,172 @@
 <tbody>
 <tr class="error">
 <td>error</td>
-<td>0</td>
-<td>No page-level DocBlock was found in file libs/pi_barcode.php</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>113</td>
+<td>117</td>
 <td>No DocBlock was found for \pi_barcode</td>
-</tr>
-<tr class="critical">
-<td>critical</td>
-<td>115</td>
-<td>No short description for property $CODE</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>120</td>
-<td>No DocBlock was found for property $FULLCODE</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>121</td>
-<td>No DocBlock was found for property $TYPE</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>122</td>
-<td>No DocBlock was found for property $HEIGHT</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>123</td>
-<td>No DocBlock was found for property $WIDTH</td>
 </tr>
 <tr class="error">
 <td>error</td>
 <td>124</td>
-<td>No DocBlock was found for property $CODEWIDTH</td>
+<td>No DocBlock was found for property $FULLCODE</td>
 </tr>
 <tr class="error">
 <td>error</td>
 <td>125</td>
-<td>No DocBlock was found for property $CALMZONE</td>
+<td>No DocBlock was found for property $TYPE</td>
 </tr>
 <tr class="error">
 <td>error</td>
 <td>126</td>
-<td>No DocBlock was found for property $HR</td>
+<td>No DocBlock was found for property $HEIGHT</td>
 </tr>
 <tr class="error">
 <td>error</td>
 <td>127</td>
-<td>No DocBlock was found for property $SHOWTYPE</td>
+<td>No DocBlock was found for property $WIDTH</td>
 </tr>
 <tr class="error">
 <td>error</td>
 <td>128</td>
-<td>No DocBlock was found for property $BACKGROUND</td>
+<td>No DocBlock was found for property $CODEWIDTH</td>
 </tr>
 <tr class="error">
 <td>error</td>
 <td>129</td>
-<td>No DocBlock was found for property $FOREGROUND</td>
+<td>No DocBlock was found for property $CALMZONE</td>
 </tr>
 <tr class="error">
 <td>error</td>
 <td>130</td>
-<td>No DocBlock was found for property $FILETYPE</td>
+<td>No DocBlock was found for property $HR</td>
 </tr>
 <tr class="error">
 <td>error</td>
 <td>131</td>
-<td>No DocBlock was found for property $ENCODED</td>
+<td>No DocBlock was found for property $SHOWTYPE</td>
 </tr>
 <tr class="error">
 <td>error</td>
 <td>132</td>
-<td>No DocBlock was found for property $IH</td>
-</tr>
-<tr class="critical">
-<td>critical</td>
-<td>134</td>
-<td>No short description for property $C128</td>
+<td>No DocBlock was found for property $BACKGROUND</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>180</td>
+<td>133</td>
+<td>No DocBlock was found for property $FOREGROUND</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>134</td>
+<td>No DocBlock was found for property $FILETYPE</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>135</td>
+<td>No DocBlock was found for property $ENCODED</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>136</td>
+<td>No DocBlock was found for property $IH</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>184</td>
 <td>No DocBlock was found for property $C25</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>190</td>
+<td>194</td>
 <td>No DocBlock was found for property $C39</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>208</td>
+<td>212</td>
 <td>No DocBlock was found for property $codabar</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>218</td>
+<td>222</td>
 <td>No DocBlock was found for property $MSI</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>233</td>
+<td>237</td>
 <td>No DocBlock was found for property $C11</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>248</td>
+<td>252</td>
 <td>No DocBlock was found for property $postnet</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>261</td>
+<td>265</td>
 <td>No DocBlock was found for property $kix</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>276</td>
+<td>280</td>
 <td>No DocBlock was found for property $CMC7</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>294</td>
+<td>298</td>
 <td>No DocBlock was found for property $EANbars</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>317</td>
+<td>321</td>
 <td>No DocBlock was found for property $EANparity</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>330</td>
-<td>No short description for method pi_barcode()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>352</td>
+<td>356</td>
 <td>Argument $type is missing from the Docblock of setType()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>359</td>
+<td>363</td>
 <td>Argument $code is missing from the Docblock of setCode()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>366</td>
+<td>370</td>
 <td>Argument $height is missing from the Docblock of setSize()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>366</td>
+<td>370</td>
 <td>Argument $width is missing from the Docblock of setSize()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>366</td>
+<td>370</td>
 <td>Argument $calmZone is missing from the Docblock of setSize()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>375</td>
+<td>379</td>
 <td>Argument $text is missing from the Docblock of setText()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>389</td>
+<td>393</td>
 <td>Argument $fg is missing from the Docblock of setColors()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>389</td>
+<td>393</td>
 <td>Argument $bg is missing from the Docblock of setColors()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>397</td>
+<td>401</td>
 <td>Argument $ft is missing from the Docblock of setFiletype()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>406</td>
-<td>No short description for method checkCode()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>980</td>
+<td>984</td>
 <td>Argument $file is missing from the Docblock of writeBarcodeFile()</td>
 </tr>
 </tbody>
@@ -6608,7 +6568,7 @@
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-12-23T03:50:23+01:00.<br></footer></div>
+            generated on 2014-01-01T22:49:40+01:00.<br></footer></div>
 </div>
 </body>
 </html>

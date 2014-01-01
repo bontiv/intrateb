@@ -21,10 +21,14 @@
                                     API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a>Packages</a></li>
 <li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/FPDF.html"><i class="icon-folder-open"></i> FPDF</a></li>
+<li><a href="../packages/FrameTool.html"><i class="icon-folder-open"></i> FrameTool</a></li>
 <li><a href="../packages/PHPMailer.html"><i class="icon-folder-open"></i> PHPMailer</a></li>
 <li><a href="../packages/PHPWavUtils.html"><i class="icon-folder-open"></i> PHPWavUtils</a></li>
 <li><a href="../packages/Securimage.html"><i class="icon-folder-open"></i> Securimage</a></li>
 <li><a href="../packages/Smarty.html"><i class="icon-folder-open"></i> Smarty</a></li>
+<li><a href="../packages/makefont.html"><i class="icon-folder-open"></i> makefont</a></li>
+<li><a href="../packages/ticketgen.html"><i class="icon-folder-open"></i> ticketgen</a></li>
 </ul>
 </li>
 <li class="dropdown" id="charts-menu">
@@ -35,7 +39,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">1085</span></a></li>
+                <span class="label label-info">1078</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul>
 <li>todo 
@@ -269,7 +273,16 @@
 <pre>acl_smarty(\type $params, \type $content, \type $smarty, \type $repeat) : \type</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
+<div class="long_description"><p>__Dans le template __
+SYNTAXE1 :
+{acl level="ADMINISTRATOR"}...{/acl}
+Pour s'afficher il faut le niveau demandé. Level peut être :
+ADMINISTRATOR, SUPERUSER, USER, GUEST, ANNONYMOUS</p>
+
+<p>SYNTAXE2:
+{acl action="act" page="pge"}..{/acl}
+Pour s'afficher, l'utilisateur doit avoir les accès à la page pge de l'action
+act.</p></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$params</h4>
@@ -362,6 +375,41 @@
 <h2>ecole_index()
         </h2>
 <pre>ecole_index() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="function_event_addsection"></a><div class="element clickable function  function_event_addsection" data-toggle="collapse" data-target=".function_event_addsection .collapse">
+<h2>event_addsection()
+        </h2>
+<pre>event_addsection() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="function_event_delsection"></a><div class="element clickable function  function_event_delsection" data-toggle="collapse" data-target=".function_event_delsection .collapse">
+<h2>event_delsection()
+        </h2>
+<pre>event_delsection() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="function_event_index"></a><div class="element clickable function  function_event_index" data-toggle="collapse" data-target=".function_event_index .collapse">
+<h2>event_index()
+        </h2>
+<pre>event_index() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="function_event_staff"></a><div class="element clickable function  function_event_staff" data-toggle="collapse" data-target=".function_event_staff .collapse">
+<h2>event_staff()
+        </h2>
+<pre>event_staff() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="function_event_view"></a><div class="element clickable function  function_event_view" data-toggle="collapse" data-target=".function_event_view .collapse">
+<h2>event_view()
+        </h2>
+<pre>event_view() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
@@ -653,6 +701,13 @@ est trop faible</h2>
 <td>type $pdo</td>
 </tr></table>
 </div></div>
+</div>
+<a id="function_section_mkevent"></a><div class="element clickable function  function_section_mkevent" data-toggle="collapse" data-target=".function_section_mkevent .collapse">
+<h2>section_mkevent()
+        </h2>
+<pre>section_mkevent() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="function_section_reject"></a><div class="element clickable function  function_section_reject" data-toggle="collapse" data-target=".function_section_reject .collapse">
 <h2>Bye le membre .</h2>
@@ -3606,7 +3661,7 @@ facilement.</p>
 <div id="TTFParser" class="element ajax clickable class">
 <h1>TTFParser<a href="../classes/TTFParser.html">¶</a>
 </h1>
-<p class="short_description"></p>
+<p class="short_description">Makefont ttf parser</p>
 <div class="details collapse"></div>
 <a href="../classes/TTFParser.html" class="more">« More »</a>
 </div>
@@ -3807,7 +3862,7 @@ File: WavFile.php<br /></p>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-12-23T03:50:16+01:00.<br></footer></div>
+            generated on 2014-01-01T22:49:24+01:00.<br></footer></div>
 </div>
 </body>
 </html>

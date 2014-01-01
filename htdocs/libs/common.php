@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * Fonctions de base du framework
+ * @package FrameTool
+ */
+
+/**
  * Fichier avec les fonctions permettant le fonctionnement par défaut de l'app.
  */
 define('ACL_ANNONYMOUS', 0);

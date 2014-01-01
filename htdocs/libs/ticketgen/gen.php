@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Fichier de la bibliothèque ticketgen
+ * @package ticketgen
+ */
+
+
 $genRoot = dirname(__FILE__) . '/';
 define('FPDF_FONTPATH', $genRoot . 'fonts/');
 require_once $genRoot . 'codegen.php';

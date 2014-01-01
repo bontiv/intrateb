@@ -1,4 +1,8 @@
 <?php
+/**
+ * Makefont ttf parser
+ * @package makefont_ttfparser
+ */
 /*******************************************************************************
 * Utility to parse TTF font files                                              *
 *                                                                              *
