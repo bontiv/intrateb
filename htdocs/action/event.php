@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * Gestion des événements
+ * Ce controleur permet de gérer les différents événements.
+ * @package Epicenote
+ */
+
+
+/**
+ * Liste les événements
+ * Permet de lister tous les événements enregistrés sur l'intra.
+ */
 function event_index()
 {
     global $tpl;
@@ -11,6 +22,56 @@ function event_index()
     quit();
 }
 
+
+/**
+ * Voir l'équipe d'une section
+ * Quand une section participe, elle participe avec une liste de staffs. Cette page permet de voir et gérer la liste des staffs.
+ */
+function event_staff () {
+    global $tpl, $pdo;
+    
+    $sql = $pdo->prepare('SELECT * FROM events LEFT JOIN users ON event_owner = user_id LEFT JOIN sections ON section_id = event_section WHERE event_id = ?');
+    $sql->bindValue(1, $_GET['event']);
+    $sql->execute();
+    
+    $event = $sql->fetch();
+    if (!$event)
+        modexec ('syscore', 'notfound');
+    $tpl->assign('event', $event);
+
+    $sql = $pdo->prepare('SELECT * FROM event_sections LEFT JOIN sections ON es_section = section_id LEFT JOIN users ON section_owner = user_id WHERE es_event = ? AND es_section = ?');
+    $sql->bindValue(1, $event['event_id']);
+    $sql->bindValue(2, $_GET['section']);
+    $sql->execute();
+    $es = array();
+    $section = $sql->fetch();
+    if (!$section)
+        modexec ('syscore', 'notfound');
+    
+    if (isset($_SESSION['user'])) {
+        $sql = $pdo->prepare('SELECT COUNT(*) FROM event_staff WHERE est_user = ? AND est_section = ? AND est_event = ?');
+        $sql->bindValue(1, $_SESSION['user']['user_id']);
+        $sql->bindValue(2, $section['section_id']);
+        $sql->bindValue(3, $event['event_id']);
+        $sql->execute();
+        $dat = $sql->fetch();
+        $section['inType'] = $dat[0] == 0;
+    }
+    else
+        $section['inType'] = false;
+    
+    $tpl->assign('section', $section);
+    // TODO Faire la liste des membres inscrits
+    $tpl->assign('users', array());
+    $tpl->display("event_staff.tpl");
+    quit();
+}
+
+
+/**
+ * Détails d'un événement
+ * Cette page permet de voir les informations détaillés d'une section. Nous pouvons aussi utiliser cette page pour ajouter ou retirer la participation d'une section à un événement.
+ */
 function event_view() {
     global $tpl, $pdo;
     
@@ -41,6 +102,11 @@ function event_view() {
     quit();
 }
 
+
+/**
+ * Ajoute une section à un événement
+ * Cette page permet de notifier la participation d'une section à un événement.
+ */
 function event_addsection() {
     global $pdo;
     
@@ -52,6 +118,11 @@ function event_addsection() {
     redirect('event', 'view', array('event' => $_GET['event']));
 }
 
+
+/**
+ * Supprime la participation d'une section à un événement
+ * Permet de supprimer une section d'un événement. On ne supprime pas la section réellement, on retire sa participation à l'événement.
+ */
 function event_delsection() {
     global $pdo;
 
@@ -63,8 +134,3 @@ function event_delsection() {
     redirect('event', 'view', array('event' => $_GET['event']));
 }
 
-function event_staff() {
-    global $pdo, $tpl;
-    
-    
-}

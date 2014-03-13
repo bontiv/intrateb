@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * Controleurs du module administration
+ * Ce module permet la gestion des droits d'accès. Son droit d'accès est forcé à "Admin" par le framework, il ne peut pas être édité lui même.
+ * @package Epicenote
+ */
+
+
+/**
+ * Controleur page d'index admin
+ * Permet l'affichage de la page d'administration des droits d'accès.
+ */
 function admin_index() {
     global $pdo, $tpl;
 
@@ -13,6 +24,11 @@ function admin_index() {
     quit();
 }
 
+
+/**
+ * Controleur mise à jour des droits
+ * Ce controleur est appelé quand on valide la page avec les droits d'accès. Il permet d'enregistrer les nouveaux droits d'accès.
+ */
 function admin_update() {
     global $pdo;
 

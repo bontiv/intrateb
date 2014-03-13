@@ -21,6 +21,7 @@
                                     API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a>Packages</a></li>
 <li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Epicenote.html"><i class="icon-folder-open"></i> Epicenote</a></li>
 <li><a href="../packages/FPDF.html"><i class="icon-folder-open"></i> FPDF</a></li>
 <li><a href="../packages/FrameTool.html"><i class="icon-folder-open"></i> FrameTool</a></li>
 <li><a href="../packages/PHPMailer.html"><i class="icon-folder-open"></i> PHPMailer</a></li>
@@ -39,11 +40,11 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">1078</span></a></li>
+                <span class="label label-info">1047</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul>
 <li>todo 
-                <span class="label label-info">6</span>
+                <span class="label label-info">7</span>
 </li>
 <li>fixme 
                 <span class="label label-info">7</span>
@@ -83,8 +84,9 @@
 <li class="function  "><a href="#function_getAclLevel" title="getAclLevel :: Récupère le niveau nécessaire pour aller effectuer une action"><span class="description">Récupère le niveau nécessaire pour aller effectuer une action</span><pre>getAclLevel</pre></a></li>
 <li class="function  "><a href="#function_hasAcl" title="hasAcl :: Test si l'utilisateur a un niveau d'accès"><span class="description">Test si l'utilisateur a un niveau d'accès</span><pre>hasAcl</pre></a></li>
 <li class="function  "><a href="#function_mkurl" title="mkurl :: Permet de créer des URL pour le framework"><span class="description">Permet de créer des URL pour le framework</span><pre>mkurl</pre></a></li>
-<li class="function  "><a href="#function_mkurl_smarty" title="mkurl_smarty :: "><span class="description">mkurl_smarty()
-        </span><pre>mkurl_smarty</pre></a></li>
+<li class="function  "><a href="#function_mkurl_smarty" title="mkurl_smarty :: Ajout de la fonction mkurl dans le moteur Smarty
+La fonction mkurl permet de créer des liens beaucoup plus rapidement sur les templates."><span class="description">Ajout de la fonction mkurl dans le moteur Smarty
+La fonction mkurl permet de créer des liens beaucoup plus rapidement sur les templates.</span><pre>mkurl_smarty</pre></a></li>
 <li class="function  "><a href="#function_modexec" title="modexec :: Execute un controleur"><span class="description">Execute un controleur</span><pre>modexec</pre></a></li>
 <li class="function  "><a href="#function_modsecu" title="modsecu :: Laisser la possibilité à un module de gérer sa sécurité"><span class="description">Laisser la possibilité à un module de gérer sa sécurité</span><pre>modsecu</pre></a></li>
 <li class="function  "><a href="#function_needAcl" title="needAcl :: Affiche une page d'erreur si le niveau d'accès de l'utilisateur
@@ -92,6 +94,13 @@ est trop faible"><span class="description">Affiche une page d'erreur si le nivea
 est trop faible</span><pre>needAcl</pre></a></li>
 <li class="function  "><a href="#function_quit" title="quit :: Permet de quitter proprement le CMS"><span class="description">Permet de quitter proprement le CMS</span><pre>quit</pre></a></li>
 <li class="function  "><a href="#function_redirect" title="redirect :: Redirige l'utilisateur."><span class="description">Redirige l'utilisateur.</span><pre>redirect</pre></a></li>
+<li class="function  "><a href="#function_syscore_autoload" title="syscore_autoload :: Affichage de page
+Cette fonction autoload (qui attrappe plusieurs pages) permet d'afficher
+des pages d'erreur type des erreurs les plus souvent rencontré dans le
+fonctionnement de FrameTool."><span class="description">Affichage de page
+Cette fonction autoload (qui attrappe plusieurs pages) permet d'afficher
+des pages d'erreur type des erreurs les plus souvent rencontré dans le
+fonctionnement de FrameTool.</span><pre>syscore_autoload</pre></a></li>
 <li class="function  "><a href="#function_urldup" title="urldup :: Génère une URL de la même page avec des paramètres différents"><span class="description">Génère une URL de la même page avec des paramètres différents</span><pre>urldup</pre></a></li>
 <li class="nav-header">
 <i class="icon-custom icon-constant"></i> Constants</li>
@@ -257,8 +266,8 @@ act.</p></div>
 </div></div>
 </div>
 <a id="function_mkurl_smarty"></a><div class="element clickable function  function_mkurl_smarty" data-toggle="collapse" data-target=".function_mkurl_smarty .collapse">
-<h2>mkurl_smarty()
-        </h2>
+<h2>Ajout de la fonction mkurl dans le moteur Smarty
+La fonction mkurl permet de créer des liens beaucoup plus rapidement sur les templates.</h2>
 <pre>mkurl_smarty($params, $smarty) </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
@@ -348,6 +357,26 @@ est trop faible</h2>
 </div>
 </div></div>
 </div>
+<a id="function_syscore_autoload"></a><div class="element clickable function  function_syscore_autoload" data-toggle="collapse" data-target=".function_syscore_autoload .collapse">
+<h2>Affichage de page
+Cette fonction autoload (qui attrappe plusieurs pages) permet d'afficher
+des pages d'erreur type des erreurs les plus souvent rencontré dans le
+fonctionnement de FrameTool.</h2>
+<pre>syscore_autoload(\type $page) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>global</th>
+<td>type $tpl</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$page</h4>
+<code>\type</code>
+</div>
+</div></div>
+</div>
 <a id="function_urldup"></a><div class="element clickable function  function_urldup" data-toggle="collapse" data-target=".function_urldup .collapse">
 <h2>Génère une URL de la même page avec des paramètres différents</h2>
 <pre>urldup(\type $options) </pre>
@@ -411,7 +440,7 @@ est trop faible</h2>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2014-01-01T22:49:24+01:00.<br></footer></div>
+            generated on 2014-03-13T06:25:57+01:00.<br></footer></div>
 </div>
 </body>
 </html>

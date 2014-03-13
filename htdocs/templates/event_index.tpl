@@ -1,7 +1,7 @@
 {include "head.tpl"}
 
 <h1>Events</h1>
-
+<im>Pour créer un event, passez par la page de votre section.</im>
 <table class="table table-striped table-hover">
   <thead>
     <tr>
@@ -23,8 +23,8 @@
       <td>{$line.event_coef}</td>
       <td>
         <div class="btn-group">
-          <a href="{mkurl action="user" page="delete" user=$line.user_id}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
-          <a href="{mkurl action="user" page="edit" user=$line.user_id}" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
+          <a href="{mkurl action="event" page="delete" event=$line.event_id}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
+          <a href="{mkurl action="event" page="edit" event=$line.event_id}" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
         </div>
       </td>
     </tr>

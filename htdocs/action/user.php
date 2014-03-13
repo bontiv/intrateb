@@ -1,5 +1,16 @@
 <?php
+/**
+ * Module de gestion des utilisateurs
+ * Ce module permet de gérer son compte d'utilisateur ainsi que les utilisateurs
+ * du site.
+ * @package Epicenote
+ */
 
+/**
+ * Permet d'afficher la liste des utilisateurs
+ * @global type $pdo
+ * @global type $tpl
+ */
 function user_index() {
     global $pdo, $tpl;
 
@@ -9,6 +20,11 @@ function user_index() {
     quit();
 }
 
+
+/**
+ * Ajoute un utilisateur
+ * Des fois c'est bien de pouvoir rajouter un utilisateur depuis le panneau d'admin pour l'ajout des nouveaux adhérents.
+ */
 function user_add() {
     global $pdo, $tpl;
 
@@ -33,6 +49,10 @@ function user_add() {
     quit();
 }
 
+
+/**
+ * Suppresion d'un utilisateur
+ */
 function user_delete() {
     global $pdo;
 
@@ -44,6 +64,11 @@ function user_delete() {
         modexec('syscore', 'sqlerror');
 }
 
+
+/**
+ * Détails d'un utilisateur
+ * Et optionnellement sa vie.
+ */
 function user_view() {
     global $pdo, $tpl;
 
@@ -72,6 +97,11 @@ function user_view() {
     quit();
 }
 
+
+/**
+ * Ajoute un utilisateur comme staff d'une section
+ * Cette fonctionnalité permet de gérer les sections d'un utilisateur directement depuis son compte :p
+ */
 function user_invit_section() {
     global $pdo;
 
@@ -82,6 +112,10 @@ function user_invit_section() {
     redirect('user', 'view', array('user' => $_GET['user']));
 }
 
+
+/**
+ * Permet de quitter une section
+ */
 function user_quit() {
     global $pdo;
 

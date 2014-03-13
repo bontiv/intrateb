@@ -2,16 +2,40 @@
 
 /**
  * Fonctions de base du framework
+ * Fichier avec les fonctions permettant le fonctionnement par défaut de l'app.
  * @package FrameTool
  */
 
 /**
- * Fichier avec les fonctions permettant le fonctionnement par défaut de l'app.
+ */
+
+/**
+ * Niveau d'accès pour les visiteurs non connectés
  */
 define('ACL_ANNONYMOUS', 0);
+
+/**
+ */
+
+/**
+ * Niveau d'accès pour les utilisateurs enregistré mais non membre
+ */
 define('ACL_GUEST', 1);
+
+/**
+ * Niveau d'accès pour les membres
+ */
 define('ACL_USER', 2);
+
+/**
+ * Niveau d'accès pour les membres avec surclassement par un module
+ * Ce niveau d'accès particulier est donné par un module lors de son chargement si l'utilisateur peut réaliser des actions spéciales sur ce module. Par exemple, pour une section, l'utilisateur qui est "responsable de section" va avoir ce niveau sur toutes les pages qui concerne sa section.
+ */
 define('ACL_SUPERUSER', 3);
+
+/**
+ * Niveau d'accès pour les administrateurs
+ */
 define('ACL_ADMINISTRATOR', 4);
 
 /**
@@ -150,6 +174,11 @@ function mkurl($action, $page = 'index', $options = null) {
     return $url;
 }
 
+
+/**
+ * Ajout de la fonction mkurl dans le moteur Smarty
+ * La fonction mkurl permet de créer des liens beaucoup plus rapidement sur les templates.
+ */
 function mkurl_smarty($params, $smarty) {
     $action = $params['action'];
     unset($params['action']);

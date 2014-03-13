@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * Controleurs de la gestion des écoles
+ * Ce controleur permet de gérer les différentes écoles du groupe IONIS
+ * @package Epicenote
+ */
+
+
+/**
+ * Affiche la liste des écoles
+ * Permet d'afficher une page avec la liste des écoles (page par défaut du module).
+ */
 function ecole_index()
 {
     global $pdo, $tpl;
@@ -10,6 +21,11 @@ function ecole_index()
     quit();
 }
 
+
+/**
+ * Ajout d'une école
+ * Controleur utilisé pour ajouter une nouvelle école.
+ */
 function ecole_add()
 {
     global $pdo, $tpl;
@@ -31,6 +47,11 @@ function ecole_add()
     quit();
 }
 
+
+/**
+ * Supression d'une école
+ * Controleur utilisé pour supprimer une école.
+ */
 function ecole_delete()
 {
     global $pdo;

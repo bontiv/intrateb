@@ -21,6 +21,7 @@
                                     API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a>Packages</a></li>
 <li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Epicenote.html"><i class="icon-folder-open"></i> Epicenote</a></li>
 <li><a href="../packages/FPDF.html"><i class="icon-folder-open"></i> FPDF</a></li>
 <li><a href="../packages/FrameTool.html"><i class="icon-folder-open"></i> FrameTool</a></li>
 <li><a href="../packages/PHPMailer.html"><i class="icon-folder-open"></i> PHPMailer</a></li>
@@ -39,11 +40,11 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">1078</span></a></li>
+                <span class="label label-info">1047</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul>
 <li>todo 
-                <span class="label label-info">6</span>
+                <span class="label label-info">7</span>
 </li>
 <li>fixme 
                 <span class="label label-info">7</span>
@@ -305,18 +306,18 @@ act.</p></div>
 </div></div>
 </div>
 <a id="function_admin_index"></a><div class="element clickable function  function_admin_index" data-toggle="collapse" data-target=".function_admin_index .collapse">
-<h2>admin_index()
-        </h2>
+<h2>Controleur page d'index admin
+Permet l'affichage de la page d'administration des droits d'accès.</h2>
 <pre>admin_index() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="function_admin_update"></a><div class="element clickable function  function_admin_update" data-toggle="collapse" data-target=".function_admin_update .collapse">
-<h2>admin_update()
-        </h2>
+<h2>Controleur mise à jour des droits
+Ce controleur est appelé quand on valide la page avec les droits d'accès.</h2>
 <pre>admin_update() </pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>Il permet d'enregistrer les nouveaux droits d'accès.</p></div></div></div>
 </div>
 <a id="function_autoInsert"></a><div class="element clickable function  function_autoInsert" data-toggle="collapse" data-target=".function_autoInsert .collapse">
 <h2>Cette fonction un peu pratique permet d'insérer en BDD des données
@@ -358,60 +359,60 @@ act.</p></div>
 </div></div>
 </div>
 <a id="function_ecole_add"></a><div class="element clickable function  function_ecole_add" data-toggle="collapse" data-target=".function_ecole_add .collapse">
-<h2>ecole_add()
-        </h2>
+<h2>Ajout d'une école
+Controleur utilisé pour ajouter une nouvelle école.</h2>
 <pre>ecole_add() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="function_ecole_delete"></a><div class="element clickable function  function_ecole_delete" data-toggle="collapse" data-target=".function_ecole_delete .collapse">
-<h2>ecole_delete()
-        </h2>
+<h2>Supression d'une école
+Controleur utilisé pour supprimer une école.</h2>
 <pre>ecole_delete() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="function_ecole_index"></a><div class="element clickable function  function_ecole_index" data-toggle="collapse" data-target=".function_ecole_index .collapse">
-<h2>ecole_index()
-        </h2>
+<h2>Affiche la liste des écoles
+Permet d'afficher une page avec la liste des écoles (page par défaut du module).</h2>
 <pre>ecole_index() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="function_event_addsection"></a><div class="element clickable function  function_event_addsection" data-toggle="collapse" data-target=".function_event_addsection .collapse">
-<h2>event_addsection()
-        </h2>
+<h2>Ajoute une section à un événement
+Cette page permet de notifier la participation d'une section à un événement.</h2>
 <pre>event_addsection() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="function_event_delsection"></a><div class="element clickable function  function_event_delsection" data-toggle="collapse" data-target=".function_event_delsection .collapse">
-<h2>event_delsection()
-        </h2>
+<h2>Supprime la participation d'une section à un événement
+Permet de supprimer une section d'un événement.</h2>
 <pre>event_delsection() </pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>On ne supprime pas la section réellement, on retire sa participation à l'événement.</p></div></div></div>
 </div>
 <a id="function_event_index"></a><div class="element clickable function  function_event_index" data-toggle="collapse" data-target=".function_event_index .collapse">
-<h2>event_index()
-        </h2>
+<h2>Liste les événements
+Permet de lister tous les événements enregistrés sur l'intra.</h2>
 <pre>event_index() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="function_event_staff"></a><div class="element clickable function  function_event_staff" data-toggle="collapse" data-target=".function_event_staff .collapse">
-<h2>event_staff()
-        </h2>
+<h2>Voir l'équipe d'une section
+Quand une section participe, elle participe avec une liste de staffs.</h2>
 <pre>event_staff() </pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>Cette page permet de voir et gérer la liste des staffs.</p></div></div></div>
 </div>
 <a id="function_event_view"></a><div class="element clickable function  function_event_view" data-toggle="collapse" data-target=".function_event_view .collapse">
-<h2>event_view()
-        </h2>
+<h2>Détails d'un événement
+Cette page permet de voir les informations détaillés d'une section.</h2>
 <pre>event_view() </pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>Nous pouvons aussi utiliser cette page pour ajouter ou retirer la participation d'une section à un événement.</p></div></div></div>
 </div>
 <a id="function_getAclLevel"></a><div class="element clickable function  function_getAclLevel" data-toggle="collapse" data-target=".function_getAclLevel .collapse">
 <h2>Récupère le niveau nécessaire pour aller effectuer une action</h2>
@@ -452,8 +453,8 @@ act.</p></div>
 </div></div>
 </div>
 <a id="function_index_create"></a><div class="element clickable function  function_index_create" data-toggle="collapse" data-target=".function_index_create .collapse">
-<h2>index_create()
-        </h2>
+<h2>Inscrire un nouvel utilisateur
+Cette page permet à un visiteur de s'inscrire sur le site.</h2>
 <pre>index_create() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
@@ -531,8 +532,8 @@ act.</p></div>
 </div></div>
 </div>
 <a id="function_mkurl_smarty"></a><div class="element clickable function  function_mkurl_smarty" data-toggle="collapse" data-target=".function_mkurl_smarty .collapse">
-<h2>mkurl_smarty()
-        </h2>
+<h2>Ajout de la fonction mkurl dans le moteur Smarty
+La fonction mkurl permet de créer des liens beaucoup plus rapidement sur les templates.</h2>
 <pre>mkurl_smarty($params, $smarty) </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
@@ -637,7 +638,8 @@ est trop faible</h2>
 </div></div>
 </div>
 <a id="function_section_accept"></a><div class="element clickable function  function_section_accept" data-toggle="collapse" data-target=".function_section_accept .collapse">
-<h2>Ho Oui ! Un staff</h2>
+<h2>Ho Oui ! Un staff
+Permet d'accepter un membre dans sa section.</h2>
 <pre>section_accept() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
@@ -649,49 +651,47 @@ est trop faible</h2>
 </div></div>
 </div>
 <a id="function_section_add"></a><div class="element clickable function  function_section_add" data-toggle="collapse" data-target=".function_section_add .collapse">
-<h2>section_add()
-        </h2>
+<h2>Ajoute une section</h2>
 <pre>section_add() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="function_section_delete"></a><div class="element clickable function  function_section_delete" data-toggle="collapse" data-target=".function_section_delete .collapse">
-<h2>section_delete()
-        </h2>
+<h2>Supprime une section</h2>
 <pre>section_delete() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="function_section_details"></a><div class="element clickable function  function_section_details" data-toggle="collapse" data-target=".function_section_details .collapse">
-<h2>section_details()
-        </h2>
+<h2>Affiche les détails d'une section
+Les détails d'une section c'est aussi la liste des membres de la section avec la gestion des membres.</h2>
 <pre>section_details() </pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>NB: C'est aussi d'ici qu'on créer un événement.</p></div></div></div>
 </div>
 <a id="function_section_goin"></a><div class="element clickable function  function_section_goin" data-toggle="collapse" data-target=".function_section_goin .collapse">
-<h2>section_goin()
-        </h2>
+<h2>Je veux rentrer dans la section
+Ce controleur permet à l'utilisateur actuellement connecter de faire une demande d'adhésion à une section.</h2>
 <pre>section_goin() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="function_section_goout"></a><div class="element clickable function  function_section_goout" data-toggle="collapse" data-target=".function_section_goout .collapse">
-<h2>section_goout()
-        </h2>
+<h2>Je ne veux plus de cette section
+Cette fonction permet à l'utilisateur connecté de quitter la section.</h2>
 <pre>section_goout() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="function_section_index"></a><div class="element clickable function  function_section_index" data-toggle="collapse" data-target=".function_section_index .collapse">
-<h2>section_index()
-        </h2>
+<h2>Liste toutes les sections</h2>
 <pre>section_index() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="function_section_manager"></a><div class="element clickable function  function_section_manager" data-toggle="collapse" data-target=".function_section_manager .collapse">
-<h2>Promotion manager</h2>
+<h2>Promotion manager
+Et hop ! Un staff devient responsable de la section.</h2>
 <pre>section_manager() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
@@ -703,18 +703,19 @@ est trop faible</h2>
 </div></div>
 </div>
 <a id="function_section_mkevent"></a><div class="element clickable function  function_section_mkevent" data-toggle="collapse" data-target=".function_section_mkevent .collapse">
-<h2>section_mkevent()
-        </h2>
+<h2>Permet de créer un événement
+Ce controleur permet de créer un événement à partir d'une section.</h2>
 <pre>section_mkevent() </pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>On y accède à partir de la fiche de la section qui va gérer le déroulement de l'événement.</p></div></div></div>
 </div>
 <a id="function_section_reject"></a><div class="element clickable function  function_section_reject" data-toggle="collapse" data-target=".function_section_reject .collapse">
 <h2>Bye le membre .</h2>
 <pre>section_reject() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>..</p></div>
+<div class="long_description"><p>..
+Permet de retirer un membre d'une section.</p></div>
 <table class="table table-bordered"><tr>
 <th>global</th>
 <td>type $pdo</td>
@@ -2602,14 +2603,23 @@ Purpose:  wrap a string of text at a given length</p></div>
 </div></div>
 </div>
 <a id="function_syscore_autoload"></a><div class="element clickable function  function_syscore_autoload" data-toggle="collapse" data-target=".function_syscore_autoload .collapse">
-<h2>syscore_autoload()
-        </h2>
-<pre>syscore_autoload($page) </pre>
+<h2>Affichage de page
+Cette fonction autoload (qui attrappe plusieurs pages) permet d'afficher
+des pages d'erreur type des erreurs les plus souvent rencontré dans le
+fonctionnement de FrameTool.</h2>
+<pre>syscore_autoload(\type $page) </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>global</th>
+<td>type $tpl</td>
+</tr></table>
 <h3>Parameters</h3>
-<div class="subelement argument"><h4>$page</h4></div>
+<div class="subelement argument">
+<h4>$page</h4>
+<code>\type</code>
+</div>
 </div></div>
 </div>
 <a id="function_tln_casenormalize"></a><div class="element clickable function  function_tln_casenormalize" data-toggle="collapse" data-target=".function_tln_casenormalize .collapse">
@@ -2852,43 +2862,52 @@ be funny to make "java[tab]script" be just as good as "javascript".</p></div>
 </div></div>
 </div>
 <a id="function_user_add"></a><div class="element clickable function  function_user_add" data-toggle="collapse" data-target=".function_user_add .collapse">
-<h2>user_add()
-        </h2>
+<h2>Ajoute un utilisateur
+Des fois c'est bien de pouvoir rajouter un utilisateur depuis le panneau d'admin pour l'ajout des nouveaux adhérents.</h2>
 <pre>user_add() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="function_user_delete"></a><div class="element clickable function  function_user_delete" data-toggle="collapse" data-target=".function_user_delete .collapse">
-<h2>user_delete()
-        </h2>
+<h2>Suppresion d'un utilisateur</h2>
 <pre>user_delete() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="function_user_index"></a><div class="element clickable function  function_user_index" data-toggle="collapse" data-target=".function_user_index .collapse">
-<h2>user_index()
-        </h2>
+<h2>Permet d'afficher la liste des utilisateurs</h2>
 <pre>user_index() </pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>global</th>
+<td>type $pdo</td>
+</tr>
+<tr>
+<th>global</th>
+<td>type $tpl</td>
+</tr>
+</table>
+</div></div>
 </div>
 <a id="function_user_invit_section"></a><div class="element clickable function  function_user_invit_section" data-toggle="collapse" data-target=".function_user_invit_section .collapse">
-<h2>user_invit_section()
-        </h2>
+<h2>Ajoute un utilisateur comme staff d'une section
+Cette fonctionnalité permet de gérer les sections d'un utilisateur directement depuis son compte :p</h2>
 <pre>user_invit_section() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="function_user_quit"></a><div class="element clickable function  function_user_quit" data-toggle="collapse" data-target=".function_user_quit .collapse">
-<h2>user_quit()
-        </h2>
+<h2>Permet de quitter une section</h2>
 <pre>user_quit() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="function_user_view"></a><div class="element clickable function  function_user_view" data-toggle="collapse" data-target=".function_user_view .collapse">
-<h2>user_view()
-        </h2>
+<h2>Détails d'un utilisateur
+Et optionnellement sa vie.</h2>
 <pre>user_view() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
@@ -3862,7 +3881,7 @@ File: WavFile.php<br /></p>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2014-01-01T22:49:24+01:00.<br></footer></div>
+            generated on 2014-03-13T06:25:57+01:00.<br></footer></div>
 </div>
 </body>
 </html>

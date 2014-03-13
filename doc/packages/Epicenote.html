@@ -1,0 +1,422 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>EpiceNote » Epicenote</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">EpiceNote</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Epicenote.html"><i class="icon-folder-open"></i> Epicenote</a></li>
+<li><a href="../packages/FPDF.html"><i class="icon-folder-open"></i> FPDF</a></li>
+<li><a href="../packages/FrameTool.html"><i class="icon-folder-open"></i> FrameTool</a></li>
+<li><a href="../packages/PHPMailer.html"><i class="icon-folder-open"></i> PHPMailer</a></li>
+<li><a href="../packages/PHPWavUtils.html"><i class="icon-folder-open"></i> PHPWavUtils</a></li>
+<li><a href="../packages/Securimage.html"><i class="icon-folder-open"></i> Securimage</a></li>
+<li><a href="../packages/Smarty.html"><i class="icon-folder-open"></i> Smarty</a></li>
+<li><a href="../packages/makefont.html"><i class="icon-folder-open"></i> makefont</a></li>
+<li><a href="../packages/ticketgen.html"><i class="icon-folder-open"></i> ticketgen</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">1047</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul>
+<li>todo 
+                <span class="label label-info">7</span>
+</li>
+<li>fixme 
+                <span class="label label-info">7</span>
+</li>
+</ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">7</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-map-marker"></i> Packages</li>
+<li>
+<a href="../packages/Epicenote.html" title="Epicenote"><i class="icon-folder-open"></i>Epicenote</a><ul class="nav nav-list nav-packages"></ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-function"></i> Functions</li>
+<li class="function  "><a href="#function_admin_index" title="admin_index :: Controleur page d'index admin
+Permet l'affichage de la page d'administration des droits d'accès."><span class="description">Controleur page d'index admin
+Permet l'affichage de la page d'administration des droits d'accès.</span><pre>admin_index</pre></a></li>
+<li class="function  "><a href="#function_admin_update" title="admin_update :: Controleur mise à jour des droits
+Ce controleur est appelé quand on valide la page avec les droits d'accès."><span class="description">Controleur mise à jour des droits
+Ce controleur est appelé quand on valide la page avec les droits d'accès.</span><pre>admin_update</pre></a></li>
+<li class="function  "><a href="#function_ecole_add" title="ecole_add :: Ajout d'une école
+Controleur utilisé pour ajouter une nouvelle école."><span class="description">Ajout d'une école
+Controleur utilisé pour ajouter une nouvelle école.</span><pre>ecole_add</pre></a></li>
+<li class="function  "><a href="#function_ecole_delete" title="ecole_delete :: Supression d'une école
+Controleur utilisé pour supprimer une école."><span class="description">Supression d'une école
+Controleur utilisé pour supprimer une école.</span><pre>ecole_delete</pre></a></li>
+<li class="function  "><a href="#function_ecole_index" title="ecole_index :: Affiche la liste des écoles
+Permet d'afficher une page avec la liste des écoles (page par défaut du module)."><span class="description">Affiche la liste des écoles
+Permet d'afficher une page avec la liste des écoles (page par défaut du module).</span><pre>ecole_index</pre></a></li>
+<li class="function  "><a href="#function_event_addsection" title="event_addsection :: Ajoute une section à un événement
+Cette page permet de notifier la participation d'une section à un événement."><span class="description">Ajoute une section à un événement
+Cette page permet de notifier la participation d'une section à un événement.</span><pre>event_addsection</pre></a></li>
+<li class="function  "><a href="#function_event_delsection" title="event_delsection :: Supprime la participation d'une section à un événement
+Permet de supprimer une section d'un événement."><span class="description">Supprime la participation d'une section à un événement
+Permet de supprimer une section d'un événement.</span><pre>event_delsection</pre></a></li>
+<li class="function  "><a href="#function_event_index" title="event_index :: Liste les événements
+Permet de lister tous les événements enregistrés sur l'intra."><span class="description">Liste les événements
+Permet de lister tous les événements enregistrés sur l'intra.</span><pre>event_index</pre></a></li>
+<li class="function  "><a href="#function_event_staff" title="event_staff :: Voir l'équipe d'une section
+Quand une section participe, elle participe avec une liste de staffs."><span class="description">Voir l'équipe d'une section
+Quand une section participe, elle participe avec une liste de staffs.</span><pre>event_staff</pre></a></li>
+<li class="function  "><a href="#function_event_view" title="event_view :: Détails d'un événement
+Cette page permet de voir les informations détaillés d'une section."><span class="description">Détails d'un événement
+Cette page permet de voir les informations détaillés d'une section.</span><pre>event_view</pre></a></li>
+<li class="function  "><a href="#function_index_create" title="index_create :: Inscrire un nouvel utilisateur
+Cette page permet à un visiteur de s'inscrire sur le site."><span class="description">Inscrire un nouvel utilisateur
+Cette page permet à un visiteur de s'inscrire sur le site.</span><pre>index_create</pre></a></li>
+<li class="function  "><a href="#function_index_index" title="index_index :: Petite page de présentation du projet"><span class="description">Petite page de présentation du projet</span><pre>index_index</pre></a></li>
+<li class="function  "><a href="#function_index_login" title="index_login :: Permet de connecter un utilisateur"><span class="description">Permet de connecter un utilisateur</span><pre>index_login</pre></a></li>
+<li class="function  "><a href="#function_index_logout" title="index_logout :: Ferme une session utilisateur"><span class="description">Ferme une session utilisateur</span><pre>index_logout</pre></a></li>
+<li class="function  "><a href="#function_section_accept" title="section_accept :: Ho Oui ! Un staff
+Permet d'accepter un membre dans sa section."><span class="description">Ho Oui ! Un staff
+Permet d'accepter un membre dans sa section.</span><pre>section_accept</pre></a></li>
+<li class="function  "><a href="#function_section_add" title="section_add :: Ajoute une section"><span class="description">Ajoute une section</span><pre>section_add</pre></a></li>
+<li class="function  "><a href="#function_section_delete" title="section_delete :: Supprime une section"><span class="description">Supprime une section</span><pre>section_delete</pre></a></li>
+<li class="function  "><a href="#function_section_details" title="section_details :: Affiche les détails d'une section
+Les détails d'une section c'est aussi la liste des membres de la section avec la gestion des membres."><span class="description">Affiche les détails d'une section
+Les détails d'une section c'est aussi la liste des membres de la section avec la gestion des membres.</span><pre>section_details</pre></a></li>
+<li class="function  "><a href="#function_section_goin" title="section_goin :: Je veux rentrer dans la section
+Ce controleur permet à l'utilisateur actuellement connecter de faire une demande d'adhésion à une section."><span class="description">Je veux rentrer dans la section
+Ce controleur permet à l'utilisateur actuellement connecter de faire une demande d'adhésion à une section.</span><pre>section_goin</pre></a></li>
+<li class="function  "><a href="#function_section_goout" title="section_goout :: Je ne veux plus de cette section
+Cette fonction permet à l'utilisateur connecté de quitter la section."><span class="description">Je ne veux plus de cette section
+Cette fonction permet à l'utilisateur connecté de quitter la section.</span><pre>section_goout</pre></a></li>
+<li class="function  "><a href="#function_section_index" title="section_index :: Liste toutes les sections"><span class="description">Liste toutes les sections</span><pre>section_index</pre></a></li>
+<li class="function  "><a href="#function_section_manager" title="section_manager :: Promotion manager
+Et hop ! Un staff devient responsable de la section."><span class="description">Promotion manager
+Et hop ! Un staff devient responsable de la section.</span><pre>section_manager</pre></a></li>
+<li class="function  "><a href="#function_section_mkevent" title="section_mkevent :: Permet de créer un événement
+Ce controleur permet de créer un événement à partir d'une section."><span class="description">Permet de créer un événement
+Ce controleur permet de créer un événement à partir d'une section.</span><pre>section_mkevent</pre></a></li>
+<li class="function  "><a href="#function_section_reject" title="section_reject :: Bye le membre ."><span class="description">Bye le membre .</span><pre>section_reject</pre></a></li>
+<li class="function  "><a href="#function_user_add" title="user_add :: Ajoute un utilisateur
+Des fois c'est bien de pouvoir rajouter un utilisateur depuis le panneau d'admin pour l'ajout des nouveaux adhérents."><span class="description">Ajoute un utilisateur
+Des fois c'est bien de pouvoir rajouter un utilisateur depuis le panneau d'admin pour l'ajout des nouveaux adhérents.</span><pre>user_add</pre></a></li>
+<li class="function  "><a href="#function_user_delete" title="user_delete :: Suppresion d'un utilisateur"><span class="description">Suppresion d'un utilisateur</span><pre>user_delete</pre></a></li>
+<li class="function  "><a href="#function_user_index" title="user_index :: Permet d'afficher la liste des utilisateurs"><span class="description">Permet d'afficher la liste des utilisateurs</span><pre>user_index</pre></a></li>
+<li class="function  "><a href="#function_user_invit_section" title="user_invit_section :: Ajoute un utilisateur comme staff d'une section
+Cette fonctionnalité permet de gérer les sections d'un utilisateur directement depuis son compte :p"><span class="description">Ajoute un utilisateur comme staff d'une section
+Cette fonctionnalité permet de gérer les sections d'un utilisateur directement depuis son compte :p</span><pre>user_invit_section</pre></a></li>
+<li class="function  "><a href="#function_user_quit" title="user_quit :: Permet de quitter une section"><span class="description">Permet de quitter une section</span><pre>user_quit</pre></a></li>
+<li class="function  "><a href="#function_user_view" title="user_view :: Détails d'un utilisateur
+Et optionnellement sa vie."><span class="description">Détails d'un utilisateur
+Et optionnellement sa vie.</span><pre>user_view</pre></a></li>
+</ul>
+</div>
+<div class="span8 package-contents">
+<ul class="breadcrumb"><li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span><li class="active"><a href="../packages/Epicenote.html">Epicenote</a></li>
+</li></ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-function"></i> Functions</h3>
+<a id="function_admin_index"></a><div class="element clickable function  function_admin_index" data-toggle="collapse" data-target=".function_admin_index .collapse">
+<h2>Controleur page d'index admin
+Permet l'affichage de la page d'administration des droits d'accès.</h2>
+<pre>admin_index() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="function_admin_update"></a><div class="element clickable function  function_admin_update" data-toggle="collapse" data-target=".function_admin_update .collapse">
+<h2>Controleur mise à jour des droits
+Ce controleur est appelé quand on valide la page avec les droits d'accès.</h2>
+<pre>admin_update() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>Il permet d'enregistrer les nouveaux droits d'accès.</p></div></div></div>
+</div>
+<a id="function_ecole_add"></a><div class="element clickable function  function_ecole_add" data-toggle="collapse" data-target=".function_ecole_add .collapse">
+<h2>Ajout d'une école
+Controleur utilisé pour ajouter une nouvelle école.</h2>
+<pre>ecole_add() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="function_ecole_delete"></a><div class="element clickable function  function_ecole_delete" data-toggle="collapse" data-target=".function_ecole_delete .collapse">
+<h2>Supression d'une école
+Controleur utilisé pour supprimer une école.</h2>
+<pre>ecole_delete() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="function_ecole_index"></a><div class="element clickable function  function_ecole_index" data-toggle="collapse" data-target=".function_ecole_index .collapse">
+<h2>Affiche la liste des écoles
+Permet d'afficher une page avec la liste des écoles (page par défaut du module).</h2>
+<pre>ecole_index() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="function_event_addsection"></a><div class="element clickable function  function_event_addsection" data-toggle="collapse" data-target=".function_event_addsection .collapse">
+<h2>Ajoute une section à un événement
+Cette page permet de notifier la participation d'une section à un événement.</h2>
+<pre>event_addsection() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="function_event_delsection"></a><div class="element clickable function  function_event_delsection" data-toggle="collapse" data-target=".function_event_delsection .collapse">
+<h2>Supprime la participation d'une section à un événement
+Permet de supprimer une section d'un événement.</h2>
+<pre>event_delsection() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>On ne supprime pas la section réellement, on retire sa participation à l'événement.</p></div></div></div>
+</div>
+<a id="function_event_index"></a><div class="element clickable function  function_event_index" data-toggle="collapse" data-target=".function_event_index .collapse">
+<h2>Liste les événements
+Permet de lister tous les événements enregistrés sur l'intra.</h2>
+<pre>event_index() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="function_event_staff"></a><div class="element clickable function  function_event_staff" data-toggle="collapse" data-target=".function_event_staff .collapse">
+<h2>Voir l'équipe d'une section
+Quand une section participe, elle participe avec une liste de staffs.</h2>
+<pre>event_staff() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>Cette page permet de voir et gérer la liste des staffs.</p></div></div></div>
+</div>
+<a id="function_event_view"></a><div class="element clickable function  function_event_view" data-toggle="collapse" data-target=".function_event_view .collapse">
+<h2>Détails d'un événement
+Cette page permet de voir les informations détaillés d'une section.</h2>
+<pre>event_view() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>Nous pouvons aussi utiliser cette page pour ajouter ou retirer la participation d'une section à un événement.</p></div></div></div>
+</div>
+<a id="function_index_create"></a><div class="element clickable function  function_index_create" data-toggle="collapse" data-target=".function_index_create .collapse">
+<h2>Inscrire un nouvel utilisateur
+Cette page permet à un visiteur de s'inscrire sur le site.</h2>
+<pre>index_create() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="function_index_index"></a><div class="element clickable function  function_index_index" data-toggle="collapse" data-target=".function_index_index .collapse">
+<h2>Petite page de présentation du projet</h2>
+<pre>index_index() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>global</th>
+<td>type $tpl</td>
+</tr></table>
+</div></div>
+</div>
+<a id="function_index_login"></a><div class="element clickable function  function_index_login" data-toggle="collapse" data-target=".function_index_login .collapse">
+<h2>Permet de connecter un utilisateur</h2>
+<pre>index_login() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>global</th>
+<td>type $tpl</td>
+</tr>
+<tr>
+<th>global</th>
+<td>type $pdo</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="function_index_logout"></a><div class="element clickable function  function_index_logout" data-toggle="collapse" data-target=".function_index_logout .collapse">
+<h2>Ferme une session utilisateur</h2>
+<pre>index_logout() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>global</th>
+<td>type $tpl</td>
+</tr></table>
+</div></div>
+</div>
+<a id="function_section_accept"></a><div class="element clickable function  function_section_accept" data-toggle="collapse" data-target=".function_section_accept .collapse">
+<h2>Ho Oui ! Un staff
+Permet d'accepter un membre dans sa section.</h2>
+<pre>section_accept() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>global</th>
+<td>type $pdo</td>
+</tr></table>
+</div></div>
+</div>
+<a id="function_section_add"></a><div class="element clickable function  function_section_add" data-toggle="collapse" data-target=".function_section_add .collapse">
+<h2>Ajoute une section</h2>
+<pre>section_add() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="function_section_delete"></a><div class="element clickable function  function_section_delete" data-toggle="collapse" data-target=".function_section_delete .collapse">
+<h2>Supprime une section</h2>
+<pre>section_delete() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="function_section_details"></a><div class="element clickable function  function_section_details" data-toggle="collapse" data-target=".function_section_details .collapse">
+<h2>Affiche les détails d'une section
+Les détails d'une section c'est aussi la liste des membres de la section avec la gestion des membres.</h2>
+<pre>section_details() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>NB: C'est aussi d'ici qu'on créer un événement.</p></div></div></div>
+</div>
+<a id="function_section_goin"></a><div class="element clickable function  function_section_goin" data-toggle="collapse" data-target=".function_section_goin .collapse">
+<h2>Je veux rentrer dans la section
+Ce controleur permet à l'utilisateur actuellement connecter de faire une demande d'adhésion à une section.</h2>
+<pre>section_goin() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="function_section_goout"></a><div class="element clickable function  function_section_goout" data-toggle="collapse" data-target=".function_section_goout .collapse">
+<h2>Je ne veux plus de cette section
+Cette fonction permet à l'utilisateur connecté de quitter la section.</h2>
+<pre>section_goout() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="function_section_index"></a><div class="element clickable function  function_section_index" data-toggle="collapse" data-target=".function_section_index .collapse">
+<h2>Liste toutes les sections</h2>
+<pre>section_index() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="function_section_manager"></a><div class="element clickable function  function_section_manager" data-toggle="collapse" data-target=".function_section_manager .collapse">
+<h2>Promotion manager
+Et hop ! Un staff devient responsable de la section.</h2>
+<pre>section_manager() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>global</th>
+<td>type $pdo</td>
+</tr></table>
+</div></div>
+</div>
+<a id="function_section_mkevent"></a><div class="element clickable function  function_section_mkevent" data-toggle="collapse" data-target=".function_section_mkevent .collapse">
+<h2>Permet de créer un événement
+Ce controleur permet de créer un événement à partir d'une section.</h2>
+<pre>section_mkevent() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>On y accède à partir de la fiche de la section qui va gérer le déroulement de l'événement.</p></div></div></div>
+</div>
+<a id="function_section_reject"></a><div class="element clickable function  function_section_reject" data-toggle="collapse" data-target=".function_section_reject .collapse">
+<h2>Bye le membre .</h2>
+<pre>section_reject() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>..
+Permet de retirer un membre d'une section.</p></div>
+<table class="table table-bordered"><tr>
+<th>global</th>
+<td>type $pdo</td>
+</tr></table>
+</div></div>
+</div>
+<a id="function_user_add"></a><div class="element clickable function  function_user_add" data-toggle="collapse" data-target=".function_user_add .collapse">
+<h2>Ajoute un utilisateur
+Des fois c'est bien de pouvoir rajouter un utilisateur depuis le panneau d'admin pour l'ajout des nouveaux adhérents.</h2>
+<pre>user_add() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="function_user_delete"></a><div class="element clickable function  function_user_delete" data-toggle="collapse" data-target=".function_user_delete .collapse">
+<h2>Suppresion d'un utilisateur</h2>
+<pre>user_delete() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="function_user_index"></a><div class="element clickable function  function_user_index" data-toggle="collapse" data-target=".function_user_index .collapse">
+<h2>Permet d'afficher la liste des utilisateurs</h2>
+<pre>user_index() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>global</th>
+<td>type $pdo</td>
+</tr>
+<tr>
+<th>global</th>
+<td>type $tpl</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="function_user_invit_section"></a><div class="element clickable function  function_user_invit_section" data-toggle="collapse" data-target=".function_user_invit_section .collapse">
+<h2>Ajoute un utilisateur comme staff d'une section
+Cette fonctionnalité permet de gérer les sections d'un utilisateur directement depuis son compte :p</h2>
+<pre>user_invit_section() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="function_user_quit"></a><div class="element clickable function  function_user_quit" data-toggle="collapse" data-target=".function_user_quit .collapse">
+<h2>Permet de quitter une section</h2>
+<pre>user_quit() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="function_user_view"></a><div class="element clickable function  function_user_view" data-toggle="collapse" data-target=".function_user_view .collapse">
+<h2>Détails d'un utilisateur
+Et optionnellement sa vie.</h2>
+<pre>user_view() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2014-03-13T06:25:57+01:00.<br></footer></div>
+</div>
+</body>
+</html>

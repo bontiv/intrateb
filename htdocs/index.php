@@ -21,13 +21,25 @@ define('DS', DIRECTORY_SEPARATOR);
 $root = dirname(__FILE__) . DS;
 
 session_start();
+
+/**
+ * Ici on lit la configuration pour la connection à la BDD
+ */
 require('config.php');
+
+/**
+ * Ouverture du fichier avec les fonctions de base de FrameTool
+ */
 require 'libs' . DS . 'common.php';
 
 //Initialisation du PDO
 $pdo = new PDO($dsn, $db_user, $db_pass);
 
 // Initialisation du système de template
+
+/**
+ * Chargement du moteur de template Smarty
+ */
 include 'libs' . DS . 'Smarty' . DS . 'Smarty.class.php';
 $tpl = new Smarty();
 $tpl->compile_dir = $root . 'tmp';

@@ -1,6 +1,14 @@
 <?php
 
 /**
+ * Controleur par défaut
+ * Ce controleur permet d'afficher la page d'accueil du site, mais aussi aux
+ * utilisateurs de se connecter. L'accès à ce module est forcé en mode publique
+ * par le framework.
+ * @package Epicenote
+ */
+
+/**
  * Petite page de présentation du projet
  * @global type $tpl
  */
@@ -60,6 +68,11 @@ function index_logout() {
     redirect('index');
 }
 
+
+/**
+ * Inscrire un nouvel utilisateur
+ * Cette page permet à un visiteur de s'inscrire sur le site.
+ */
 function index_create() {
     global $tpl, $pdo;
     $tpl->assign('error', false);

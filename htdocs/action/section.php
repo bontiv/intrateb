@@ -1,5 +1,14 @@
 <?php
+/**
+ * Controleur sur la gestion des sections
+ * Ce controleur contient toutes les pages utilisés pour gérer les sections.
+ * @package Epicenote
+ */
 
+/**
+ * Permet de créer un événement
+ * Ce controleur permet de créer un événement à partir d'une section. On y accède à partir de la fiche de la section qui va gérer le déroulement de l'événement.
+ */
 function section_mkevent() {
     global $pdo, $tpl;
    
@@ -39,6 +48,10 @@ function section_mkevent() {
     quit();
 }
 
+
+/**
+ * Liste toutes les sections
+ */
 function section_index() {
     global $pdo, $tpl;
 
@@ -61,6 +74,10 @@ function section_index() {
     quit();
 }
 
+
+/**
+ * Ajoute une section
+ */
 function section_add() {
     global $pdo, $tpl;
 
@@ -82,6 +99,10 @@ function section_add() {
     quit();
 }
 
+
+/**
+ * Supprime une section
+ */
 function section_delete() {
     global $pdo;
 
@@ -93,6 +114,12 @@ function section_delete() {
         modexec('syscore', 'sqlerror');
 }
 
+
+/**
+ * Affiche les détails d'une section
+ * Les détails d'une section c'est aussi la liste des membres de la section avec la gestion des membres.
+ * NB: C'est aussi d'ici qu'on créer un événement.
+ */
 function section_details() {
     global $pdo, $tpl;
 
@@ -130,6 +157,11 @@ function section_details() {
 }
 
 
+
+/**
+ * Je veux rentrer dans la section
+ * Ce controleur permet à l'utilisateur actuellement connecter de faire une demande d'adhésion à une section.
+ */
 function section_goin() {
     global $pdo;
 
@@ -140,6 +172,11 @@ function section_goin() {
     redirect('section');
 }
 
+
+/**
+ * Je ne veux plus de cette section
+ * Cette fonction permet à l'utilisateur connecté de quitter la section.
+ */
 function section_goout() {
     global $pdo;
 
@@ -152,6 +189,7 @@ function section_goout() {
 
 /**
  * Ho Oui ! Un staff
+ * Permet d'accepter un membre dans sa section.
  * @global type $pdo
  */
 function section_accept()
@@ -167,6 +205,7 @@ function section_accept()
 
 /**
  * Bye le membre ...
+ * Permet de retirer un membre d'une section.
  * @global type $pdo
  */
 function section_reject()
@@ -182,6 +221,7 @@ function section_reject()
 
 /**
  * Promotion manager
+ * Et hop ! Un staff devient responsable de la section.
  * @global type $pdo
  */
 function section_manager()
