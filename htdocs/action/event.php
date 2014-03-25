@@ -22,6 +22,42 @@ function event_index()
     quit();
 }
 
+/**
+ * Fonction permettant de s'inscrire en staff sur un événement
+ * @global type $pdo
+ */
+function event_goin() {
+    global $pdo;
+    
+    $sql = $pdo->prepare('INSERT INTO event_staff (est_user, est_event, est_section) VALUES (?,?,?)');
+    if (!isset($_GET['user']) || !hasAcl(ACL_SUPERUSER))
+        $sql->bindValue(1, $_SESSION['user']['user_id']);
+    else
+        $sql->bindValue(1, $_GET['user']['user_id']);
+    $sql->bindValue(2, $_GET['event']);
+    $sql->bindValue(3, $_GET['section']);
+    $sql->execute();
+    modexec('event', 'staff');
+}
+
+/**
+ * Fonction permettant de quitter en staff sur un événement
+ * @global type $pdo
+ */
+function event_goout() {
+    global $pdo;
+    
+    $sql = $pdo->prepare('DELETE FROM event_staff WHERE est_user = ? AND est_event = ? AND est_section = ?');
+    if (!isset($_GET['user']) || !hasAcl(ACL_SUPERUSER))
+        $sql->bindValue(1, $_SESSION['user']['user_id']);
+    else
+        $sql->bindValue(1, $_GET['user']['user_id']);
+    $sql->bindValue(2, $_GET['event']);
+    $sql->bindValue(3, $_GET['section']);
+    $sql->execute();
+    modexec('event', 'staff');
+}
+
 
 /**
  * Voir l'équipe d'une section
@@ -61,8 +97,16 @@ function event_staff () {
         $section['inType'] = false;
     
     $tpl->assign('section', $section);
-    // TODO Faire la liste des membres inscrits
-    $tpl->assign('users', array());
+    
+    $sql = $pdo->prepare('SELECT * FROM event_staff LEFT JOIN users ON est_user = user_id LEFT JOIN user_sections ON us_user = user_id AND us_section = est_section WHERE est_event = ? AND est_section = ?');
+    $sql->bindValue(1, $event['event_id']);
+    $sql->bindValue(2, $section['section_id']);
+    $sql->execute();
+    $users = [];
+    while ($usr = $sql->fetch())
+        $users[] = $usr;
+    
+    $tpl->assign('users', $users);
     $tpl->display("event_staff.tpl");
     quit();
 }

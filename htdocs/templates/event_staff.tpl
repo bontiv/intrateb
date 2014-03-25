@@ -6,9 +6,9 @@
 
 <div>
 {if not $section.inType}
-    <a href="{mkurl action="event" page="goout" section=$section.section_id}" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Quitter</a>
+    <a href="{mkurl action="event" page="goout" event=$event.event_id section=$section.section_id}" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Quitter</a>
     {else}
-    <a href="{mkurl action="event" page="goin" section=$section.section_id}" class="btn btn-info"><i class="glyphicon glyphicon-heart"></i> Rejoindre</a>
+    <a href="{mkurl action="event" page="goin" event=$event.event_id section=$section.section_id}" class="btn btn-info"><i class="glyphicon glyphicon-heart"></i> Rejoindre</a>
     {/if}
 </div>
 <h3>Membres</h3>
@@ -27,7 +27,7 @@
         {foreach from=$users item="line"}
             <tr>
                 <td>{$line.user_name}</td>
-                <td><span class="label label-success">Staff</span></td>
+                <td>{if $line.us_type=="user"}<span class="label label-success">Staff</span>{elseif $line.us_type=="manager"}<span class="label label-primary">Manager</span>{else}<span class="label label-default">Guest</span>{/if}</td>
                 <td>{$line.user_login}</td>
                 <td>{$line.user_email}</td>
                 <td>{$line.user_phone}</td>
