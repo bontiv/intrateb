@@ -1,0 +1,10 @@
+## Table user_types
+name: user_types
+key: ut_id
+fields:
+  ut_id:
+    type: auto_int
+  ut_name:
+    type: var
+    size: 100
+    

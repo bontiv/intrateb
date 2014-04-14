@@ -1,0 +1,30 @@
+## Table User_sections
+name: user_sections
+key: us_id
+fields:
+  us_id:
+    type: auto_int
+  us_user:
+    type: external
+    table: users
+  us_section:
+    type: external
+    table: sections
+  us_type:
+    type: enum
+    items:
+      manager: Responsable de section
+      user: Staff section
+      guest: Candidat
+      rejected: Candidat rejeté
+indexes:
+  user_id:
+    type: index
+    fields: [us_user, us_section]
+  us_user:
+    type: index
+    fields: [us_user]
+  us_section:
+    type: index
+    fields: [us_section]
+    

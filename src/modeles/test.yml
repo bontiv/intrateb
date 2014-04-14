@@ -1,0 +1,20 @@
+name: test
+key: test_id
+fields:
+ test_id:
+  type: auto_int
+ test_truc:
+  type: var
+  size: 20
+  readonly: true
+ acl_page:
+  type: var
+  size: 20
+  readonly: true
+ acl_acces:
+  type: enum
+  items:
+   ANNONYMOUS: Annonyme
+   ADMINISTRATOR: Administrateur
+   GUEST: Nouvel inscrits
+

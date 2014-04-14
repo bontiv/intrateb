@@ -1,0 +1,26 @@
+name: acces
+key: acl_id
+fields:
+ acl_id:
+  type: auto_int
+ acl_action:
+  type: var
+  size: 30
+  readonly: true
+ acl_page:
+  type: var
+  size: 30
+  readonly: true
+ acl_acces:
+  type: enum
+  default: ADMINISTRATOR
+  items:
+   ANNONYMOUS: Annonyme
+   GUEST: Nouvel inscrits
+   USER: Utilisateur validé
+   SUPERUSER: Utilisateur acrédité
+   ADMINISTRATOR: Administrateur
+indexes:
+  acl_action:
+    type: unique
+    fields: [acl_action, acl_page]

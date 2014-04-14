@@ -1,0 +1,45 @@
+## Table events
+name: events
+key: event_id
+fields:
+  event_id:
+    type: auto_int
+  event_name:
+    type: var
+    size: 100
+  event_desc:
+    type: text
+  event_start:
+    type: date_time
+  event_end:
+    type: date_time
+  event_lock:
+    type: date
+  event_note1:
+    type: date
+  event_note2:
+    type: date
+  event_coef:
+    type: int
+  event_section:
+    type: external
+    table: sections
+  event_owner:
+    type: external
+    table: users
+    readonly: true
+  event_state:
+    type: enum
+    default: DRAFT
+    readonly: true
+    items:
+      DRAFT: Attente de validation bureau
+      OPEN: Evenement en cours
+      MODERATE1: Periode de notation activité
+      MODERETE2: Periode de notation événement
+      CLOSE: Editable admin (pas encore sur bulletin
+      END: Evenement terminé et définitivement clos
+indexes:
+  event_section:
+    type: index
+    fields: event_section

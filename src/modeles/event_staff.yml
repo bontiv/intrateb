@@ -1,0 +1,15 @@
+## Table event_staff
+name: event_staff
+key: est_id
+fields:
+  est_id:
+    type: auto_int
+  est_user:
+    type: external
+    table: users
+  est_event:
+    type: external
+    table: events
+  est_section:
+    type: external
+    table: sections

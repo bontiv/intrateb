@@ -1,0 +1,24 @@
+## Table sections
+name: sections
+key: section_id
+fields:
+  section_id:
+    type: auto_int
+  section_name:
+    type: var
+  section_type:
+    type: enum
+    items:
+      primary: Section asso
+      secondary: Sous-section
+  section_owner:
+    type: external
+    table: users
+indexes:
+  section_name:
+    type: unique
+    fields: [section_name]
+  section_owner:
+    type: index
+    fields: [section_owner]
+    

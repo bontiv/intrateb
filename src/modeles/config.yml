@@ -1,0 +1,17 @@
+## Table config
+name: config
+fields:
+  name:
+    type: var
+    size: 30
+  value:
+    type: text
+  env:
+    type: var
+    size: 20
+    default: def
+indexes:
+  name:
+    type: unique
+    fields: [name, env]
+    

@@ -1,0 +1,41 @@
+## Table users
+name: users
+key: user_id
+fields:
+  user_id:
+    type: auto_int
+  user_name:
+    type: var
+    size: 20
+  user_pass:
+    type: var
+    size: 34
+  user_firstname:
+    type: var
+    size: 20
+  user_lastname:
+    type: var
+    size: 20
+  user_type:
+    type: external
+    table: user_types
+  user_login:
+    type: var
+  user_email:
+    type: var
+    size: 100
+  user_phone:
+    type: tel
+  user_role:
+    type: enum
+    default: GUEST
+    items:
+      GUEST: Nouvel inscrit
+      USER: Utilisateur validé
+      SUPERUSER: Utilisateur acrédité
+      ADMINISTRATOR: Administrateur
+indexes:
+  user_name:
+    type: unique
+    fields: [user_name]
+    

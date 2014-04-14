@@ -1,0 +1,20 @@
+## Table event_sections
+name: event_sections
+key: es_id
+fields:
+  es_id:
+    type: auto_int
+  es_event:
+    type: external
+    table: events
+  es_section:
+    type: external
+    table: section
+indexes:
+  es_event:
+    type: index
+    fields: es_event
+  es_section:
+    type: index
+    fields: es_section
+    
