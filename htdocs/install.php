@@ -95,8 +95,8 @@ if (isset($_GET['etape']) && $_GET['etape'] == 'dbsync') {
             if ($c['Type'] != mdle_field_type($define_tables[$table], $c['Field']))
                 $modify_fields[] = $c['Field'];
         }
-        $add_fields = array_diff($fields, array_keys($define_tables[$table]['fields']));
-        $del_fields = array_diff(array_keys($define_tables[$table]['fields']), $fields);
+        $del_fields = array_diff($fields, array_keys($define_tables[$table]['fields']));
+        $add_fields = array_diff(array_keys($define_tables[$table]['fields']), $fields);
         if (count($add_fields) + count($del_fields) + count($modify_fields) != 0) {
             $modify_tables[] = array(
                 'table' => $table,
@@ -129,8 +129,8 @@ if (isset($_GET['etape']) && $_GET['etape'] == 'dbsync') {
                 $first = false;
             else
                 $sql .= ',';
-            $sql .= "\n    ADD `$col`";
-            mdle_sql_fielddef($define_tables[$tdef['table']], $col);
+            $sql .= "\n    ADD `$col` ";
+            $sql .= mdle_sql_fielddef($define_tables[$tdef['table']], $col);
         }
         foreach ($tdef['modify'] as $col) {
             if ($first)
@@ -481,6 +481,7 @@ function tpl_pge_dbsync() {
         # ------------------------------------------------------------
 
                     <?php
+                    echo "\n";
                     foreach ($sql_queries as $query) {
                         echo "$query;\n\n";
                     }

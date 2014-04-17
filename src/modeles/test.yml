@@ -9,8 +9,10 @@ fields:
   readonly: true
  acl_page:
   type: var
-  size: 20
+  size: 30
   readonly: true
+ bidon:
+   type: text
  acl_acces:
   type: enum
   items:
