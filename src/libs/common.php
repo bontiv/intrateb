@@ -427,4 +427,77 @@ class SimplePager {
 
 }
 
+/**
+ * Permet de récupérer des informations de debug (en retirant une partie de la
+ * pile d'exécution.
+ * @param type $pile
+ * @return type
+ */
+function dbg_getInfos($pile = 0) {
+    $log = debug_backtrace();
+    for ($i = 0; $i < $pile; $i++)
+        array_shift ($log);
+    $log = array_reverse($log);
+    return $log;
+}
+
+/**
+ * Fonction plus ou moins système permettant l'affichage des informations
+ * détaillé sur un message de debug.
+ * @param type $file
+ * @param type $msg
+ * @param type $log
+ */
+function dbg_show_msg($file, $msg, $log) {
+    echo "<p>Erreur $msg dans le module $file.</p><p><u>Backtrace:</u><br>\n";
+    echo "<table border=1><tr class=\"font-weight:bold;\"><th>Fichier</th><th>Ligne</th><th>Fonction</th><th>Arguments</th></tr>\n";
+
+    foreach ($log as $line)
+    {
+        if (!isset($line['class']))
+            $line['class'] = '';
+        if (!isset($line['type']))
+            $line['type'] = '';
+        if (!isset($line['line']))
+            $line['line'] = '<i>Undef</i>';
+        if (!isset($line['file']))
+            $line['file'] = '<i>Undef</i>';
+        
+        $line['argsStr'] = '';
+        foreach ($line['args'] as $input) {
+            if ($line['argsStr'] != '')
+                $line['argsStr'] .= ', ';
+            $line['argsStr'] .= var_export($input, true);
+        }
+        
+        echo "<tr><td>$line[file]</td><td>$line[line]</td><td>$line[class]$line[type]$line[function]</td><td>$line[argsStr]</td></tr>";
+    }
+    echo "</table></p><br>";
+}
+
+/**
+ * Lance une erreur critique.
+ * @param type $file
+ * @param type $msg
+ * @param type $pile
+ */
+function dbg_error($file, $msg, $pile = FALSE) {
+    echo "<br><br><strong>ERREUR CRITIQUE</strong><br>\n";
+    echo "<p>Une erreur de type critique a intérrompu l'exécution</p>";
+    dbg_show_msg($file, $msg, dbg_getInfos($pile));
+    exit(1);
+}
+
+/**
+ * Lance une erreur non critique.
+ * @param type $file
+ * @param type $msg
+ * @param type $pile
+ */
+function dbg_warning($file, $msg, $pile = 0) {
+    echo "<br><br><strong>ATTENTION</strong><br>\n";
+    echo "<p>Une erreur non crtitique est intervenue. Elle n'est pas bloquante mais peut mériter d'y jetter un coup d'oeil.</p>";
+    dbg_show_msg($file, $msg, dbg_getInfos($pile + 1));
+}
+
 ?>

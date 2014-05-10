@@ -14,6 +14,7 @@ fields:
   section_owner:
     type: external
     table: users
+    display: %user_firstname% %user_lastname% (%user_name%)
 indexes:
   section_name:
     type: unique

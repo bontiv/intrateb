@@ -34,6 +34,7 @@ require_once $root . 'libs' . DS . 'spyc.php';
  * Ouverture du fichier avec les fonctions de base de FrameTool
  */
 require_once $root . 'libs' . DS . 'common.php';
+require_once $root . 'libs' . DS . 'models.php';
 
 //Initialisation du PDO
 $pdo = new PDO($dsn, $db_user, $db_pass);

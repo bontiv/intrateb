@@ -7,9 +7,12 @@ fields:
   est_user:
     type: external
     table: users
+    display: %user_firstname% %user_lastname% (%user_name%)
   est_event:
     type: external
     table: events
+    display: %event_name%
   est_section:
     type: external
     table: sections
+    display: %section_name%

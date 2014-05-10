@@ -2,14 +2,17 @@
 <html>
     <head>
         <!-- Css -->
-        <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="bootstrap/css/bootstrap-select.css" rel="stylesheet">
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-select.css" rel="stylesheet">
+        <link href="css/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
         <!-- /Css -->
         <!-- Scripts -->
-        <script src="bootstrap/js/jquery.js"></script>
-        <script src="bootstrap/js/bootstrap.js"></script>
-        <script src="bootstrap/js/bootstrap-select.js"></script>
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src="js/bootstrap-select.js"></script>
+        <script src="js/jquery-ui-1.10.4.custom.min.js"></script>
+        <script src="js/datetime-picker.min.js"></script>
         <!-- /Scripts -->
 
         <title>Epice Notator ! La terreur des assos !</title>
@@ -54,6 +57,7 @@
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle">Admin
                             <b class="caret"></b></a>
                         <ul class="dropdown-menu">
+                            <li><a href="{mkurl action="admin_modeles"}">Instances de donnée</a></li>
                             <li><a href="{mkurl action="admin"}">Droits d'accès</a></li>
                         </ul>
                     </li>

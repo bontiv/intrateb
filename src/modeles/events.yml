@@ -24,9 +24,11 @@ fields:
   event_section:
     type: external
     table: sections
+    display: %section_name%
   event_owner:
     type: external
     table: users
+    display: %user_firstname% %user_lastname% (%user_name%)
     readonly: true
   event_state:
     type: enum

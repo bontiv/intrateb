@@ -19,6 +19,7 @@ fields:
   user_type:
     type: external
     table: user_types
+    display: %ut_name%
   user_login:
     type: var
   user_email:
