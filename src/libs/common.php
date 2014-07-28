@@ -236,7 +236,7 @@ function modsecu($action, $page = 'index') {
  * @param type $page
  */
 function modexec($action, $page = 'index') {
-    global $root;
+    global $root, $exec_mod, $exec_action;
 
     include_once $root . 'action' . DS . $action . '.php';
 
@@ -246,6 +246,8 @@ function modexec($action, $page = 'index') {
         $exec = true;
     }
     if (function_exists($action . '_' . $page)) {
+        $exec_mod = $action;
+        $exec_action = $page;
         call_user_func($action . '_' . $page);
         $exec = true;
     }
@@ -500,4 +502,12 @@ function dbg_warning($file, $msg, $pile = 0) {
     dbg_show_msg($file, $msg, dbg_getInfos($pile + 1));
 }
 
-?>
+/**
+ * Affiche le template pour le module en exécution
+ */
+function display() {
+    global $tpl, $exec_mod, $exec_action;
+    
+    $tpl->display($exec_mod.'_'.$exec_action.'.tpl');
+    quit();
+}

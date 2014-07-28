@@ -317,6 +317,25 @@ class SQLFetchNotFound extends Exception {
     
 }
 
+class ModeleFieldNotFound extends Exception {
+    private $table;
+    private $colum;
+    
+    public function __construct($table, $colum) {
+        parent::__construct("No field $colum in $table", 22, 0);
+        $this->colum = $colum;
+        $this->table = $table;
+    }
+    
+    public function getTable() {
+        return $this->colum;
+    }
+    
+    public function getColum() {
+        return $this->colum;
+    }
+}
+
 class Modele {
 
     private $desc;
@@ -425,10 +444,13 @@ class Modele {
             $nbVals++;
         }
 
+        $sql .= ' WHERE ' . $this->desc['key'] . ' = ?';
+        
         $stmt = $pdo->prepare($sql);
         foreach ($values as $index => $val) {
             $stmt->bindValue($index + 1, $val);
         }
+        $stmt->bindValue($nbVals + 1, $this->getKey());
         return $stmt->execute();
     }
 
@@ -459,6 +481,14 @@ class Modele {
             throw new Exception();
         }
     }
+    
+    /**
+     * Récupère la valeur d'un champ
+     * @param type $name
+     */
+    function __get($name) {
+        if (!isset($this->instance[$name]))
+            throw new ModeleFieldNotFound($this->getName (), $name);
+        return $this->instance[$name];
+    }
 }
-
-?>
