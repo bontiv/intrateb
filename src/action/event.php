@@ -178,3 +178,40 @@ function event_delsection() {
     redirect('event', 'view', array('event' => $_GET['event']));
 }
 
+/**
+ * Permet d'éditer le coef d'un event
+ */
+function event_edit() {
+    global $tpl;
+
+    $mdl = new Modele('events');
+    $mdl->fetch($_GET['event']);
+    $tpl->assign('event', $mdl);
+    $tpl->assign('success', false);
+    $tpl->assign('error', false);
+    
+    display();
+}
+
+/**
+ * Sauvegarde de l'événement
+ */
+function event_editpost () {
+    global $tpl;
+
+    $mdl = new Modele('events');
+    $mdl->fetch($_GET['event']);
+    $tpl->assign('success', false);
+    $tpl->assign('error', false);
+    if ($mdl->modFrom($_POST)) {
+        $tpl->assign('success', true);
+    }
+    else
+    {
+        $tpl->assign('error', 'Erreur d\'enregistrement.');
+    }
+    $tpl->assign('event', $mdl);
+    
+    $tpl->display('event_edit.tpl');
+    quit();
+}
