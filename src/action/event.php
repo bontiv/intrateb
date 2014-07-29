@@ -215,3 +215,19 @@ function event_editpost () {
     $tpl->display('event_edit.tpl');
     quit();
 }
+
+/**
+ * Supprime un événement
+ */
+function event_delete() {
+    global $tpl;
+    
+    $mdl = new Modele('events');
+    try {
+        $mdl->fetch($_GET['event']);
+        $tpl->assign('hsuccess', $mdl->delete());
+    } catch(SQLFetchNotFound $e) {
+        $tpl->assign('hsuccess', false);
+    }
+    modexec('event', 'index');
+}
