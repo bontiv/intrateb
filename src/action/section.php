@@ -234,3 +234,16 @@ function section_manager()
     $sql->execute();
     redirect('section', 'details', array('section' => $_GET['section']));
 }
+
+function section_edit() {
+    global $tpl;
+    
+    $mdl = new Modele('sections');
+    $mdl->fetch($_GET['section']);
+    if (isset($_POST['postOK'])) {
+        $tpl->assign('hsuccess', $mdl->modFrom($_POST));
+    }
+    $tpl->assign('section', $mdl);
+    
+    display();
+}

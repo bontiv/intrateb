@@ -82,3 +82,10 @@
         </nav>
         <div class="container row col-md-offset-1">
 
+{if isset($hsuccess)}
+    {if $hsuccess}
+        <div class="alert alert-success"><p>Opération effectué avec succès.</p></div>
+    {else}
+        <div class="alert alert-danger"><p>Une erreur a empêché l'opération.</p></div>
+    {/if}
+{/if}

@@ -3,8 +3,8 @@
 <h1>Fiche d'événement</h1>
 
 <div class="btn-group">
-    <a class="btn btn-danger">Supprimer</a>
-    <a class="btn btn-warning">Modifier</a>
+    <a class="btn btn-danger" href="{mkurl action="event" page="delete" event=$event.event_id}">Supprimer</a>
+    <a class="btn btn-warning" href="{mkurl action="event" page="edit" event=$event.event_id}">Modifier</a>
 </div>
 
 <h2>Description</h2>
