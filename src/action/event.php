@@ -102,7 +102,7 @@ function event_staff () {
     $sql->bindValue(1, $event['event_id']);
     $sql->bindValue(2, $section['section_id']);
     $sql->execute();
-    $users = [];
+    $users = array();
     while ($usr = $sql->fetch())
         $users[] = $usr;
     
