@@ -294,7 +294,7 @@ function index_print() {
         $y = 150 + 5 * floor($pos / 2);
 
         $pdf->SetXY($x, $y);
-        $pdf->Cell(60, 5, uc($c['subscription_label'] . "/$pos/$x/$y"), 1, 0, '');
+        $pdf->Cell(60, 5, uc($c['subscription_label']), 1, 0, '');
         $pdf->Cell(15, 5, number_format($c['subscription_price'], 2, ',', '') . ' ' . chr(128), 1, 0, '');
         $pdf->Rect($x + 75, $y, 5, 5);
 
