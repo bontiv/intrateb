@@ -6,18 +6,16 @@
  * @package Epicenote
  */
 
-
 /**
  * Liste les événements
  * Permet de lister tous les événements enregistrés sur l'intra.
  */
-function event_index()
-{
+function event_index() {
     global $tpl;
-    
+
     $p = new SimplePager('events');
     $p->run($tpl);
-    
+
     $tpl->display('event_index.tpl');
     quit();
 }
@@ -28,7 +26,7 @@ function event_index()
  */
 function event_goin() {
     global $pdo;
-    
+
     $sql = $pdo->prepare('INSERT INTO event_staff (est_user, est_event, est_section) VALUES (?,?,?)');
     if (!isset($_GET['user']) || !hasAcl(ACL_SUPERUSER))
         $sql->bindValue(1, $_SESSION['user']['user_id']);
@@ -46,7 +44,7 @@ function event_goin() {
  */
 function event_goout() {
     global $pdo;
-    
+
     $sql = $pdo->prepare('DELETE FROM event_staff WHERE est_user = ? AND est_event = ? AND est_section = ?');
     if (!isset($_GET['user']) || !hasAcl(ACL_SUPERUSER))
         $sql->bindValue(1, $_SESSION['user']['user_id']);
@@ -58,21 +56,20 @@ function event_goout() {
     modexec('event', 'staff');
 }
 
-
 /**
  * Voir l'équipe d'une section
  * Quand une section participe, elle participe avec une liste de staffs. Cette page permet de voir et gérer la liste des staffs.
  */
-function event_staff () {
+function event_staff() {
     global $tpl, $pdo;
-    
+
     $sql = $pdo->prepare('SELECT * FROM events LEFT JOIN users ON event_owner = user_id LEFT JOIN sections ON section_id = event_section WHERE event_id = ?');
     $sql->bindValue(1, $_GET['event']);
     $sql->execute();
-    
+
     $event = $sql->fetch();
     if (!$event)
-        modexec ('syscore', 'notfound');
+        modexec('syscore', 'notfound');
     $tpl->assign('event', $event);
 
     $sql = $pdo->prepare('SELECT * FROM event_sections LEFT JOIN sections ON es_section = section_id LEFT JOIN users ON section_owner = user_id WHERE es_event = ? AND es_section = ?');
@@ -82,8 +79,8 @@ function event_staff () {
     $es = array();
     $section = $sql->fetch();
     if (!$section)
-        modexec ('syscore', 'notfound');
-    
+        modexec('syscore', 'notfound');
+
     if (isset($_SESSION['user'])) {
         $sql = $pdo->prepare('SELECT COUNT(*) FROM event_staff WHERE est_user = ? AND est_section = ? AND est_event = ?');
         $sql->bindValue(1, $_SESSION['user']['user_id']);
@@ -95,9 +92,9 @@ function event_staff () {
     }
     else
         $section['inType'] = false;
-    
+
     $tpl->assign('section', $section);
-    
+
     $sql = $pdo->prepare('SELECT * FROM event_staff LEFT JOIN users ON est_user = user_id LEFT JOIN user_sections ON us_user = user_id AND us_section = est_section WHERE est_event = ? AND est_section = ?');
     $sql->bindValue(1, $event['event_id']);
     $sql->bindValue(2, $section['section_id']);
@@ -105,12 +102,11 @@ function event_staff () {
     $users = array();
     while ($usr = $sql->fetch())
         $users[] = $usr;
-    
+
     $tpl->assign('users', $users);
     $tpl->display("event_staff.tpl");
     quit();
 }
-
 
 /**
  * Détails d'un événement
@@ -118,34 +114,50 @@ function event_staff () {
  */
 function event_view() {
     global $tpl, $pdo;
-    
+
     $sql = $pdo->prepare('SELECT * FROM events LEFT JOIN users ON event_owner = user_id LEFT JOIN sections ON section_id = event_section WHERE event_id = ?');
     $sql->bindValue(1, $_GET['event']);
     $sql->execute();
-    
+
     $event = $sql->fetch();
     if (!$event)
-        modexec ('syscore', 'notfound');
-    
+        modexec('syscore', 'notfound');
+
     $sql = $pdo->prepare('SELECT * FROM event_sections LEFT JOIN sections ON es_section = section_id WHERE es_event = ?');
     $sql->bindValue(1, $event['event_id']);
     $sql->execute();
     $es = array();
-    while ($line = $sql->fetch())
+    while ($line = $sql->fetch()) {
         $es[$line['section_id']] = $line;
+        $es[$line['section_id']]['cdat'] = false;
+    }
+
+    $mdl = new Modele('event_staff');
+    $mdl->find(array(
+        'est_event' => $event['event_id'],
+        'est_user' => $_SESSION['user']['user_id'],
+    ));
+    while ($mdl->next()) {
+        if (isset($es[$mdl->est_section])) {
+            $es[$mdl->est_section]['cdat'] = $mdl->toArray();
+        } else {
+            // Réparation de table a la volé
+            $mdl->delete();
+        }
+    }
+
     $tpl->assign('es', $es);
-    
+
     $sql = $pdo->prepare('SELECT * FROM sections');
     $sql->execute();
     while ($line = $sql->fetch())
-        if (!in_array($line['section_id'], array_keys ($es)))
-            $tpl->append('sections', $line); 
-   
+        if (!in_array($line['section_id'], array_keys($es)))
+            $tpl->append('sections', $line);
+
     $tpl->assign('event', $event);
     $tpl->display('event_view.tpl');
     quit();
 }
-
 
 /**
  * Ajoute une section à un événement
@@ -153,15 +165,14 @@ function event_view() {
  */
 function event_addsection() {
     global $pdo;
-    
+
     $sql = $pdo->prepare('INSERT INTO event_sections (es_event, es_section) VALUES (?, ?)');
     $sql->bindValue(1, $_GET['event']);
     $sql->bindValue(2, $_POST['es_section']);
     $sql->execute();
-    
+
     redirect('event', 'view', array('event' => $_GET['event']));
 }
-
 
 /**
  * Supprime la participation d'une section à un événement
@@ -174,7 +185,7 @@ function event_delsection() {
     $sql->bindValue(1, $_GET['event']);
     $sql->bindValue(2, $_GET['admsec']);
     $sql->execute();
-    
+
     redirect('event', 'view', array('event' => $_GET['event']));
 }
 
@@ -189,14 +200,14 @@ function event_edit() {
     $tpl->assign('event', $mdl);
     $tpl->assign('success', false);
     $tpl->assign('error', false);
-    
+
     display();
 }
 
 /**
  * Sauvegarde de l'événement
  */
-function event_editpost () {
+function event_editpost() {
     global $tpl;
 
     $mdl = new Modele('events');
@@ -205,13 +216,11 @@ function event_editpost () {
     $tpl->assign('error', false);
     if ($mdl->modFrom($_POST)) {
         $tpl->assign('success', true);
-    }
-    else
-    {
+    } else {
         $tpl->assign('error', 'Erreur d\'enregistrement.');
     }
     $tpl->assign('event', $mdl);
-    
+
     $tpl->display('event_edit.tpl');
     quit();
 }
@@ -221,13 +230,43 @@ function event_editpost () {
  */
 function event_delete() {
     global $tpl;
-    
+
     $mdl = new Modele('events');
     try {
         $mdl->fetch($_GET['event']);
         $tpl->assign('hsuccess', $mdl->delete());
-    } catch(SQLFetchNotFound $e) {
+    } catch (SQLFetchNotFound $e) {
         $tpl->assign('hsuccess', false);
     }
     modexec('event', 'index');
+}
+
+function event_joinsection() {
+    global $tpl;
+
+    $mdl = new Modele('event_staff');
+    $rst = $mdl->addFrom(array(
+        'est_user' => $_SESSION['user']['user_id'],
+        'est_event' => $_GET['event'],
+        'est_section' => $_GET['section'],
+    ));
+
+    $tpl->assign('hsuccess', $rst);
+    modexec('event', 'view');
+}
+
+function event_quitsection() {
+    global $tpl;
+    
+    $mdl = new Modele('event_staff');
+    $tpl->assign('hsuccess', $mdl->find(array(
+       'est_event' => $_GET['event'],
+       'est_section' => $_GET['section'],
+        'est_user' => $_SESSION['user']['user_id'],
+    )));
+    
+    while ($mdl->next())
+        $mdl->delete ();
+    
+    modexec('event', 'view');
 }

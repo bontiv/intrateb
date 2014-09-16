@@ -42,8 +42,15 @@
             {foreach from=$es item="i"}
                 <tr>
                     <td><a href="{mkurl action="event" page="staff" section=$i.section_id event=$event.event_id}">{$i.section_name}</a></td>
-                    <td>LOL</td>
-                    <td><a class="btn btn-danger" href="{mkurl action="event" page="delsection" event=$event.event_id admsec=$i.section_id}"><span class="glyphicon glyphicon-remove"></span></a></td>
+                    <td>LOL{if $i.cdat} <span class="label label-warning">Candidat</span>{/if}</td>
+                    <td>
+                        <a class="btn btn-danger" href="{mkurl action="event" page="delsection" event=$event.event_id admsec=$i.section_id}"><span class="glyphicon glyphicon-remove"></span></a>
+                        {if not $i.cdat}
+                        <a class="btn btn-primary" href="{mkurl action="event" page="joinsection" event=$event.event_id section=$i.section_id}"><span class="">Rejoindre</span></a>
+                            {else}
+                        <a class="btn btn-danger" href="{mkurl action="event" page="quitsection" event=$event.event_id section=$i.section_id}"><span class="">Quitter</span></a>
+                            {/if}
+                    </td>
                 </tr>
             {/foreach}
         </tbody>

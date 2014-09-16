@@ -1,0 +1,24 @@
+## Table users
+name: subscription
+key: subscription_id
+fields:
+
+  subscription_id:
+    type: auto_int
+
+  subscription_label:
+    type: var
+    size: 20
+    label: Type de cotisation
+
+  subscription_mandate:
+    type: external
+    label: Mandat
+    table: mandate
+    display: %mandate_label%
+
+  subscription_price:
+    type: var
+    label: Prix
+## YAML Template.
+---

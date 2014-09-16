@@ -5,10 +5,8 @@
  * Fichier avec les fonctions permettant le fonctionnement par défaut de l'app.
  * @package FrameTool
  */
-
 /**
  */
-
 /**
  * Niveau d'accès pour les visiteurs non connectés
  */
@@ -16,7 +14,6 @@ define('ACL_ANNONYMOUS', 0);
 
 /**
  */
-
 /**
  * Niveau d'accès pour les utilisateurs enregistré mais non membre
  */
@@ -79,18 +76,18 @@ function needAcl($acl) {
 
 /**
  * Permet de cacher quelque chose en fonction de l'accréditation
- * 
+ *
  * __Dans le template __
  * SYNTAXE1 :
  * {acl level="ADMINISTRATOR"}...{/acl}
  * Pour s'afficher il faut le niveau demandé. Level peut être :
  * ADMINISTRATOR, SUPERUSER, USER, GUEST, ANNONYMOUS
- * 
+ *
  * SYNTAXE2:
  * {acl action="act" page="pge"}..{/acl}
  * Pour s'afficher, l'utilisateur doit avoir les accès à la page pge de l'action
  * act.
- * 
+ *
  * @param type $params
  * @param type $content
  * @param type $smarty
@@ -105,7 +102,7 @@ function acl_smarty($params, $content, $smarty, &$repeat) {
         if (!isset($params['page']))
             $params['page'] = 'index';
         if (isset($params['action']))
-            $need = getAclLevel ($params['action'], $params['page']);
+            $need = getAclLevel($params['action'], $params['page']);
 
         if (hasAcl($need))
             return $content;
@@ -173,7 +170,6 @@ function mkurl($action, $page = 'index', $options = null) {
 
     return $url;
 }
-
 
 /**
  * Ajout de la fonction mkurl dans le moteur Smarty
@@ -323,43 +319,43 @@ class SimplePager {
 
     /**
      * numéro du premier enregistrement
-     * @var type 
+     * @var type
      */
     protected $start;
 
     /**
      * Nombre d'enregistrements par page
-     * @var type 
+     * @var type
      */
     protected $nbByPage;
 
     /**
      * Prefix des variables pour ce pager
-     * @var type 
+     * @var type
      */
     protected $prepose;
 
     /**
      * Requete SQL contenant la limite préparé avec PDO
-     * @var type 
+     * @var type
      */
     protected $sql;
 
     /**
      * Requete SQL préparé avec PDO qui servira à compter les enregistrements
-     * @var type 
+     * @var type
      */
     protected $sqlCount;
 
     /**
      * Petit racourcis pour avoir la variable du numéro de page
-     * @var type 
+     * @var type
      */
     protected $key;
 
     /**
      * On construit le pager
-     * 
+     *
      * @global type $pdo
      * @param type $table
      * @param type $where
@@ -438,7 +434,7 @@ class SimplePager {
 function dbg_getInfos($pile = 0) {
     $log = debug_backtrace();
     for ($i = 0; $i < $pile; $i++)
-        array_shift ($log);
+        array_shift($log);
     $log = array_reverse($log);
     return $log;
 }
@@ -454,8 +450,7 @@ function dbg_show_msg($file, $msg, $log) {
     echo "<p>Erreur $msg dans le module $file.</p><p><u>Backtrace:</u><br>\n";
     echo "<table border=1><tr class=\"font-weight:bold;\"><th>Fichier</th><th>Ligne</th><th>Fonction</th><th>Arguments</th></tr>\n";
 
-    foreach ($log as $line)
-    {
+    foreach ($log as $line) {
         if (!isset($line['class']))
             $line['class'] = '';
         if (!isset($line['type']))
@@ -464,14 +459,14 @@ function dbg_show_msg($file, $msg, $log) {
             $line['line'] = '<i>Undef</i>';
         if (!isset($line['file']))
             $line['file'] = '<i>Undef</i>';
-        
+
         $line['argsStr'] = '';
         foreach ($line['args'] as $input) {
             if ($line['argsStr'] != '')
                 $line['argsStr'] .= ', ';
             $line['argsStr'] .= var_export($input, true);
         }
-        
+
         echo "<tr><td>$line[file]</td><td>$line[line]</td><td>$line[class]$line[type]$line[function]</td><td>$line[argsStr]</td></tr>";
     }
     echo "</table></p><br>";
@@ -507,7 +502,16 @@ function dbg_warning($file, $msg, $pile = 0) {
  */
 function display() {
     global $tpl, $exec_mod, $exec_action;
-    
-    $tpl->display($exec_mod.'_'.$exec_action.'.tpl');
+
+    $tpl->display($exec_mod . '_' . $exec_action . '.tpl');
     quit();
+}
+
+/**
+ * Convertie une chaine UTF-8
+ * @param string $txt
+ * @return string
+ */
+function uc($txt) {
+    return iconv('UTF-8', 'ISO-8859-1//TRANSLIT//IGNORE', $txt);
 }

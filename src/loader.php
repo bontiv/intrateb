@@ -4,7 +4,6 @@
  * Page de déparrage du framework
  * @package FrameTool
  */
-
 /*
  * En cas de lancement direct, arrêt de la procédure
  */
@@ -55,7 +54,7 @@ if (!is_dir($tpl->compile_dir))
     @mkdir($tpl->compile_dir, 0777);
 
 if (!is_writable($tpl->compile_dir))
-    chmod ($tpl->compile_dir, 0777);
+    chmod($tpl->compile_dir, 0777);
 
 // Etape 1, on charge la configuration sur l'environnement présent.
 $conf = $pdo->prepare("SELECT * FROM config WHERE env is NULL OR env = ?");

@@ -1,0 +1,20 @@
+## Table users
+name: mandate
+key: mandate_id
+fields:
+
+  mandate_id:
+    type: auto_int
+
+  mandate_label:
+    type: var
+    size: 20
+    label: Mandat
+
+  mandate_start:
+    type: date
+    label: Début
+
+  mandate_end:
+    type: date
+    label: Fin

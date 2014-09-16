@@ -151,12 +151,13 @@ function mdle_form_var($data, $value = null, $error = false) {
     $str = '<div class="form-group';
     if ($error)
         $str .= ' has-error';
-    $str .= '"><label for="' . $data['name'] . '">'
+    $str .= '"><label class="col-md-4 control-label" for="' . $data['name'] . '">'
             . $data['label'] . '</label>'
-            . '<input type="text" size="' . $data['size'] . '" class="form-control" id="'
+            . '<div class="col-md-6">'
+            . '<input type="text" size="' . $data['size'] . '" class="form-control input-md" id="'
             . $data['name'] . '" name="' . $data['name'] . '" placeholder="' . $data['name']
-            . '" value="' . addslashes($value) . '"></div>';
-    
+            . '" value="' . addslashes($value) . '"></div></div>';
+
     return $str;
 }
 
@@ -167,14 +168,15 @@ function mdle_form_date_time($data, $value = null, $error = false) {
     $str = '<div class="form-group';
     if ($error)
         $str .= ' has-error';
-    $str .= '"><label for="' . $data['name'] . '">'
+    $str .= '"><label class="col-md-4 control-label" for="' . $data['name'] . '">'
             . $data['label'] . '</label>'
+            . '<div class="col-md-6">'
             . '<input type="text" size="' . $data['size'] . '" class="form-control" id="'
             . $data['name'] . '" name="' . $data['name'] . '" placeholder="' . $data['name']
-            . '" value="' . addslashes($value) . '"></div>';
-    
+            . '" value="' . addslashes($value) . '"></div></div>';
+
     $str .= "<script type='text/javascript'>\n$(function() {
-$( \"#". $data['name'] ."\" ).datetimepicker({dateFormat: 'yy-mm-dd'});
+$( \"#" . $data['name'] . "\" ).datetimepicker({dateFormat: 'yy-mm-dd'});
 });
 </script>";
     return $str;
@@ -187,13 +189,14 @@ function mdle_form_date($data, $value = null, $error = false) {
     $str = '<div class="form-group';
     if ($error)
         $str .= ' has-error';
-    $str .= '"><label for="' . $data['name'] . '">'
+    $str .= '"><label class="col-md-4 control-label" for="' . $data['name'] . '">'
             . $data['label'] . '</label>'
+            . '<div class="col-md-6">'
             . '<input type="text" size="' . $data['size'] . '" class="form-control" id="'
             . $data['name'] . '" name="' . $data['name'] . '" id="' . $data['name'] . '" placeholder="' . $data['name']
-            . '" value="' . addslashes($value) . '"></div>';
+            . '" value="' . addslashes($value) . '"></div></div>';
     $str .= "<script type='text/javascript'>\n$(function() {
-$( \"#". $data['name'] ."\" ).datepicker({dateFormat: 'yy-mm-dd'});
+$( \"#" . $data['name'] . "\" ).datepicker({dateFormat: 'yy-mm-dd'});
 });
 </script>";
     return $str;
@@ -206,12 +209,13 @@ function mdle_form_int($data, $value = null, $error = false) {
     $str = '<div class="form-group';
     if ($error)
         $str .= ' has-error';
-    $str .= '"><label for="' . $data['name'] . '">'
+    $str .= '"><label class="col-md-4 control-label" for="' . $data['name'] . '">'
             . $data['label'] . '</label>'
+            . '<div class="col-md-6">'
             . '<input type="text" size="' . $data['size'] . '" class="form-control" id="'
             . $data['name'] . '" name="' . $data['name'] . '" placeholder="' . $data['name']
-            . '" value="' . addslashes($value) . '"></div>';
-    
+            . '" value="' . addslashes($value) . '"></div></div>';
+
     return $str;
 }
 
@@ -222,12 +226,13 @@ function mdle_form_tel($data, $value = null, $error = false) {
     $str = '<div class="form-group';
     if ($error)
         $str .= ' has-error';
-    $str .= '"><label for="' . $data['name'] . '">'
+    $str .= '"><label class="col-md-4 control-label" for="' . $data['name'] . '">'
             . $data['label'] . '</label>'
+            . '<div class="col-md-6">'
             . '<input type="tel" size="' . $data['size'] . '" class="form-control" id="'
             . $data['name'] . '" name="' . $data['name'] . '" placeholder="' . $data['name']
-            . '" value="' . addslashes($value) . '"></div>';
-    
+            . '" value="' . addslashes($value) . '"></div></div>';
+
     return $str;
 }
 
@@ -238,111 +243,120 @@ function mdle_form_text($data, $value = null, $error = false) {
     $str = '<div class="form-group';
     if ($error)
         $str .= ' has-error';
-    $str .= '"><label for="' . $data['name'] . '">'
+    $str .= '"><label class="col-md-4 control-label" for="' . $data['name'] . '">'
             . $data['label'] . '</label>'
+            . '<div class="col-md-6">'
             . '<textarea class="form-control" id="'
             . $data['name'] . '" name="' . $data['name'] . '" placeholder="' . $data['name']
             . '">' . htmlentities($value) . '</textarea>
-    </div>';
+    </div></div>';
 
     return $str;
 }
 
 function mdle_form_external($data, $value = null, $error = false) {
     global $pdo;
-    
+
     if ($value === null && isset($data['default']))
         $value = $data['default'];
 
     $ext = $pdo->query("SELECT * FROM `" . $data['table'] . "`");
     $extDesc = mdle_need_desc($data['table']);
-    
+
     $str = '<div class="form-group';
     if ($error)
         $str .= ' has-error';
-    $str .= '"><label for="' . $data['name'] . '">'
+    $str .= '"><label class="col-md-4 control-label" for="' . $data['name'] . '">'
             . $data['label'] . '</label>'
+            . '<div class="col-md-6">'
             . '<select class="form-control" id="'
             . $data['name'] . '" name="' . $data['name'] . '" placeholder="' . $data['name']
             . '">';
     while ($opt = $ext->fetch()) {
         $val = $opt[$extDesc['key']];
         $str .= '<option value="' . addslashes($val) . '"';
-        if ($val == $value) $str .= " selected";
+        if ($val == $value)
+            $str .= " selected";
         if (!isset($data['display']))
             $str .= '>' . htmlentities($opt[0]) . '</option>';
         else {
             $display = $data['display'];
             foreach ($opt as $key => $value)
-                $display = str_replace ('%'.$key.'%', $value, $display);
+                $display = str_replace('%' . $key . '%', $value, $display);
             $str .= '>' . htmlentities($display) . '</option>';
         }
     }
     $str .= '</select>
-    </div>';
+    </div></div>';
 
     return $str;
 }
 
 function mdle_form_enum($data, $value = null, $error = false) {
     global $pdo;
-    
+
     if ($value === null && isset($data['default']))
         $value = $data['default'];
-    
+
     $str = '<div class="form-group';
     if ($error)
         $str .= ' has-error';
-    $str .= '"><label for="' . $data['name'] . '">'
+    $str .= '"><label class="col-md-4 control-label" for="' . $data['name'] . '">'
             . $data['label'] . '</label>'
+            . '<div class="col-md-6">'
             . '<select class="form-control" id="'
             . $data['name'] . '" name="' . $data['name'] . '" placeholder="' . $data['name']
             . '">';
     foreach ($data['items'] as $name => $val) {
         $str .= '<option value="' . addslashes($name) . '"';
-        if ($name == $value) $str .= " selected";
+        if ($name == $value)
+            $str .= " selected";
         $str .= '>' . htmlentities($val) . '</option>';
     }
     $str .= '</select>
-    </div>';
+    </div></div>';
 
     return $str;
 }
 
 class SQLFetchException extends Exception {
-    
+
 }
 
 class SQLFetchNotFound extends Exception {
-    
+
 }
 
 class ModeleFieldNotFound extends Exception {
+
     private $table;
     private $colum;
-    
+
     public function __construct($table, $colum) {
-        parent::__construct("No field $colum in $table", 22, 0);
+        parent::__construct("No field $colum in $table", 22);
         $this->colum = $colum;
         $this->table = $table;
     }
-    
+
     public function getTable() {
         return $this->colum;
     }
-    
+
     public function getColum() {
         return $this->colum;
     }
+
 }
 
 class Modele {
 
     private $desc;
     private $instance;
+    private $iterator;
 
     function __construct($table) {
         $this->desc = mdle_need_desc($table);
+        $this->iterator = false;
         foreach ($this->desc['fields'] as $n => &$v) {
             $v['name'] = $n;
             if (!isset($v['label']))
@@ -350,6 +364,22 @@ class Modele {
             if (!isset($v['size']))
                 $v['size'] = 30;
         }
+    }
+
+    private function hasRight($field) {
+        if (!hasAcl(ACL_ADMINISTRATOR) && isset($this->desc['fields'][$field]['readonly']) && $this->desc['fields'][$field]['readonly'] == 'true')
+            return false;
+        elseif (!isset($this->desc['fields'][$field]['visible']))
+            return true;
+        elseif ($this->desc['fields'][$field]['visible'] == 'false')
+            return false;
+        elseif ($this->desc['fields'][$field]['visible'] == 'admin' && !hasAcl(ACL_ADMINISTRATOR))
+            return false;
+        elseif ($this->desc['fields'][$field]['visible'] == 'true')
+            return true;
+        elseif ($this->desc['fields'][$field]['visible'] == 'superuser' && hasAcl(ACL_SUPERUSER))
+            return true;
+        return false;
     }
 
     function getName() {
@@ -363,7 +393,7 @@ class Modele {
     function getKey() {
         return $this->instance[$this->desc['key']];
     }
-    
+
     function displayField($name) {
         if (!isset($this->desc['fields'][$name]))
             dbg_error(__FILE__, 'Oups ! On me demande l\'affichage du champ ' . $name . ' mais il n\'existe pas dans le modèle ' . $this->getName() . '.');
@@ -371,7 +401,7 @@ class Modele {
         // Pas de champs pour une inscrémentation auto
         if ($this->desc['fields'][$name]['type'] == 'auto_int')
             return '';
-        
+
         $func = 'mdle_form_' . $this->desc['fields'][$name]['type'];
 
         if (function_exists($func))
@@ -383,13 +413,14 @@ class Modele {
     function edit() {
         $form = '';
         foreach (array_keys($this->desc['fields']) as $name)
-            $form .= $this->displayField($name);
+            if ($this->hasRight($name))
+                $form .= $this->displayField($name);
         return $form;
     }
 
     function addFrom($data) {
         global $pdo;
-        
+
         $sql = 'INSERT INTO ' . $this->desc['name'] . ' (';
         $nbVals = 0;
         $values = array();
@@ -400,14 +431,14 @@ class Modele {
 
             if ($nbVals != 0)
                 $sql .= ', ';
-            
+
             if (!isset($data[$name]) && isset($desc['default'])) {
                 $data[$name] = $desc['default'];
             } elseif (!isset($data[$name])) {
                 continue;
             }
             $sql .= '`' . $name . '`';
-            $values[] = $data[$name];            
+            $values[] = $data[$name];
             $nbVals++;
         }
         $sql .= ') VALUES (' . implode(', ', array_fill(0, $nbVals, '?')) . ')';
@@ -416,12 +447,13 @@ class Modele {
         foreach ($values as $index => $val) {
             $stmt->bindValue($index + 1, $val);
         }
-        return $stmt->execute();
+        $rst = $stmt->execute();
+        return $rst;
     }
-    
-    function modFrom($data) {
+
+    function modFrom($data, $secure = true) {
         global $pdo;
-        
+
         $sql = 'UPDATE ' . $this->desc['name'] . ' SET ';
         $nbVals = 0;
         $values = array();
@@ -430,22 +462,32 @@ class Modele {
             if ($desc['type'] == 'auto_int')
                 continue;
 
-            if ($nbVals != 0)
-                $sql .= ', ';
-            
-            if (!isset($data[$name]) && isset($desc['default'])) {
+            if ($secure && !$this->hasRight($name))
+                continue;
+
+            if (!hasAcl(ACL_ADMINISTRATOR) && isset($desc['readonly']) && $desc['readonly'] != 'false')
+                continue;
+
+            if (!isset($data[$name]))
+                continue;
+
+            if ($data[$name] == '' && isset($desc['default'])) {
                 $data[$name] = $desc['default'];
             } elseif (!isset($data[$name])) {
                 continue;
             }
+
+            if ($nbVals != 0)
+                $sql .= ', ';
+
             $this->instance[$name] = $data[$name];
             $sql .= '`' . $name . '` = ?';
-            $values[] = $data[$name];            
+            $values[] = $data[$name];
             $nbVals++;
         }
 
         $sql .= ' WHERE ' . $this->desc['key'] . ' = ?';
-        
+
         $stmt = $pdo->prepare($sql);
         foreach ($values as $index => $val) {
             $stmt->bindValue($index + 1, $val);
@@ -456,7 +498,7 @@ class Modele {
 
     function fetch($id) {
         global $pdo;
-        
+
         $sql = 'SELECT * FROM `' . $this->desc['name'] . '` WHERE `'
                 . $this->desc['key'] . '` = ?';
         $rst = $pdo->prepare($sql);
@@ -469,10 +511,59 @@ class Modele {
             throw new SQLFetchNotFound();
         }
     }
-    
+
+    function find($where) {
+        global $pdo;
+
+        $values = array();
+        $sql = 'SELECT * FROM `' . $this->desc['name'] . '` WHERE';
+        $first = true;
+
+        // Vérifie les noms des colones
+        if (is_array($where)) {
+            foreach ($where as $colum => $value) {
+                if (isset($this->desc['fields'][$colum])) {
+                    if ($first) {
+                        $first = false;
+                    } else {
+                        $sql .= ' AND';
+                    }
+                    // TODO : Il faut utiliser LIKE pour les alphabetiques
+                    $sql .= '`' . $colum . '` = ?';
+                    $values[] = $value;
+                } else {
+                    dbg_warning(__FILE__, "Colone $colum invalide dans la table " . $this->desc['name']);
+                }
+            }
+        } else {
+            $sql .= ' ' . $where;
+        }
+
+        $stmt = $pdo->prepare($sql);
+        for ($i = 0; $i < count($values); $i++) {
+            $stmt->bindValue($i + 1, $values[$i]);
+        }
+        $success = $stmt->execute();
+
+        if ($success) {
+            $this->iterator = $stmt;
+        } else {
+            $this->iterator = false;
+        }
+
+        return $success;
+    }
+
+    function next() {
+        if ($this->iterator) {
+            $this->instance = $this->iterator->fetch(PDO::FETCH_ASSOC);
+        }
+        return $this->instance;
+    }
+
     function delete() {
         global $pdo;
-        
+
         $sql = 'DELETE FROM `' . $this->desc['name'] . '` WHERE `'
                 . $this->desc['key'] . '` = ?';
         $rst = $pdo->prepare($sql);
@@ -481,14 +572,26 @@ class Modele {
             throw new Exception();
         }
     }
-    
+
     /**
      * Récupère la valeur d'un champ
      * @param type $name
      */
     function __get($name) {
         if (!isset($this->instance[$name]))
-            throw new ModeleFieldNotFound($this->getName (), $name);
+            throw new ModeleFieldNotFound($this->getName(), $name);
+        if ($this->desc['fields'][$name]['type'] == 'enum')
+            return $this->desc['fields'][$name]['items'][$this->instance[$name]];
+        if ($this->desc['fields'][$name]['type'] == 'external' && is_string($this->instance[$name])) {
+            $id = $this->instance[$name];
+            $this->instance[$name] = new Modele($this->desc['fields'][$name]['table']);
+            $this->instance[$name]->fetch($id);
+        }
         return $this->instance[$name];
     }
+
+    function toArray() {
+        return $this->instance;
+    }
+
 }
