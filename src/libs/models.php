@@ -373,8 +373,8 @@ class Modele {
             return true;
         elseif ($this->desc['fields'][$field]['visible'] == 'false')
             return false;
-        elseif ($this->desc['fields'][$field]['visible'] == 'admin' && !hasAcl(ACL_ADMINISTRATOR))
-            return false;
+        elseif ($this->desc['fields'][$field]['visible'] == 'admin' && hasAcl(ACL_ADMINISTRATOR))
+            return true;
         elseif ($this->desc['fields'][$field]['visible'] == 'true')
             return true;
         elseif ($this->desc['fields'][$field]['visible'] == 'superuser' && hasAcl(ACL_SUPERUSER))

@@ -10,7 +10,7 @@ fields:
     size: 20
     label: Pseudo
   user_pass:
-    visible: admin
+    visible: false
     type: var
     size: 34
   user_firstname:
@@ -63,6 +63,7 @@ fields:
     default: GUEST
     visible: admin
     readonly: true
+    label: Niveau d'acréditation
     items:
       GUEST: Nouvel inscrit
       USER: Utilisateur validé
