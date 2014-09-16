@@ -57,6 +57,12 @@ fields:
   user_born:
     type: date
     label: date de naissance
+  user_photo:
+    type: var
+    size: 200
+    label: Photo d'identité
+    visible: admin
+    null: true
 
   user_role:
     type: enum

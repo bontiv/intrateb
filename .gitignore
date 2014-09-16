@@ -1,4 +1,6 @@
 /nbproject/private/
 /tmp/*.php
+/tmp/img*
+/tmp/photo*
 /htdocs/bootstrap.php
 .DS_Store

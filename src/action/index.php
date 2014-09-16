@@ -137,7 +137,23 @@ function index_profile() {
 
     $_SESSION['random'] = md5(uniqid('epicenote'));
     $tpl->assign('random', $_SESSION['random']);
+    $tpl->assign('isMember', hasAcl(ACL_USER));
     $tpl->assign('form', $mdl->edit());
+
+    $mdl = new Modele('card');
+    $mdl->find(array('card_user' => $_SESSION['user']['user_id']));
+    $l = $mdl->next();
+    if (!$l) {
+        $tpl->assign('cards', false);
+    }
+    while ($l) {
+        $o = new Modele('card');
+        $o->fetch($mdl->card_id);
+        $tpl->append('cards', $o);
+        $l = $mdl->next();
+    }
+
+
     display();
 }
 
@@ -309,5 +325,51 @@ function index_print() {
     if (ob_get_flush() == '') {
         $pdf->Output('inscription.pdf', 'I');
     }
+    quit();
+}
+
+function index_photoedit() {
+    global $tmpdir;
+
+    $ext = strtolower(strrchr($_FILES['photo']['name'], '.'));
+
+    if ($ext == '.jpg' || $ext == '.jpeg')
+        $imgs = imagecreatefromjpeg($_FILES['photo']['tmp_name']);
+    elseif ($ext == '.png')
+        $imgs = imagecreatefrompng($_FILES['photo']['tmp_name']);
+    elseif ($ext == '.gif')
+        $imgs = imagecreatefromgif($_FILES['photo']['tmp_name']);
+
+    $sz = getimagesize($_FILES['photo']['tmp_name']);
+
+    $imgd = imagecreatetruecolor(210, 270);
+    imagefill($imgd, 0, 0, imagecolorallocate($imgd, 255, 255, 255));
+
+    if ($sz[0] / 210 > $sz[1] / 270) {
+        $w = 210;
+        $h = ceil(210 * $sz[1] / $sz[0]);
+    } else {
+        $w = ceil(270 * $sz[0] / $sz[1]);
+        $h = 270;
+    }
+
+    imagecopyresized($imgd, $imgs, (210 - $w) / 2, (270 - $h) / 2, 0, 0, $w, $h, $sz[0], $sz[1]);
+
+    $usr = new Modele('users');
+    $usr->fetch($_SESSION['user']['user_id']);
+
+    $filename = tempnam($tmpdir, 'photo');
+    error_reporting(E_ALL);
+    imagepng($imgd, $filename);
+    $usr->user_photo = $filename;
+    redirect('index', 'profile');
+}
+
+function index_photo() {
+    $usr = new Modele('users');
+    $usr->fetch($_SESSION['user']['user_id']);
+
+    header('Content-Type: image/png');
+    readfile($usr->user_photo);
     quit();
 }

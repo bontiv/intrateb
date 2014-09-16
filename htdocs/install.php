@@ -94,6 +94,8 @@ if (isset($_GET['etape']) && $_GET['etape'] == 'dbsync') {
             $fields[] = $c['Field'];
             if ($c['Type'] != mdle_field_type($define_tables[$table], $c['Field']))
                 $modify_fields[] = $c['Field'];
+            elseif (isset($define_tables[$table]['fields'][$c['Field']]['null']) && $c['Null'] != 'YES')
+                $modify_fields[] = $c['Field'];
         }
         $del_fields = array_diff($fields, array_keys($define_tables[$table]['fields']));
         $add_fields = array_diff(array_keys($define_tables[$table]['fields']), $fields);
@@ -275,8 +277,8 @@ function tpl_form_field($name, $desc, $type = 'text') {
     global $variables, $valid;
     ?>
     <div class="form-group<?php if (!$valid[$name]) echo ' has-error'; ?>">
-        <label for="<?php echo $name; ?>"><?php echo $desc; ?></label>
-        <input type="<?php echo $type; ?>" class="form-control" id="<?php echo $name; ?>" name="<?php echo $name; ?>" placeholder="<?php echo $desc; ?>" value="<?php echo $variables[$name]; ?>">
+      <label for="<?php echo $name; ?>"><?php echo $desc; ?></label>
+      <input type="<?php echo $type; ?>" class="form-control" id="<?php echo $name; ?>" name="<?php echo $name; ?>" placeholder="<?php echo $desc; ?>" value="<?php echo $variables[$name]; ?>">
     </div>
     <?php
 }
@@ -317,7 +319,7 @@ function tpl_pge_dirselect() {
         tpl_form_field('srcdir', 'Dossier des fichiers source');
         tpl_form_field('tmpdir', 'Dossier des fichiers temporaires');
         ?>
-        <button type="submit" class="btn btn-default">Valider</button>
+      <button type="submit" class="btn btn-default">Valider</button>
     </form>
 
 
@@ -338,7 +340,7 @@ function tpl_pge_dbconfig() {
         tpl_form_field('db_user', 'Utilisateur de la BDD');
         tpl_form_field('db_pass', 'Mot de passe BDD', 'password');
         ?>
-        <button type="submit" class="btn btn-default">Valider</button>
+      <button type="submit" class="btn btn-default">Valider</button>
     </form>
 
 
@@ -355,7 +357,7 @@ function tpl_pge_serverconfig() {
         tpl_form_field('urlbase', 'Base des URL (si url rewrite)');
         tpl_form_field('env', 'Environnement');
         ?>
-        <button type="submit" class="btn btn-default">Valider</button>
+      <button type="submit" class="btn btn-default">Valider</button>
     </form>
 
 
@@ -371,7 +373,7 @@ function tpl_pge_userinfo() {
         tpl_form_field('admin_user', 'Utilisateur admin');
         tpl_form_field('admin_pass', 'Mot de passe admin', 'password');
         ?>
-        <button type="submit" class="btn btn-default">Valider</button>
+      <button type="submit" class="btn btn-default">Valider</button>
     </form>
 
 
@@ -384,113 +386,113 @@ function tpl_pge_dbsync() {
     <h2><?php echo $titles['dbsync']; ?></h2>
     <?php
     if (count(array_keys($valid, false))) {
-        echo '<div class="alert alert-warning"><h4>Erreur SQL</h4><p>Une erreur d\'exécution SQL s\'est produite.</p><p>' . nl2br(print_r($dbh->errorInfo(), true)) . '</p></div>';
+        echo '<div class="alert alert-warning"><h4>Erreur SQL</h4><p>Une erreur d\'exécution SQL s\'est produite.</p><p>' . nl2br(print_r($pdo->errorInfo(), true)) . '</p></div>';
     }
     ?>
     <form role="form" method="POST" action="install.php?etape=dbsync">
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="#settings" data-toggle="tab">Paramètres</a></li>
-            <li><a href="#tables" data-toggle="tab">Tables</a></li>
-            <li><a href="#columns" data-toggle="tab">Colonnes</a></li>
-            <li><a href="#sql" data-toggle="tab">Requêtes SQL</a></li>
-        </ul>
-        <div class="tab-content">
-            <div class="tab-pane active" id="settings">
-                <h3>Paramètres</h3>
-                <p>L'installation va commencer avec les paramètres suivantes :</p>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Variable</th>
-                            <th>Valeur</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        foreach ($variables as $var => $val) {
-                            echo '<tr><td>' . $var . '</td><td>';
-                            if (!in_array($var, array('admin_pass', 'db_pass')))
-                                echo $val;
-                            else
-                                echo '******';
-                            echo '</td></tr>';
-                        }
-                        ?>
-                    </tbody>
-                </table>
-            </div>
-            <div class="tab-pane" id="tables">
-                <h3>Vérification des tables</h3>
-                <p>L'installation va effectuer les actions suivantes sur les tables :</p>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Table</th>
-                            <th>Fichier</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        foreach ($delete_tables as $table) {
-                            echo "<tr><td>$table</td><td><span class=\"text-muted\"><em>#NDEF</em></span></td><td><span class=\"label label-danger\">Supression</span></td></tr>";
-                        }
-                        foreach ($install_tables as $table) {
-                            echo "<tr><td>$table</td><td>" . $define_tables[$table]['file'] . "</td><td><span class=\"label label-success\">Création</span></td></tr>";
-                        }
-                        foreach ($modify_tables as $table) {
-                            echo "<tr><td>$table[table]</td><td>" . $define_tables[$table['table']]['file'] . "</td><td><span class=\"label label-warning\">Modification</span></td></tr>";
-                        }
-                        ?>
-                    </tbody>
-                </table>
-            </div>
-            <div class="tab-pane" id="columns">
-                <h3>Vérification des colonnes</h3>
-                <p>L'installation va effectuer les actions suivantes sur les colonnes :</p>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Table</th>
-                            <th>Colonne</th>
-                            <th>Fichier</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        foreach ($modify_tables as $tdef) {
-                            foreach ($tdef['add'] as $col)
-                                echo "<tr><td>$tdef[table]</td><td>$col</td><td>" . $define_tables[$tdef['table']]['file'] . "</td><td><span class=\"label label-success\">Ajout</span></td></tr>";
-                            foreach ($tdef['del'] as $col)
-                                echo "<tr><td>$tdef[table]</td><td>$col</td><td>" . $define_tables[$tdef['table']]['file'] . "</td><td><span class=\"label label-danger\">Suppression</span></td></tr>";
-                            foreach ($tdef['modify'] as $col)
-                                echo "<tr><td>$tdef[table]</td><td>$col</td><td>" . $define_tables[$tdef['table']]['file'] . "</td><td><span class=\"label label-warning\">Modification</span></td></tr>";
-                        }
-                        ?>
-                    </tbody>
-                </table>
-            </div>
-            <div class="tab-pane" id="sql">
-                <h3>Requêtes SQL à exécuter</h3>
-                <p>Voilà le fichier SQL généré qui sera exécuté sur la base de donnée.</p>
-                <p><pre>
-        # ------------------------------------------------------------
-        # Fichier SQL généré par le système d'installation automatique
-        # @Copyright bonnetlive
-        # ------------------------------------------------------------
-
-                    <?php
-                    echo "\n";
-                    foreach ($sql_queries as $query) {
-                        echo "$query;\n\n";
-                    }
-                    ?>
-                </pre></p>
-            </div>
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#settings" data-toggle="tab">Paramètres</a></li>
+        <li><a href="#tables" data-toggle="tab">Tables</a></li>
+        <li><a href="#columns" data-toggle="tab">Colonnes</a></li>
+        <li><a href="#sql" data-toggle="tab">Requêtes SQL</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="settings">
+          <h3>Paramètres</h3>
+          <p>L'installation va commencer avec les paramètres suivantes :</p>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Variable</th>
+                <th>Valeur</th>
+              </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach ($variables as $var => $val) {
+                    echo '<tr><td>' . $var . '</td><td>';
+                    if (!in_array($var, array('admin_pass', 'db_pass')))
+                        echo $val;
+                    else
+                        echo '******';
+                    echo '</td></tr>';
+                }
+                ?>
+            </tbody>
+          </table>
         </div>
-        <input type="hidden" name="installed" value="true">
-        <button type="submit" class="btn btn-default">Valider</button>
+        <div class="tab-pane" id="tables">
+          <h3>Vérification des tables</h3>
+          <p>L'installation va effectuer les actions suivantes sur les tables :</p>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Table</th>
+                <th>Fichier</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach ($delete_tables as $table) {
+                    echo "<tr><td>$table</td><td><span class=\"text-muted\"><em>#NDEF</em></span></td><td><span class=\"label label-danger\">Supression</span></td></tr>";
+                }
+                foreach ($install_tables as $table) {
+                    echo "<tr><td>$table</td><td>" . $define_tables[$table]['file'] . "</td><td><span class=\"label label-success\">Création</span></td></tr>";
+                }
+                foreach ($modify_tables as $table) {
+                    echo "<tr><td>$table[table]</td><td>" . $define_tables[$table['table']]['file'] . "</td><td><span class=\"label label-warning\">Modification</span></td></tr>";
+                }
+                ?>
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane" id="columns">
+          <h3>Vérification des colonnes</h3>
+          <p>L'installation va effectuer les actions suivantes sur les colonnes :</p>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Table</th>
+                <th>Colonne</th>
+                <th>Fichier</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach ($modify_tables as $tdef) {
+                    foreach ($tdef['add'] as $col)
+                        echo "<tr><td>$tdef[table]</td><td>$col</td><td>" . $define_tables[$tdef['table']]['file'] . "</td><td><span class=\"label label-success\">Ajout</span></td></tr>";
+                    foreach ($tdef['del'] as $col)
+                        echo "<tr><td>$tdef[table]</td><td>$col</td><td>" . $define_tables[$tdef['table']]['file'] . "</td><td><span class=\"label label-danger\">Suppression</span></td></tr>";
+                    foreach ($tdef['modify'] as $col)
+                        echo "<tr><td>$tdef[table]</td><td>$col</td><td>" . $define_tables[$tdef['table']]['file'] . "</td><td><span class=\"label label-warning\">Modification</span></td></tr>";
+                }
+                ?>
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane" id="sql">
+          <h3>Requêtes SQL à exécuter</h3>
+          <p>Voilà le fichier SQL généré qui sera exécuté sur la base de donnée.</p>
+          <p><pre>
+                            # ------------------------------------------------------------
+                            # Fichier SQL généré par le système d'installation automatique
+                            # @Copyright bonnetlive
+                            # ------------------------------------------------------------
+
+            <?php
+            echo "\n";
+            foreach ($sql_queries as $query) {
+                echo "$query;\n\n";
+            }
+            ?>
+          </pre></p>
+        </div>
+      </div>
+      <input type="hidden" name="installed" value="true">
+      <button type="submit" class="btn btn-default">Valider</button>
     </form>
 
 
@@ -512,8 +514,8 @@ function tpl_pge_configwrite() {
     </pre>
     <br/>
     <form method="POST" action="install.php?etape=configwrite">
-        <input type="hidden" name="configwrite" value="true" />
-        <button type="submit"class="btn btn-default">Ecrire la configuration</button>
+      <input type="hidden" name="configwrite" value="true" />
+      <button type="submit"class="btn btn-default">Ecrire la configuration</button>
     </form>
     <?php
 }
@@ -527,49 +529,49 @@ function tpl_pge_endinstall() {
 }
 ?>
 <html>
-    <head>
-        <title>Installation de EpiceNote (intranet)</title>
-        <!-- Css -->
-        <link href="css/bootstrap.css" rel="stylesheet">
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/bootstrap-select.css" rel="stylesheet">
-        <!-- /Css -->
-        <!-- Scripts -->
-        <script src="js/jquery.js"></script>
-        <script src="js/bootstrap.js"></script>
-        <script src="js/bootstrap-select.js"></script>
-        <!-- /Scripts -->
+  <head>
+    <title>Installation de EpiceNote (intranet)</title>
+    <!-- Css -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-select.css" rel="stylesheet">
+    <!-- /Css -->
+    <!-- Scripts -->
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <!-- /Scripts -->
 
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body background="../images/bg3.png" style="background-attachment: fixed; width: 100%; height: 100%; background-position: top center; z-index: 1; position: relative;">
-        <nav class="navbar navbar-default" role="navigation">
-            <div class="navar-header">
-                <a class="navbar-brand" href="install.php">EpiceNotator Install</a>
-            </div>
-            <div class="collapse navbar-collapse navbar-ex1-collapse" >
-                <ul class="nav navbar-nav">
-                    <li><a href="index.php">Page d'accueil</a></li>
-                </ul>
-            </div>
-        </nav>
-        <div class="container-fluid">
-            <div class="row-fluid">
-                <div class="col-xs-2" style="background: #faf2cc">
-                    <h2>Menu</h2>
-                    <ul class="nav nav-pills nav-stacked">
-                        <?php
-                        foreach ($pages as $item)
-                            tpl_menu_item($item);
-                        ?>
-                    </ul>
-                </div>
-                <div class="col-xs-10">
-                    <h1>Installation Epicenote</h1>
-                    <?php call_user_func('tpl_pge_' . $_GET['etape']); ?>
-                </div>
-            </div>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body background="../images/bg3.png" style="background-attachment: fixed; width: 100%; height: 100%; background-position: top center; z-index: 1; position: relative;">
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="navar-header">
+        <a class="navbar-brand" href="install.php">EpiceNotator Install</a>
+      </div>
+      <div class="collapse navbar-collapse navbar-ex1-collapse" >
+        <ul class="nav navbar-nav">
+          <li><a href="index.php">Page d'accueil</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="col-xs-2" style="background: #faf2cc">
+          <h2>Menu</h2>
+          <ul class="nav nav-pills nav-stacked">
+              <?php
+              foreach ($pages as $item)
+                  tpl_menu_item($item);
+              ?>
+          </ul>
         </div>
-    </body>
+        <div class="col-xs-10">
+          <h1>Installation Epicenote</h1>
+          <?php call_user_func('tpl_pge_' . $_GET['etape']); ?>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

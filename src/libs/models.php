@@ -64,6 +64,12 @@ function mdle_field_type($table_info, $field) {
     if ($field['type'] == 'int')
         return 'int(' . (isset($field['size']) ? $field['size'] : 10) . ')';
 
+    if ($field['type'] == 'file')
+        return 'blob';
+
+    if ($field['type'] == 'bool')
+        return 'enum(\'true\', \'false\')';
+
     echo '<br><br><strong>Type field inconnu</strong><br>';
     var_dump($field);
     exit();
@@ -74,7 +80,7 @@ function mdle_sql_fielddef($table, $col) {
 
     $sql = mdle_field_type($table, $col);
     $data = $table['fields'][$col];
-    if (!isset($data['null']) || $data['null'] == 'no')
+    if (!isset($data['null']) || !$data['null'])
         $sql .= ' NOT';
     $sql .= ' NULL';
 
@@ -82,6 +88,8 @@ function mdle_sql_fielddef($table, $col) {
         $sql .= ' AUTO_INCREMENT';
     if (isset($data['default']))
         $sql .= ' DEFAULT ' . $pdo->quote($data['default']);
+    elseif ($data['type'] == 'file')
+        $sql .= ' DEFAULT NULL';
     return $sql;
 }
 
@@ -157,6 +165,21 @@ function mdle_form_var($data, $value = null, $error = false) {
             . '<input type="text" size="' . $data['size'] . '" class="form-control input-md" id="'
             . $data['name'] . '" name="' . $data['name'] . '" placeholder="' . $data['name']
             . '" value="' . addslashes($value) . '"></div></div>';
+
+    return $str;
+}
+
+function mdle_form_file($data, $value = null, $error = false) {
+
+    $str = '<div class="form-group';
+    if ($error)
+        $str .= ' has-error';
+    $str .= '"><label class="col-md-4 control-label" for="' . $data['name'] . '">'
+            . $data['label'] . '</label>'
+            . '<div class="col-md-6">'
+            . '<input type="file" class="form-control input-md" id="'
+            . $data['name'] . '" name="' . $data['name'] . '" placeholder="' . $data['name']
+            . '" ></div></div>';
 
     return $str;
 }
@@ -429,25 +452,36 @@ class Modele {
             if ($desc['type'] == 'auto_int')
                 continue;
 
-            if ($nbVals != 0)
-                $sql .= ', ';
+            if ($desc['type'] == 'file' && !is_resource($data[$name]))
+                continue;
 
             if (!isset($data[$name]) && isset($desc['default'])) {
                 $data[$name] = $desc['default'];
             } elseif (!isset($data[$name])) {
                 continue;
             }
+
+            if ($nbVals != 0)
+                $sql .= ', ';
+
             $sql .= '`' . $name . '`';
-            $values[] = $data[$name];
+            $values[] = array(
+                'val' => $data[$name],
+                'type' => $desc['type'],
+            );
             $nbVals++;
         }
         $sql .= ') VALUES (' . implode(', ', array_fill(0, $nbVals, '?')) . ')';
 
         $stmt = $pdo->prepare($sql);
         foreach ($values as $index => $val) {
-            $stmt->bindValue($index + 1, $val);
+            if ($val['type'] == 'file')
+                $stmt->bindValue($index + 1, $val['val'], PDO::PARAM_LOB);
+            else
+                $stmt->bindValue($index + 1, $val['val']);
         }
         $rst = $stmt->execute();
+        $this->fetch($pdo->lastInsertId());
         return $rst;
     }
 
@@ -462,13 +496,19 @@ class Modele {
             if ($desc['type'] == 'auto_int')
                 continue;
 
+            if (!$secure && $desc['type'] == 'file')
+                continue;
+
+            if (!isset($data[$name]))
+                continue;
+
+            if ($desc['type'] == 'file' && !is_resource($data[$name]))
+                continue;
+
             if ($secure && !$this->hasRight($name))
                 continue;
 
             if (!hasAcl(ACL_ADMINISTRATOR) && isset($desc['readonly']) && $desc['readonly'] != 'false')
-                continue;
-
-            if (!isset($data[$name]))
                 continue;
 
             if ($data[$name] == '' && isset($desc['default'])) {
@@ -482,7 +522,8 @@ class Modele {
 
             $this->instance[$name] = $data[$name];
             $sql .= '`' . $name . '` = ?';
-            $values[] = $data[$name];
+
+            $values[] = array('val' => $data[$name], 'type' => $desc['type']);
             $nbVals++;
         }
 
@@ -490,10 +531,15 @@ class Modele {
 
         $stmt = $pdo->prepare($sql);
         foreach ($values as $index => $val) {
-            $stmt->bindValue($index + 1, $val);
+            if ($val['type'] == 'file') {
+                $stmt->bindValue($index + 1, $val['val'], PDO::PARAM_LOB);
+            } else
+                $stmt->bindValue($index + 1, $val['val']);
         }
         $stmt->bindValue($nbVals + 1, $this->getKey());
-        return $stmt->execute();
+        $result = $stmt->execute();
+
+        return $result;
     }
 
     function fetch($id) {
@@ -512,12 +558,15 @@ class Modele {
         }
     }
 
-    function find($where) {
+    function find($where = false) {
         global $pdo;
 
         $values = array();
-        $sql = 'SELECT * FROM `' . $this->desc['name'] . '` WHERE';
+        $sql = 'SELECT * FROM `' . $this->desc['name'] . '`';
         $first = true;
+
+        if ($where !== false)
+            $sql .= ' WHERE';
 
         // Vérifie les noms des colones
         if (is_array($where)) {
@@ -578,16 +627,41 @@ class Modele {
      * @param type $name
      */
     function __get($name) {
-        if (!isset($this->instance[$name]))
+
+        $raw = false;
+        if ('raw_' == substr($name, 0, 4)) {
+            $raw = true;
+            $name = substr($name, 4);
+        }
+
+        if (!isset($this->desc['fields'][$name]))
             throw new ModeleFieldNotFound($this->getName(), $name);
-        if ($this->desc['fields'][$name]['type'] == 'enum')
+        if (!isset($this->instance[$name]))
+            return null;
+        if (!$raw && $this->desc['fields'][$name]['type'] == 'enum')
             return $this->desc['fields'][$name]['items'][$this->instance[$name]];
-        if ($this->desc['fields'][$name]['type'] == 'external' && is_string($this->instance[$name])) {
+        if (!$raw && $this->desc['fields'][$name]['type'] == 'external' && is_string($this->instance[$name])) {
             $id = $this->instance[$name];
             $this->instance[$name] = new Modele($this->desc['fields'][$name]['table']);
             $this->instance[$name]->fetch($id);
         }
         return $this->instance[$name];
+    }
+
+    function __set($name, $value) {
+        global $pdo;
+
+        if (!isset($this->desc['fields'][$name]))
+            throw new ModeleFieldNotFound($this->getName(), $name);
+
+        if ($this->desc['fields'][$name]['type'] == 'external' && !is_string($value)) {
+            $value = $value->getKey();
+        }
+
+        if (!$this->modFrom(array($name => $value), false)) {
+            var_dump($GLOBALS['pdo']->errorInfo());
+            throw new Exception('Field update error', 21);
+        }
     }
 
     function toArray() {

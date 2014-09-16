@@ -31,6 +31,7 @@
 <ul class="nav nav-pills" role="tablist">
   <li class="active"><a href="#edit" role="tab" data-toggle="pill">Profile</a></li>
   <li class=""><a href="#password" role="tab" data-toggle="pill">Mot de passe</a></li>
+  <li class=""><a href="#card" role="tab" data-toggle="pill">Carte de membre</a></li>
   <li class=""><a href="#print" role="tab" data-toggle="pill">Fiche de membre</a></li>
 </ul>
 
@@ -96,7 +97,104 @@
 
       </fieldset>
     </form>
+  </div>
+
+  <div class="pill-pane" id="card">
+    <h2>Edition des cartes de membre</h2>
+    <p>La carte de membre peut être demandé par le gardien a tout moment sur
+      le campus. Vous ne pouvez accéder librement sur le campus qu'en présence
+      d'une carte de membre valide.</p>
+    <h3>Etape 1: Paramètre de la photo</h3>
+    <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="{mkurl action="index" page="photoedit"}">
+      <fieldset>
+
+        <!-- Ancienne photo-->
+        <div class="form-group">
+          <label class="col-md-4 control-label">Votre photo</label>
+          <div class="col-md-5">
+            <img src="{mkurl action="index" page="photo"}" alt="Aucune photo ou photo invalide" />
+          </div>
+        </div>
+
+        <!-- Nouvelle photo-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="photo">Nouvelle photo</label>
+          <div class="col-md-5">
+            <input id="photo" name="photo" class="input-file" type="file">
+            <span class="help-block">Veuillez mettre une photo en PNJ, GIF ou JPG.</span>
+
+          </div>
+        </div>
+
+        <!-- Button (Double) -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="editpass"></label>
+          <div class="col-md-8">
+            <button id="editpass" name="editpass" class="btn btn-success">Valider</button>
+          </div>
+        </div>
+
+      </fieldset>
     </form>
+
+    <h3>Etape 2: Création de la carte</h3>
+    {if $isMember}
+        <form class="form-horizontal" action="{mkurl action="cards" page="makeme"}" method="POST">
+
+          <!-- List mandate -->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="mandate">Mandat</label>
+            <div class="col-md-5">
+              <select id="mandate" name="mandate" class="form-control input-md" onchange="updateSub()">
+                {foreach from=$mandate item="l"}
+                    <option value="{$l.mandate_id}">{$l.mandate_label}</option>
+                {/foreach}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="editpass"></label>
+            <div class="col-md-8">
+
+              <input type="submit" class="btn btn-primary" value="Créer la demande" />
+            </div>
+          </div>
+        </form>
+        <h3>Etape 3 : Suivi des demandes</h3>
+        {if $cards}
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th>Date de création</th>
+                  <th>Statut de la carte</th>
+                  <th>Statut imprimeur</th>
+                  <th>Mandat</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {foreach from=$cards item="card"}
+                    <tr>
+                      <td>{$card->card_maketime}</td>
+                      <td><span class="label
+                                {if $card->raw_card_status=="NOPICTURE"}label-danger
+                                {else}label-default{/if}
+                                ">
+                          {$card->card_status}</span></td>
+                      <td>{if $card->card_bundle}{$card->card_bundle->cbundle_status}{else}<span class="label label-danger">Non envoyé</span>{/if}</td>
+                      <td>{$card->card_mandate->mandate_label}</td>
+                      <td>{if $card->raw_card_status=="NOPICTURE" or $card->raw_card_status=="CREATED"}<a href="{mkurl action="cards" page="delmycard" card=$card->card_id}" class="btn btn-danger glyphicon glyphicon-trash"></a>{/if}</td>
+                    </tr>
+                {/foreach}
+              </tbody>
+            </table>
+        {else}
+            <p>Vous n'avez encore aucune carte</p>
+        {/if}
+    {else}
+
+        <p>La création de la carte n'est possible qu'après la validation de votre adhésion par le bureau.</p>
+    {/if}
   </div>
 
   <div class="pill-pane" id="print">

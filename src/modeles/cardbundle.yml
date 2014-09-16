@@ -1,0 +1,17 @@
+name: cardbundle
+key: cbundle_id
+fields:
+  cbundle_id:
+    type: auto_int
+  cbundle_date:
+    type: date
+    label: Date de création
+  cbundle_status:
+    type: enum
+    default: CREATED
+    label: Statut
+    readonly: true
+    items:
+      CREATED : Attente d'envoi
+      WAIT : En cours d'impression
+      OK : Cartes imprimés, veuillez la récupérer

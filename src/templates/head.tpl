@@ -59,6 +59,7 @@
             <ul class="dropdown-menu">
               <li><a href="{mkurl action="admin_modeles"}">Instances de donnée</a></li>
               <li><a href="{mkurl action="admin"}">Droits d'accès</a></li>
+              <li><a href="{mkurl action="cards"}">Gestion des cartes</a></li>
             </ul>
           </li>
           {/acl}

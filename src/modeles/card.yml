@@ -1,0 +1,45 @@
+## Table users
+name: card
+key: card_id
+fields:
+  card_id:
+    type: auto_int
+  card_user:
+    visible: admin
+    type: external
+    label: Membre
+    table: users
+    display: %user_name%
+  card_bundle:
+    type: external
+    table: cardbundle
+    display: Bundle %cbundle_date%
+    label: Groupe de traitement
+    readonly: true
+    null: true
+  card_status:
+    visible: admin
+    type: enum
+    default: CREATED
+    label: Statut
+    readonly: true
+    items:
+      CREATED : En attente validation
+      WAIT : Attente d'envoi
+      PRINT : Traitement en cours
+      NOPICTURE : Photo invalide
+      DELIVRED : Délivré
+  card_picture:
+    type: var
+    size: 200
+    label: Image
+    null: true
+    readonly: true
+  card_mandate:
+    type: external
+    table: mandate
+    display: %mandate_label%
+    label: Mandat
+  card_maketime:
+    type: date
+    label: Date de création
