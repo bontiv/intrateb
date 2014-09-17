@@ -97,6 +97,19 @@ function cards_view() {
     quit();
 }
 
+function cards_viewmycard() {
+    $mdl = new Modele('card');
+    $mdl->find(array(
+        'card_id' => $_GET['card'],
+        'card_user' => $_SESSION['user']['user_id'],
+    ));
+    $mdl->next();
+
+    header('Content-Type: image/png');
+    readfile($mdl->card_picture);
+    quit();
+}
+
 function cards_delmycard() {
     global $tpl;
 
@@ -135,5 +148,63 @@ function cards_mkbundle() {
         $crd->card_bundle = $bdl;
         $crd->card_status = 'PRINT';
     }
+    redirect('cards');
+}
+
+function cards_download() {
+    global $tmpdir;
+
+    $bdl = new Modele('cardbundle');
+    $bdl->fetch($_GET['bundle']);
+    $bdl->cbundle_status = 'WAIT';
+
+    $crd = new Modele('card');
+    $crd->find(array('card_bundle' => $bdl->cbundle_id));
+
+    $zipfile = tempnam($tmpdir, 'zip');
+
+    $zip = new ZipArchive();
+    $zip->open($zipfile, ZipArchive::CREATE);
+
+    $zip->setArchiveComment("Automade zip archive from EPITANIME intra software. Bundle " . $bdl->cbundle_date);
+
+    while ($crd->next()) {
+        $zip->addFile($crd->card_picture, "card$crd->card_id.png");
+        $crd->card_status = 'PRINT';
+    }
+
+    $zip->close();
+    header('Content-Type: application/zip');
+    header('Content-Disposition: attachment; filename="bundle_' . $bdl->cbundle_date . '.zip"');
+    readfile($zipfile);
+    unlink($zipfile);
+
+    quit();
+}
+
+function cards_bundleok() {
+    $bdl = new Modele('cardbundle');
+    $bdl->fetch($_GET['bundle']);
+    $bdl->cbundle_status = 'OK';
+
+    redirect('cards');
+}
+
+function cards_delbundle() {
+    $bdl = new Modele('cardbundle');
+    $bdl->fetch($_GET['bundle']);
+
+    $crd = new Modele('card');
+    $crd->find(array(
+        'card_bundle' => $bdl->getKey(),
+    ));
+
+    while ($crd->next()) {
+        $crd->card_bundle = null;
+        $crd->card_status = 'WAIT';
+    }
+
+    $bdl->delete();
+
     redirect('cards');
 }

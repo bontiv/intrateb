@@ -164,6 +164,7 @@ function index_subscriptions() {
             echo '<option value="' . $line['subscription_id'] . '">' . $line['subscription_label'] . ' (montant ' . $line['subscription_price'] . ' €)</option>';
         }
     }
+    quit();
 }
 
 function index_print() {

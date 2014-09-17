@@ -34,9 +34,21 @@
     {foreach from=$bundles item="l"}
         <tr>
           <td>{$l.cbundle_date}</td>
-          <td>{$l.cbundle_status}</td>
+          <td>
+            {if $l.cbundle_status=='CREATED'}
+                <span class="label label-danger">Non envoyé</span>
+            {elseif $l.cbundle_status=='WAIT'}
+                <span class="label label-default">Téléchargé</span>
+            {else}
+                <span class="label label-success">Réceptionné</span>
+            {/if}
+          </td>
           <td>{$l.count}</td>
-          <td></td>
+          <td>
+            {if $l.cbundle_status=='CREATED'}<a href="{mkurl action="cards" page="delbundle" bundle=$l.cbundle_id}" class="btn btn-danger glyphicon glyphicon-trash"></a>{/if}
+            {if $l.cbundle_status=='WAIT'}<a title="Set de cartes récéptionné" href="{mkurl action="cards" page="bundleok" bundle=$l.cbundle_id}" class="btn btn-success glyphicon glyphicon-check"></a>{/if}
+            <a title="Télécharger le set de cartes" href="{mkurl action="cards" page="download" bundle=$l.cbundle_id}" class="btn btn-primary glyphicon glyphicon-download"></a>
+          </td>
         </tr>
     {/foreach}
   </tbody>

@@ -28,11 +28,30 @@
   {rdelim})
 </script>
 
+
+<div class="modal fade" id="cardView">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Carte de membre</h4>
+      </div>
+      <div class="modal-body">
+        <p><img src="" width="500px" id="cardImage" style="border: 2px solid black; border-radius: 25px;" /></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-primary">Fermer</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
 <ul class="nav nav-pills" role="tablist">
-  <li class="active"><a href="#edit" role="tab" data-toggle="pill">Profile</a></li>
-  <li class=""><a href="#password" role="tab" data-toggle="pill">Mot de passe</a></li>
-  <li class=""><a href="#card" role="tab" data-toggle="pill">Carte de membre</a></li>
-  <li class=""><a href="#print" role="tab" data-toggle="pill">Fiche de membre</a></li>
+  <li class="active"><a href="#edit" role="tablist" data-toggle="pill">Profile</a></li>
+  <li class=""><a href="#password" role="tablist" data-toggle="pill">Mot de passe</a></li>
+  <li class=""><a href="#card" role="tablist" data-toggle="pill">Carte de membre</a></li>
+  <li class=""><a href="#print" role="tablist" data-toggle="pill">Fiche de membre</a></li>
 </ul>
 
 <div class="pill-content">
@@ -181,65 +200,79 @@
                                 {else}label-default{/if}
                                 ">
                           {$card->card_status}</span></td>
-                      <td>{if $card->card_bundle}{$card->card_bundle->cbundle_status}{else}<span class="label label-danger">Non envoyé</span>{/if}</td>
-                      <td>{$card->card_mandate->mandate_label}</td>
-                      <td>{if $card->raw_card_status=="NOPICTURE" or $card->raw_card_status=="CREATED"}<a href="{mkurl action="cards" page="delmycard" card=$card->card_id}" class="btn btn-danger glyphicon glyphicon-trash"></a>{/if}</td>
-                    </tr>
-                {/foreach}
-              </tbody>
-            </table>
-        {else}
-            <p>Vous n'avez encore aucune carte</p>
-        {/if}
-    {else}
+                      <td>{if $card->card_bundle}
+                        <span class="label
+                              {if $card->card_bundle->raw_cbundle_status=="CREATED"}
+                                  label-warning
+                              {elseif $card->card_bundle->raw_cbundle_status=="OK"}
+                                  label-success
+                              {else}
+                                  label-default
+                              {/if}">
+                          {$card->card_bundle->cbundle_status}
+                        </span>
+                        {else}<span class="label label-danger">Non envoyé</span>{/if}</td>
+                            <td>{$card->card_mandate->mandate_label}</td>
+                            <td>
+                              {if $card->raw_card_status=="NOPICTURE" or $card->raw_card_status=="CREATED"}<a href="{mkurl action="cards" page="delmycard" card=$card->card_id}" class="btn btn-danger glyphicon glyphicon-trash"></a>{/if}
+                              <a title="Voir la carte" href="#cardView" data-toggle="modal" onclick="$('#cardImage').attr('src', '{mkurl action="cards" page="viewmycard" card=$card->card_id}')" class="btn btn-default glyphicon glyphicon-eye-open"></a>
+                            </td>
+                        </tr>
+                        {/foreach}
+                        </tbody>
+                      </table>
+                      {else}
+                          <p>Vous n'avez encore aucune carte</p>
+                          {/if}
+                              {else}
 
-        <p>La création de la carte n'est possible qu'après la validation de votre adhésion par le bureau.</p>
-    {/if}
-  </div>
+                                  <p>La création de la carte n'est possible qu'après la validation de votre adhésion par le bureau.</p>
+                                  {/if}
+                                  </div>
 
-  <div class="pill-pane" id="print">
-    <h2>Création de la fiche de membre</h2>
-    <p>
-      La fiche de membre vous permet de valider votre adhésion à Epitanime.
-      Elle peut être pré-remplie mais doit être signée par vous même. En
-      signant la fiche de membre, vous approuvez l'exactitude des informations
-      qui y sont inscrites.
-    </p>
-    <p>
-      Le montant de la cotisation est isncrit dans le règlement intérieur
-      de l'association.
-    </p>
-    <form class="form-horizontal" action="{mkurl action="index" page="print"}" method="POST">
+                                  <div class="pill-pane" id="print">
+                                    <h2>Création de la fiche de membre</h2>
+                                    <p>
+                                      La fiche de membre vous permet de valider votre adhésion à Epitanime.
+                                      Elle peut être pré-remplie mais doit être signée par vous même. En
+                                      signant la fiche de membre, vous approuvez l'exactitude des informations
+                                      qui y sont inscrites.
+                                    </p>
+                                    <p>
+                                      Le montant de la cotisation est isncrit dans le règlement intérieur
+                                      de l'association.
+                                    </p>
+                                    <form class="form-horizontal" action="{mkurl action="index" page="print"}" method="POST">
 
-      <!-- List mandate -->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="mandate">Mandat</label>
-        <div class="col-md-5">
-          <select id="mandate" name="mandate" class="form-control input-md" onchange="updateSub()">
-            {foreach from=$mandate item="l"}
-                <option value="{$l.mandate_id}">{$l.mandate_label}</option>
-            {/foreach}
-          </select>
-        </div>
-      </div>
+                                      <!-- List mandate -->
+                                      <div class="form-group">
+                                        <label class="col-md-4 control-label" for="mandate">Mandat</label>
+                                        <div class="col-md-5">
+                                          <select id="mandate" name="mandate" class="form-control input-md" onchange="updateSub()">
+                                            {foreach from=$mandate item="l"}
+                                                <option value="{$l.mandate_id}">{$l.mandate_label}</option>
+                                            {/foreach}
+                                          </select>
+                                        </div>
+                                      </div>
 
-      <!-- List cotisation -->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="subscription">Type de cotisation</label>
-        <div class="col-md-5">
-          <select id="subscription" name="subscription" class="form-control input-md">
-          </select>
-        </div>
-      </div>
+                                      <!-- List cotisation -->
+                                      <div class="form-group">
+                                        <label class="col-md-4 control-label" for="subscription">Type de cotisation</label>
+                                        <div class="col-md-5">
+                                          <select id="subscription" name="subscription" class="form-control input-md">
+                                          </select>
+                                        </div>
+                                      </div>
 
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="editpass"></label>
-        <div class="col-md-8">
+                                      <div class="form-group">
+                                        <label class="col-md-4 control-label" for="editpass"></label>
+                                        <div class="col-md-8">
 
-          <input type="submit" class="btn btn-primary" value="Imprimer" />
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
-{include "foot.tpl"}
+                                          <input type="submit" class="btn btn-primary" value="Imprimer" />
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </div>
+                              </div>
+                              {include "foot.tpl"}
