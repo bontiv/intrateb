@@ -4,3 +4,4 @@
 /tmp/photo*
 /htdocs/bootstrap.php
 .DS_Store
+/src/libs/card_bg.*
