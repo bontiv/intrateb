@@ -242,7 +242,7 @@
                                       Le montant de la cotisation est isncrit dans le règlement intérieur
                                       de l'association.
                                     </p>
-                                    <form class="form-horizontal" action="{mkurl action="index" page="print"}" method="POST">
+                                    <form target="_blank" class="form-horizontal" action="{mkurl action="index" page="print"}" method="POST">
 
                                       <!-- List mandate -->
                                       <div class="form-group">

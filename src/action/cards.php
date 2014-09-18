@@ -3,11 +3,26 @@
 function cards_makeme() {
     global $tpl, $pdo, $srcdir, $tmpdir;
 
+    include_once $srcdir . DS . 'libs' . DS . 'barcode.php';
+
     $mdl = new Modele('card');
     $mdt = new Modele('mandate');
     $mdt->fetch($_POST['mandate']);
     $usr = new Modele('users');
     $usr->fetch($_SESSION['user']['user_id']);
+
+    $filename = tempnam($tmpdir, 'img');
+
+    if ($mdl->addFrom(array(
+                'card_user' => $usr->user_id,
+                'card_mandate' => $mdt->mandate_id,
+                'card_maketime' => date('Y-m-d'),
+                'card_picture' => $filename,
+            ))) {
+        $tpl->assign('hsuccess', true);
+    } else
+        $tpl->assign('hsuccess', false);
+
 
     $imgd = imagecreatefrompng($srcdir . DS . 'libs' . DS . 'card_bg.png');
     $fdir = $srcdir . DS . 'libs' . DS . 'font' . DS;
@@ -22,18 +37,13 @@ function cards_makeme() {
     imagettftext($imgd, 50, 0, 400, 360, $c_black, $fdir . 'AccidentalPresidency.ttf', "Prénom: " . $usr->user_firstname);
     imagettftext($imgd, 50, 0, 400, 420, $c_black, $fdir . 'AccidentalPresidency.ttf', "Nom: " . $usr->user_lastname);
 
-    $filename = tempnam($tmpdir, 'img');
-    imagepng($imgd, $filename);
+    $cbfile = tempnam($tmpdir, 'cb');
+    imagebarcode($cbfile, str_pad($mdl->getKey(), 12, '0', STR_PAD_LEFT), 600, 70, 5);
+    $codebar = imagecreatefrompng($cbfile);
+    imagecopy($imgd, $codebar, 275, 535, 0, 0, 600, 70);
+    unlink($cbfile);
 
-    if ($mdl->addFrom(array(
-                'card_user' => $usr->user_id,
-                'card_mandate' => $mdt->mandate_id,
-                'card_maketime' => date('Y-m-d'),
-                'card_picture' => $filename,
-            ))) {
-        $tpl->assign('hsuccess', true);
-    } else
-        $tpl->assign('hsuccess', false);
+    imagepng($imgd, $filename);
 
     modexec('index', 'profile');
 }

@@ -168,9 +168,10 @@ function index_subscriptions() {
 }
 
 function index_print() {
-    global $root;
+    global $root, $srcdir, $tmpdir;
 
-    include_once $root . 'libs' . DS . 'fpdf.php';
+    include_once $srcdir . DS . 'libs' . DS . 'fpdf.php';
+    include_once $srcdir . DS . 'libs' . DS . 'barcode.php';
 
     if (!isset($_POST['mandate']))
         $_POST['mandate'] = 1;
@@ -301,6 +302,13 @@ function index_print() {
     $pdf->SetFont('Arial', 'B', 10);
     $pdf->SetXY(18, 145);
     $pdf->Cell(50, 5, uc('Cotisation'), 0, 0, '');
+
+    $cb = '9' . str_pad($mdt->getKey(), 4, '0', STR_PAD_LEFT) . str_pad($usr->getKey(), 7, '0', STR_PAD_LEFT);
+
+    $cbfile = tempnam($tmpdir, 'cb');
+    imagebarcode($cbfile, $cb, 200, 40, 2);
+    $pdf->Image($cbfile, 10, 10, 30, 0, 'PNG');
+    unlink($cbfile);
 
     $pos = -1;
     $pdf->SetFont('Arial', '', 10);
