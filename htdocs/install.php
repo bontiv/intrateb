@@ -155,7 +155,7 @@ if (isset($_GET['etape']) && $_GET['etape'] == 'dbsync') {
         $sql = $pdo->prepare('SELECT * FROM users WHERE user_name = ?');
         $sql->bindValue(1, $_SESSION['admin_user']);
         $sql->execute();
-        if ($sql->rowCount() == 0) {
+        if ($sql->rowCount() == 0 && $_SESSION['admin_user'] != '' && $_SESSION['admin_pass'] != '') {
             $sql = $pdo->prepare('INSERT INTO users (user_name, user_pass, user_firstname, user_lastname, user_type, user_login, user_email, user_phone, user_role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
             $sql->bindValue(1, $_SESSION['admin_user']);
             $sql->bindValue(2, $_SESSION['admin_pass']);
@@ -477,10 +477,10 @@ function tpl_pge_dbsync() {
           <h3>Requêtes SQL à exécuter</h3>
           <p>Voilà le fichier SQL généré qui sera exécuté sur la base de donnée.</p>
           <p><pre>
-                            # ------------------------------------------------------------
-                            # Fichier SQL généré par le système d'installation automatique
-                            # @Copyright bonnetlive
-                            # ------------------------------------------------------------
+                                # ------------------------------------------------------------
+                                # Fichier SQL généré par le système d'installation automatique
+                                # @Copyright bonnetlive
+                                # ------------------------------------------------------------
 
             <?php
             echo "\n";
