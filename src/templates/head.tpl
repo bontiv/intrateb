@@ -67,7 +67,7 @@
         <div class="nav navbar-nav navbar-text pull-right dropdown">
           {if $_user}
               <a href="#" data-toggle="dropdown" role="menu" style="color:grey">
-                {$_user.user_name}</a><b class="caret"></b>
+                {$_user.user_name} <b class="caret"></b></a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                 <li><a href="{mkurl action="index" page="logout"}">Déconnexion</a></li>
                 <li><a href="{mkurl action="index" page="profile"}">Mon profile</a></li>
