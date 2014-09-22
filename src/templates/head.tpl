@@ -15,7 +15,7 @@
     <script src="js/datetime-picker.min.js"></script>
     <!-- /Scripts -->
 
-    <title>Epice Notator ! La terreur des assos !</title>
+    <title>Intranet EPITANIME</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
@@ -24,7 +24,7 @@
 
     <nav class="navbar navbar-default" role="navigation">
       <div class="navar-header">
-        <a class="navbar-brand" href="{mkurl action="index"}">EpiceNotator</a>
+        <a class="navbar-brand" href="{mkurl action="index"}">Intra EPITANIME</a>
       </div>
 
       <div class="collapse navbar-collapse navbar-ex1-collapse" >
