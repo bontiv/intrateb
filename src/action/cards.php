@@ -45,7 +45,7 @@ function cards_makeme() {
 
     imagepng($imgd, $filename);
 
-    modexec('index', 'profil');
+    modexec('index', 'profile');
 }
 
 function cards_index() {
@@ -132,12 +132,12 @@ function cards_delmycard() {
 
     if (!$mdl->next()) {
         $tpl->assign('hsuccess', false);
-        modexec('index', 'profil');
+        modexec('index', 'profile');
     }
 
     $mdl->delete();
     $tpl->assign('hsuccess', true);
-    modexec('index', 'profil');
+    modexec('index', 'profile');
 }
 
 function cards_mkbundle() {

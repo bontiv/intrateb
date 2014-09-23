@@ -375,7 +375,7 @@ function index_photoedit() {
     error_reporting(E_ALL);
     imagepng($imgd, $filename);
     $usr->user_photo = $filename;
-    redirect('index', 'profil');
+    redirect('index', 'profile');
 }
 
 function index_photo() {
