@@ -107,7 +107,7 @@ function index_create() {
 }
 
 /**
- * Modification du profile utilisateur
+ * Modification du profil utilisateur
  * @global type $tpl
  */
 function index_profile() {
@@ -375,7 +375,7 @@ function index_photoedit() {
     error_reporting(E_ALL);
     imagepng($imgd, $filename);
     $usr->user_photo = $filename;
-    redirect('index', 'profile');
+    redirect('index', 'profil');
 }
 
 function index_photo() {

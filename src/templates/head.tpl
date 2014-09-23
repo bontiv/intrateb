@@ -70,7 +70,7 @@
                 {$_user.user_name} <b class="caret"></b></a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                 <li><a href="{mkurl action="index" page="logout"}">Déconnexion</a></li>
-                <li><a href="{mkurl action="index" page="profile"}">Mon profile</a></li>
+                <li><a href="{mkurl action="index" page="profile"}">Mon profil</a></li>
               </ul>
           {else}
               <a href="{mkurl action="index" page="login"}" style="color:grey">

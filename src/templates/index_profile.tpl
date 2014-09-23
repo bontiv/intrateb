@@ -58,7 +58,7 @@
   <div class="pill-pane active" id="edit">
     <form method="POST" class="form-horizontal">
 
-      <legend>Edition du profile</legend>
+      <legend>Edition du profil</legend>
 
       <fieldset>
         {$form}
