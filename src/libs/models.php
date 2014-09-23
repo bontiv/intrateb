@@ -304,8 +304,8 @@ function mdle_form_external($data, $value = null, $error = false) {
             $str .= '>' . htmlentities($opt[0]) . '</option>';
         else {
             $display = $data['display'];
-            foreach ($opt as $key => $value)
-                $display = str_replace('%' . $key . '%', $value, $display);
+            foreach ($opt as $key => $val2)
+                $display = str_replace('%' . $key . '%', $val2, $display);
             $str .= '>' . htmlentities($display) . '</option>';
         }
     }
