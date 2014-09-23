@@ -1,7 +1,8 @@
 {include "head.tpl"}
 <script type="text/javascript" >
-    function crytogun()
+    function crytogun(form)
   {ldelim}
+          var login = form.elements;
           var chain = My_Crypt(login.login.value + ":" + login.password.value);
           login.password.value = My_Crypt(chain + "{$random}");
   {rdelim}
@@ -20,7 +21,7 @@
      -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
      -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
      box-shadow: 0 1px 2px rgba(0,0,0,.05);">
-  <form id="login" name="login" class="form-signin" onsubmit="return crytogun()" method="POST">
+  <form id="login" name="login" class="form-signin" onsubmit="return crytogun(this)" method="POST">
     <center><h2 class="form-signin-heading">Identifiez-vous</h2></center>
     <table border="0" style="">
       <tbody><tr>
@@ -52,7 +53,7 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="password">Mot de passe</label>
         <div class="col-md-8">
-          <input class="form-control input-md" type="text" id="password" name="password" />
+          <input class="form-control input-md" type="password" id="password" name="password" />
         </div>
       </div>
 
