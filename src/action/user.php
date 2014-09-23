@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Module de gestion des utilisateurs
  * Ce module permet de gérer son compte d'utilisateur ainsi que les utilisateurs
@@ -20,7 +21,6 @@ function user_index() {
     quit();
 }
 
-
 /**
  * Ajoute un utilisateur
  * Des fois c'est bien de pouvoir rajouter un utilisateur depuis le panneau d'admin pour l'ajout des nouveaux adhérents.
@@ -34,8 +34,7 @@ function user_add() {
     if (isset($_POST['user_name'])) {
         if (autoInsert('users', 'user_')) {
             $tpl->assign('succes', true);
-        }
-        else
+        } else
             $tpl->assign('error', true);
     }
 
@@ -48,7 +47,6 @@ function user_add() {
     $tpl->display('user_add.tpl');
     quit();
 }
-
 
 /**
  * Suppresion d'un utilisateur
@@ -63,7 +61,6 @@ function user_delete() {
     else
         modexec('syscore', 'sqlerror');
 }
-
 
 /**
  * Détails d'un utilisateur
@@ -97,7 +94,6 @@ function user_view() {
     quit();
 }
 
-
 /**
  * Ajoute un utilisateur comme staff d'une section
  * Cette fonctionnalité permet de gérer les sections d'un utilisateur directement depuis son compte :p
@@ -112,7 +108,6 @@ function user_invit_section() {
     redirect('user', 'view', array('user' => $_GET['user']));
 }
 
-
 /**
  * Permet de quitter une section
  */
@@ -123,5 +118,20 @@ function user_quit() {
     $sql->bindValue(1, $_GET['user']);
     $sql->bindValue(2, $_GET['section']);
     $sql->execute();
-    redirect('user', 'view', array('user' => $_GET['user']));    
+    redirect('user', 'view', array('user' => $_GET['user']));
+}
+
+function user_check() {
+    global $tpl;
+
+    $mdt = new Modele('mandate');
+    $mdt->find();
+
+    $tpl->assign('mandates', array());
+
+    while ($l = $mdt->next()) {
+        $tpl->append('mandates', $l);
+    }
+
+    display();
 }
