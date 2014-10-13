@@ -377,7 +377,7 @@ class Modele {
     private $instance;
     private $iterator;
 
-    function __construct($table) {
+    function __construct($table, $id = null) {
         $this->desc = mdle_need_desc($table);
         $this->iterator = false;
         foreach ($this->desc['fields'] as $n => &$v) {
@@ -386,6 +386,10 @@ class Modele {
                 $v['label'] = $n;
             if (!isset($v['size']))
                 $v['size'] = 30;
+
+            if ($id !== null) {
+                $this->fetch($id);
+            }
         }
     }
 
@@ -481,7 +485,8 @@ class Modele {
                 $stmt->bindValue($index + 1, $val['val']);
         }
         $rst = $stmt->execute();
-        $this->fetch($pdo->lastInsertId());
+        if ($rst)
+            $this->fetch($pdo->lastInsertId());
         return $rst;
     }
 
@@ -603,6 +608,10 @@ class Modele {
         return $success;
     }
 
+    function count() {
+        return $this->iterator->rowCount();
+    }
+
     function next() {
         if ($this->iterator) {
             $this->instance = $this->iterator->fetch(PDO::FETCH_ASSOC);
@@ -634,8 +643,9 @@ class Modele {
             $name = substr($name, 4);
         }
 
-        if (!isset($this->desc['fields'][$name]))
+        if (!isset($this->desc['fields'][$name])) {
             throw new ModeleFieldNotFound($this->getName(), $name);
+        }
         if (!isset($this->instance[$name]))
             return null;
         if (!$raw && $this->desc['fields'][$name]['type'] == 'enum')

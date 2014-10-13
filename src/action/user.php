@@ -90,6 +90,12 @@ function user_view() {
         if (!in_array($line['section_id'], $sections))
             $tpl->append('section_list', $line);
 
+    $mdt = new Modele('user_mandate');
+    $mdt->find(array('um_user' => $_REQUEST['user']));
+    while ($mdt->next()) {
+        $tpl->append('mandates', $mdt->um_mandate);
+    }
+
     $tpl->display('user_details.tpl');
     quit();
 }
@@ -121,6 +127,38 @@ function user_quit() {
     redirect('user', 'view', array('user' => $_GET['user']));
 }
 
+function user_add_mandate($user, $mandate) {
+    $usr = new Modele('users');
+    $mdt = new Modele('mandate');
+    $lnk = new Modele('user_mandate');
+
+    if (preg_match('/^9([0-9]{4})([0-9]{7})[0-9]$/', $user, $matchs)) {
+        $user = $matchs[2];
+        $mandate = $matchs[1];
+    }
+
+    $usr->fetch($user);
+    $mdt->fetch($mandate);
+
+    if ($lnk->find(array(
+                'um_user' => $usr->getKey(),
+                'um_mandate' => $usr->getKey(),
+            )) && $lnk->count() > 0) {
+        return true;
+    }
+
+    $succ = $lnk->addFrom(array(
+        'um_user' => $usr->getKey(),
+        'um_mandate' => $mdt->getKey(),
+    ));
+
+    if ($succ && $usr->user_role < ACL_USER) {
+        $usr->user_role = ACL_USER;
+    }
+
+    return $succ;
+}
+
 function user_check() {
     global $tpl;
 
@@ -128,6 +166,10 @@ function user_check() {
     $mdt->find();
 
     $tpl->assign('mandates', array());
+
+    if (isset($_POST['idfiche'])) {
+        $tpl->assign('hsuccess', user_add_mandate($_POST['idfiche'], $_POST['mandate']));
+    }
 
     while ($l = $mdt->next()) {
         $tpl->append('mandates', $l);

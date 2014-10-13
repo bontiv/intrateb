@@ -1,0 +1,14 @@
+## Table User_sections
+name: user_mandate
+key: um_id
+fields:
+  um_id:
+    type: auto_int
+  um_user:
+    type: external
+    table: users
+    display: %user_firstname% %user_lastname% (%user_name%)
+  um_mandate:
+    type: external
+    table: mandate
+    display: %mandate_label%
