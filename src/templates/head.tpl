@@ -36,13 +36,7 @@
 
         <div class="collapse navbar-collapse" >
           <ul class="nav navbar-nav">
-            {acl action="user"}
-            <li><a href="{mkurl action="user"}">Utilisateurs</a></li>
-              {/acl}
-              {acl action="ecole"}
-            <li><a href="{mkurl action="ecole"}">Ecoles</a></li>
-              {/acl}
-              {acl action="section"}
+            {acl action="section"}
             <li><a href="{mkurl action="section"}">Sections</a></li>
               {/acl}
               {acl action="event"}
@@ -64,6 +58,12 @@
               <a href="#" data-toggle="dropdown" class="dropdown-toggle">Admin
                 <b class="caret"></b></a>
               <ul class="dropdown-menu">
+                {acl action="user"}
+                <li><a href="{mkurl action="user"}">Utilisateurs</a></li>
+                  {/acl}
+                  {acl action="ecole"}
+                <li><a href="{mkurl action="ecole"}">Ecoles</a></li>
+                  {/acl}
                 <li><a href="{mkurl action="admin_modeles"}">Instances de donnée</a></li>
                 <li><a href="{mkurl action="admin"}">Droits d'accès</a></li>
                 <li><a href="{mkurl action="cards"}">Gestion des cartes</a></li>
