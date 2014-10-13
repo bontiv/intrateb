@@ -20,7 +20,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
 
-  <body background="../images/bg3.png" style="background-attachment: fixed; width: 100%; height: 100%; background-position: top center; z-index: 1; position: relative;">
+  <body>
 
     <div class="navbar navbar-default" role="navigation">
       <div class="container">
