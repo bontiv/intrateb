@@ -98,7 +98,7 @@
         </div>
       </div>{* /container *}
     </div>{* /navbar *}
-    <div class="container row col-md-offset-1">
+    <div class="container container-fluid">
 
       {if isset($hsuccess)}
           {if $hsuccess}
