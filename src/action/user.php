@@ -15,7 +15,31 @@
 function user_index() {
     global $pdo, $tpl;
 
-    $pager = new SimplePager('users');
+    if (isset($_POST['search'])) {
+        header('location: ' . urldup(array(
+                    'search' => $_POST['search'],
+        )));
+        quit();
+    }
+
+    $where = '';
+
+    if (isset($_GET['search'])) {
+        $where = 'WHERE user_name LIKE ? '
+                . 'OR user_lastname LIKE ? '
+                . 'OR user_firstname LIKE ? '
+                . 'OR user_email LIKE ? ';
+    }
+
+    $pager = new SimplePager('users', $where . 'ORDER BY user_name ASC', 'p', 20);
+
+    if (isset($_GET['search'])) {
+        $pager->bindValue(1, "%${_GET['search']}%");
+        $pager->bindValue(2, "%${_GET['search']}%");
+        $pager->bindValue(3, "%${_GET['search']}%");
+        $pager->bindValue(4, "%${_GET['search']}%");
+    }
+
     $pager->run($tpl);
     $tpl->display('user_index.tpl');
     quit();

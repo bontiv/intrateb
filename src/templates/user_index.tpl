@@ -23,11 +23,36 @@
   </div>
 </div>
 {* END BLOCK : Modal ajout membre *}
+
 <div class="">
   <h1>Administration</h1>
   <h3>Gestion des utilisateurs</h3>
+
+  {* START BLOCK recherche *}
+  <form class="form-inline" method="POST" action="{mkurl action="user" page="index"}">
+    <fieldset>
+      <div class="form-group">
+        <div class="col-md-8">
+          <input id="search" name="search" placeholder="Recherche" class="form-control input-md"  type="search">
+        </div>
+      </div>
+    </fieldset>
+  </form>
+  {* END BLOCK *}
+
+
   <a class="btn btn-link" href="{mkurl action="user" page="add"}" role="button" data-toggle="modal"><i class="glyphicon glyphicon-plus"></i> Ajouter</a>
   <a class="btn btn-link" href="{mkurl action="user" page="check"}" role="button" data-toggle="modal"><i class="glyphicon glyphicon-check" title="Valider des cotisations"></i> Valider</a>
+
+  <ul class="pager">
+    {if $ptable.showPrev}
+        <li><a href="{$ptable.prev}"><i class="glyphicon glyphicon-arrow-left"></i> Précédent</a></li>
+        {/if}
+        {if $ptable.showNext}
+        <li><a href="{$ptable.next}">Suivant <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+        {/if}
+  </ul>
+
 
   <table class="table table-striped table-hover">
     <thead>
@@ -66,5 +91,14 @@
     </tbody>
   </table>
 </div>
+
+<ul class="pager">
+  {if $ptable.showPrev}
+      <li><a href="{$ptable.prev}"><i class="glyphicon glyphicon-arrow-left"></i> Précédent</a></li>
+      {/if}
+      {if $ptable.showNext}
+      <li><a href="{$ptable.next}">Suivant <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+        {/if}
+</ul>
 
 {include "foot.tpl"}
