@@ -24,6 +24,50 @@
 </div>
 {* END BLOCK : Modal ajout membre *}
 
+{* BLOCK : Modal google *}
+<div class="modal fade" id="googleCopy" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Copier Coller pour Google</h4>
+      </div>
+      <div class="modal-body">
+        <textarea id="googleCopyText" onchange="updateTextArea()" onclick="updateTextArea()" style="width:100%;height:100px"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btn-primary">Valider</button>
+      </div>
+    </div>
+  </div>
+</div>
+{* END BLOCK : Modal google *}
+
+<script type="text/javascript">
+  {literal}
+      var clipboard = '';
+
+      function addAddress(email) {
+          clipboard = clipboard + email + ";\n";
+      }
+
+      function sendToClipboard()
+      {
+          $('#googleCopyText').val(clipboard);
+          $('#googleCopy').modal('show');
+          $('#googleCopyText').get(0).select();
+          return false;
+      }
+
+      function updateTextArea() {
+          $('#googleCopyText').val(clipboard);
+          $('#googleCopyText').get(0).focus();
+          $('#googleCopyText').get(0).select();
+      }
+  {/literal}
+</script>
+
 <div class="">
   <h1>Administration</h1>
   <h3>Gestion des utilisateurs</h3>
@@ -43,6 +87,8 @@
 
   <a class="btn btn-link" href="{mkurl action="user" page="add"}" role="button" data-toggle="modal"><i class="glyphicon glyphicon-plus"></i> Ajouter</a>
   <a class="btn btn-link" href="{mkurl action="user" page="check"}" role="button" data-toggle="modal"><i class="glyphicon glyphicon-check" title="Valider des cotisations"></i> Valider</a>
+  <a class="btn btn-link" href="#" onclick="sendToClipboard();
+          return false;"><i class="glyphicon glyphicon-share" title="Copier dans le presse papier"></i> Presse-papier</a>
 
   <ul class="pager">
     {if $ptable.showPrev}
@@ -50,7 +96,7 @@
         {/if}
         {if $ptable.showNext}
         <li><a href="{$ptable.next}">Suivant <i class="glyphicon glyphicon-arrow-right"></i></a></li>
-        {/if}
+          {/if}
   </ul>
 
 
@@ -77,7 +123,12 @@
             <td>{$line.user_lastname}</td>
             <td>{$line.user_firstname}</td>
             <td>{$line.user_phone}</td>
-            <td><a href="{$line.user_email}">{$line.user_email}</a></td>
+            <td>
+              <a class="email-field" href="mailto:{$line.user_email}">{$line.user_email}</a>
+              <script type="text/javascript">
+                  addAddress('{$line.user_email}');
+              </script>
+            </td>
             <td><a href="https://intra.epitech.eu/user/{$line.user_login}/">{$line.user_login}</a></td>
             <td>
               <div class="btn-group">

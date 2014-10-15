@@ -80,6 +80,8 @@ function index_create() {
     if (isset($_POST['user_name'])) {
         $pass = md5($_POST['user_name'] . ':' . $_POST['user_pass']);
 
+        //$pdo->prepare('');
+
         if (strlen($_POST['user_pass']) < 4)
             $tpl->assign('error', 'Mot de passes pas assez long...');
         elseif ($_POST['user_pass'] != $_POST['confirmPassword'])
