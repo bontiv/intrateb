@@ -49,7 +49,7 @@
       var clipboard = '';
 
       function addAddress(email) {
-          clipboard = clipboard + email + ";\n";
+          clipboard = clipboard + email + ",\n";
       }
 
       function sendToClipboard()
