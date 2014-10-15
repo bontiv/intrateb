@@ -1,7 +1,9 @@
 {include "head.tpl"}
 
 {if $succes}
-    <div class="alert success alert-success" role="alert">Inscription passé avec succès.</div>
+    <div class="alert success alert-success" role="alert">
+      Inscription passé avec succès. Vous pouvez dès à présent vous connecter.
+    </div>
 {/if}
 {if $error}
     <div class="alert alert-danger danger" role="alert"><strong>Erreur !</strong> {$error}</div>
