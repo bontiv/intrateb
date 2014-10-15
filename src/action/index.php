@@ -80,21 +80,29 @@ function index_create() {
     if (isset($_POST['user_name'])) {
         $pass = md5($_POST['user_name'] . ':' . $_POST['user_pass']);
 
-        //$pdo->prepare('');
+        $stm = $pdo->prepare('SELECT COUNT(*) FROM users WHERE user_name LIKE ?');
+        $stm->bindValue(1, $_POST['user_name']);
+        $stm->execute();
+        $rst = $stm->fetch();
+        if ($rst[0] == 0) {
 
-        if (strlen($_POST['user_pass']) < 4)
-            $tpl->assign('error', 'Mot de passes pas assez long...');
-        elseif ($_POST['user_pass'] != $_POST['confirmPassword'])
-            $tpl->assign('error', 'Mot de passes différents...');
-        elseif ($_POST['user_pass'] != $_POST['confirmPassword'])
-            $tpl->assign('error', 'Mot de passes différents...');
-        elseif (autoInsert('users', 'user_', array(
-                    'user_pass' => $pass,
-                    'user_role' => 'GUEST',
-                ))) {
-            $tpl->assign('succes', true);
-        } else
-            $tpl->assign('error', 'Erreur SQL...');
+            if (strlen($_POST['user_pass']) < 4)
+                $tpl->assign('error', 'Mot de passes pas assez long...');
+            elseif ($_POST['user_pass'] != $_POST['confirmPassword'])
+                $tpl->assign('error', 'Mot de passes différents...');
+            elseif ($_POST['user_pass'] != $_POST['confirmPassword'])
+                $tpl->assign('error', 'Mot de passes différents...');
+            elseif (autoInsert('users', 'user_', array(
+                        'user_pass' => $pass,
+                        'user_role' => 'GUEST',
+                    ))) {
+                $tpl->assign('succes', true);
+            } else
+                $tpl->assign('error', 'Erreur SQL...');
+        } else {
+            //Block d'erreur utilisateur existant
+            $tpl->assign('error', "Ce nom d'utilisateur est déjà utilisé.");
+        }
     }
 
     $sql = $pdo->prepare('SELECT * FROM user_types');
