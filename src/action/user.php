@@ -201,3 +201,25 @@ function user_check() {
 
     display();
 }
+
+function user_editpassword() {
+    global $tpl;
+
+    $pass = $_POST['password'];
+    $confirm = $_POST['password2'];
+    $user = $_GET['user'];
+
+    if ($pass != $confirm) {
+        $tpl->assign('hsuccess', false);
+    } else {
+        $mdl = new Modele('users');
+        $mdl->fetch($user);
+        $rslt = $mdl->modFrom(array(
+            'user_pass' => md5($mdl->user_login . ':' . $mdl->user_login),
+                ), false);
+
+        $tpl->assign('hsuccess', $rslt);
+
+        modexec('user', 'view');
+    }
+}

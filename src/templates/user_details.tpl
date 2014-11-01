@@ -1,5 +1,32 @@
 {include "head.tpl"}
 
+<!-- Modal passwordRecover -->
+<form action="{mkurl action="user" page="editpassword" user=$user.user_id}" method="POST">
+  <div class="modal fade" id="passwordRecover" tabindex="-1" role="dialog" aria-labelledby="Password Recover" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title" id="myModalLabel">Réinitialisation du mot de passe</h4>
+        </div>
+        <div class="modal-body">
+          <p>Entrez un nouveau mot de passe ci-dessous.</p>
+          <div class="form-group">
+            <input type="password" name="password" class="form-control input-md" placeholder="Mot de passe" />
+          </div>
+          <div class="form-group">
+            <input type="password" name="password2" class="form-control input-md" placeholder="Confirmation" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+          <button type="submit" class="btn btn-primary">Valider</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
 <h1>Utilisateurs</h1>
 <h2>{$user.user_name}</h2>
 
@@ -11,6 +38,10 @@
   <strong>email : </strong>{$user.user_email}<br/>
   <strong>Téléphone : </strong>{$user.user_phone}<br/>
   <strong>Accès : </strong>{$user.user_role}</p>
+
+<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#passwordRecover">
+  <i class="glyphicon glyphicon-edit"></i> Mot de passe
+</button>
 
 <h3>Ses sections</h3>
 <form method="POST" class="form-inline" action="{mkurl action="user" page="invit_section" user=$user.user_id}">
