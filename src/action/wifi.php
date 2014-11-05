@@ -37,10 +37,21 @@ function _wifi_getToken() {
     }
 }
 
+function wifi_index() {
+    global $pdo, $tpl;
+
+    $rst = $pdo->query('SELECT * FROM wifi_tokens LEFT JOIN wifi_tokenGroup ON wt_group = wtg_id LEFT JOIN users ON wt_assign = user_id WHERE wt_date + INTERVAL wtg_duration MINUTE > NOW()');
+
+    while ($l = $rst->fetch()) {
+        $tpl->append('lines', $l);
+    }
+    display();
+}
+
 /**
  * Fichier administration du wifi
  */
-function wifi_index() {
+function wifi_tokens() {
     global $pdo, $tpl;
 
     $mdl = new Modele('wifi_tokenGroup');
@@ -130,7 +141,7 @@ function wifi_del() {
 
     $tpl->assign('hsuccess', $stmt1->execute() && $stmt2->execute());
 
-    modexec('wifi');
+    modexec('wifi', 'tokens');
 }
 
 function wifi_allow() {
