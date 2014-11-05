@@ -133,6 +133,12 @@ function wifi_del() {
     modexec('wifi');
 }
 
+function wifi_allow() {
+    $redirect = $_GET['url'];
+    header('Location: ' . $redirect . '#' . _wifi_getToken());
+    quit();
+}
+
 function wifi_login() {
     global $tpl;
     $redirect = $_GET['url'];
@@ -142,11 +148,11 @@ function wifi_login() {
     }
 
     if (isset($_SESSION['user']) && $_SESSION['user']) {
-        echo 'OK';
-        header('Location: ' . $redirect . '#' . _wifi_getToken());
-        quit();
+        redirect('wifi', 'allow', array('url' => $redirect));
     }
 
+    $_SESSION['random'] = uniqid();
+    $tpl->assign('random', $_SESSION['random']);
     $tpl->assign('redirect', $redirect);
     display();
 }

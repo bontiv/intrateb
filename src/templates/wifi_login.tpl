@@ -24,11 +24,11 @@
 
     <script type="text/javascript" >
         function crytogun(form)
-        {
-            var login = form.elements;
-            var chain = My_Crypt(login.login.value + ":" + login.password.value);
-            login.password.value = My_Crypt(chain + "9c2f79bac069cb2cb08ef5e58d427adf");
-        }
+      {ldelim}
+              var login = form.elements;
+              var chain = My_Crypt(login.login.value + ":" + login.password.value);
+              login.password.value = My_Crypt(chain + "{$random}");
+      {rdelim}
     </script>
     <script type="text/javascript" src="crypt.js" >alert("Impossible de lancer l'algo de cryptage")</script>
 
