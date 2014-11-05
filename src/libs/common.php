@@ -515,3 +515,32 @@ function display() {
 function uc($txt) {
     return iconv('UTF-8', 'ISO-8859-1//TRANSLIT//IGNORE', $txt);
 }
+
+/**
+ * Permet d'authentifier un utilisateur
+ *
+ * @global type $pdo
+ * @param type $user Utilisateur
+ * @param type $pass Mot de passe chiffré
+ * @return boolean True si authentification réussie
+ */
+function login_user($user, $pass) {
+    global $pdo;
+
+    $sql = $pdo->prepare('SELECT * FROM users WHERE user_name = ?');
+    $sql->bindValue(1, $user);
+    $sql->execute();
+    if ($user = $sql->fetch()) {
+        //Ici l'utilisateur existe
+        if (strlen($user['user_pass']) != 32) // Mot de passe non chiffré ...
+            $user['user_pass'] = md5($user['user_name'] . ':' . $user['user_pass']);
+
+        //Mot de passe correct ?
+        if (md5($user['user_pass'] . $_SESSION['random']) == $pass) {
+            $_SESSION['user'] = $user;
+            $_SESSION['user']['role'] = aclFromText($user['user_role']);
+            return true;
+        }
+    }
+    return false;
+}

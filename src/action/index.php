@@ -25,27 +25,14 @@ function index_index() {
  * @global type $pdo
  */
 function index_login() {
-    global $tpl, $pdo;
+    global $tpl;
 
     $tpl->assign('msg', false);
 
     //Tentative de connexion
     if (isset($_POST['login'])) {
-        $sql = $pdo->prepare('SELECT * FROM users WHERE user_name = ?');
-        $sql->bindValue(1, $_POST['login']);
-        $sql->execute();
-        if ($user = $sql->fetch()) {
-            //Ici l'utilisateur existe
-            if (strlen($user['user_pass']) != 32) // Mot de passe non chiffré ...
-                $user['user_pass'] = md5($user['user_name'] . ':' . $user['user_pass']);
-
-            //Mot de passe correct ?
-            if (md5($user['user_pass'] . $_SESSION['random']) == $_POST['password']) {
-                $_SESSION['user'] = $user;
-                $_SESSION['user']['role'] = aclFromText($user['user_role']);
-                redirect('index');
-            }
-        }
+        if (login_user($_POST['login'], $_POST['password']))
+            redirect('index');
 
         // Et oui, pas de redirection = erreur de login ...
         $tpl->assign('msg', 'Utilisateur ou mot de passe erroné.');
