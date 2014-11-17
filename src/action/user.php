@@ -215,7 +215,7 @@ function user_editpassword() {
         $mdl = new Modele('users');
         $mdl->fetch($user);
         $rslt = $mdl->modFrom(array(
-            'user_pass' => md5($mdl->user_login . ':' . $mdl->user_login),
+            'user_pass' => md5($mdl->user_login . ':' . $confirm),
                 ), false);
 
         $tpl->assign('hsuccess', $rslt);
