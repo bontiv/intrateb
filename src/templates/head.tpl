@@ -68,6 +68,7 @@
                 <li><a href="{mkurl action="admin"}">Droits d'accès</a></li>
                 <li><a href="{mkurl action="cards"}">Gestion des cartes</a></li>
                 <li><a href="{mkurl action="wifi"}">Gestion du wifi</a></li>
+                <li><a href="{mkurl action="config"}">Configurations</a></li>
               </ul>
             </li>
             {/acl}

@@ -544,3 +544,30 @@ function login_user($user, $pass) {
     }
     return false;
 }
+
+/**
+ * Récupère la liste des configurations
+ */
+function get_configs() {
+    global $root, $_cfg_cache;
+
+    if ($_cfg_cache !== null)
+        return $_cfg_cache;
+
+    $files = scandir($root . 'configs');
+    $config = array();
+    foreach ($files as $name) {
+        $file = $root . 'configs' . DS . $name;
+        if (is_file($file)) {
+            $data = spyc_load_file($file);
+            $data['file'] = $name;
+            foreach ($data['fields'] as $fname => &$fdata)
+                $fdata['name'] = $fname;
+            if (isset($data['name']))
+                $config[$data['name']] = $data;
+        }
+    }
+
+    $_cfg_cache = $config;
+    return $config;
+}

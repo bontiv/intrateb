@@ -57,11 +57,21 @@ if (!is_writable($tpl->compile_dir))
     chmod($tpl->compile_dir, 0777);
 
 // Etape 1, on charge la configuration sur l'environnement présent.
+$cfg = get_configs();
+$config = array();
+foreach ($cfg as $cfgPart) {
+    $config[$cfgPart['name']] = array();
+    foreach ($cfgPart['fields'] as $field) {
+        $config[$cfgPart['name']][$field['name']] = isset($field['default']) ? $field['default'] : null;
+    }
+}
+
 $conf = $pdo->prepare("SELECT * FROM config WHERE env is NULL OR env = ?");
 $conf->bindValue(1, $env);
 $conf->execute();
 while ($dat = $conf->fetch()) {
-    $$dat['name'] = $dat['value'];
+    $parts = explode('!!', $dat['name']);
+    $config[$parts[0]][$parts[1]] = $dat['value'];
 }
 
 // Etape 2, calcul du chemin d'execution
