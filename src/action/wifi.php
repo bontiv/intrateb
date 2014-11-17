@@ -60,7 +60,7 @@ function wifi_tokens() {
     while ($mdl->next()) {
         $line = $mdl->toArray();
 
-        $stmt = $pdo->prepare('SELECT COUNT(*) FROM wifi_tokens WHERE wt_group = ? AND wt_assign IS NULL');
+        $stmt = $pdo->prepare('SELECT COUNT(*) FROM wifi_tokens WHERE wt_group = ?');
         $stmt->bindValue(1, $mdl->wtg_id);
         $stmt->execute();
         $rst = $stmt->fetch();
