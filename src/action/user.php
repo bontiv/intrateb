@@ -176,7 +176,7 @@ function user_add_mandate($user, $mandate) {
         'um_mandate' => $mdt->getKey(),
     ));
 
-    if ($succ && (aclFromText($usr->user_role) < ACL_USER)) {
+    if ($succ && (aclFromText($usr->raw_user_role) < ACL_USER)) {
         $usr->user_role = ACL_USER;
     }
 
