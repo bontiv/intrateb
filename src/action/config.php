@@ -30,19 +30,36 @@ function _config_update($scope, $name, $value) {
 
     $config[$scope][$name] = $value;
 
-    $update = $pdo->prepare('UPDATE config SET value = ? WHERE name = ? AND env = ?');
-    $update->bindValue(1, $value);
-    $update->bindValue(2, "$scope!!$name");
-    $update->bindValue(3, $env);
-    $update->execute();
-    if ($update->rowCount() > 0)
-        return true;
-    echo 'step2';
-    $insert = $pdo->prepare('INSERT INTO config (value, name, env) VALUES (?, ?, ?)');
-    $insert->bindValue(1, $value);
-    $insert->bindValue(2, "$scope!!$name");
-    $insert->bindValue(3, $env);
-    return $insert->execute();
+    $exist = $pdo->prepare('SELECT value FROM config WHERE `name` = ? AND `env` = ?');
+    $exist->bindValue(1, "$scope!!$name");
+    $exist->bindValue(2, $env);
+    $exist->execute();
+    $val = $exist->fetch();
+
+    if ($val === false) {
+        $insert = $pdo->prepare(
+                'INSERT INTO config (`value`, `name`, `env`) VALUES (?, ?, ?)');
+        $insert->bindValue(1, $value);
+        $insert->bindValue(2, "$scope!!$name");
+        $insert->bindValue(3, $env);
+        return $insert->execute();
+
+
+        // Valeur existante
+    } else {
+
+        // Valeur déjà à jour
+
+        if ($val[0] == $value) {
+            return true;
+        } else {
+            $update = $pdo->prepare('UPDATE config SET `value` = ? WHERE `name` = ? AND `env` = ?');
+            $update->bindValue(1, $value);
+            $update->bindValue(2, "$scope!!$name");
+            $update->bindValue(3, $env);
+            return $update->execute();
+        }
+    }
 }
 
 function config_edit() {

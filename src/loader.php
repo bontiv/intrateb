@@ -35,6 +35,12 @@ require_once $root . 'libs' . DS . 'spyc.php';
 require_once $root . 'libs' . DS . 'common.php';
 require_once $root . 'libs' . DS . 'models.php';
 
+//Initialisation des mails
+require_once $root . 'libs' . DS . 'phpmailer' . DS . 'class.phpmailer.php';
+
+//Initialisation du captcha
+require_once $root . 'libs' . DS . 'securimage' . DS . 'securimage.php';
+
 //Initialisation du PDO
 $pdo = new PDO($dsn, $db_user, $db_pass);
 
@@ -106,11 +112,10 @@ if ($_SESSION['user']) {
         $_SESSION['user']['sections'][$line['section_id']] = $line;
 }
 
-modsecu($action, $page);
-needAcl(getAclLevel($action, $page));
+modsecu($action, $page, $_GET);
+needAcl(getAclLevel($action, $page), $action, $page, $_GET);
 
 // Etape 4 lancement du module
 modexec($action, $page);
 modexec('syscore', 'moderror');
 quit();
-?>

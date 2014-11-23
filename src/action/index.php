@@ -383,3 +383,77 @@ function index_photo() {
     readfile($usr->user_photo);
     quit();
 }
+
+function index_securimage_show() {
+    global $srcdir;
+
+    require_once $srcdir . '/libs/securimage/securimage_show.php';
+
+    quit();
+}
+
+function index_password() {
+    global $tpl;
+
+    if (isset($_POST['valider'])) {
+        $securimage = new Securimage();
+        if ($securimage->check($_POST['captcha_code']) == false) {
+            $tpl->assign('msg', 'Le captcha est incorrect');
+            $tpl->assign('error_captcha', true);
+
+            //catcha valide
+        } else {
+            // Recherche du membre
+            $mdl = new Modele('users');
+            $mdl->find(array('user_email' => $_POST['mail']));
+            if (!$mdl->next()) {
+                $tpl->assign('msg', 'L\'adresse email est introuvable');
+                $tpl->assign('error_mail', true);
+
+                // Membre existe
+            } else {
+                $_SESSION['index_password_code'] = uniqid();
+                $_SESSION['index_password_email'] = $_POST['mail'];
+                $tpl->assign('url', $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . mkurl('index', 'password_change', array(
+                            session_name() => session_id(),
+                            'valid' => $_SESSION['index_password_code']
+                )));
+                $mail = getMailer();
+                $mail->AddAddress($_SESSION['index_password_email']);
+                $mail->Subject = '[intra EPITANIME] mot de passe perdu';
+                $mail->Body = $tpl->fetch('mail_password.tpl');
+                $tpl->assign('msuccess', $mail->Send());
+            }
+        }
+    }
+
+    display();
+}
+
+function index_password_change() {
+    global $tpl;
+
+    if (!isset($_GET['valid']) || $_GET['valid'] != $_SESSION['index_password_code']) {
+        $tpl->assign('hsuccess', false);
+        modexec('index');
+    }
+
+    $mdl = new Modele('users');
+    $mdl->find(array('user_email' => $_SESSION['index_password_email']));
+    $mdl->next();
+
+    if (isset($_POST['pwd1'])) {
+        $success = $mdl->modFrom(array('user_pass' => $_POST['pwd1']), false);
+        $tpl->assign('hsuccess', $success);
+        if ($success) {
+            unset($_SESSION['index_password_code']);
+            $_SESSION['user'] = $mdl->toArray();
+            $_SESSION['user']['role'] = aclFromText($mdl->user_role);
+            $tpl->assign('_user', $_SESSION['user']);
+            modexec('index');
+        }
+    }
+
+    $tpl->assign('user', $mdl);
+    display();
+}

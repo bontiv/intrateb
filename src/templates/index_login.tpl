@@ -34,6 +34,7 @@
         </tr>
       </tbody></table>
     <button style="float:right" class="btn btn-large btn-primary" type="submit" value="OK">Connexion</button>
+    <a href="{mkurl action="index" page="password"}" class="btn btn-danger btn-large">Mot de passe perdu</a>
   </form>
 </div>
 
@@ -60,6 +61,7 @@
       <div class="form-group">
         <div class="col-md-offset-4 col-md-8">
           <button style="float:right" class="btn btn-large btn-primary" type="submit" value="OK">Connexion</button>
+          <a href="{mkurl action="index" page="password"}" class="btn btn-danger btn-large">Mot de passe perdu</a>
         </div>
       </div>
 
