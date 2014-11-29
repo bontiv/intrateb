@@ -1,0 +1,35 @@
+## Table wifi_token
+name: wifi_tokens
+key: wt_id
+fields:
+  wt_id:
+    type: auto_int
+  wt_token:
+    type: var
+    size: 20
+    label: Token
+  wt_group:
+    type: var
+    size: 34
+    table: wifi_tokenGroup
+    display: %wtg_roll%
+    label: Groupe
+  wt_assign:
+    type: external
+    label: Prénom
+    table: users
+    display: %user_name%
+    null: true
+  wt_date:
+    type: date_time
+    label: Date d'utilisation
+    null: true
+
+
+indexes:
+  wt_token_index:
+    type: unique
+    fields: [wt_token]
+  wt_group_index:
+    type: index
+    fields: [wt_group]

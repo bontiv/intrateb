@@ -176,7 +176,7 @@ function user_add_mandate($user, $mandate) {
         'um_mandate' => $mdt->getKey(),
     ));
 
-    if ($succ && $usr->user_role < ACL_USER) {
+    if ($succ && (aclFromText($usr->raw_user_role) < ACL_USER)) {
         $usr->user_role = ACL_USER;
     }
 
@@ -214,8 +214,9 @@ function user_editpassword() {
     } else {
         $mdl = new Modele('users');
         $mdl->fetch($user);
+
         $rslt = $mdl->modFrom(array(
-            'user_pass' => md5($mdl->user_login . ':' . $mdl->user_login),
+            'user_pass' => md5($mdl->user_name . ':' . $pass),
                 ), false);
 
         $tpl->assign('hsuccess', $rslt);

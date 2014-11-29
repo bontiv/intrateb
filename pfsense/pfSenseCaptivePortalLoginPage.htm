@@ -1,0 +1,104 @@
+<html>
+  <head>
+    <title>Connexion WiFi - EPITANIME</title>
+    <meta name="viewport" content="width=1.0" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <style type="text/css">
+      body {
+          background-color: #fff;
+      }
+      body,td,th {
+          color: #000;
+          font-family: Verdana, Arial;
+          font-size: 9pt;
+      }
+      h1 {
+          font-size: 14pt;
+          margin-top: 0;
+          text-align: center;
+      }
+      h2 {
+          font-size: 10pt;
+          background-color: blue;
+          color: #fff;
+          padding: 5px;
+          margin: 0;
+      }
+      #LoginForm {
+          padding: 10px;
+          margin: 5px;
+          max-width: 500px;
+          margin-left: auto;
+          margin-right: auto;
+      }
+      #LoginFormOptions .LoginFormField {
+          width: 100%;
+          margin-top: 5px;
+      }
+      #LoginFormOptions .LoginFormButton {
+          margin-top: 5px;
+      }
+      #LoginFormCredentials {
+          border: solid 1px blue;
+          margin-right: 10px;
+          margin-bottom: 10px;
+          width: 100%;
+      }
+      #LoginFormVoucher {
+          border: solid 1px blue;
+          margin-right: 10px;
+          margin-bottom: 10px;
+          width: 100%;
+      }
+      .LoginFormContents {
+          padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="LoginForm">
+      <h1>Réseau WiFi EPITANIME</h1>
+      <p>La connexion au réseau WiFi est restreinte aux membres d'EPITANIME.
+        Pour pouvoir utiliser cette connexion, vous devez être à jour dans
+        votre cotisation.</p>
+      <div id="LoginFormOptions">
+
+        <div id="LoginFormVoucher">
+          <form method="post" id="form-intra" action="$PORTAL_ACTION$">
+            <input name="redirurl" type="hidden" value="$PORTAL_REDIRURL$">
+            <h2>Intranet EPITANIME (membres)</h2>
+            <div class="LoginFormContents">
+              <button type="button" onclick="document.location = 'http://intra.epitanime.com/index.php?action=wifi&page=login&url=' + encodeURIComponent('$PORTAL_ACTION$')">Connexion</button>
+              <input name="auth_voucher" type="hidden" value="" />
+              <input name="redirurl" type="hidden" value="$PORTAIL_REDIRURL$" />
+              <input name="accept" type="hidden" value="Login" />
+            </div>
+          </form>
+          <script type="text/javascript">
+            var voucher = document.location.hash.substr(1);
+            if (voucher.length > 0) {
+                document.forms['form-intra'].elements.auth_voucher.value = voucher;
+                document.forms['form-intra'].submit();
+            }
+          </script>
+        </div>
+
+
+        <div id="LoginFormCredentials">
+          <form method="post" action="$PORTAL_ACTION$">
+            <input name="redirurl" type="hidden" value="$PORTAL_REDIRURL$">
+            <h2>Technical network (section technique)</h2>
+            <div class="LoginFormContents">
+              Utilisateur:<br/>
+              <input name="auth_user" type="text" class="LoginFormField"><br />
+              Mot de passe:<br/>
+              <input id="auth_pass" name="auth_pass" type="password" class="LoginFormField"><br/>
+              <input name="accept" type="submit" value="Login" class="LoginFormButton">
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>

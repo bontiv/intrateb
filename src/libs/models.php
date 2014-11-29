@@ -332,6 +332,7 @@ function mdle_form_enum($data, $value = null, $error = false) {
             . '">';
     foreach ($data['items'] as $name => $val) {
         $str .= '<option value="' . addslashes($name) . '"';
+
         if ($name == $value)
             $str .= " selected";
         $str .= '>' . htmlentities($val) . '</option>';

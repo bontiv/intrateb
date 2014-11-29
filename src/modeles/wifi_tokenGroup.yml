@@ -1,0 +1,17 @@
+## Table wifi_tokenGroup
+name: wifi_tokenGroup
+key: wtg_id
+fields:
+  wtg_id:
+    type: auto_int
+  wtg_roll:
+    type: int
+    size: 5
+    label: ID
+  wtg_duration:
+    type: int
+    size: 5
+    label: Durée (minutes)
+  wtg_date:
+    type: date
+    label: Date de création

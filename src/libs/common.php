@@ -56,10 +56,14 @@ function aclFromText($txt) {
  * @param type $acl
  * @return type
  */
-function hasAcl($acl) {
+function hasAcl($acl, $action = null, $page = 'index', $params = null) {
     if (!isset($_SESSION['user']) || $_SESSION['user'] == false || !isset($_SESSION['user']['role']))
         $user = ACL_ANNONYMOUS;
-    else
+    elseif ($action != null) {
+        $user = modsecu($action, $page, $params);
+        if ($user < $_SESSION['user']['role'])
+            $user = $_SESSION['user']['role'];
+    } else
         $user = $_SESSION['user']['role'];
     return $user >= $acl;
 }
@@ -69,8 +73,8 @@ function hasAcl($acl) {
  * est trop faible
  * @param type $acl
  */
-function needAcl($acl) {
-    if (!hasAcl($acl))
+function needAcl($acl, $action = null, $page = null, $params = null) {
+    if (!hasAcl($acl, $action, $page, $params))
         modexec('syscore', 'forbidden');
 }
 
@@ -185,7 +189,7 @@ function mkurl_smarty($params, $smarty) {
     }
 
     //Petit troll pour les accès refusés :
-    if (!hasAcl(getAclLevel($action, $page)))
+    if (!hasAcl(getAclLevel($action, $page), $action, $page, $params))
         return '#';
 
     return mkurl($action, $page, $params);
@@ -215,14 +219,18 @@ function redirect($action, $page = 'index', $options = null) {
  * @param type $action
  * @param type $page
  */
-function modsecu($action, $page = 'index') {
+function modsecu($action, $page = 'index', $params = null) {
     global $root;
 
+    if (!file_exists($root . 'action' . DS . $action . '.php'))
+        return false;
+    
     include_once $root . 'action' . DS . $action . '.php';
 
     if (function_exists($action . '_security')) {
-        call_user_func($action . '_security', $page);
+        return call_user_func($action . '_security', $page, $params);
     }
+    return false;
 }
 
 /**
@@ -514,4 +522,91 @@ function display() {
  */
 function uc($txt) {
     return iconv('UTF-8', 'ISO-8859-1//TRANSLIT//IGNORE', $txt);
+}
+
+/**
+ * Permet d'authentifier un utilisateur
+ *
+ * @global type $pdo
+ * @param type $user Utilisateur
+ * @param type $pass Mot de passe chiffré
+ * @return boolean True si authentification réussie
+ */
+function login_user($user, $pass) {
+    global $pdo;
+
+    $sql = $pdo->prepare('SELECT * FROM users WHERE user_name = ?');
+    $sql->bindValue(1, $user);
+    $sql->execute();
+    if ($user = $sql->fetch()) {
+        //Ici l'utilisateur existe
+        if (strlen($user['user_pass']) != 32) // Mot de passe non chiffré ...
+            $user['user_pass'] = md5($user['user_name'] . ':' . $user['user_pass']);
+
+        //Mot de passe correct ?
+        if (md5($user['user_pass'] . $_SESSION['random']) == $pass) {
+            $_SESSION['user'] = $user;
+            $_SESSION['user']['role'] = aclFromText($user['user_role']);
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
+ * Récupère la liste des configurations
+ */
+function get_configs() {
+    global $root, $_cfg_cache;
+
+    if ($_cfg_cache !== null)
+        return $_cfg_cache;
+
+    $files = scandir($root . 'configs');
+    $config = array();
+    foreach ($files as $name) {
+        $file = $root . 'configs' . DS . $name;
+        if (is_file($file)) {
+            $data = spyc_load_file($file);
+            $data['file'] = $name;
+            foreach ($data['fields'] as $fname => &$fdata) {
+                $fdata['name'] = $fname;
+                if (!isset($fdata['size']))
+                    $fdata['size'] = 50;
+            }
+            if (isset($data['name']))
+                $config[$data['name']] = $data;
+        }
+    }
+
+    $_cfg_cache = $config;
+    return $config;
+}
+
+function getMailer() {
+    global $config;
+
+    $mc = $config['PHPMailer'];
+    $m = new PHPMailer();
+
+    if ($mc['enable'] == 'no') {
+        dbg_error(__FILE__, 'Les mails sont désactivés');
+        return null;
+    }
+
+    $m->Mailer = $mc['enable'];
+    $m->From = $mc['from'];
+    $m->FromName = $mc['from_name'];
+    $m->Sender = $mc['from'];
+    $m->Host = $mc['smtp_host'];
+    $m->Port = $mc['smtp_port'];
+    $m->SMTPSecure = $mc['smtp_enc'] == 'no' ? '' : $mc['smtp_enc'];
+    $m->SMTPAuth = $mc['smtp_auth_user'] != '' && $mc['smtp_auth_pass'] != '';
+    $m->Username = $mc['smtp_auth_user'];
+    $m->Password = $mc['smtp_auth_pass'];
+
+    $m->CharSet = 'utf-8';
+    $m->IsHTML();
+
+    return $m;
 }

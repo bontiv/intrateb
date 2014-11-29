@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Controleur sur la gestion des sections
  * Ce controleur contient toutes les pages utilisés pour gérer les sections.
@@ -6,16 +7,36 @@
  */
 
 /**
+ * Défini le mode superuser
+ */
+function section_security($page, $params) {
+    $mdl = new Modele('user_sections');
+
+    if (!$_SESSION['user'] || !isset($params['section']))
+        return false;
+
+    $mdl->find(array(
+        'us_user' => $_SESSION['user']['user_id'],
+        'us_section' => $params['section'],
+        'us_type' => 'manager'
+    ));
+    if ($mdl->count()) {
+        return ACL_SUPERUSER;
+    }
+    return false;
+}
+
+/**
  * Permet de créer un événement
  * Ce controleur permet de créer un événement à partir d'une section. On y accède à partir de la fiche de la section qui va gérer le déroulement de l'événement.
  */
 function section_mkevent() {
     global $pdo, $tpl;
-   
+
     $tpl->assign('error', false);
     $tpl->assign('succes', false);
     $tpl->assign('section', $_GET['section']);
-    
+
     if (isset($_POST['event_name'])) {
         $dateStart = new DateTime($_POST['event_start']);
         $dateEnd = new DateTime($_POST['event_end']);
@@ -26,7 +47,7 @@ function section_mkevent() {
         $dateNote1->add($sevenDays);
         $dateNote2 = new DateTime($dateNote1->format('Y-m-d H:i:s'));
         $dateNote2->add($sevenDays);
-        
+
         $extra = array(
             'event_start' => $dateStart->format('Y-m-d H:i:s'),
             'event_end' => $dateEnd->format('Y-m-d H:i:s'),
@@ -37,17 +58,16 @@ function section_mkevent() {
             'event_section' => $_GET['section'],
             'event_owner' => $_SESSION['user']['user_id'],
         );
-        
+
         if (autoInsert('events', 'event_', $extra))
             $tpl->assign('succes', true);
         else
             $tpl->assign('error', true);
     }
-    
+
     $tpl->display('section_mkevent.tpl');
     quit();
 }
-
 
 /**
  * Liste toutes les sections
@@ -74,7 +94,6 @@ function section_index() {
     quit();
 }
 
-
 /**
  * Ajoute une section
  */
@@ -89,8 +108,7 @@ function section_add() {
                     'section_owner' => $_SESSION['user']['user_id'],
                 ))) {
             $tpl->assign('succes', true);
-        }
-        else
+        } else
             $tpl->assign('error', $pdo->errorInfo());
     }
 
@@ -98,7 +116,6 @@ function section_add() {
     $tpl->display('section_add.tpl');
     quit();
 }
-
 
 /**
  * Supprime une section
@@ -113,7 +130,6 @@ function section_delete() {
     else
         modexec('syscore', 'sqlerror');
 }
-
 
 /**
  * Affiche les détails d'une section
@@ -132,7 +148,7 @@ function section_details() {
     $tpl->assign('managers', array());
     $tpl->assign('users', array());
     $tpl->assign('guests', array());
-    
+
 
     $sql = $pdo->prepare('SELECT * FROM user_sections LEFT JOIN users ON user_id = us_user WHERE us_section = ? AND us_type="manager"');
     $sql->bindValue(1, $section['section_id']);
@@ -156,8 +172,6 @@ function section_details() {
     quit();
 }
 
-
-
 /**
  * Je veux rentrer dans la section
  * Ce controleur permet à l'utilisateur actuellement connecter de faire une demande d'adhésion à une section.
@@ -171,7 +185,6 @@ function section_goin() {
     $sql->execute();
     redirect('section');
 }
-
 
 /**
  * Je ne veux plus de cette section
@@ -192,10 +205,9 @@ function section_goout() {
  * Permet d'accepter un membre dans sa section.
  * @global type $pdo
  */
-function section_accept()
-{
+function section_accept() {
     global $pdo;
-    
+
     $sql = $pdo->prepare('UPDATE user_sections SET us_type = "user" WHERE us_user = ? AND us_section = ?');
     $sql->bindValue(1, $_GET['user']);
     $sql->bindValue(2, $_GET['section']);
@@ -208,10 +220,9 @@ function section_accept()
  * Permet de retirer un membre d'une section.
  * @global type $pdo
  */
-function section_reject()
-{
+function section_reject() {
     global $pdo;
-    
+
     $sql = $pdo->prepare('UPDATE user_sections SET us_type = "rejected" WHERE us_user = ? AND us_section = ?');
     $sql->bindValue(1, $_GET['user']);
     $sql->bindValue(2, $_GET['section']);
@@ -224,10 +235,9 @@ function section_reject()
  * Et hop ! Un staff devient responsable de la section.
  * @global type $pdo
  */
-function section_manager()
-{
+function section_manager() {
     global $pdo;
-    
+
     $sql = $pdo->prepare('UPDATE user_sections SET us_type = "manager" WHERE us_user = ? AND us_section = ?');
     $sql->bindValue(1, $_GET['user']);
     $sql->bindValue(2, $_GET['section']);
@@ -237,13 +247,13 @@ function section_manager()
 
 function section_edit() {
     global $tpl;
-    
+
     $mdl = new Modele('sections');
     $mdl->fetch($_GET['section']);
     if (isset($_POST['postOK'])) {
         $tpl->assign('hsuccess', $mdl->modFrom($_POST));
     }
     $tpl->assign('section', $mdl);
-    
+
     display();
 }

@@ -35,6 +35,12 @@ require_once $root . 'libs' . DS . 'spyc.php';
 require_once $root . 'libs' . DS . 'common.php';
 require_once $root . 'libs' . DS . 'models.php';
 
+//Initialisation des mails
+require_once $root . 'libs' . DS . 'phpmailer' . DS . 'class.phpmailer.php';
+
+//Initialisation du captcha
+require_once $root . 'libs' . DS . 'securimage' . DS . 'securimage.php';
+
 //Initialisation du PDO
 $pdo = new PDO($dsn, $db_user, $db_pass);
 
@@ -57,11 +63,21 @@ if (!is_writable($tpl->compile_dir))
     chmod($tpl->compile_dir, 0777);
 
 // Etape 1, on charge la configuration sur l'environnement présent.
+$cfg = get_configs();
+$config = array();
+foreach ($cfg as $cfgPart) {
+    $config[$cfgPart['name']] = array();
+    foreach ($cfgPart['fields'] as $field) {
+        $config[$cfgPart['name']][$field['name']] = isset($field['default']) ? $field['default'] : null;
+    }
+}
+
 $conf = $pdo->prepare("SELECT * FROM config WHERE env is NULL OR env = ?");
 $conf->bindValue(1, $env);
 $conf->execute();
 while ($dat = $conf->fetch()) {
-    $$dat['name'] = $dat['value'];
+    $parts = explode('!!', $dat['name']);
+    $config[$parts[0]][$parts[1]] = $dat['value'];
 }
 
 // Etape 2, calcul du chemin d'execution
@@ -96,11 +112,10 @@ if ($_SESSION['user']) {
         $_SESSION['user']['sections'][$line['section_id']] = $line;
 }
 
-modsecu($action, $page);
-needAcl(getAclLevel($action, $page));
+modsecu($action, $page, $_GET);
+needAcl(getAclLevel($action, $page), $action, $page, $_GET);
 
 // Etape 4 lancement du module
 modexec($action, $page);
 modexec('syscore', 'moderror');
 quit();
-?>

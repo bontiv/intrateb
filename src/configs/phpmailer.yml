@@ -1,0 +1,47 @@
+## PHP Mailer config
+---
+
+name: PHPMailer
+label: PHP Mailer
+fields:
+    enable:
+        type: enum
+        items:
+            no: Non
+            mail: Methode php mail
+            smtp: Methode SMTP
+            sendmail: Sendmail
+        label: Enable
+        default: "no"
+    from:
+        type: var
+        label: Adresse d'expédition
+        default: "intra@epitanime.com"
+    from_name:
+        type: var
+        label: Nom d'expédition
+        default: "Intra EPITANIME"
+    smtp_host:
+        type: var
+        label: serveur SMTP
+        default: "smtp.gmail.com"
+    smtp_port:
+        type: int
+        label: Port SMTP
+        default: 587
+    smtp_auth_user:
+        type: var
+        label: Utilisateur SMTP
+        default: "intra@epitanime.com"
+    smtp_auth_pass:
+        type: var
+        label: Mot de passe SMTP
+        default: "Intra EPITANIME"
+    smtp_enc:
+        type: enum
+        label: Sécurité SMTP
+        items:
+            no: "Aucune protection"
+            ssl: "SSL"
+            tls: "TLS"
+        default: "tls"
