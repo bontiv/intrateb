@@ -26,4 +26,20 @@
         {/foreach}
     </tbody>
 </table>
+    <script type="text/javascript">
+        var page = '{mkurl action="karaoke" page="play"}';
+        var page = 'http://localhost:8080/epicenote/htdocs/index.php?action=karaoke&page=play';
+{literal}
+        $(function(){
+            setInterval(function(){
+                $.get(
+                    page,
+                    function(data){
+                        $('#karaoke-list').html($('#karaoke-list', data).html());
+                    }
+                );
+            },5000);
+        });
+    </script>
+{/literal}
 {include "foot.tpl"}
