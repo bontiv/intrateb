@@ -6,6 +6,10 @@
  * and open the template in the editor.
  */
 
+function karaoke_list() {
+    $ch = curl_init('http://zanark.net/demandes/ajax.php?loadTasks&list=1&compl=1&sort=1');
+}
+
 function karaoke_play() {
     global $tpl;
     
