@@ -222,6 +222,9 @@ function redirect($action, $page = 'index', $options = null) {
 function modsecu($action, $page = 'index', $params = null) {
     global $root;
 
+    if (!file_exists($root . 'action' . DS . $action . '.php'))
+        return false;
+    
     include_once $root . 'action' . DS . $action . '.php';
 
     if (function_exists($action . '_security')) {
