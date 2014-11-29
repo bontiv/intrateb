@@ -1,0 +1,10 @@
+## PHP Mailer config
+---
+
+name: Zanark
+label: Zanark Karaoke server
+fields:
+    playlist:
+        type: var
+        label: Adresse du serveur playlist
+        default: "http://www.zanark.net/karaoke/"

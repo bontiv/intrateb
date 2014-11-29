@@ -1,21 +1,20 @@
 <?php
 
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
 function karaoke_play() {
-    global $tpl;
-    
-    $ch = curl_init('http://www.zanark.net/karaoke/');
+    global $tpl, $config;
+
+    $ch = curl_init($config['Zanark']['playlist']);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $ans = strip_tags(curl_exec($ch));
     $matches = array();
 
-    foreach (explode("\n", $ans) as $line)
-    {
+    foreach (explode("\n", $ans) as $line) {
         $parts = explode(" - ", $line);
         if (count($parts) > 2) {
             $occ = array(
@@ -31,7 +30,7 @@ function karaoke_play() {
             } else {
                 $occ['status'] = $def[0];
             }
-            $occ[3] = trim($occ[3],  " ▶✓");
+            $occ[3] = trim($occ[3], " ▶✓");
             $matches[] = $occ;
         }
     }
