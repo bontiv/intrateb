@@ -17,7 +17,11 @@ function karaoke_play() {
     {
         foreach ($matches as &$occ) {
             $def = array_keys(array('', '✓'), $occ[5]);
-            $occ['status'] = $def[0];
+            if (!isset($def[0])) {
+                $occ['status'] = -1;
+            } else {
+                $occ['status'] = $def[0];
+            }
         }
     }
     $tpl->assign('karaoke', $matches);

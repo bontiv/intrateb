@@ -1,5 +1,5 @@
 {include "head.tpl"}
-<h1>La notation</h1>
+<h1>Lecture du Karaoke</h1>
 <hr/>
 <table class="table" id="karaoke-list">
     <thead>
