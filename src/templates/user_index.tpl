@@ -122,7 +122,7 @@
             </td>
             <td>{$line.user_lastname}</td>
             <td>{$line.user_firstname}</td>
-            <td>{$line.user_phone}</td>
+            <td><a href="tel:{$line.user_phone}">{$line.user_phone}</a></td>
             <td>
               <a class="email-field" href="mailto:{$line.user_email}">{$line.user_email}</a>
               <script type="text/javascript">
