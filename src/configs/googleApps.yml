@@ -1,0 +1,14 @@
+## PHP Mailer config
+---
+
+name: GoogleApps
+label: Google Apps
+fields:
+    clientID:
+        type: var
+        label: Client ID
+        default: ""
+    secret:
+        type: var
+        label: Clé privé
+        default: ""

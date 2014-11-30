@@ -6,6 +6,84 @@
  * du site.
  * @package Epicenote
  */
+/* * ******************************* */
+
+/*
+ * Experimental : Google Sync
+ */
+
+function user_sync() {
+    global $config;
+
+    $url = "https://accounts.google.com/o/oauth2/auth";
+
+    $params = array(
+        "response_type" => "code",
+        "client_id" => $config['GoogleApps']['clientID'],
+        "redirect_uri" => "http://localhost/epicenote/htdocs/index.php?action=user&page=syncReturn",
+        "scope" => "https://www.googleapis.com/auth/admin.directory.group"
+    );
+
+    $request_to = $url . '?' . http_build_query($params);
+
+    header("Location: " . $request_to);
+    quit();
+}
+
+function user_syncReturn() {
+    global $config;
+
+    if (isset($_GET['code'])) {
+        // try to get an access token
+        $code = $_GET['code'];
+        $url = 'https://accounts.google.com/o/oauth2/token';
+        $params = array(
+            "code" => $code,
+            "client_id" => $config['GoogleApps']['clientID'],
+            "client_secret" => $config['GoogleApps']['secret'],
+            "redirect_uri" => "http://localhost/epicenote/htdocs/index.php?action=user&page=syncReturn",
+            "grant_type" => "authorization_code"
+        );
+
+        $request = curl_init($url);
+        curl_setopt($request, CURLOPT_POST, true);
+        curl_setopt($request, CURLOPT_POSTFIELDS, $params);
+        curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
+        $body = curl_exec($request);
+        $responseObj = json_decode($body);
+
+        $_SESSION['user']['GoogleToken'] = $responseObj->access_token;
+        redirect('user', 'syncProc');
+    }
+}
+
+function user_syncProc() {
+    global $tpl;
+
+    $ch = curl_init('https://www.googleapis.com/admin/directory/v1/groups/membres@epitanime.com/members?maxResults=1000&oauth_token=' . $_SESSION['user']['GoogleToken']);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $members = json_decode(curl_exec($ch));
+    $Gregistred = array();
+    $Sregistred = array();
+
+    foreach ($members->members as $member) {
+        if (isset($member->email)) {
+            $Gregistred[] = $member->email;
+        }
+    }
+
+    $mdl = new Modele('users');
+    $mdl->find();
+    while ($mdl->next()) {
+        $Sregistred[] = $mdl->user_email;
+    }
+
+    $tpl->assign('add', array_diff($Sregistred, $Gregistred));
+    $tpl->assign('del', array_diff($Gregistred, $Sregistred));
+    display();
+}
+
+/* * ******************************* */
 
 /**
  * Permet d'afficher la liste des utilisateurs
