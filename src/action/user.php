@@ -68,14 +68,14 @@ function user_syncProc() {
 
     foreach ($members->members as $member) {
         if (isset($member->email)) {
-            $Gregistred[] = $member->email;
+            $Gregistred[] = strtolower($member->email);
         }
     }
 
     $mdl = new Modele('users');
     $mdl->find();
     while ($mdl->next()) {
-        $Sregistred[] = $mdl->user_email;
+        $Sregistred[] = strtolower($mdl->user_email);
     }
 
     $tpl->assign('add', array_diff($Sregistred, $Gregistred));
