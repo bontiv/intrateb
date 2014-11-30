@@ -20,7 +20,7 @@ function user_sync() {
     $params = array(
         "response_type" => "code",
         "client_id" => $config['GoogleApps']['clientID'],
-        "redirect_uri" => "http://localhost/epicenote/htdocs/index.php?action=user&page=syncReturn",
+        "redirect_uri" => $config['GoogleApps']['returnUrl'],
         "scope" => "https://www.googleapis.com/auth/admin.directory.group"
     );
 
@@ -41,7 +41,7 @@ function user_syncReturn() {
             "code" => $code,
             "client_id" => $config['GoogleApps']['clientID'],
             "client_secret" => $config['GoogleApps']['secret'],
-            "redirect_uri" => "http://localhost/epicenote/htdocs/index.php?action=user&page=syncReturn",
+            "redirect_uri" => $config['GoogleApps']['returnUrl'],
             "grant_type" => "authorization_code"
         );
 

@@ -12,3 +12,7 @@ fields:
         type: var
         label: Clé privé
         default: ""
+    returnUrl:
+        type: var
+        label: URL callback
+        default: ""
