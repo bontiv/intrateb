@@ -49,8 +49,8 @@
           <td>{$line.user_name}</td>
           <td><span class="label label-success">Staff</span></td>
           <td>{$line.user_login}</td>
-          <td>{$line.user_email}</td>
-          <td>{$line.user_phone}</td>
+          <td><a href="mailto:{$line.user_email}">{$line.user_email}</a></td>
+          <td><a href="tel:{$line.user_phone}">{$line.user_phone}</a></td>
           <td>
             <div class="btn-group">
               <a href="{mkurl action="section" page="reject" user=$line.user_id section=$section.section_id}" class="btn btn-danger"><span class="glyphicon-remove glyphicon"></span></a>
@@ -64,8 +64,8 @@
           <td>{$line.user_name}</td>
           <td><span class="label label-default">En attente</span></td>
           <td>{$line.user_login}</td>
-          <td>{$line.user_email}</td>
-          <td>{$line.user_phone}</td>
+          <td><a href="mailto:{$line.user_email}">{$line.user_email}</a></td>
+          <td><a href="tel:{$line.user_phone}">{$line.user_phone}</a></td>
           <td>
             <div class="btn-group">
               <a href="{mkurl action="section" page="reject" user=$line.user_id section=$section.section_id}" class="btn btn-danger"><span class="glyphicon-remove glyphicon"></span></a>
