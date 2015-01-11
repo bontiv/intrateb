@@ -1,5 +1,11 @@
 {include "head.tpl"}
 
+<style type="text/css">
+  .admCol {
+      width: 90%;margin-left: 5%;
+  }
+</style>
+
 <h1>Administration</h1>
 <h2>Droits d'accès</h2>
 <form method="POST" action="{mkurl action="admin" page="update"}">
@@ -23,18 +29,26 @@
                 <th>Module</th>
                 <th>Page</th>
                 <th>Niveau</th>
+                <th>Groupes responsables</th>
                 </thead>
                 <tbody>
                   {foreach from=$page item="line"}
                       <tr>
                         <td>{$line.acl_action}</td>
                         <td>{$line.acl_page}</td>
-                        <td><select name="acl{$line.acl_id}">
+                        <td><select class="admCol" name="acl{$line.acl_id}">
                             <option {if $line.acl_acces=="ANNONYMOUS"}selected="selected"{/if} value="ANNONYMOUS">Libre</option>
                             <option {if $line.acl_acces=="GUEST"}selected="selected"{/if} value="GUEST">Visiteur</option>
                             <option {if $line.acl_acces=="USER"}selected="selected"{/if} value="USER">Membre</option>
                             <option {if $line.acl_acces=="SUPERUSER"}selected="selected"{/if} value="SUPERUSER">Responsable</option>
                             <option {if $line.acl_acces=="ADMINISTRATOR"}selected="selected"{/if} value="ADMINISTRATOR">Admin</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select name="groups{$line.acl_id}[]" class="admCol" multiple="multiple" size="5">
+                            {foreach from=$grps item="grp"}
+                                <option value="{$grp.section_id}"{if isset($aclGrps[$line.acl_id]) and in_array($grp.section_id, $aclGrps[$line.acl_id])} selected="selected"{/if}>{$grp.section_name}</option>
+                            {/foreach}
                           </select>
                         </td>
                       </tr>
