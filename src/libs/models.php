@@ -71,7 +71,7 @@ function mdle_field_type($table_info, $field) {
         return 'enum(\'true\', \'false\')';
 
     echo '<br><br><strong>Type field inconnu</strong><br>';
-    var_dump($field);
+    var_dump($field, $table_info['name']);
     exit();
 }
 
@@ -144,7 +144,7 @@ function mdle_need_desc($table) {
             return $data;
         }
     }
-    dbg_warning(__FILE__, "Il n'y a pas de fichier portant le nom d'une classe demandé : $table", 1);
+    dbg_warning(__FILE__, "Il n'y a pas de fichier portant le nom d'un modèle demandé : $table", 1);
     // Peut-être qu'en chargeant tous les fichiers on va trouver le bon...
     mdle_get_tables();
     if (!isset($_mdle_cache[$table]))
