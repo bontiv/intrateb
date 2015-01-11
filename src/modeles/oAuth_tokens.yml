@@ -1,81 +1,33 @@
-## Table users
-name: users
-key: user_id
+name: oAuth_tokens
+key: ot_id
 fields:
-  user_id:
+  ot_id:
     type: auto_int
-  user_name:
-    readonly: true
+  ot_token:
     type: var
     size: 20
-    label: Pseudo
-  user_pass:
-    visible: false
-    type: var
-    size: 34
-  user_firstname:
-    type: var
-    size: 20
-    label: Prénom
-  user_lastname:
-    type: var
-    size: 20
-    label: Nom de famille
-  user_type:
+    label: Token
+  ot_type:
+    type: enum
+    items:
+        TEMP: Service Temp Token (step1)
+        ACCESS: Access Token
+  ot_user:
     type: external
-    table: user_types
-    display: %ut_name%
-    label: Ecole IONIS
-  user_login:
-    type: var
-    label: Login IONIS (étudiant seulement)
-  user_promo:
-    type: int
-    label: Promotion (étudiant seulement)
-  user_email:
-    type: var
-    size: 100
-    label: Adresse email
-  user_phone:
-    type: tel
-    label: Numéro de téléphone
-  user_address:
-    type: text
-    label: Adresse postale
-  user_cp:
-    type: int
-    label: Code postal
-  user_town:
-    type: var
-    label: Ville
-  user_sexe:
-    type: enum
-    label: Sexe
-    items:
-      GIRL: fille
-      MAN: garçon
-  user_born:
-    type: date
-    label: date de naissance
-  user_photo:
-    type: var
-    size: 200
-    label: Photo d'identité
-    visible: admin
+    table: users
+    label: Utilisateur
     null: true
-
-  user_role:
-    type: enum
-    default: GUEST
-    visible: admin
-    readonly: true
-    label: Niveau d'acréditation
-    items:
-      GUEST: Nouvel inscrit
-      USER: Utilisateur validé
-      SUPERUSER: Utilisateur acrédité
-      ADMINISTRATOR: Administrateur
+    display: %user_name%
+  ot_endDate:
+    type: date_time
+    label: Fin de validité
+  ot_scope:
+    type: text
+    label: Scope (action/page)
+  ot_confirm:
+    type: var
+    label: Code de confirmation
 indexes:
   user_name:
     type: unique
-    fields: [user_name]
+    fields: [ot_token]
