@@ -22,6 +22,23 @@ function admin_index() {
         $conf[$line['acl_action']][] = $line;
     }
 
+    $groups = new Modele('sections');
+    $groups->find();
+    while ($groups->next()) {
+        $tpl->append('grps', $groups->toArray());
+    }
+
+    $aclGrps = new Modele('access_groups');
+    $aclGrps->find();
+    $aclGrpsRslt = array();
+    while ($aclGrps->next()) {
+        if (!isset($aclGrpsRslt[$aclGrps->raw_ag_access])) {
+            $aclGrpsRslt[$aclGrps->raw_ag_access] = array();
+        }
+        $aclGrpsRslt[$aclGrps->raw_ag_access][] = $aclGrps->raw_ag_group;
+    }
+
+    $tpl->assign('aclGrps', $aclGrpsRslt);
     $tpl->assign('acls', $conf);
     $tpl->display('admin_index.tpl');
     quit();
@@ -42,6 +59,31 @@ function admin_update() {
             $update->bindValue(1, $_POST['acl' . $line['acl_id']]);
             $update->bindValue(2, $line['acl_id']);
             $update->execute();
+        }
+
+        $grpDel = $pdo->prepare('DELETE FROM access_groups WHERE ag_acces = ?');
+        $grpDel->bindValue(1, $line['acl_id']);
+        $grpDel->execute();
+
+        if (isset($_POST['groups' . $line['acl_id']])) {
+
+            $nbRow = count($_POST['groups' . $line['acl_id']]);
+            $sqlGrpQuery = 'INSERT INTO access_groups (ag_access, ag_group) VALUES ';
+
+            $parts = array();
+            for ($i = 0; $i < $nbRow; $i++) {
+                $parts[] = '(?, ?)';
+            }
+
+            $sqlGrpQuery .= implode(', ', $parts);
+            $sqlGrp = $pdo->prepare($sqlGrpQuery);
+            $i = 1;
+
+            foreach ($_POST['groups' . $line['acl_id']] as $grp) {
+                $sqlGrp->bindValue($i++, $line['acl_id']);
+                $sqlGrp->bindValue($i++, $grp);
+            }
+            $sqlGrp->execute();
         }
     }
 

@@ -1,0 +1,17 @@
+name: access_groups
+key: ag_id
+fields:
+ ag_id:
+  type: auto_int
+ ag_access:
+  type: external
+  table: acces
+  display: %acl_action% %acl_page%
+ ag_group:
+  type: external
+  table: sections
+  display: %section_name%
+indexes:
+  ag_index_groups:
+    type: index
+    fields: ag_group

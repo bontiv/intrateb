@@ -57,6 +57,8 @@ function aclFromText($txt) {
  * @return type
  */
 function hasAcl($acl, $action = null, $page = 'index', $params = null) {
+    global $pdo;
+
     if (!isset($_SESSION['user']) || $_SESSION['user'] == false || !isset($_SESSION['user']['role']))
         $user = ACL_ANNONYMOUS;
     elseif ($action != null) {
@@ -65,6 +67,21 @@ function hasAcl($acl, $action = null, $page = 'index', $params = null) {
             $user = $_SESSION['user']['role'];
     } else
         $user = $_SESSION['user']['role'];
+
+    // Tentative de rattrapage par groupe
+    if ($user < ACL_SUPERUSER && $acl <= ACL_SUPERUSER) {
+        $sql = $pdo->prepare('SELECT ag_group FROM access_groups RIGHT JOIN acces ON ag_access = acl_id WHERE acl_action = ? AND acl_page = ?');
+        $sql->bindValue(1, $action !== null ? $action : 'index');
+        $sql->bindValue(2, $page);
+        $sql->execute();
+        while ($line = $sql->fetch()) {
+            // Test si utilisateur dans section $line[0]
+            if (isset($_SESSION['user']['sections'][$line[0]]) && $_SESSION['user']['sections'][$line[0]]['us_type'] == 'manager') {
+                $user = ACL_SUPERUSER;
+            }
+        }
+    }
+
     return $user >= $acl;
 }
 
@@ -224,7 +241,7 @@ function modsecu($action, $page = 'index', $params = null) {
 
     if (!file_exists($root . 'action' . DS . $action . '.php'))
         return false;
-    
+
     include_once $root . 'action' . DS . $action . '.php';
 
     if (function_exists($action . '_security')) {
