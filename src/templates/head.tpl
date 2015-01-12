@@ -33,7 +33,7 @@
           </button>
           <a class="navbar-brand" href="{mkurl action="index"}">Intra EPITANIME</a>
         </div>
-        
+
 
         <div class="collapse navbar-collapse" >
           <ul class="nav navbar-nav">
@@ -45,6 +45,7 @@
                 <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="{mkurl action="karaoke" page="play"}">Karaoke Play</a></li>
+                <li><a href="{mkurl action="ftp" page="index"}">Comptes FTP</a></li>
               </ul>
             </li>
             {acl action="event"}

@@ -1,0 +1,40 @@
+name: ftp_users
+key: fu_id
+fields:
+ fu_id:
+  type: auto_int
+ fu_user:
+  type: var
+  label: Utilisateur FTP
+ fu_pass:
+  type: var
+  label: Code FTP
+ fu_section:
+  type: external
+  label: Section
+  table: sections
+  display: %section_name%
+ fu_member:
+  type: external
+  label: Membre Epitanime
+  table: users
+  display: %user_firstname% %user_lastname% (%user_name%)
+ fu_path:
+  type: var
+  size: 200
+  label: Dossier
+ fu_deletable:
+  type: enum
+  label: Effacable
+  default: "YES"
+  items:
+   NO: Non supprimable
+   YES: Supprimable
+
+indexes:
+  fu_index_groups:
+    type: index
+    fields: fu_section
+  fu_index_user:
+    type: index
+    fields: fu_member

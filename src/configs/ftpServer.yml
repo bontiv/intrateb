@@ -1,0 +1,28 @@
+
+name: ftpServer
+label: Serveur FTP
+fields:
+    host:
+        type: var
+        label: Adresse
+        default: "localhost"
+    user:
+        type: var
+        label: Utilisateur
+        default: "ftpadmin"
+    pass:
+        type: var
+        label: Mot de passe
+        default: ""
+    type:
+        type: enum
+        label: Type de connexion
+        default: "SSH"
+        items:
+            LOCAL: Connexion locale
+            SSH: Connexion SSH
+    scripts:
+        type: var
+        size: 200
+        label: Dossier des scripts de management
+        default: /opt/ftpadmin
