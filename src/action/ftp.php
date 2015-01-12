@@ -36,7 +36,7 @@ function ftp_index() {
             . 'LEFT JOIN sections ON section_id = fu_section '
             . 'LEFT JOIN users ON fu_member = user_id '
             . 'LEFT JOIN user_sections ON fu_section = us_section AND us_user = :uid ';
-    if (false && !hasAcl(ACL_ADMINISTRATOR)) {
+    if (!hasAcl(ACL_ADMINISTRATOR)) {
         $sqlQuery .= 'WHERE fu_member = :uid OR ( '
                 . 'us_type = \'manager\' '
 //                . 'AND us_user = :uid '
