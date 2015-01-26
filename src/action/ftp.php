@@ -6,6 +6,21 @@
  * and open the template in the editor.
  */
 
+/**
+ * Fonction de parametrage du niveau de secu
+ * @param type $page
+ * @param type $params
+ * @return type
+ */
+function ftp_security($page, $params) {
+    if ($page == 'index') {
+        return ACL_ANNONYMOUS;
+    }
+    elseif (hasAcl(ACL_SUPERUSER, 'ftp', 'index')) { //Responsable index == admin FTP
+        return ACL_ADMINISTRATOR;
+    }
+}
+
 function _ftp_exec($command) {
     global $config;
 
@@ -36,7 +51,7 @@ function ftp_index() {
             . 'LEFT JOIN sections ON section_id = fu_section '
             . 'LEFT JOIN users ON fu_member = user_id '
             . 'LEFT JOIN user_sections ON fu_section = us_section AND us_user = :uid ';
-    if (!hasAcl(ACL_ADMINISTRATOR)) {
+    if (!hasAcl(ACL_SUPERUSER)) {
         $sqlQuery .= 'WHERE fu_member = :uid OR ( '
                 . 'us_type = \'manager\' '
 //                . 'AND us_user = :uid '
