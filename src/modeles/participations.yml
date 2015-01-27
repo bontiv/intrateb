@@ -1,0 +1,52 @@
+## Table users
+name: participations
+key: part_id
+fields:
+  part_id:
+    type: auto_int
+  part_section:
+    type: external
+    table: user_types
+    display: %ut_name%
+    label: Section
+  part_event:
+    type: external
+    table: user_types
+    display: %ut_name%
+    label: Event
+    null: true
+  part_duration:
+    type: int
+    label: Durée (mins)
+  part_title:
+    type: var
+    size: 255
+    label: Déscription courte (255c)
+  part_justification:
+    type: text
+    label: Justification
+  part_validation_date:
+    type: date
+    null: true
+    label: Date de validation bureau
+  part_attribution_date:
+    type: date
+    null: true
+    label: Date d'attribution
+  part_status:
+    type: enum
+    label: Status
+    default: DRAFT
+    items:
+      DRAFT: Brouillon
+      SUBMITTED: En validation
+      ACCEPTED: Validé
+      REFUSED: Refusé
+
+indexes:
+  idx_part_event:
+    type: index
+    fields: [part_event]
+  idx_part_section:
+    type: index
+    fields: [part_section]

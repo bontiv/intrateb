@@ -1,0 +1,30 @@
+## Table users
+name: periods
+key: period_id
+fields:
+  period_id:
+    type: auto_int
+  period_start:
+    type: date
+    label: Debut
+  period_end:
+    type: date
+    label: fin
+  period_type:
+    type: external
+    table: user_types
+    display: %ut_name%
+    label: Ecole / Type
+  period_mandate:
+    type: external
+    table: mandate
+    display: %mandate_label%
+    label: Mandat
+    
+indexes:
+  idx_period_mandate:
+    type: index
+    fields: [period_mandate]
+  idx_period_type:
+    type: index
+    fields: [period_type]

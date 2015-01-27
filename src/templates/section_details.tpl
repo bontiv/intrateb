@@ -11,6 +11,7 @@
       <a href="{mkurl action="section" page="goin" section=$section.section_id}" class="btn btn-info"><i class="glyphicon glyphicon-heart"></i> Adhérer</a>
   {/if}
   <a href="{mkurl action="section" page="mkevent" section=$section.section_id}" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Créer event</a>
+  <a href="{mkurl action="section" page="addpoints" section=$section.section_id}" class="btn btn-default"><span class="glyphicon glyphicon-gift"></span> Donner des points</a>
 </div>
 
 {* Les onglets *}
