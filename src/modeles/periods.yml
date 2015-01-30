@@ -4,6 +4,10 @@ key: period_id
 fields:
   period_id:
     type: auto_int
+  period_label:
+    type: var
+    size: 150
+    label: Nom
   period_start:
     type: date
     label: Debut

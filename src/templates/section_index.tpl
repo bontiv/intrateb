@@ -1,5 +1,9 @@
 {include "head.tpl"}
 
+<ol class="breadcrumb">
+  <li class="active">Sections</li>
+</ol>
+
 <h1>Administration</h1>
 <h3>Gestion des sections</h3>
 <a class="btn btn-link" href="{mkurl action="section" page="add"}" role="button" data-toggle="modal"><i class="glyphicon glyphicon-plus"></i> Ajouter</a>

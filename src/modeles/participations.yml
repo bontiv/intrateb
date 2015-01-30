@@ -4,10 +4,14 @@ key: part_id
 fields:
   part_id:
     type: auto_int
+  part_title:
+    type: var
+    size: 255
+    label: Déscription courte (255c)
   part_section:
     type: external
-    table: user_types
-    display: %ut_name%
+    table: sections
+    display: %section_name%
     label: Section
   part_event:
     type: external
@@ -17,11 +21,7 @@ fields:
     null: true
   part_duration:
     type: int
-    label: Durée (mins)
-  part_title:
-    type: var
-    size: 255
-    label: Déscription courte (255c)
+    label: Durée (hrs)
   part_justification:
     type: text
     label: Justification

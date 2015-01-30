@@ -438,10 +438,10 @@ class Modele {
             dbg_error(__FILE__, 'L\'affichage des champs de type ' . $this->desc['fields'][$name]['type'] . ' n\'est pas encore implémenté.');
     }
 
-    function edit() {
+    function edit($fieldlist = null) {
         $form = '';
         foreach (array_keys($this->desc['fields']) as $name)
-            if ($this->hasRight($name))
+            if ($this->hasRight($name) && ($fieldlist === null || in_array($name, $fieldlist)))
                 $form .= $this->displayField($name);
         return $form;
     }

@@ -111,8 +111,8 @@
     </div>{* /navbar *}
     <div class="container container-fluid">
 
-      {if isset($hsuccess)}
-          {if $hsuccess}
+      {if isset($hsuccess) or isset($smarty.get.hsuccess)}
+          {if (isset($smarty.get.hsuccess) and $smarty.get.hsuccess==1) or (isset($hsuccess) and $hsuccess)}
               <div class="alert alert-success"><p>Opération effectué avec succès.</p></div>
           {else}
               <div class="alert alert-danger"><p>Une erreur a empêché l'opération.</p></div>

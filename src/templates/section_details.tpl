@@ -1,5 +1,10 @@
 {include "head.tpl"}
 
+<ol class="breadcrumb">
+  <li><a href="{mkurl action="section"}">Sections</a></li>
+  <li class="active">{$section.section_name}</li>
+</ol>
+
 <h1>Administration</h1>
 <h2>Section {$section.section_name}</h2>
 <p>Section crée par {$section.user_name}. C'est une {if $section.section_type="primary"}section principale{else}sous section{/if}.</p>
