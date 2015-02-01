@@ -379,6 +379,13 @@ class Modele {
     private $iterator;
 
     function __construct($table, $id = null) {
+
+        #Support pour le clonage
+        if ($table instanceof Modele) {
+            $id = $table->getKey();
+            $table = $table->getName();
+        }
+
         $this->desc = mdle_need_desc($table);
         $this->iterator = false;
         foreach ($this->desc['fields'] as $n => &$v) {
@@ -438,10 +445,10 @@ class Modele {
             dbg_error(__FILE__, 'L\'affichage des champs de type ' . $this->desc['fields'][$name]['type'] . ' n\'est pas encore implémenté.');
     }
 
-    function edit() {
+    function edit($fieldlist = null) {
         $form = '';
         foreach (array_keys($this->desc['fields']) as $name)
-            if ($this->hasRight($name))
+            if ($this->hasRight($name) && ($fieldlist === null || in_array($name, $fieldlist)))
                 $form .= $this->displayField($name);
         return $form;
     }
@@ -653,8 +660,12 @@ class Modele {
             return $this->desc['fields'][$name]['items'][$this->instance[$name]];
         if (!$raw && $this->desc['fields'][$name]['type'] == 'external' && is_string($this->instance[$name])) {
             $id = $this->instance[$name];
-            $this->instance[$name] = new Modele($this->desc['fields'][$name]['table']);
-            $this->instance[$name]->fetch($id);
+            try {
+                $this->instance[$name] = new Modele($this->desc['fields'][$name]['table']);
+                $this->instance[$name]->fetch($id);
+            } catch (SQLFetchNotFound $e) {
+                $this->instance[$name] = false;
+            }
         }
         return $this->instance[$name];
     }
@@ -675,8 +686,34 @@ class Modele {
         }
     }
 
+    function reverse($model) {
+        $infos = mdle_need_desc($model);
+        foreach ($infos['fields'] as $name => $f) {
+            if ($f['type'] == 'external' && $f['table'] == $this->getName()) {
+                $mdl = new Modele($model);
+                $mdl->find(array($name => $this->getKey()));
+                return $mdl;
+            }
+        }
+        return false;
+    }
+
     function toArray() {
         return $this->instance;
+    }
+
+    function appendTemplate($varName) {
+        global $tpl;
+
+        while ($this->next()) {
+            $tpl->append($varName, new Modele($this));
+        }
+    }
+
+    function assignTemplate($varName) {
+        global $tpl;
+
+        $tpl->assign($varName, $this);
     }
 
 }

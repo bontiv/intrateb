@@ -1,0 +1,36 @@
+## Table users
+name: marks
+key: mark_id
+fields:
+  mark_id:
+    type: auto_int
+  mark_user:
+    type: external
+    table: users
+    display: %user_name%
+    label: Utilisateur
+  mark_participation:
+    type: external
+    table: participations
+    display: %part_desc%
+    label: Activité
+  mark_mark:
+    type: int
+    default: 20
+    display: Qualité
+  mark_period:
+    type: external
+    table: periods
+    display: %period_start% - %period_end%
+    label: Période
+
+indexes:
+  ind_mark_user:
+    type: index
+    fields: [mark_user]
+  ind_mark_participation:
+    type: index
+    fields: [mark_participation]
+  ind_mark_period:
+    type: index
+    fields: [mark_period]
