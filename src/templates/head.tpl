@@ -73,6 +73,7 @@
                   {acl action="ecole"}
                 <li><a href="{mkurl action="ecole"}">Ecoles</a></li>
                   {/acl}
+                <li><a href="{mkurl action="admin_note"}">Notation</a></li>
                 <li><a href="{mkurl action="admin_modeles"}">Instances de donnée</a></li>
                 <li><a href="{mkurl action="admin"}">Droits d'accès</a></li>
                 <li><a href="{mkurl action="cards"}">Gestion des cartes</a></li>

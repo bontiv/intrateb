@@ -349,3 +349,18 @@ function section_activities() {
 
     display();
 }
+
+function section_viewactivity() {
+    $section = new Modele('sections');
+    $section->fetch($_REQUEST['section']);
+    $section->assignTemplate('section');
+
+    $mdl = new Modele('participations');
+    $mdl->fetch($_REQUEST['activity']);
+    if ($mdl->raw_part_section == $_REQUEST['section']) {
+        $mdl->assignTemplate('part');
+    } else {
+        redirect('index');
+    }
+    display();
+}

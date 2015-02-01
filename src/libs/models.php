@@ -686,8 +686,34 @@ class Modele {
         }
     }
 
+    function reverse($model) {
+        $infos = mdle_need_desc($model);
+        foreach ($infos['fields'] as $name => $f) {
+            if ($f['type'] == 'external' && $f['table'] == $this->getName()) {
+                $mdl = new Modele($model);
+                $mdl->find(array($name => $this->getKey()));
+                return $mdl;
+            }
+        }
+        return false;
+    }
+
     function toArray() {
         return $this->instance;
+    }
+
+    function appendTemplate($varName) {
+        global $tpl;
+
+        while ($this->next()) {
+            $tpl->append($varName, new Modele($this));
+        }
+    }
+
+    function assignTemplate($varName) {
+        global $tpl;
+
+        $tpl->assign($varName, $this);
     }
 
 }
