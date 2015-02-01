@@ -2,30 +2,10 @@
 
 <ol class="breadcrumb">
   <li><a href="{mkurl action="section"}">Sections</a></li>
-  <li class="active">{$section.section_name}</li>
+  <li class="active">{$section->section_name}</li>
 </ol>
 
-<h1>Administration</h1>
-<h2>Section {$section.section_name}</h2>
-<p>Section crée par {$section.user_name}. C'est une {if $section.section_type="primary"}section principale{else}sous section{/if}.</p>
-
-<div class="btn-group">
-  {if $section.inType}
-      <a href="{mkurl action="section" page="goout" section=$section.section_id}" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Quitter</a>
-  {else}
-      <a href="{mkurl action="section" page="goin" section=$section.section_id}" class="btn btn-info"><i class="glyphicon glyphicon-heart"></i> Adhérer</a>
-  {/if}
-  <a href="{mkurl action="section" page="mkevent" section=$section.section_id}" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Créer event</a>
-  <a href="{mkurl action="section" page="addpoints" section=$section.section_id}" class="btn btn-default"><span class="glyphicon glyphicon-gift"></span> Donner des points</a>
-</div>
-
-{* Les onglets *}
-<ul class="nav nav-pills" style="margin-top: 20px;">
-  <li class="active">
-    <a href="{mkurl action=section page=details section=$section.section_id}">Membres</a>
-  </li>
-  <li><a href="{mkurl action=section page=activities section=$section.section_id}">Activités</a></li>
-</ul>
+{include "section_head.tpl"}
 
 <h3>Membres</h3>
 <table class="table table-striped table-hover">
@@ -47,7 +27,7 @@
           <td>{$line.user_login}</td>
           <td><a href="mailto:{$line.user_email}">{$line.user_email}</a></td>
           <td><a href="tel:{$line.user_phone}">{$line.user_phone}</a></td>
-          <td><a href="{mkurl action="section" page="accept" user=$line.user_id section=$section.section_id}" class="btn btn-warning"><span class="glyphicon-thumbs-down glyphicon"></span></td>
+          <td><a href="{mkurl action="section" page="accept" user=$line.user_id section=$section->section_id}" class="btn btn-warning"><span class="glyphicon-thumbs-down glyphicon"></span></td>
         </tr>
     {/foreach}
     {foreach from=$users item="line"}
@@ -59,8 +39,8 @@
           <td><a href="tel:{$line.user_phone}">{$line.user_phone}</a></td>
           <td>
             <div class="btn-group">
-              <a href="{mkurl action="section" page="reject" user=$line.user_id section=$section.section_id}" class="btn btn-danger"><span class="glyphicon-remove glyphicon"></span></a>
-              <a href="{mkurl action="section" page="manager" user=$line.user_id section=$section.section_id}" class="btn btn-warning"><span class="glyphicon-thumbs-up glyphicon"></span></a>
+              <a href="{mkurl action="section" page="reject" user=$line.user_id section=$section->section_id}" class="btn btn-danger"><span class="glyphicon-remove glyphicon"></span></a>
+              <a href="{mkurl action="section" page="manager" user=$line.user_id section=$section->section_id}" class="btn btn-warning"><span class="glyphicon-thumbs-up glyphicon"></span></a>
             </div>
           </td>
         </tr>
@@ -74,8 +54,8 @@
           <td><a href="tel:{$line.user_phone}">{$line.user_phone}</a></td>
           <td>
             <div class="btn-group">
-              <a href="{mkurl action="section" page="reject" user=$line.user_id section=$section.section_id}" class="btn btn-danger"><span class="glyphicon-remove glyphicon"></span></a>
-              <a href="{mkurl action="section" page="accept" user=$line.user_id section=$section.section_id}" class="btn btn-primary"><span class="glyphicon-plus glyphicon"></span></a>
+              <a href="{mkurl action="section" page="reject" user=$line.user_id section=$section->section_id}" class="btn btn-danger"><span class="glyphicon-remove glyphicon"></span></a>
+              <a href="{mkurl action="section" page="accept" user=$line.user_id section=$section->section_id}" class="btn btn-primary"><span class="glyphicon-plus glyphicon"></span></a>
             </div>
           </td>
         </tr>

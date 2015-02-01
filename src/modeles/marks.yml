@@ -14,12 +14,16 @@ fields:
     table: participations
     display: %part_desc%
     label: Activité
+  mark_mark:
+    type: int
+    default: 20
+    display: Qualité
   mark_period:
     type: external
     table: periods
     display: %period_start% - %period_end%
     label: Période
-    
+
 indexes:
   ind_mark_user:
     type: index

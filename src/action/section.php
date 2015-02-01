@@ -139,31 +139,29 @@ function section_delete() {
 function section_details() {
     global $pdo, $tpl;
 
-    $sql = $pdo->prepare('SELECT * FROM sections LEFT JOIN users ON user_id = section_owner WHERE section_id = ?');
-    $sql->bindValue(1, $_REQUEST['section']);
-    $sql->execute();
-    $section = $sql->fetch();
-    $section['inType'] = isset($_SESSION['user']['sections'][$section['section_id']]) ? $_SESSION['user']['sections'][$section['section_id']]['us_type'] : false;
-    $tpl->assign('section', $section);
     $tpl->assign('managers', array());
     $tpl->assign('users', array());
     $tpl->assign('guests', array());
 
+    $section = new Modele('sections');
+    $section->fetch($_REQUEST['section']);
+    $tpl->assign('section', $section);
+
 
     $sql = $pdo->prepare('SELECT * FROM user_sections LEFT JOIN users ON user_id = us_user WHERE us_section = ? AND us_type="manager"');
-    $sql->bindValue(1, $section['section_id']);
+    $sql->bindValue(1, $section->section_id);
     $sql->execute();
     while ($line = $sql->fetch())
         $tpl->append('managers', $line);
 
     $sql = $pdo->prepare('SELECT * FROM user_sections LEFT JOIN users ON user_id = us_user WHERE us_section = ? AND us_type="user"');
-    $sql->bindValue(1, $section['section_id']);
+    $sql->bindValue(1, $section->section_id);
     $sql->execute();
     while ($line = $sql->fetch())
         $tpl->append('users', $line);
 
     $sql = $pdo->prepare('SELECT * FROM user_sections LEFT JOIN users ON user_id = us_user WHERE us_section = ? AND us_type="guest"');
-    $sql->bindValue(1, $section['section_id']);
+    $sql->bindValue(1, $section->section_id);
     $sql->execute();
     while ($line = $sql->fetch())
         $tpl->append('guests', $line);
@@ -260,31 +258,31 @@ function section_edit() {
 
 function section_addpoints() {
     global $tpl, $pdo;
-    
+
     $section = new Modele('sections');
     $section->fetch($_REQUEST['section']);
     $tpl->assign('section', $section);
-    
+
     $queryFields = array(
         'part_duration',
         'part_title',
         'part_justification'
-        );
-    
+    );
+
     $mdl = new Modele('participations');
     $tpl->assign('form', $mdl->edit($queryFields));
-    
+
     if (isset($_POST['edit'])) {
         $data = array(
             'part_section' => $section->section_id,
             'part_attribution_date' => date('Y-m-d'),
             'part_status' => 'SUBMITTED',
         );
-        
+
         foreach ($queryFields as $field) {
             $data[$field] = $_POST[$field];
         }
-        
+
         if (!$mdl->addFrom($data))
             redirect('section', 'details', array('section' => $section->section_id, 'hsuccess' => '0'));
         $sql = $pdo->prepare('SELECT * FROM user_sections LEFT JOIN users ON user_id = us_user WHERE us_section = ? ORDER BY user_name');
@@ -295,7 +293,7 @@ function section_addpoints() {
         $dataMark = array(
             'mark_participation' => $mdl->getKey(),
         );
-        
+
         while ($user = $sql->fetch()) {
             if (in_array($user['user_id'], $_POST['staffs'])) {
                 $dataMark['mark_user'] = $user['user_id'];
@@ -305,34 +303,49 @@ function section_addpoints() {
         }
         redirect('section', 'details', array('section' => $section->section_id, 'hsuccess' => '1'));
     }
-    
+
     $types = new Modele('user_types');
     $types->find();
     while ($type = $types->next()) {
         $periods = $pdo->prepare('SELECT * FROM periods WHERE period_start < NOW() AND period_end > NOW() AND period_type = ?');
         $periods->bindValue(1, $types->ut_id);
         $periods->execute();
-        
+
         $repPeriods = array();
         while ($period = $periods->fetch()) {
             $repPeriods[] = $period;
         }
-        
+
         $tpl->append('types', array(
             'id' => $types->ut_id,
             'name' => $types->ut_name,
             'periods' => $repPeriods,
         ));
     }
-    
+
     $sql = $pdo->prepare('SELECT * FROM user_sections LEFT JOIN users ON user_id = us_user WHERE us_section = ? ORDER BY user_name');
     $sql->bindValue(1, $section->section_id);
     $sql->execute();
-    
+
     while ($user = $sql->fetch()) {
         $tpl->append('staffs', $user);
     }
-    
+
     display();
 }
 
+function section_activities() {
+    global $tpl;
+
+    $section = new Modele('sections');
+    $section->fetch($_REQUEST['section']);
+    $tpl->assign('section', $section);
+
+    $activites = new Modele('participations');
+    $activites->find(array('part_section' => $section->section_id));
+    while ($activites->next()) {
+        $tpl->append('activities', new Modele($activites));
+    }
+
+    display();
+}
