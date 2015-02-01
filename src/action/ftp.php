@@ -15,8 +15,7 @@
 function ftp_security($page, $params) {
     if ($page == 'index') {
         return ACL_ANNONYMOUS;
-    }
-    elseif (hasAcl(ACL_SUPERUSER, 'ftp', 'index')) { //Responsable index == admin FTP
+    } elseif (hasAcl(ACL_SUPERUSER, 'ftp', 'index')) { //Responsable index == admin FTP
         return ACL_ADMINISTRATOR;
     }
 }
@@ -51,7 +50,7 @@ function ftp_index() {
             . 'LEFT JOIN sections ON section_id = fu_section '
             . 'LEFT JOIN users ON fu_member = user_id '
             . 'LEFT JOIN user_sections ON fu_section = us_section AND us_user = :uid ';
-    if (!hasAcl(ACL_SUPERUSER)) {
+    if (!hasAcl(ACL_SUPERUSER, 'ftp', 'index')) {
         $sqlQuery .= 'WHERE fu_member = :uid OR ( '
                 . 'us_type = \'manager\' '
 //                . 'AND us_user = :uid '
@@ -95,7 +94,7 @@ function ftp_edit() {
     $account->fetch($_GET['account']);
     $tpl->assign('account', $account);
 
-    if (!hasAcl(ACL_ADMINISTRATOR)
+    if (!hasAcl(ACL_SUPERUSER, 'ftp', 'index')
 //            && $account->raw_fu_member != $_SESSION['user']['user_id']
             && (
             !isset($_SESSION['user']['sections'][$account->raw_fu_section]) || $_SESSION['user']['sections'][$account->raw_fu_section]['us_type'] != 'manager'
