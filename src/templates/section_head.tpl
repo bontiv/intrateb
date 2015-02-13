@@ -20,4 +20,7 @@
   <li{if $smarty.get.page=='activities'} class="active"{/if}>
     <a href="{mkurl action=section page=activities section=$section->section_id}">Activités</a>
   </li>
+  <li{if $smarty.get.page=='events'} class="active"{/if}>
+    <a href="{mkurl action=section page=events section=$section->section_id}">Evénements</a>
+  </li>
 </ul>

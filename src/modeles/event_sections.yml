@@ -12,6 +12,9 @@ fields:
     type: external
     table: sections
     display: %section_name%
+  es_needed:
+    type: int
+    label: Nombre de staffs requis
 indexes:
   es_event:
     type: index
@@ -19,4 +22,4 @@ indexes:
   es_section:
     type: index
     fields: es_section
-    
+

@@ -89,8 +89,7 @@ function event_staff() {
         $sql->execute();
         $dat = $sql->fetch();
         $section['inType'] = $dat[0] == 0;
-    }
-    else
+    } else
         $section['inType'] = false;
 
     $tpl->assign('section', $section);
@@ -130,6 +129,11 @@ function event_view() {
     while ($line = $sql->fetch()) {
         $es[$line['section_id']] = $line;
         $es[$line['section_id']]['cdat'] = false;
+        $es[$line['section_id']]['staffs'] = new Modele('event_staff');
+        $es[$line['section_id']]['staffs']->find(array(
+            'est_event' => $event['event_id'],
+            'est_section' => $line['section_id'],
+        ));
     }
 
     $mdl = new Modele('event_staff');
@@ -138,8 +142,8 @@ function event_view() {
         'est_user' => $_SESSION['user']['user_id'],
     ));
     while ($mdl->next()) {
-        if (isset($es[$mdl->est_section])) {
-            $es[$mdl->est_section]['cdat'] = $mdl->toArray();
+        if (isset($es[$mdl->raw_est_section])) {
+            $es[$mdl->raw_est_section]['cdat'] = $mdl->toArray();
         } else {
             // Réparation de table a la volé
             $mdl->delete();
@@ -257,16 +261,38 @@ function event_joinsection() {
 
 function event_quitsection() {
     global $tpl;
-    
+
     $mdl = new Modele('event_staff');
     $tpl->assign('hsuccess', $mdl->find(array(
-       'est_event' => $_GET['event'],
-       'est_section' => $_GET['section'],
-        'est_user' => $_SESSION['user']['user_id'],
+                'est_event' => $_GET['event'],
+                'est_section' => $_GET['section'],
+                'est_user' => $_SESSION['user']['user_id'],
     )));
-    
+
     while ($mdl->next())
-        $mdl->delete ();
-    
+        $mdl->delete();
+
     modexec('event', 'view');
+}
+
+function event_edit_needed() {
+    $mdl = new Modele('event_sections');
+    $mdl->find(array(
+        'es_section' => $_GET['section'],
+        'es_event' => $_GET['event'],
+    ));
+
+    $mdl->next();
+
+    if (isset($_POST['count'])) {
+        $mdl->es_needed = $_POST['count'];
+        redirect('event', 'staff', array(
+            'event' => $mdl->raw_es_event,
+            'section' => $mdl->raw_es_section,
+            'hsuccess' => '1',
+        ));
+    }
+
+    $mdl->assignTemplate('es');
+    display();
 }

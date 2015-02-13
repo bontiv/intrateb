@@ -350,6 +350,22 @@ function section_activities() {
     display();
 }
 
+function section_events() {
+    global $tpl;
+
+    $section = new Modele('sections');
+    $section->fetch($_REQUEST['section']);
+    $tpl->assign('section', $section);
+
+    $events = new Modele('events');
+    $events->find(array('event_section' => $section->section_id));
+    while ($events->next()) {
+        $tpl->append('events', new Modele($events));
+    }
+
+    display();
+}
+
 function section_viewactivity() {
     $section = new Modele('sections');
     $section->fetch($_REQUEST['section']);

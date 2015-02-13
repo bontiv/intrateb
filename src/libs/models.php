@@ -591,7 +591,7 @@ class Modele {
                         $sql .= ' AND';
                     }
                     // TODO : Il faut utiliser LIKE pour les alphabetiques
-                    $sql .= '`' . $colum . '` = ?';
+                    $sql .= ' `' . $colum . '` = ?';
                     $values[] = $value;
                 } else {
                     dbg_warning(__FILE__, "Colone $colum invalide dans la table " . $this->desc['name']);
