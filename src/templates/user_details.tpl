@@ -65,7 +65,7 @@
     <tbody>
       {foreach from=$sections item="line"}
           <tr>
-            <td><a href="{mkurl action="section" page="detail" section=$line.section_id}">{$line.section_name}</a></td>
+            <td><a href="{mkurl action="section" page="details" section=$line.section_id}">{$line.section_name}</a></td>
             <td>{$line.section_type}</td>
             <td>{$line.us_type}</td>
             <td>{acl level="SUPERUSER"}<a href="{mkurl action="user" page="quit" section=$line.section_id user=$user.user_id}" class="btn btn-danger">Quitter</a>{/acl}</td>
