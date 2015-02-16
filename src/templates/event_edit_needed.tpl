@@ -3,7 +3,7 @@
 <ol class="breadcrumb">
   <li><a href="{mkurl action="event"}">Events</a></li>
   <li><a href="{mkurl action="event" page="view" event=$es->es_event->event_id}">{$es->es_event->event_name}</a></li>
-  <li><a href="{mkurl action=event page=staff event=$es->raw_es_event section=$es->raw_es_section}">Staffs {$es->es_section->section_name}</a></li>
+  <li><a href="{mkurl action=event page=staff event=$es->es_event->event_id section=$es->es_section->section_id}">Staffs {$es->es_section->section_name}</a></li>
   <li class="active">Edition</li>
 </ol>
 

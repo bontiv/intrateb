@@ -5,6 +5,40 @@
  * Ce controleur permet de gérer les différents événements.
  * @package Epicenote
  */
+function event_security($page, $params) {
+    $us = new Modele('user_sections');
+    $event = new Modele('events');
+
+    if (!isset($params['event']))
+        return false;
+
+    $event->fetch($params['event']);
+
+    if (!$_SESSION['user'])
+        return false;
+
+    // Rattrapage manager de l'event
+    $us->find(array(
+        'us_user' => $_SESSION['user']['user_id'],
+        'us_section' => $event->event_section->section_id,
+        'us_type' => 'manager'
+    ));
+    if ($us->count()) {
+        return ACL_SUPERUSER;
+    }
+
+    // Rattrapage manager de section event
+    if (preg_match('`^staff(|_.*)$`', $page)) {
+        $us->find(array(
+            'us_user' => $_SESSION['user']['user_id'],
+            'us_section' => $params['section'],
+            'us_type' => 'manager'
+        ));
+        if ($us->count()) {
+            return ACL_SUPERUSER;
+        }
+    }
+}
 
 /**
  * Liste les événements
@@ -294,5 +328,174 @@ function event_edit_needed() {
     }
 
     $mdl->assignTemplate('es');
+    display();
+}
+
+function event_staff_accept() {
+    $mdl = new Modele('event_staff');
+    $mdl->find(array(
+        'est_event' => $_GET['event'],
+        'est_section' => $_GET['section'],
+        'est_user' => $_GET['user'],
+    ));
+    if ($mdl->next()) {
+        $mdl->est_status = 'OK';
+        $GLOBALS['tpl']->assign('hsuccess', true);
+    } else {
+        $GLOBALS['tpl']->assign('hsuccess', false);
+    }
+
+    modexec('event', 'staff');
+}
+
+function event_staff_reject() {
+    $mdl = new Modele('event_staff');
+    $mdl->find(array(
+        'est_event' => $_GET['event'],
+        'est_section' => $_GET['section'],
+        'est_user' => $_GET['user'],
+    ));
+    if ($mdl->next()) {
+        $mdl->est_status = 'NO';
+        $GLOBALS['tpl']->assign('hsuccess', true);
+    } else {
+        $GLOBALS['tpl']->assign('hsuccess', false);
+    }
+
+    modexec('event', 'staff');
+}
+
+function event_addpoints() {
+    global $tpl, $pdo;
+
+    $event = new Modele('events');
+    $event->fetch($_GET['event']);
+    $event->assignTemplate('event');
+
+    $section = new Modele('sections');
+    $section->fetch($_REQUEST['section']);
+    $section->assignTemplate('section');
+
+    $queryFields = array(
+        'part_duration',
+        'part_title',
+        'part_justification'
+    );
+
+    $mdl = new Modele('participations');
+    $tpl->assign('form', $mdl->edit($queryFields));
+
+    if (isset($_POST['edit'])) {
+        $data = array(
+            'part_section' => $section->section_id,
+            'part_attribution_date' => date('Y-m-d'),
+            'part_status' => 'SUBMITTED',
+            'part_event' => $event->getKey(),
+        );
+
+        foreach ($queryFields as $field) {
+            $data[$field] = $_POST[$field];
+        }
+
+        if (!$mdl->addFrom($data))
+            redirect('section', 'details', array('section' => $section->section_id, 'hsuccess' => '0'));
+        $sql = $pdo->prepare('SELECT * FROM event_staff LEFT JOIN users ON user_id =est_user WHERE est_section = ? AND est_event = ?');
+        $sql->bindValue(1, $section->getKey());
+        $sql->bindValue(2, $event->getKey());
+        $sql->execute();
+
+        $mdlMark = new Modele('marks');
+        $dataMark = array(
+            'mark_participation' => $mdl->getKey(),
+        );
+
+        while ($user = $sql->fetch()) {
+            $markOk = $_POST['staff-' . $user['user_id'] . '-ok'];
+            $markPeriod = $_POST['staff-' . $user['user_id'] . '-period'];
+            $markMark = $_POST['staff-' . $user['user_id'] . '-mark'];
+
+            if ($markOk == 'OK') {
+                $dataMark['mark_user'] = $user['user_id'];
+                $dataMark['mark_period'] = $markPeriod;
+                $mdlMark->addFrom($dataMark);
+            }
+        }
+        redirect('event', 'staff', array('event' => $event->getKey(), 'section' => $section->section_id, 'hsuccess' => '1'));
+    }
+
+    $types = new Modele('user_types');
+    $types->find();
+    $repPeriods = array();
+
+    while ($type = $types->next()) {
+        $periods = $pdo->prepare('SELECT * FROM periods WHERE period_start < NOW() AND period_end > NOW() AND period_type = ?');
+        $periods->bindValue(1, $types->ut_id);
+        $periods->execute();
+
+        while ($period = $periods->fetch()) {
+            if (!isset($repPeriods[$types->ut_id])) {
+                $repPeriods[$types->ut_id] = array();
+            }
+            $repPeriods[$types->ut_id][] = $period;
+        }
+    }
+    $tpl->assign('periods', $repPeriods);
+
+    $sql = $pdo->prepare('SELECT * FROM event_staff LEFT JOIN users ON user_id =est_user WHERE est_section = ? AND est_event = ? ORDER BY user_name');
+    $sql->bindValue(1, $section->getKey());
+    $sql->bindValue(2, $event->getKey());
+    $sql->execute();
+
+    while ($user = $sql->fetch()) {
+        $tpl->append('staffs', $user);
+    }
+
+    display();
+}
+
+function event_staff_activities() {
+    global $tpl, $pdo;
+
+    $sql = $pdo->prepare('SELECT * FROM events LEFT JOIN users ON event_owner = user_id LEFT JOIN sections ON section_id = event_section WHERE event_id = ?');
+    $sql->bindValue(1, $_GET['event']);
+    $sql->execute();
+
+    $event = $sql->fetch();
+    if (!$event)
+        modexec('syscore', 'notfound');
+    $tpl->assign('event', $event);
+
+    $sql = $pdo->prepare('SELECT * FROM event_sections LEFT JOIN sections ON es_section = section_id LEFT JOIN users ON section_owner = user_id WHERE es_event = ? AND es_section = ?');
+    $sql->bindValue(1, $event['event_id']);
+    $sql->bindValue(2, $_GET['section']);
+    $sql->execute();
+
+    $es = array();
+    $section = $sql->fetch();
+    if (!$section)
+        modexec('syscore', 'notfound');
+
+    if (isset($_SESSION['user'])) {
+        $sql = $pdo->prepare('SELECT COUNT(*) FROM event_staff WHERE est_user = ? AND est_section = ? AND est_event = ?');
+        $sql->bindValue(1, $_SESSION['user']['user_id']);
+        $sql->bindValue(2, $section['section_id']);
+        $sql->bindValue(3, $event['event_id']);
+        $sql->execute();
+        $dat = $sql->fetch();
+        $section['inType'] = $dat[0] == 0;
+    } else
+        $section['inType'] = false;
+
+    $tpl->assign('section', $section);
+
+    $activites = new Modele('participations');
+    $activites->find(array(
+        'part_section' => $section['section_id'],
+        'part_event' => $event['event_id'],
+    ));
+    while ($activites->next()) {
+        $tpl->append('activities', new Modele($activites));
+    }
+
     display();
 }

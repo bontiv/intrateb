@@ -16,3 +16,11 @@ fields:
     type: external
     table: sections
     display: %section_name%
+  est_status:
+    type: enum
+    label: Status
+    default: WAIT
+    items:
+      WAIT: Candidat
+      OK  : Accepté
+      NO  : Rejecté

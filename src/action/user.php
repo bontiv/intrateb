@@ -244,7 +244,7 @@ function user_add_mandate($user, $mandate) {
 
     if ($lnk->find(array(
                 'um_user' => $usr->getKey(),
-                'um_mandate' => $usr->getKey(),
+                'um_mandate' => $mdt->getKey(),
             )) && $lnk->count() > 0) {
         return true;
     }

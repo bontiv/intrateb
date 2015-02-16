@@ -15,8 +15,8 @@ fields:
     label: Section
   part_event:
     type: external
-    table: user_types
-    display: %ut_name%
+    table: events
+    display: %event_name%
     label: Event
     null: true
   part_duration:
