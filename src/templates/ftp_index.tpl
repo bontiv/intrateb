@@ -20,7 +20,10 @@
         {foreach from=$allFtp item="account"}
             <tr>
               <td>{$account.fu_user}</td>
-              <td>{$account.fu_pass}</td>
+              <td>
+                <div id="{$account.fu_id}-pass" style="display:none;">{$account.fu_pass}</div>
+                <div id="{$account.fu_id}-label">********* <a href="#" onclick="show({$account.fu_id})"><i class="glyphicon glyphicon-user"></i><span class="hide">Voir</span></a></div>
+              </td>
               <td><a href="{mkurl action="user" page="view" user=$account.user_id}">{$account.user_name}</a></td>
               <td><a href="{mkurl action="section" page="details" section=$account.section_id}">{$account.section_name}</a></td>
               <td>{$account.fu_path}</td>
@@ -39,4 +42,17 @@
       Vous ne gérez aucun compte FTP.
     </p>
 {/if}
+
+<script type="text/javascript">
+  {literal}
+      function show(id) {
+          $('#' + id + '-pass').show();
+          $('#' + id + '-label').hide();
+          setTimeout(function () {
+              $('#' + id + '-pass').hide();
+              $('#' + id + '-label').show();
+          }, 5000);
+      }
+  {/literal}
+</script>
 {include "foot.tpl"}
