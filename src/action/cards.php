@@ -120,6 +120,38 @@ function cards_viewmycard() {
     quit();
 }
 
+/**
+ * Refus de carte par pannel user
+ * @global type $tpl
+ */
+function cards_delcard() {
+    global $tpl;
+
+    $mdl = new Modele('card');
+
+    $mdl->fetch($_GET['card']);
+    $mdl->card_status = 'NOPICTURE';
+    $tpl->assign('hsuccess', true);
+    $_REQUEST['user'] = $mdl->raw_card_user;
+    modexec('user', 'view');
+}
+
+/**
+ * Acceptation de carte par pannel user
+ * @global type $tpl
+ */
+function cards_okcard() {
+    global $tpl;
+
+    $mdl = new Modele('card');
+
+    $mdl->fetch($_GET['card']);
+    $mdl->card_status = 'WAIT';
+    $tpl->assign('hsuccess', true);
+    $_REQUEST['user'] = $mdl->raw_card_user;
+    modexec('user', 'view');
+}
+
 function cards_delmycard() {
     global $tpl;
 

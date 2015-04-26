@@ -198,6 +198,14 @@ function user_view() {
         $tpl->append('mandates', $mdt->um_mandate);
     }
 
+    $mdl = new Modele('card');
+    $mdl->find(array('card_user' => $_REQUEST['user']));
+    while ($l = $mdl->next()) {
+        $o = new Modele('card');
+        $o->fetch($mdl->card_id);
+        $tpl->append('cards', $o);
+    }
+
     $tpl->display('user_details.tpl');
     quit();
 }
@@ -301,4 +309,13 @@ function user_editpassword() {
 
         modexec('user', 'view');
     }
+}
+
+function user_viewphoto() {
+    $usr = new Modele('users');
+    $usr->fetch($_GET['user']);
+
+    header('Content-Type: image/png');
+    readfile($usr->user_photo);
+    quit();
 }
