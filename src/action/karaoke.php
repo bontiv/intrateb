@@ -18,7 +18,7 @@ function karaoke_play() {
         $parts = explode(" - ", $line);
         if (count($parts) > 2) {
             $occ = array(
-                $parts[0],
+                trim($parts[0]),
                 $parts[1],
                 isset($parts[3]) ? $parts[2] : "",
                 isset($parts[3]) ? $parts[3] : $parts[2],

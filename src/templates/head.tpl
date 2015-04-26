@@ -46,6 +46,7 @@
               <ul class="dropdown-menu">
                 <li><a href="{mkurl action="karaoke" page="play"}">Karaoke Play</a></li>
                 <li><a href="{mkurl action="ftp" page="index"}">Comptes FTP</a></li>
+                <li><a href="{mkurl action="toyunda" page="index"}">Toyunda</a></li>
               </ul>
             </li>
             {acl action="event"}

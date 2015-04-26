@@ -8,3 +8,8 @@ fields:
         type: var
         label: Adresse du serveur playlist
         default: "http://www.zanark.net/karaoke/"
+    todolist:
+        type: var
+        label: Adresse du serveur todolist
+        default: "http://www.zanark.net/demandes/"
+        
