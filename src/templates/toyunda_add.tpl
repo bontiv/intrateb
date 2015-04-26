@@ -4,12 +4,12 @@
 
 <ol class="breadcrumb">
   <li><a href="{mkurl action="toyunda" page="index"}" class="active">Toyunda</a></li>
-  <li><a href="#" class="active">Ajout d'une demande</a></li>
+  <li><a href="{mkurl action="toyunda" page="add"}" class="active">Ajout d'une demande</a></li>
 </ol>
 
 <ul class="nav nav-pills">
   <li role="presentation"><a href="{mkurl action="toyunda" page="index"}">Liste des demandes</a></li>
-  <li role="presentation" class="active"><a href="#">Ajout d'une demande</a></li>
+  <li role="presentation" class="active"><a href="{mkurl action="toyunda" page="add"}">Ajout d'une demande</a></li>
   <li role="presentation" class="disabled"><a href="#">Liste complète</a></li>
 </ul>
 
