@@ -9,8 +9,6 @@
 function toyunda_index() {
     global $config, $tpl;
 
-    $url = "http://www.mytinytodo.net/demo/";
-
     $ci = curl_init($config['Zanark']['todolist'] . 'ajax.php?loadTasks&list=1&compl=1&sort=0');
     curl_setopt($ci, CURLOPT_RETURNTRANSFER, true);
     $list = json_decode(curl_exec($ci), true);
@@ -40,7 +38,7 @@ function toyunda_index() {
 }
 
 function toyunda_add() {
-    global $tpl;
+    global $tpl, $config;
 
     if (isset($_POST['title'])) {
         if ($_POST['title'] == "") {
@@ -58,9 +56,7 @@ function toyunda_add() {
                 $str = "$_POST[langue] - $_POST[title]";
             }
 
-            $url = "http://www.mytinytodo.net/demo/";
-
-            $ci = curl_init($url . 'ajax.php?newTask');
+            $ci = curl_init($config['Zanark']['todolist'] . 'ajax.php?newTask');
             curl_setopt($ci, CURLOPT_POST, true);
             curl_setopt($ci, CURLOPT_POSTFIELDS, array(
                 "list" => "1",

@@ -8,8 +8,8 @@
 </ol>
 
 <ul class="nav nav-pills">
-  <li role="presentation" class="active"><a href="#">Liste des demande</a></li>
-  <li role="presentation"><a href="{mkurl action="toyunda" page="add"}">Ajout de demande</a></li>
+  <li role="presentation" class="active"><a href="#">Liste des demandes</a></li>
+  <li role="presentation"><a href="{mkurl action="toyunda" page="add"}">Ajout d'une demande</a></li>
   <li role="presentation" class="disabled"><a href="#">Liste complète</a></li>
 </ul>
 
