@@ -20,7 +20,7 @@
     <p>
       La section Toyunda s'occupe de la Toyunda. La Toyunda est le système permetant
       la réalisation des karaoké à EPITANIME. Les responsables de la section
-      Toyunda s'applique à faire évoluer la base de donnée des karaoké disponibles.
+      Toyunda s'applique à faire évoluer la base de donnée des karaokés disponibles.
     </p>
   </div>
 </div>
