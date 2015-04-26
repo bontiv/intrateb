@@ -57,11 +57,11 @@
                 <span class="label label-success">Fini</span>
             {else}
                 {if $task.prio < 0}
-                    <span class="label label-default">Basse priorité</span>
+                    <span class="label label-default">En attente</span>
                 {elseif $task.prio == 1}
-                    <span class="label label-warning">Haute priorité</span>
+                    <span class="label label-warning">En cours</span>
                 {elseif $task.prio >= 2}
-                    <span class="label label-danger">Très haute priorité</span>
+                    <span class="label label-info">A intégrer</span>
                 {/if}
             {/if}
           <td>
