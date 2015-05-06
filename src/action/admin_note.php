@@ -90,10 +90,76 @@ function admin_note_delmandate() {
     } else {
         redirect("admin_note", "mandate", array('hsuccess' => 1));
     }
+}
+
+function admin_note_periods() {
+    $mdl = new Modele('periods');
+    $mdl->find(array("period_state" => "ACTIVE"));
+    $mdl->appendTemplate('periods');
+    display();
+}
+
+function admin_note_delperiod() {
+    $prd = new Modele('periods', $_REQUEST['id']);
+    $marks = new Modele('marks');
+    $marks->find(array('mark_period' => $prd->getKey()));
+    while ($marks->next()) {
+        $marks->delete();
+    }
+    $prd->delete();
+    redirect('admin_note', 'periods', array('hsuccess' => 1));
+}
+
+function admin_note_bulletin() {
+    $mdl = new Modele('periods');
+    $mdl->find("period_state = 'DRAFT' OR period_state = 'VALID' OR period_state = 'SENT'");
+    $mdl->appendTemplate('periods');
+    display();
+}
+
+function admin_note_addbulletin() {
+    global $pdo, $root;
+
+    if (isset($_GET['id'])) {
+        $mdl = new Modele("periods");
+        $mdl->fetch($_GET['id']);
+
+        require $root . 'libs' . DS . 'bulletins' . DS . $mdl->period_type->ut_name . DS . 'bulletin.php';
+        bulletin_add($mdl->period_id);
+
+        $mdl->period_state = 'DRAFT';
+        redirect('admin_note', 'bulletin', array('hsuccess' => 1));
+    }
+
+    $mdl = new Modele("periods");
+    $mdl->find(array("period_state" => "ACTIVE"));
+    $mdl->appendTemplate('periods');
 
     display();
 }
 
-function admin_note_periods() {
-    display();
+function admin_note_viewbulletin() {
+    global $pdo, $root;
+
+    $mdl = new Modele("periods");
+    $mdl->fetch($_GET['id']);
+    $mdl->assignTemplate('bulletin');
+
+    require $root . 'libs' . DS . 'bulletins' . DS . $mdl->period_type->ut_name . DS . 'bulletin.php';
+
+    bulletin_view($_GET['id']);
+    quit();
+}
+
+function admin_note_editbulletin() {
+    global $pdo, $root;
+
+    $mdl = new Modele("periods");
+    $mdl->fetch($_GET['id']);
+    $mdl->assignTemplate('bulletin');
+
+    require $root . 'libs' . DS . 'bulletins' . DS . $mdl->period_type->ut_name . DS . 'bulletin.php';
+
+    bulletin_edit($_GET['id']);
+    quit();
 }

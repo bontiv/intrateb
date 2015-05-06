@@ -1,0 +1,27 @@
+## Table users
+name: bulletin_user
+key: bu_id
+fields:
+  bu_id:
+    type: auto_int
+  bu_period:
+    type: external
+    label: Période
+    table: periods
+    display: %period_label%
+  bu_user:
+    type: external
+    label: Utilisateur
+    display: %user_name%
+    table: users
+  bu_data:
+    type: text
+    label: Data
+
+indexes:
+  idx_bu_period:
+    type: index
+    fields: [bu_period]
+  idx_bu_user:
+    type: index
+    fields: [bu_user]

@@ -24,7 +24,17 @@ fields:
     table: mandate
     display: %mandate_label%
     label: Mandat
-    
+  period_state:
+      type: enum
+      label: Statut
+      visible: admin
+      default: ACTIVE
+      items:
+          ACTIVE: Période active
+          DRAFT:  Brouillon de bulletin
+          VALID:  Bulletin validé
+          SENT:   Bulletin envoyé
+
 indexes:
   idx_period_mandate:
     type: index
