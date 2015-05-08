@@ -29,7 +29,7 @@
   </table>
 
   <p>
-    <input type="submit" class="btn btn-primary" />
+    <input type="submit" name="send" class="btn btn-primary" />
   </p>
 </form>
 

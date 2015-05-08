@@ -307,7 +307,7 @@ function section_addpoints() {
     $types = new Modele('user_types');
     $types->find();
     while ($type = $types->next()) {
-        $periods = $pdo->prepare('SELECT * FROM periods WHERE period_start < NOW() AND period_end > NOW() AND period_type = ?');
+        $periods = $pdo->prepare('SELECT * FROM periods WHERE period_start < NOW() AND period_end > NOW() AND period_type = ? AND period_state = "ACTIVE"');
         $periods->bindValue(1, $types->ut_id);
         $periods->execute();
 

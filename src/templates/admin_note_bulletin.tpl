@@ -15,6 +15,7 @@
               <th>Début</th>
               <th>Fin</th>
               <th>Ecole</th>
+              <th>Générateur</th>
               <th>Notes</th>
               <th>Statut</th>
             </tr>
@@ -26,11 +27,14 @@
                   <td>{$m->period_start}</td>
                   <td>{$m->period_end}</td>
                   <td>{$m->period_type->ut_name}</td>
+                  <td>{$m->period_generator}</td>
                   <td>{$m->reverse("marks")->count()}</td>
                   <td>
                     {if $m->raw_period_state == "DRAFT"}
                         <div class="label label-info">Brouillon</div>
-                    {elseif $m->raw_period_state == "ACTIVE"}
+                    {elseif $m->raw_period_state == "VALID"}
+                        <div class="label label-warning">Validé (attente envoi)</div>
+                    {elseif $m->raw_period_state == "SEND"}
                         <div class="label label-success">Terminé</div>
                     {/if}
                   </td>

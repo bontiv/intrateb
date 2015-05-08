@@ -3,8 +3,19 @@
 <h2>Bulletin {$bulletin->period_label}</h2>
 
 <p>
-  <a href="{mkurl action="admin_note" page="editbulletin" id=$bulletin->period_id}" class="btn btn-warning">Modifier</a>
-  <a href="" class="btn btn-primary">Valider</a>
+  {if $bulletin->raw_period_state=="DRAFT"}
+      <a href="{mkurl action="admin_note" page="editbulletin" id=$bulletin->period_id}" class="btn btn-warning">Modifier</a>
+      <a href="{mkurl action="admin_note" page="validbulletin" id=$bulletin->period_id}" class="btn btn-primary">Valider</a>
+  {/if}
+  {if $bulletin->raw_period_state=="VALID" or $bulletin->raw_period_state=="SENT"}
+  <div class="btn-group">
+    <button data-toggle="dropdown" class="btn btn-info dropdown-toggle">Télécharger <span class="caret"></span></button>
+    <ul class="dropdown-menu" role="menu">
+      <li><a href="{mkurl action="admin_note" page="downbulletin" format="hoarau" id=$bulletin->period_id}">Format CSV hoarau</a></li>
+      <li><a href="{mkurl action="admin_note" page="downbulletin" format="intra" id=$bulletin->period_id}">Format CSV Intra</a></li>
+    </ul>
+  </div>
+{/if}
 </p>
 
 <table class="table">

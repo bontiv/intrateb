@@ -24,6 +24,11 @@ fields:
     table: mandate
     display: %mandate_label%
     label: Mandat
+  period_generator:
+      label: Générateur du bulletin
+      type: var
+      size: 50
+      default: ""
   period_state:
       type: enum
       label: Statut

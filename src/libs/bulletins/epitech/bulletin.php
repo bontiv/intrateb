@@ -36,8 +36,8 @@ function bulletin_add($period_id) {
     }
 }
 
-function bulletin_view($period_id) {
-    global $tpl, $root;
+function bulletin_toTemplate($period_id) {
+    global $tpl;
 
     $mdl = new Modele('bulletin_user');
     $mdl->find(array('bu_period' => $period_id));
@@ -48,6 +48,7 @@ function bulletin_view($period_id) {
         $marks = unserialize($mdl->bu_data);
         $line = array(
             'user' => $mdl->bu_user,
+            'spice' => 0,
         );
 
         foreach ($marks as $mark) {
@@ -55,39 +56,86 @@ function bulletin_view($period_id) {
                 $colums[] = $mark['label'];
             }
             $line[$mark['label']] = $mark['duration'];
+            $line['spice'] += $mark['duration'];
         }
 
         $tpl->append('marks', $line);
     }
 
     $tpl->assign('colums', $colums);
+}
+
+function bulletin_view($period_id) {
+    global $tpl, $root;
+
+    bulletin_toTemplate($period_id);
+
     $tpl->display($root . 'libs/bulletins/epitech/view.tpl');
 }
 
 function bulletin_edit($period_id) {
     global $tpl, $root;
 
-    $mdl = new Modele('bulletin_user');
-    $mdl->find(array('bu_period' => $period_id));
-
-    $colums = array();
-
-    while ($mdl->next()) {
-        $marks = unserialize($mdl->bu_data);
-        $line = array(
-            'user' => $mdl->bu_user,
-        );
-
-        foreach ($marks as $mark) {
-            if (!in_array($mark['label'], $colums)) {
-                $colums[] = $mark['label'];
+    if (isset($_POST['send'])) {
+        foreach ($_POST as $key => $value) {
+            $parsed = explode(';', $key, 2);
+            if (count($parsed) == 2) {
+                list($user, $field) = $parsed;
+                $usrblt = new Modele('bulletin_user');
+                $usrblt->find(array(
+                    'bu_period' => $period_id,
+                    'bu_user' => $user,
+                ));
+                if ($usrblt->next()) {
+                    $data = unserialize($usrblt->bu_data);
+                    foreach ($data as &$mark) {
+                        if ($mark['label'] == $field) {
+                            $mark['duration'] = $value;
+                        }
+                    }
+                    $usrblt->bu_data = serialize($data);
+                }
             }
-            $line[$mark['label']] = $mark['duration'];
         }
-
-        $tpl->append('marks', $line);
+        redirect("admin_note", "viewbulletin", array("id" => $period_id, "hsuccess" => 1));
     }
 
-    $tpl->assign('colums', $colums);
+    bulletin_toTemplate($period_id);
+
     $tpl->display($root . 'libs/bulletins/epitech/edit.tpl');
+}
+
+function bulletin_download($period_id) {
+    global $tpl, $root;
+
+    header('Content-Type: text/plain;charset=UTF-8');
+    //header("Content-Disposition: attachment; filename=\"Period$period_id-$_GET[format].csv\"");
+
+    bulletin_toTemplate($period_id);
+
+    if ($_GET['format'] == 'hoarau') {
+        $tpl->display($root . 'libs/bulletins/epitech/download_hoarau.tpl');
+    } else {
+        $tpl->display($root . 'libs/bulletins/epitech/download_intra.tpl');
+    }
+}
+
+function bulletin_view_user($id) {
+    global $tpl, $root;
+
+    $mdl = new Modele('bulletin_user');
+    $mdl->fetch($id);
+
+    $bulletin = array(
+        'bu' => $mdl,
+        'data' => unserialize($mdl->bu_data),
+        'spice' => 0,
+    );
+
+    foreach ($bulletin['data'] as $mark) {
+        $bulletin['spice'] += $mark['duration'];
+    }
+
+    $tpl->assign('bulletin', $bulletin);
+    $tpl->display($root . 'libs/bulletins/epitech/user.tpl');
 }

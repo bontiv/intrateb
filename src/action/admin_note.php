@@ -118,22 +118,31 @@ function admin_note_bulletin() {
 }
 
 function admin_note_addbulletin() {
-    global $pdo, $root;
+    global $pdo, $root, $tpl;
 
     if (isset($_GET['id'])) {
         $mdl = new Modele("periods");
-        $mdl->fetch($_GET['id']);
+        $mdl->fetch($_POST['period']);
+        $_POST['generator'] = basename($_POST['generator']);
 
-        require $root . 'libs' . DS . 'bulletins' . DS . $mdl->period_type->ut_name . DS . 'bulletin.php';
+        require $root . 'libs' . DS . 'bulletins' . DS . $_POST['generator'] . DS . 'bulletin.php';
         bulletin_add($mdl->period_id);
 
         $mdl->period_state = 'DRAFT';
+        $mdl->period_generator = $_POST['generator'];
         redirect('admin_note', 'bulletin', array('hsuccess' => 1));
     }
 
     $mdl = new Modele("periods");
     $mdl->find(array("period_state" => "ACTIVE"));
     $mdl->appendTemplate('periods');
+
+    foreach (scandir($root . 'libs' . DS . 'bulletins') as $generator) {
+        if (is_dir($root . 'libs' . DS . 'bulletins' . DS . $generator) && $generator[0] != '.') {
+            echo $generator;
+            $tpl->append('generators', $generator);
+        }
+    }
 
     display();
 }
@@ -145,7 +154,7 @@ function admin_note_viewbulletin() {
     $mdl->fetch($_GET['id']);
     $mdl->assignTemplate('bulletin');
 
-    require $root . 'libs' . DS . 'bulletins' . DS . $mdl->period_type->ut_name . DS . 'bulletin.php';
+    require $root . 'libs' . DS . 'bulletins' . DS . $mdl->period_generator . DS . 'bulletin.php';
 
     bulletin_view($_GET['id']);
     quit();
@@ -158,8 +167,29 @@ function admin_note_editbulletin() {
     $mdl->fetch($_GET['id']);
     $mdl->assignTemplate('bulletin');
 
-    require $root . 'libs' . DS . 'bulletins' . DS . $mdl->period_type->ut_name . DS . 'bulletin.php';
+    require $root . 'libs' . DS . 'bulletins' . DS . $mdl->period_generator . DS . 'bulletin.php';
 
     bulletin_edit($_GET['id']);
+    quit();
+}
+
+function admin_note_validbulletin() {
+    $mdl = new Modele("periods");
+    $mdl->fetch($_GET['id']);
+    $mdl->period_state = 'VALID';
+
+    redirect("admin_note", "bulletin", array("hsuccess" => 1));
+}
+
+function admin_note_downbulletin() {
+    global $pdo, $root;
+
+    $mdl = new Modele("periods");
+    $mdl->fetch($_GET['id']);
+    $mdl->assignTemplate('bulletin');
+
+    require $root . 'libs' . DS . 'bulletins' . DS . $mdl->period_generator . DS . 'bulletin.php';
+
+    bulletin_download($_GET['id']);
     quit();
 }
