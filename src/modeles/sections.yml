@@ -15,6 +15,11 @@ fields:
     type: external
     table: users
     display: %user_firstname% %user_lastname% (%user_name%)
+  section_ml:
+      type: var
+      label: Adresse email ML
+      default: ""
+      
 indexes:
   section_name:
     type: unique
@@ -22,4 +27,4 @@ indexes:
   section_owner:
     type: index
     fields: [section_owner]
-    
+

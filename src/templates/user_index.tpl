@@ -89,7 +89,7 @@
   <a class="btn btn-link" href="{mkurl action="user" page="check"}" role="button" data-toggle="modal"><i class="glyphicon glyphicon-check" title="Valider des cotisations"></i> Valider</a>
   <a class="btn btn-link" href="#" onclick="sendToClipboard();
           return false;"><i class="glyphicon glyphicon-share" title="Copier dans le presse papier"></i> Presse-papier</a>
-  <a class="btn btn-link" href="{mkurl action="user" page="sync"}" role="button" data-toggle="modal"><i class="glyphicon glyphicon-export"></i> GoogleSync</a>
+  <a class="btn btn-link" href="{mkurl action="user" page="sync2"}" role="button" data-toggle="modal"><i class="glyphicon glyphicon-export"></i> GoogleSync</a>
 
   <ul class="pager">
     {if $ptable.showPrev}

@@ -30,6 +30,34 @@ function user_sync() {
     quit();
 }
 
+function user_sync2() {
+    global $srcdir, $tpl;
+
+    require_once $srcdir . '/libs/GoogleApi.php';
+
+    $api = new GoogleApi();
+    $members = $api->getGroupMembers();
+    $Gregistred = array();
+    $Sregistred = array();
+
+    foreach ($members->members as $member) {
+        if (isset($member->email)) {
+            $Gregistred[] = strtolower($member->email);
+        }
+    }
+
+    $mdl = new Modele('users');
+    $mdl->find();
+    while ($mdl->next()) {
+        $Sregistred[] = strtolower($mdl->user_email);
+    }
+
+    $tpl->assign('add', array_diff($Sregistred, $Gregistred));
+    $tpl->assign('del', array_diff($Gregistred, $Sregistred));
+    $tpl->display('user_syncProc.tpl');
+    quit();
+}
+
 function user_syncReturn() {
     global $config;
 
@@ -169,7 +197,7 @@ function user_delete() {
  * Et optionnellement sa vie.
  */
 function user_view() {
-    global $pdo, $tpl;
+    global $pdo, $tpl, $srcdir;
 
     $sql = $pdo->prepare('SELECT * FROM users LEFT JOIN user_types ON ut_id = user_type WHERE user_id = ?');
     $sql->bindValue(1, $_REQUEST['user']);
@@ -204,6 +232,24 @@ function user_view() {
         $o = new Modele('card');
         $o->fetch($mdl->card_id);
         $tpl->append('cards', $o);
+    }
+
+    require_once $srcdir . '/libs/GoogleApi.php';
+    $api = new GoogleApi();
+    $mls = $api->findUserGroups($user['user_email']);
+    $groups = array();
+    if (isset($mls->groups)) {
+        $tpl->assign('groups', $mls->groups);
+        foreach ($mls->groups as $group) {
+            $groups[] = $group->email;
+        }
+    }
+
+    $allGroups = $api->getGroupsList();
+    foreach ($allGroups->groups as $group) {
+        if (!in_array($group->email, $groups)) {
+            $tpl->append('otherGroups', $group);
+        }
     }
 
     $tpl->display('user_details.tpl');
@@ -318,4 +364,28 @@ function user_viewphoto() {
     header('Content-Type: image/png');
     readfile($usr->user_photo);
     quit();
+}
+
+function user_removeGroup() {
+    global $srcdir;
+
+    $usr = new Modele('users');
+    $usr->fetch($_GET['user']);
+
+    require_once $srcdir . '/libs/GoogleApi.php';
+    $api = new GoogleApi();
+    $ret = $api->delGroupMember($_GET['group'], $usr->user_email);
+    redirect("user", "view", array('user' => $usr->user_id, 'hsuccess' => isset($ret->error) ? 0 : 1));
+}
+
+function user_addGroup() {
+    global $srcdir;
+
+    $usr = new Modele('users');
+    $usr->fetch($_GET['user']);
+
+    require_once $srcdir . '/libs/GoogleApi.php';
+    $api = new GoogleApi();
+    $ret = $api->addGroupMember($_POST['group'], $usr->user_email);
+    redirect("user", "view", array('user' => $usr->user_id, 'hsuccess' => isset($ret->error) ? 0 : 1));
 }

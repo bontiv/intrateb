@@ -2,6 +2,12 @@
 <h2>Section {$section->section_name}</h2>
 <p>Section crée par {if $section->section_owner!=false}{$section->section_owner->user_name}{else}<i class="disabled">annonyme</i>{/if}. C'est une {if $section->section_type=="primary"}section principale{else}sous section{/if}.</p>
 
+{if $section->section_ml}
+    <p>Cette section possède une ML. Vous pouvez contacter les responsables à
+      l'addresse : <a href="mailto:{$section->section_ml}">{$section->section_ml}</a>.
+    </p>
+{/if}
+
 <div class="btn-group">
   {if isset($_user.sections[$section->section_id])}
       <a href="{mkurl action="section" page="goout" section=$section->section_id}" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Quitter</a>

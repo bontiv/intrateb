@@ -16,57 +16,140 @@ class GoogleApi {
     private $scopes;
     private $mail;
     private $bearer;
+    private $key;
+    private $user;
 
     // Mecanisme de Google : https://developers.google.com/accounts/docs/OAuth2ServiceAccount
 
-    private function createJWTHeader() {
-        return base64_encode('{"alg":"RS256","typ":"JWT"}');
+    public function __construct($scopes = null, $apiData = null, $user = null) {
+        global $config;
+
+        if ($apiData == null) {
+            $apiData = json_decode($config['GoogleApps']['json'], true);
+        }
+
+        if ($user == null) {
+            $user = $config['GoogleApps']['user'];
+        }
+
+        if ($scopes == null) {
+            $scopes = array("https://www.googleapis.com/auth/admin.directory.group");
+        } elseif (!is_array($scopes)) {
+            $scopes = array($scopes);
+        }
+
+        $this->mail = $apiData['client_email'];
+        $this->scopes = $scopes;
+        $this->key = $apiData['private_key'];
+        $this->user = $user;
     }
 
-    private function createJWTClaim($aud = 'https://accounts.google.com/o/oauth2/token') {
-        $exp = time() + 400;
+    private function base64encode($data) {
+        return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
+    }
+
+    private function createJWTHeader() {
+        return $this->base64encode('{"alg":"RS256","typ":"JWT"}');
+    }
+
+    private function createJWTClaim($aud = 'https://www.googleapis.com/oauth2/v3/token') {
         $iat = time();
-        return base64_encode("{"
+        $exp = $iat + 3600;
+
+        $jwt = "{"
                 . "\"iss\":\"$this->mail\","
+                . "\"sub\":\"$this->user\","
                 . "\"scope\":\"" . implode(' ', $this->scopes) . "\","
                 . "\"aud\":\"$aud\","
-                . "\"exp\":\"$exp\","
-                . "\"iat\":\"$iat\"}");
+                . "\"exp\":$exp,"
+                . "\"iat\":$iat}";
+
+        return $this->base64encode($jwt);
     }
 
-    private function createJWT($aud = 'https://accounts.google.com/o/oauth2/token') {
-        global $srcdir;
-
+    private function createJWT($aud = 'https://www.googleapis.com/oauth2/v3/token') {
         $header = $this->createJWTHeader();
-        $body = $this->createJWTClaim();
-        $sign = hash('sha256', "${header}.${body}");
-        $key = openssl_pkey_get_private($srcdir . "/libs/google.p12");
-        $hash = defined("OPENSSL_ALGO_SHA256") ? OPENSSL_ALGO_SHA256 : "sha256";
-        openssl_sign("${header}.${body}", $sign, $key, $hash);
-        openssl_pkey_free($key);
+        $body = $this->createJWTClaim($aud);
+        $sign = '';
 
-        return base64_encode("${header}.${body}.${sign}");
+        $hash = defined("OPENSSL_ALGO_SHA256") ? OPENSSL_ALGO_SHA256 : "sha256";
+        openssl_sign("${header}.${body}", $sign, $this->key, $hash);
+
+        return "${header}.${body}." . $this->base64encode($sign);
     }
 
     private function getAccessToken() {
-        $curl = curl_init('https://accounts.google.com/o/oauth2/token');
-        curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, "grant_type=" . urlencode(' urn:ietf:params:oauth:grant-type:jwt-bearer') . "&assertion=" . urlencode($this->createJWT()));
-        $token = curl_exec($curl);
-
-        var_dump($token);
-        $matchs = array();
-        if (!preg_match('`"access_token" ?: ?"([^"]*)"`', $token, $matchs)) {
-            return false;
+        if ($this->bearer != null) {
+            return $this->bearer;
         }
 
-        $this->bearer = $matchs[1];
+        $assertion = $this->createJWT();
+        $post = "grant_type=" . urlencode('urn:ietf:params:oauth:grant-type:jwt-bearer')
+                . "&assertion=" . urlencode($assertion);
+
+        $curl = curl_init('https://www.googleapis.com/oauth2/v3/token');
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $post);
+        $token = curl_exec($curl);
+
+        $jans = json_decode($token);
+
+        if (isset($jans->access_token)) {
+            $this->bearer = $jans->access_token;
+        }
+
         return $this->bearer;
     }
 
-    private function run() {
-        "Authorization: Bearer $this->bearer";
+    public function getTocken() {
+        return $this->getAccessToken();
+    }
+
+    public function getGroupMembers($ml = 'membres@epitanime.com') {
+        $ch = curl_init('https://www.googleapis.com/admin/directory/v1/groups/' . $ml . '/members?maxResults=1000&access_token=' . $this->getTocken());
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $ret = curl_exec($ch);
+        return json_decode($ret);
+    }
+
+    public function getGroupsList() {
+        $ch = curl_init('https://www.googleapis.com/admin/directory/v1/groups?domain=epitanime.com&access_token=' . $this->getTocken());
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $ret = curl_exec($ch);
+        return json_decode($ret);
+    }
+
+    public function getGroupsDetails($groupKey) {
+        $ch = curl_init('https://www.googleapis.com/admin/directory/v1/groups/' . $groupKey . '?access_token=' . $this->getTocken());
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $ret = curl_exec($ch);
+        return json_decode($ret);
+    }
+
+    public function addGroupMember($groupKey, $email) {
+        $ch = curl_init('https://www.googleapis.com/admin/directory/v1/groups/' . $groupKey . '/members?access_token=' . $this->getTocken());
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, '{"email":"' . $email . '","role":"MEMBER"}');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $ret = curl_exec($ch);
+        return json_decode($ret);
+    }
+
+    public function delGroupMember($groupKey, $email) {
+        $ch = curl_init('https://www.googleapis.com/admin/directory/v1/groups/' . $groupKey . '/members/' . $email . '?access_token=' . $this->getTocken());
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $ret = curl_exec($ch);
+        return json_decode($ret);
+    }
+
+    public function findUserGroups($email) {
+        $ch = curl_init('https://www.googleapis.com/admin/directory/v1/groups?userKey=' . $email . '&maxResults=100&access_token=' . $this->getTocken());
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $ret = curl_exec($ch);
+        return json_decode($ret);
     }
 
 }

@@ -22,6 +22,7 @@
       <thead>
         <tr>
           <th>Nom</th>
+          <th>Adresse</th>
           <th>Type</th>
           <th>Créateur</th>
           <th>Action</th>
@@ -36,6 +37,7 @@
                 {if $line.inType=="user"}<span class="label label-success">Staff</span>{/if}
                 {if $line.inType=="manager"}<span class="label label-primary">Manager</span>{/if}
               </td>
+              <td>{if $line.section_ml}<a href="mailto:{$line.section_ml}">{$line.section_ml}</a>{/if}</td>
               <td>{$line.section_type}</td>
               <td>{$line.user_name}</td>
               <td>

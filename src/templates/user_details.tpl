@@ -85,6 +85,7 @@
       <li role="presentation"><a href="#adhesions" aria-controls="adhesions" role="tab" data-toggle="tab">Adhésions</a></li>
       <li role="presentation" class="disabled"><a href="#events" aria-controls="events" role="tab" data-toggle="tab">Events</a></li>
       <li role="presentation"><a href="#cartes" aria-controls="cartes" role="tab" data-toggle="tab">Cartes</a></li>
+      <li role="presentation"><a href="#mailling" aria-controls="mailling" role="tab" data-toggle="tab">Groupes de diffusion</a></li>
     </ul>
     <br />
 
@@ -199,6 +200,57 @@
         {else}
             <div class="alert alert-warning">
               <p>Cet utilisateur n'a pas édité de carte.</p>
+            </div>
+        {/if}
+      </div>
+
+      {* Mailling *}
+      <div role="tabpanel" class="tab-pane" id="mailling">
+
+        {if isset($otherGroups)}
+            <form class="form-inline" method="POST" action="{mkurl action="user" page="addGroup" user=$user.user_id}">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="input-group">
+                    <span class="input-group-addon">Ajout</span>
+                    <select class="form-control" name="group">
+                      {foreach $otherGroups as $group}
+                          <option value="{$group->id}">{$group->name}</option>
+                      {/foreach}
+                    </select>
+                    <span class="input-group-btn">
+                      <button class="btn btn-primary" type="submit"><div class="glyphicon glyphicon-plus-sign"></div></button>
+                    </span>
+                  </div><!-- /input-group -->
+                </div><!-- /.col-lg-6 -->
+              </div><!-- /.row -->
+            </form>
+        {/if}
+
+        {if isset($groups)}
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Nom</th>
+                  <th>Adresse</th>
+                  <th>Description</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {foreach $groups as $group}
+                    <tr>
+                      <td><a href="{mkurl action="ml" page="view" ml=$group->id}">{$group->name}</a></td>
+                      <td><a href="mailto:{$group->email}">{$group->email}</a></td>
+                      <td>{$group->description}</td>
+                      <td><a href="{mkurl action="user" page="removeGroup" user=$user.user_id group=$group->id}" class="btn btn-sm btn-danger glyphicon glyphicon-trash"></a></td>
+                    </tr>
+                {/foreach}
+              </tbody>
+            </table>
+        {else}
+            <div class="alert alert-warning">
+              <p>Cet utilisateur n'est dans aucun groupe de diffusion.</p>
             </div>
         {/if}
       </div>

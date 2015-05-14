@@ -16,3 +16,14 @@ fields:
         type: var
         label: URL callback
         default: ""
+    json:
+        type: text
+        label: Clé JsoN
+        default: ""
+    timeAjust:
+        type: int
+        label: Ajustement horaire
+        default: -2
+    user:
+        type: var
+        label: Utilisateur pour la clé
