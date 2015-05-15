@@ -4,7 +4,7 @@ global $srcdir;
 require_once $srcdir . '/libs/GoogleApi.php';
 
 function ml_index() {
-    global $tpl, $pdo;
+    global $tpl, $pdo, $config;
 
     $api = new GoogleApi();
     $rlst = $api->getGroupsList();
@@ -19,6 +19,7 @@ function ml_index() {
         $tpl->append('groups', array(
             'obj' => $group,
             'isSection' => in_array($group->email, $sections),
+            'isMembersList' => $group->email == $config['GoogleApps']['members_ml'],
         ));
     }
     display();
@@ -100,7 +101,9 @@ function ml_autoUpdate() {
         foreach ($reelMembers->members as $member) {
             $key = array_keys($toAdd[$section->getKey()], $member->email);
             if (strpos($member->email, 'save_') !== 0) { //Skip sauvegarde
-                if (count($key) == 0) {
+                if ($member->type == "GROUP") {
+                    continue;
+                } elseif (count($key) == 0) {
                     $toDelete[$section->getKey()][] = $member->email;
                 } else {
                     unset($toAdd[$section->getKey()][$key[0]]);
@@ -113,4 +116,49 @@ function ml_autoUpdate() {
     $tpl->assign('toDelete', $toDelete);
     $tpl->assign('toAdd', $toAdd);
     display();
+}
+
+function ml_execUpdate() {
+    $section = new Modele('sections');
+    $section->find('section_ml != ""');
+    $api = new GoogleApi();
+
+    while ($section->next()) {
+        $toAdd = array();
+        $toDelete = array();
+
+        $Lmembers = new Modele('user_sections');
+        $Lmembers->find(array(
+            'us_section' => $section->getKey(),
+            'us_type' => 'manager',
+        ));
+
+        while ($Lmembers->next()) {
+            $toAdd[] = $Lmembers->us_user->user_email;
+        }
+
+        $reelMembers = $api->getGroupMembers($section->section_ml);
+        foreach ($reelMembers->members as $member) {
+            $key = array_keys($toAdd, $member->email);
+            if (strpos($member->email, 'save_') !== 0) { //Skip sauvegarde
+                if ($member->type == "GROUP") {
+                    continue;
+                } elseif (count($key) == 0) {
+                    $toDelete[] = $member->email;
+                } else {
+                    unset($toAdd[$key[0]]);
+                }
+            }
+        }
+
+        foreach ($toAdd as $mail) {
+            $api->addGroupMember($section->section_ml, $mail);
+        }
+
+        foreach ($toDelete as $mail) {
+            $api->delGroupMember($section->section_ml, $mail);
+        }
+    }
+
+    redirect('ml', 'autoUpdate');
 }

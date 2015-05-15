@@ -20,10 +20,10 @@ fields:
         type: text
         label: Clé JsoN
         default: ""
-    timeAjust:
-        type: int
-        label: Ajustement horaire
-        default: -2
+    members_ml:
+        type: var
+        label: ML des membres
+        default: "membres@epitanime.com"
     user:
         type: var
         label: Utilisateur pour la clé

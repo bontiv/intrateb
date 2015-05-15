@@ -18,6 +18,7 @@ class GoogleApi {
     private $bearer;
     private $key;
     private $user;
+    private $expire;
 
     // Mecanisme de Google : https://developers.google.com/accounts/docs/OAuth2ServiceAccount
 
@@ -44,6 +45,31 @@ class GoogleApi {
         $this->user = $user;
     }
 
+    private function readCache() {
+        global $tmpdir;
+
+        if (!file_exists($tmpdir . '/apicred.cache')) {
+            return array();
+        }
+        $data = file_get_contents($tmpdir . '/apicred.cache');
+        $now = time() - 5;
+        if ($data != false) {
+            $data = unserialize($data);
+            foreach ($data as $k => $scope) {
+                if ($scope['expire'] < $now) {
+                    unset($data[$k]);
+                }
+            }
+        }
+        return $data;
+    }
+
+    private function writeCache($data) {
+        global $tmpdir;
+
+        file_put_contents($tmpdir . '/apicred.cache', serialize($data));
+    }
+
     private function base64encode($data) {
         return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
     }
@@ -55,6 +81,7 @@ class GoogleApi {
     private function createJWTClaim($aud = 'https://www.googleapis.com/oauth2/v3/token') {
         $iat = time();
         $exp = $iat + 3600;
+        $this->expire = $exp;
 
         $jwt = "{"
                 . "\"iss\":\"$this->mail\","
@@ -79,10 +106,6 @@ class GoogleApi {
     }
 
     private function getAccessToken() {
-        if ($this->bearer != null) {
-            return $this->bearer;
-        }
-
         $assertion = $this->createJWT();
         $post = "grant_type=" . urlencode('urn:ietf:params:oauth:grant-type:jwt-bearer')
                 . "&assertion=" . urlencode($assertion);
@@ -103,7 +126,22 @@ class GoogleApi {
     }
 
     public function getTocken() {
-        return $this->getAccessToken();
+        if ($this->bearer == null || $this->expire > time()) {
+            $key = sha1(implode(';', $this->scopes));
+            $data = $this->readCache();
+            if (isset($data[$key])) {
+                $this->bearer = $data[$key]['token'];
+                $this->expire = $data[$key]['expire'];
+            } else {
+                $this->getAccessToken();
+                $data[$key] = array(
+                    'token' => $this->bearer,
+                    'expire' => $this->expire,
+                );
+                $this->writeCache($data);
+            }
+        }
+        return $this->bearer;
     }
 
     public function getGroupMembers($ml = 'membres@epitanime.com') {

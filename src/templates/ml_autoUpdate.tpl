@@ -7,6 +7,10 @@
 
 <h2>Synchronisation auto</h2>
 
+<p>
+  <a href="{mkurl action="ml" page="execUpdate"}" class="btn btn-warning">Executer</a>
+</p>
+
 <table class="table table-striped">
   <thead>
     <tr>

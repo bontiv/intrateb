@@ -31,12 +31,12 @@ function user_sync() {
 }
 
 function user_sync2() {
-    global $srcdir, $tpl;
+    global $srcdir, $tpl, $config;
 
     require_once $srcdir . '/libs/GoogleApi.php';
 
     $api = new GoogleApi();
-    $members = $api->getGroupMembers();
+    $members = $api->getGroupMembers($config['GoogleApps']['members_ml']);
     $Gregistred = array();
     $Sregistred = array();
 
@@ -56,6 +56,41 @@ function user_sync2() {
     $tpl->assign('del', array_diff($Gregistred, $Sregistred));
     $tpl->display('user_syncProc.tpl');
     quit();
+}
+
+function user_execSync() {
+    global $srcdir, $config;
+
+    require_once $srcdir . '/libs/GoogleApi.php';
+
+    $api = new GoogleApi();
+    $members = $api->getGroupMembers($config['GoogleApps']['members_ml']);
+    $Gregistred = array();
+    $Sregistred = array();
+
+    foreach ($members->members as $member) {
+        if (isset($member->email)) {
+            $Gregistred[] = strtolower($member->email);
+        }
+    }
+
+    $mdl = new Modele('users');
+    $mdl->find();
+    while ($mdl->next()) {
+        $Sregistred[] = strtolower($mdl->user_email);
+    }
+
+    // Add
+    foreach (array_diff($Sregistred, $Gregistred) as $mail) {
+        $api->addGroupMember($config['GoogleApps']['members_ml'], $mail);
+    }
+
+    // Del
+    foreach (array_diff($Gregistred, $Sregistred) as $mail) {
+        $api->delGroupMember($config['GoogleApps']['members_ml'], $mail);
+    }
+
+    redirect("user", "sync2");
 }
 
 function user_syncReturn() {

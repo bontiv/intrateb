@@ -19,8 +19,12 @@
         {foreach $groups as $group}
             <tr>
               <td>
-                {if $group.isSection}
+                {if $group.isMembersList}
+                    <div class="label label-default">G.D. Membres</div>
+                {elseif $group.isSection}
                     <div class="label label-primary">Section</div>
+                {elseif $group.obj->directMembersCount == 1}
+                    <div class="label label-warning">Alias</div>
                 {/if}
 
                 <a href="{mkurl action="ml" page="view" ml=$group.obj->id}">{$group.obj->name}</a></td>
