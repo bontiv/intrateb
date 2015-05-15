@@ -23,7 +23,7 @@
   <tbody>
     {foreach $sections as $section}
         <tr>
-          <td><a href="{mkurl action="section" page="details" id=$section.section_id}">{$section.section_name}</a></td>
+          <td><a href="{mkurl action="section" page="details" section=$section.section_id}">{$section.section_name}</a></td>
           <td>{$section.section_ml}</td>
           <td>
             {foreach $toAdd[$section.section_id] as $mail}
