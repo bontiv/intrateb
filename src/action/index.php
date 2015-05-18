@@ -457,3 +457,9 @@ function index_password_change() {
     $tpl->assign('user', $mdl);
     display();
 }
+
+function index_error403() {
+    header("HTTP/1.1 403 Unauthorized");
+
+    display();
+}

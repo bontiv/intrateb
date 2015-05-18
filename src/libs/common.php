@@ -207,7 +207,7 @@ function mkurl_smarty($params, $smarty) {
 
     //Petit troll pour les accès refusés :
     if (!hasAcl(getAclLevel($action, $page), $action, $page, $params))
-        return '#';
+        return mkurl('index', 'error403');
 
     return mkurl($action, $page, $params);
 }
