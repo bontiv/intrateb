@@ -21,4 +21,4 @@ indexes:
     fields: [eb_ticket]
   idx_ub_event:
     type: index
-    fields: [eb_eveny]
+    fields: [eb_event]
