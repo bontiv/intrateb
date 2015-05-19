@@ -499,3 +499,75 @@ function event_staff_activities() {
 
     display();
 }
+
+function event_bocal_list() {
+    global $tpl, $pdo;
+
+    $sql = $pdo->prepare('SELECT * FROM events LEFT JOIN users ON event_owner = user_id LEFT JOIN sections ON section_id = event_section WHERE event_id = ?');
+    $sql->bindValue(1, $_GET['event']);
+    $sql->execute();
+
+    $event = $sql->fetch();
+    if (!$event) {
+        modexec('syscore', 'notfound');
+    }
+    $tpl->assign('event', $event);
+
+    $mdl = new Modele('event_bocal');
+    $mdl->find(array('eb_event' => $event['event_id']));
+    $mdl->appendTemplate('tickets');
+
+    display();
+}
+
+function event_bocal_add() {
+    global $srcdir;
+
+    include_once $srcdir . '/libs/bocal.php';
+
+    $bocal = new Bocal();
+    if (!$bocal->getTicket($_REQUEST['ticketid'])) {
+        redirect("event", "bocal_list", array("event" => $_GET['event'], "hsuccess" => 0));
+    }
+
+    $mdl = new Modele('event_bocal');
+    $mdl->addFrom(array(
+        'eb_ticket' => $bocal->id,
+        'eb_event' => $_GET['event'],
+        'eb_title' => $bocal->title,
+    ));
+    redirect("event", "bocal_list", array("event" => $_GET['event'], "hsuccess" => 1));
+}
+
+function event_bocal_view() {
+    global $tpl, $pdo, $srcdir;
+
+    $sql = $pdo->prepare('SELECT * FROM events LEFT JOIN users ON event_owner = user_id LEFT JOIN sections ON section_id = event_section WHERE event_id = ?');
+    $sql->bindValue(1, $_GET['event']);
+    $sql->execute();
+
+    $event = $sql->fetch();
+    if (!$event) {
+        modexec('syscore', 'notfound');
+    }
+    $tpl->assign('event', $event);
+
+    $mdl = new Modele('event_bocal');
+    $mdl->find(array(
+        'eb_id' => $_GET['ticket'],
+        'eb_event' => $event['event_id'],
+    ));
+
+    if (!$mdl->next()) {
+        modexec('syscore', 'notfound');
+    }
+
+    include_once $srcdir . '/libs/bocal.php';
+
+    $bocal = new Bocal();
+    if (!$bocal->getTicket($mdl->eb_ticket)) {
+        modexec('syscore', 'notfound');
+    }
+    $tpl->assign('ticket', $bocal);
+    display();
+}

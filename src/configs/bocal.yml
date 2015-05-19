@@ -1,0 +1,15 @@
+name: bocal
+label: Liaison intra Bocal
+fields:
+    baseUrl:
+        type: var
+        label: Adresse
+        default: "http://intra-bocal.epitech.eu/"
+    user:
+        type: var
+        label: Utilisateur
+        default: "epitanime"
+    pass:
+        type: var
+        label: Mot de passe
+        default: ""

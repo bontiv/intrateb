@@ -1,0 +1,24 @@
+## Table event_bocal
+name: event_bocal
+key: eb_id
+fields:
+  eb_id:
+    type: auto_int
+  eb_ticket:
+    type: int
+    label: Ticket Bocal
+  eb_event:
+    type: external
+    table: events
+    display: %event_name%
+  eb_title:
+    type: var
+    size: 255
+    label: Titre
+indexes:
+  idx_ub_ticket:
+    type: unique
+    fields: [eb_ticket]
+  idx_ub_event:
+    type: index
+    fields: [eb_eveny]
