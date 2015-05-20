@@ -11,6 +11,11 @@ if (!defined('NPE_INDEX'))
     die('Initialisation incorrect');
 
 /**
+ * Détection du mode d'execution
+ */
+define('CONSOLE', (isset($argv) || isset($argc)) && !isset($_SERVER['HTTP_HOST']));
+
+/**
  * Racourci pour le DIRECTORY_SEPARATOR
  */
 define('DS', DIRECTORY_SEPARATOR);
@@ -20,7 +25,7 @@ define('DS', DIRECTORY_SEPARATOR);
  */
 $root = dirname(__FILE__) . DS;
 
-session_start();
+CONSOLE || session_start();
 
 $tmpdir .= DS;
 
@@ -80,42 +85,46 @@ while ($dat = $conf->fetch()) {
     $config[$parts[0]][$parts[1]] = $dat['value'];
 }
 
-// Etape 2, calcul du chemin d'execution
-if (!isset($_REQUEST['action']))
-    redirect('index');
+//Etapes 2 à 4 seulement si HTTP
+if (!CONSOLE) {
 
-$action = null;
-if (isset($_GET['action']))
-    $action = $_GET['action'];
-$action = basename($action);
+    // Etape 2, calcul du chemin d'execution
+    if (!isset($_REQUEST['action']))
+        redirect('index');
 
-$page = 'index';
-if (isset($_GET['page']))
-    $page = $_GET['page'];
-$page = basename($page);
+    $action = null;
+    if (isset($_GET['action']))
+        $action = $_GET['action'];
+    $action = basename($action);
 
-if (!file_exists($root . 'action' . DS . $action . '.php')) {
-    $action = 'syscore';
-    $page = 'nomod';
+    $page = 'index';
+    if (isset($_GET['page']))
+        $page = $_GET['page'];
+    $page = basename($page);
+
+    if (!file_exists($root . 'action' . DS . $action . '.php')) {
+        $action = 'syscore';
+        $page = 'nomod';
+    }
+
+    // Etape 3, vérification des droits d'accès
+    if (!isset($_SESSION['user']))
+        $_SESSION['user'] = false;
+    $tpl->assign('_user', $_SESSION['user']);
+    if ($_SESSION['user']) {
+        $sections = $pdo->prepare('SELECT * FROM user_sections LEFT JOIN sections ON us_section = section_id WHERE us_user = ?');
+        $sections->bindValue(1, $_SESSION['user']['user_id']);
+        $sections->execute();
+        $_SESSION['user']['sections'] = array();
+        while ($line = $sections->fetch())
+            $_SESSION['user']['sections'][$line['section_id']] = $line;
+    }
+
+    modsecu($action, $page, $_GET);
+    needAcl(getAclLevel($action, $page), $action, $page, $_GET);
+
+    // Etape 4 lancement du module
+    modexec($action, $page);
+    modexec('syscore', 'moderror');
+    quit();
 }
-
-// Etape 3, vérification des droits d'accès
-if (!isset($_SESSION['user']))
-    $_SESSION['user'] = false;
-$tpl->assign('_user', $_SESSION['user']);
-if ($_SESSION['user']) {
-    $sections = $pdo->prepare('SELECT * FROM user_sections LEFT JOIN sections ON us_section = section_id WHERE us_user = ?');
-    $sections->bindValue(1, $_SESSION['user']['user_id']);
-    $sections->execute();
-    $_SESSION['user']['sections'] = array();
-    while ($line = $sections->fetch())
-        $_SESSION['user']['sections'][$line['section_id']] = $line;
-}
-
-modsecu($action, $page, $_GET);
-needAcl(getAclLevel($action, $page), $action, $page, $_GET);
-
-// Etape 4 lancement du module
-modexec($action, $page);
-modexec('syscore', 'moderror');
-quit();

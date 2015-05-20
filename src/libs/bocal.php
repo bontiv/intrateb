@@ -31,6 +31,10 @@ class BocalAnswer {
         if (preg_match('`<img src="([^"]*)"`', $rawData, $matches)) {
             $this->answerData['image'] = str_replace('..', $baseUrl, trim(strip_tags($matches[1])));
         }
+
+        if (preg_match('`<td colspan="2"><span id=\'styleTickets\'>Statut :</span>([^<]*)</td>`', $rawData, $matches)) {
+            $this->answerData['state'] = trim(strip_tags($matches[1]));
+        }
     }
 
     public function __get($name) {
@@ -153,6 +157,20 @@ class Bocal {
         }
 
         return true;
+    }
+
+    public function updateDB($id) {
+        $mdl = new Modele('event_bocal');
+        $mdl->fetch($id);
+
+        $last = $this->answers[count($this->answers) - 1];
+
+        if ($mdl->eb_state != $last->state || $mdl->eb_last_update != $last->date) {
+            $mdl->eb_state = $last->state;
+            $mdl->eb_last_update = $last->date;
+            return true;
+        }
+        return false;
     }
 
 }

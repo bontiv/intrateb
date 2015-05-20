@@ -35,6 +35,7 @@
           <td>
             <p><strong>{$reply->date}</strong></p>
             <p>{$reply->content}</p>
+            <p><strong>Statut:</strong><i>{$reply->state}</i></p>
           </td>
         </tr>
     {/foreach}

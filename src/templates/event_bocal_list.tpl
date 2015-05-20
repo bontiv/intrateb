@@ -34,6 +34,8 @@
             <tr>
               <th>Ticket ID</th>
               <th>Titre</th>
+              <th>Statut</th>
+              <th>Dernière MAJ</th>
             </tr>
           </thead>
           <tbody>
@@ -41,6 +43,8 @@
                 <tr>
                   <td>{$t->eb_ticket}</td>
                   <td><a href="{mkurl action="event" page="bocal_view" event=$event.event_id ticket=$t->eb_id}">{$t->eb_title}</a></td>
+                  <td>{$t->eb_state}</td>
+                  <td>{$t->eb_last_update}</td>
                 </tr>
             {/foreach}
           </tbody>

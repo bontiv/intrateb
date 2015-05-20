@@ -15,6 +15,14 @@ fields:
     type: var
     size: 255
     label: Titre
+  eb_last_update:
+      type: var
+      size: 150
+      label: Dernière mise à jour
+  eb_state:
+      type: var
+      size: 250
+      label: Status
 indexes:
   idx_ub_ticket:
     type: unique

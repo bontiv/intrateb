@@ -568,6 +568,7 @@ function event_bocal_view() {
     if (!$bocal->getTicket($mdl->eb_ticket)) {
         modexec('syscore', 'notfound');
     }
+    $bocal->updateDB($mdl->getKey());
     $tpl->assign('ticket', $bocal);
     display();
 }
