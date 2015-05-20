@@ -94,17 +94,17 @@ function ml_autoUpdate() {
         ));
 
         while ($Lmembers->next()) {
-            $toAdd[$section->getKey()][] = $Lmembers->us_user->user_email;
+            $toAdd[$section->getKey()][] = strtolower($Lmembers->us_user->user_email);
         }
 
         $reelMembers = $api->getGroupMembers($section->section_ml);
         foreach ($reelMembers->members as $member) {
-            $key = array_keys($toAdd[$section->getKey()], $member->email);
+            $key = array_keys($toAdd[$section->getKey()], strtolower($member->email));
             if (strpos($member->email, 'save_') !== 0) { //Skip sauvegarde
                 if ($member->type == "GROUP") {
                     continue;
                 } elseif (count($key) == 0) {
-                    $toDelete[$section->getKey()][] = $member->email;
+                    $toDelete[$section->getKey()][] = strtolower($member->email);
                 } else {
                     unset($toAdd[$section->getKey()][$key[0]]);
                 }
@@ -134,17 +134,17 @@ function ml_execUpdate() {
         ));
 
         while ($Lmembers->next()) {
-            $toAdd[] = $Lmembers->us_user->user_email;
+            $toAdd[] = strtolower($Lmembers->us_user->user_email);
         }
 
         $reelMembers = $api->getGroupMembers($section->section_ml);
         foreach ($reelMembers->members as $member) {
-            $key = array_keys($toAdd, $member->email);
+            $key = array_keys($toAdd, strtolower($member->email));
             if (strpos($member->email, 'save_') !== 0) { //Skip sauvegarde
                 if ($member->type == "GROUP") {
                     continue;
                 } elseif (count($key) == 0) {
-                    $toDelete[] = $member->email;
+                    $toDelete[] = strtolower($member->email);
                 } else {
                     unset($toAdd[$key[0]]);
                 }
