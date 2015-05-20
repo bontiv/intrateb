@@ -46,6 +46,22 @@ function ml_view() {
         ));
     }
 
+    $mls = new Modele('section_ml');
+    $mls->find(array('sm_ml' => $details->id));
+    $ids = array();
+    while ($mls->next()) {
+        $tpl->append('mls', new Modele($mls));
+        $ids[] = $mls->raw_sm_section;
+    }
+
+    $sec = new Modele('sections');
+    $sec->find();
+    while ($sec->next()) {
+        if (!in_array($sec->section_id, $ids)) {
+            $tpl->append('sections', new Modele($sec));
+        }
+    }
+
     display();
 }
 
@@ -161,4 +177,23 @@ function ml_execUpdate() {
     }
 
     redirect('ml', 'autoUpdate');
+}
+
+function ml_manageSection() {
+    $mdl = new Modele('section_ml');
+    $suc = $mdl->addFrom(array(
+        'sm_section' => $_REQUEST['section'],
+        'sm_ml' => $_REQUEST['ml'],
+    ));
+
+    redirect("ml", "view", array('hsuccess' => $suc ? 1 : 0, 'ml' => $_REQUEST['ml']));
+}
+
+function ml_removeSection() {
+    $mdl = new Modele('section_ml');
+    $mdl->fetch($_REQUEST['lnk']);
+    $ml = $mdl->sm_ml;
+    $suc = $mdl->delete();
+
+    redirect("ml", "view", array('ml' => $ml));
 }

@@ -1,0 +1,20 @@
+## Table ml des sections
+name: section_ml
+key: sm_id
+fields:
+  sm_id:
+    type: auto_int
+  sm_section:
+    type: external
+    table: sections
+    display: %section_name%
+    label: Section
+  sm_ml:
+    type: var
+    size: 100
+    label: Google API id
+
+indexes:
+  idx_sm_section:
+    type: index
+    fields: [sm_section]

@@ -190,4 +190,26 @@ class GoogleApi {
         return json_decode($ret);
     }
 
+    public function getGroupMemberDetails($groupid, $memberid) {
+        $ch = curl_init('https://www.googleapis.com/admin/directory/v1/groups/' . $groupid . '/members/' . $memberid . '?access_token=' . $this->getTocken());
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $ret = curl_exec($ch);
+        return json_decode($ret);
+    }
+
+    public function setGroupMemberLevel($groupid, $memberid, $level) {
+        $mbr = $this->getGroupMemberDetails($groupid, $memberid);
+        if (isset($mbr->error)) {
+            return $mbr;
+        }
+
+        $ch = curl_init('https://www.googleapis.com/admin/directory/v1/groups/' . $groupid . '/members/' . $mbr->id . '?access_token=' . $this->getTocken());
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, '{"email":"' . $mbr->email . '","role":"' . $level . '"}');
+        $ret = curl_exec($ch);
+        return json_decode($ret);
+    }
+
 }

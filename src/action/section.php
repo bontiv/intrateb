@@ -380,3 +380,195 @@ function section_viewactivity() {
     }
     display();
 }
+
+function section_mls() {
+    global $tpl, $srcdir;
+
+    include $srcdir . '/libs/GoogleApi.php';
+
+    $api = new GoogleApi();
+
+    $mdl = new Modele('sections');
+    $mdl->fetch($_REQUEST['section']);
+    $mdl->assignTemplate('section');
+
+    if ($mdl->section_ml) {
+        $grp = $api->getGroupsDetails($mdl->section_ml);
+        $tpl->append('groups', array(
+            'obj' => $grp,
+            'isSection' => true,
+        ));
+    }
+
+    $lnk = new Modele('section_ml');
+    $lnk->find(array('sm_section' => $mdl->section_id));
+    while ($lnk->next()) {
+        $grp = $api->getGroupsDetails($lnk->sm_ml);
+        $tpl->append('groups', array(
+            'obj' => $grp,
+            'isSection' => false,
+        ));
+    }
+
+    display();
+}
+
+function section_admin_ml() {
+    global $tpl, $srcdir, $pdo;
+
+    include $srcdir . '/libs/GoogleApi.php';
+
+    $api = new GoogleApi();
+
+    $mdl = new Modele('sections');
+    $mdl->fetch($_REQUEST['section']);
+    $mdl->assignTemplate('section');
+
+    $lnk = new Modele('section_ml');
+    $lnk->find(array(
+        'sm_section' => $_REQUEST['section'],
+        'sm_ml' => $_REQUEST['ml'],
+    ));
+    if (!$lnk->next()) {
+        modexec('syscore', 'forbidden');
+    }
+
+    $grp = $api->getGroupsDetails($lnk->sm_ml);
+    $tpl->assign('group', $grp);
+
+    $members = $api->getGroupMembers($grp->id);
+    $usql = $pdo->prepare('SELECT * FROM users WHERE user_email = ?');
+
+    foreach ($members->members as $member) {
+        $usql->bindValue(1, $member->email);
+        $usql->execute();
+        $user = $usql->fetch();
+
+        $tpl->append('members', array(
+            'isSave' => strpos($member->email, 'save_') === 0,
+            'user' => $user,
+            'obj' => $member,
+        ));
+    }
+
+    display();
+}
+
+function section_admin_ml_add() {
+    global $tpl, $srcdir, $pdo;
+
+    include $srcdir . '/libs/GoogleApi.php';
+
+    $api = new GoogleApi();
+
+    $mdl = new Modele('sections');
+    $mdl->fetch($_REQUEST['section']);
+    $mdl->assignTemplate('section');
+
+    $lnk = new Modele('section_ml');
+    $lnk->find(array(
+        'sm_section' => $_REQUEST['section'],
+        'sm_ml' => $_REQUEST['ml'],
+    ));
+    if (!$lnk->next()) {
+        modexec('syscore', 'forbidden');
+    }
+
+    $api->addGroupMember($lnk->sm_ml, $_REQUEST['email']);
+
+    redirect("section", "admin_ml", array(
+        "hsuccess" => 1,
+        "section" => $_REQUEST['section'],
+        "ml" => $lnk->sm_ml,
+    ));
+}
+
+function section_admin_ml_del() {
+    global $tpl, $srcdir, $pdo;
+
+    include $srcdir . '/libs/GoogleApi.php';
+
+    $api = new GoogleApi();
+
+    $mdl = new Modele('sections');
+    $mdl->fetch($_REQUEST['section']);
+    $mdl->assignTemplate('section');
+
+    $lnk = new Modele('section_ml');
+    $lnk->find(array(
+        'sm_section' => $_REQUEST['section'],
+        'sm_ml' => $_REQUEST['ml'],
+    ));
+    $mbr = $api->getGroupMemberDetails($_REQUEST['ml'], $_REQUEST['member']);
+    if (!$lnk->next() || strpos($_REQUEST['member'], 'save_') === 0 || $mbr->type == "GROUP") {
+        modexec('syscore', 'forbidden');
+    }
+
+    $api->delGroupMember($lnk->sm_ml, $_REQUEST['member']);
+
+    redirect("section", "admin_ml", array(
+        "hsuccess" => 1,
+        "section" => $_REQUEST['section'],
+        "ml" => $lnk->sm_ml,
+    ));
+}
+
+function section_admin_ml_setadmin() {
+    global $tpl, $srcdir, $pdo;
+
+    include $srcdir . '/libs/GoogleApi.php';
+
+    $api = new GoogleApi();
+
+    $mdl = new Modele('sections');
+    $mdl->fetch($_REQUEST['section']);
+    $mdl->assignTemplate('section');
+
+    $lnk = new Modele('section_ml');
+    $lnk->find(array(
+        'sm_section' => $_REQUEST['section'],
+        'sm_ml' => $_REQUEST['ml'],
+    ));
+    $mbr = $api->getGroupMemberDetails($_REQUEST['ml'], $_REQUEST['member']);
+    if (!$lnk->next() || strpos($_REQUEST['member'], 'save_') === 0 || $mbr->type == "GROUP") {
+        modexec('syscore', 'forbidden');
+    }
+
+    $ret = $api->setGroupMemberLevel($lnk->sm_ml, $_REQUEST['member'], 'OWNER');
+
+    redirect("section", "admin_ml", array(
+        "hsuccess" => 1,
+        "section" => $_REQUEST['section'],
+        "ml" => $lnk->sm_ml,
+    ));
+}
+
+function section_admin_ml_noadmin() {
+    global $tpl, $srcdir, $pdo;
+
+    include $srcdir . '/libs/GoogleApi.php';
+
+    $api = new GoogleApi();
+
+    $mdl = new Modele('sections');
+    $mdl->fetch($_REQUEST['section']);
+    $mdl->assignTemplate('section');
+
+    $lnk = new Modele('section_ml');
+    $lnk->find(array(
+        'sm_section' => $_REQUEST['section'],
+        'sm_ml' => $_REQUEST['ml'],
+    ));
+    $mbr = $api->getGroupMemberDetails($_REQUEST['ml'], $_REQUEST['member']);
+    if (!$lnk->next() || strpos($_REQUEST['member'], 'save_') === 0 || $mbr->type == "GROUP") {
+        modexec('syscore', 'forbidden');
+    }
+
+    $api->setGroupMemberLevel($lnk->sm_ml, $_REQUEST['member'], 'MEMBER');
+
+    redirect("section", "admin_ml", array(
+        "hsuccess" => 1,
+        "section" => $_REQUEST['section'],
+        "ml" => $lnk->sm_ml,
+    ));
+}

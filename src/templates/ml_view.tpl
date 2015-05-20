@@ -16,6 +16,35 @@
   <dd>{$group->email}</dd>
   <dt>Description</dt>
   <dd>{$group->description}</dd>
+  <dt>Section gérant</dt>
+  <dd>
+    <div class="row">
+      <div class="col-lg-6">
+        {if isset($mls)}
+            {foreach $mls as $s}
+                <a href="{mkurl action="section" page="details" section=$s->raw_sm_section}">{$s->sm_section->section_name}</a>
+                <a href="{mkurl action="ml" page="removeSection" lnk=$s->sm_id}" class="btn btn-xs btn-danger"><div class="glyphicon glyphicon-remove"></div></a>
+                {if not $s@last},{/if}
+            {/foreach}
+        {/if}
+      </div>
+      <div class="col-lg-6">
+        <form class="form-inline" method="POST" action="{mkurl action="ml" page="manageSection"}">
+          <input type="hidden" name="ml" value="{$group->id}" />
+          <div class="input-group">
+            <select name="section" class="form-control input-md">
+              {foreach $sections as $s}
+                  <option value="{$s->section_id}">{$s->section_name}</option>
+              {/foreach}
+            </select>
+            <div class="input-group-btn">
+              <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-plus-sign"></i></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </dd>
 </dl>
 
 
