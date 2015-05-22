@@ -75,7 +75,7 @@ function section_mkevent() {
 function section_index() {
     global $pdo, $tpl;
 
-    $sql = $pdo->prepare('SELECT * FROM sections LEFT JOIN users ON user_id = section_owner');
+    $sql = $pdo->prepare('SELECT * FROM sections LEFT JOIN users ON user_id = section_owner ORDER BY section_name');
     $sql->execute();
     while ($line = $sql->fetch()) {
 
