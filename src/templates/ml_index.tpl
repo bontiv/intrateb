@@ -1,7 +1,7 @@
 {include "head.tpl"}
 
 <h2>Gestion des groupes de diffusion</h2>
-{debug}
+
 <p>
   <a href="{mkurl action="ml" page="autoUpdate"}" class="btn btn-warning">MAJ Auto</a>
 </p>
