@@ -9,17 +9,24 @@ function ml_index() {
     $api = new GoogleApi();
     $rlst = $api->getGroupsList();
 
-    $sql = $pdo->query('SELECT section_ml FROM sections WHERE section_ml != ""');
+    $sql = $pdo->query('SELECT * FROM sections WHERE section_ml != ""');
     $sections = array();
     while ($s = $sql->fetch()) {
-        $sections[] = $s[0];
+        $sections[$s['section_ml']] = $s;
+    }
+
+    $sql = $pdo->query('SELECT * FROM section_ml LEFT JOIN sections ON section_id = sm_section');
+    $managed = array();
+    while ($m = $sql->fetch()) {
+        $managed[$m['sm_ml']][] = $m;
     }
 
     foreach ($rlst->groups as $group) {
         $tpl->append('groups', array(
             'obj' => $group,
-            'isSection' => in_array($group->email, $sections),
+            'isSection' => isset($sections[$group->email]) ? $sections[$group->email] : false,
             'isMembersList' => $group->email == $config['GoogleApps']['members_ml'],
+            'isManaged' => isset($managed[$group->id]) ? $managed[$group->id] : false,
         ));
     }
     display();
