@@ -120,16 +120,16 @@ function admin_note_bulletin() {
 function admin_note_addbulletin() {
     global $pdo, $root, $tpl;
 
-    if (isset($_GET['id'])) {
+    if (isset($_REQUEST['period'])) {
         $mdl = new Modele("periods");
-        $mdl->fetch($_POST['period']);
-        $_POST['generator'] = basename($_POST['generator']);
+        $mdl->fetch($_REQUEST['period']);
+        $_REQUEST['generator'] = basename($_REQUEST['generator']);
 
-        require $root . 'libs' . DS . 'bulletins' . DS . $_POST['generator'] . DS . 'bulletin.php';
+        require $root . 'libs' . DS . 'bulletins' . DS . $_REQUEST['generator'] . DS . 'bulletin.php';
         bulletin_add($mdl->period_id);
 
         $mdl->period_state = 'DRAFT';
-        $mdl->period_generator = $_POST['generator'];
+        $mdl->period_generator = $_REQUEST['generator'];
         redirect('admin_note', 'bulletin', array('hsuccess' => 1));
     }
 
@@ -139,7 +139,6 @@ function admin_note_addbulletin() {
 
     foreach (scandir($root . 'libs' . DS . 'bulletins') as $generator) {
         if (is_dir($root . 'libs' . DS . 'bulletins' . DS . $generator) && $generator[0] != '.') {
-            echo $generator;
             $tpl->append('generators', $generator);
         }
     }
