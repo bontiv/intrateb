@@ -18,7 +18,7 @@
             <tr>
               <td>{$line->part_attribution_date}</td>
               <td>{$line->part_duration}h</td>
-              <td><a href="{mkurl action="section" page="viewactivity" section=$section->section_id activity=$line->part_id}">{$line->part_title}</a></td>
+              <td><a href="{mkurl action="section" page="viewactivity" section=$section.section_id activity=$line->part_id}">{$line->part_title}</a></td>
               <td><span class="label {if $line->raw_part_status=='ACCEPTED'}label-success{elseif $line->raw_part_status=='REFUSED'}label-danger{elseif $line->raw_part_status=='SUBMITTED'}label-info{else}label-default{/if}">{$line->part_status}</span></td>
               <td>
                 {*<a href="{mkurl action="section" page="activityMod" activity=$line->part_id section=$section->section_id}" class="btn btn-warning"><span class="glyphicon-pencil glyphicon"></span>*}

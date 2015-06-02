@@ -414,13 +414,13 @@ function event_addpoints() {
             $markPeriod = $_POST['staff-' . $user['user_id'] . '-period'];
             $markMark = $_POST['staff-' . $user['user_id'] . '-mark'];
 
-            if ($markOk == 'OK') {
+            if ($markOk == 'YES') {
                 $dataMark['mark_user'] = $user['user_id'];
                 $dataMark['mark_period'] = $markPeriod;
                 $mdlMark->addFrom($dataMark);
             }
         }
-        redirect('event', 'staff', array('event' => $event->getKey(), 'section' => $section->section_id, 'hsuccess' => '1'));
+        redirect('event', 'staff_activities', array('event' => $event->getKey(), 'section' => $section->section_id, 'hsuccess' => '1'));
     }
 
     $types = new Modele('user_types');
