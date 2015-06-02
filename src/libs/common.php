@@ -125,7 +125,7 @@ function acl_smarty($params, $content, $smarty, &$repeat) {
         if (isset($params['action']))
             $need = getAclLevel($params['action'], $params['page']);
 
-        if (hasAcl($need))
+        if ((isset($params['action'], $params['page']) && hasAcl($need, $params['action'], $params['page'], $params)) || hasAcl($need))
             return $content;
         else
             return '';
