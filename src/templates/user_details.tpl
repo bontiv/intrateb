@@ -83,7 +83,7 @@
     <ul class="nav nav-tabs" role="tablist">
       <li role="presentation" class="active"><a href="#sections" aria-controls="sections" role="tab" data-toggle="tab">Sections</a></li>
       <li role="presentation"><a href="#adhesions" aria-controls="adhesions" role="tab" data-toggle="tab">Adhésions</a></li>
-      <li role="presentation" class="disabled"><a href="#events" aria-controls="events" role="tab" data-toggle="tab">Events</a></li>
+      <li role="presentation"><a href="#events" aria-controls="events" role="tab" data-toggle="tab">Events</a></li>
       <li role="presentation"><a href="#cartes" aria-controls="cartes" role="tab" data-toggle="tab">Cartes</a></li>
       <li role="presentation"><a href="#mailling" aria-controls="mailling" role="tab" data-toggle="tab">Groupes de diffusion</a></li>
     </ul>
@@ -142,11 +142,46 @@
         {/if}
       </div>
       <div role="tabpanel" class="tab-pane" id="events">
-        <div class="alert alert-danger">
-          <p>
-            Ce module n'a pas encore été implémenté.
-          </p>
-        </div>
+        {if isset($events)}
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Evenement</th>
+                  <th>Section</th>
+                  <th>Statut</th>
+                  <th>Debut</th>
+                  <th>Fin</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                {foreach $events as $event}
+                    <tr>
+                      <td><a href="{mkurl action="event" page="view" event=$event.est_event}">{$event.event_name}</a></td>
+                      <td><a href="{mkurl action="event" page="staff" event=$event.est_event section=$event.est_section}">{$event.section_name}</a></td>
+                      <td>
+                        {if $event.est_status=="OK"}
+                            <div class="label label-success">Staff</div>
+                        {elseif $event.est_status=="WAIT"}
+                            <div class="label label-info">Candidat</div>
+                        {elseif $event.est_status=="NO"}
+                            <div class="label label-danger">Refusé</div>
+                        {else}
+                            {$event.est_status}
+                        {/if}
+                      </td>
+                      <td>{$event.event_start}</td>
+                      <td>{$event.event_end}</td>
+                      <td>{$event.event_desc}</td>
+                    </tr>
+                {/foreach}
+              </tbody>
+            </table>
+        {else}
+            <div class="alert alert-info">
+              <p>Cette personne n'a participé à aucun event.</p>
+            </div>
+        {/if}
       </div>
       <div role="tabpanel" class="tab-pane" id="cartes">
         {if isset($cards)}

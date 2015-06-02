@@ -22,7 +22,7 @@
   <tbody>
     {foreach from=$managers item="line"}
         <tr>
-          <td>{$line.user_name}</td>
+          <td><a href="{mkurl action="user" page="view" user=$line.user_id}">{$line.user_name}</a></td>
           <td><span class="label label-primary">Manager</span></td>
           <td>{$line.user_login}</td>
           <td><a href="mailto:{$line.user_email}">{$line.user_email}</a></td>

@@ -249,6 +249,18 @@ function user_view() {
         $tpl->append('sections', $line);
     }
 
+    //List events
+    $sql = $pdo->prepare('SELECT * FROM event_staff'
+            . ' LEFT JOIN events ON event_id = est_event'
+            . ' LEFT JOIN sections ON section_id = est_section'
+            . ' WHERE est_user = ?'
+            . ' ORDER BY event_start DESC');
+    $sql->bindValue(1, $user['user_id']);
+    $sql->execute();
+    while ($event = $sql->fetch(PDO::FETCH_ASSOC)) {
+        $tpl->append('events', $event);
+    }
+
     $sql = $pdo->prepare('SELECT * FROM sections WHERE section_type = "primary"');
     $sql->execute();
     while ($line = $sql->fetch())

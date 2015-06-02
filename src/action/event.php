@@ -572,3 +572,45 @@ function event_bocal_view() {
     $tpl->assign('ticket', $bocal);
     display();
 }
+
+function event_staff_add() {
+    global $pdo;
+
+    // Autocomplete
+    if (isset($_GET['format']) && $_GET['format'] == 'json') {
+        $sql = $pdo->prepare("SELECT user_name FROM users WHERE user_name LIKE ? ORDER BY user_name ASC LIMIT 10");
+        $sql->bindValue(1, "%$_GET[term]%");
+        $sql->execute();
+
+        echo json_encode($sql->fetchAll(PDO::FETCH_COLUMN, 0));
+        quit();
+    }
+
+    if (isset($_POST['login'])) {
+        $mdl = new Modele('event_staff');
+        $usr = $pdo->prepare('SELECT user_id FROM users WHERE user_name = ?');
+        foreach (explode(',', $_POST['login']) as $login) {
+            $usr->bindValue(1, trim($login));
+            $usr->execute();
+            $usrDetails = $usr->fetch();
+            if ($usrDetails !== false) {
+                $mdl->find(array(
+                    'est_user' => $usrDetails['user_id'],
+                    'est_event' => $_REQUEST['event'],
+                    'est_section' => $_REQUEST['section'],
+                ));
+                if ($mdl->next()) {
+                    $mdl->est_status = 'OK';
+                } else {
+                    $mdl->addFrom(array(
+                        'est_user' => $usrDetails['user_id'],
+                        'est_event' => $_REQUEST['event'],
+                        'est_section' => $_REQUEST['section'],
+                        'est_status' => 'OK',
+                    ));
+                }
+            }
+        }
+        redirect('event', 'staff', array('section' => $_REQUEST['section'], 'event' => $_REQUEST['event'], 'hsuccess' => 1));
+    }
+}
