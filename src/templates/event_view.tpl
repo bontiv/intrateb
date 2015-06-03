@@ -12,7 +12,7 @@
   <!-- Tab panes -->
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="sections">
-      {acl action="event" page="addsection"}
+      {acl action="event" page="addsection" event=$event.event_id}
       <div>
         <form class="form-inline" action="{mkurl action="event" page="addsection" event=$event.event_id}" method="POST">
           Ajout de section :
