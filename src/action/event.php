@@ -578,11 +578,11 @@ function event_staff_add() {
 
     // Autocomplete
     if (isset($_GET['format']) && $_GET['format'] == 'json') {
-        $sql = $pdo->prepare("SELECT user_name FROM users WHERE user_name LIKE ? ORDER BY user_name ASC LIMIT 10");
-        $sql->bindValue(1, "%$_GET[term]%");
+        $sql = $pdo->prepare("SELECT user_name, user_firstname, user_lastname FROM users WHERE user_name LIKE :term OR user_firstname LIKE :term OR user_lastname LIKE :term ORDER BY user_name ASC LIMIT 10");
+        $sql->bindValue('term', "%$_GET[term]%");
         $sql->execute();
 
-        echo json_encode($sql->fetchAll(PDO::FETCH_COLUMN, 0));
+        echo json_encode($sql->fetchAll(PDO::FETCH_ASSOC));
         quit();
     }
 

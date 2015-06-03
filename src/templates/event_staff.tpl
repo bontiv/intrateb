@@ -41,9 +41,22 @@
           //Auto complete
           $('#staffAdd').autocomplete({
               source: function (request, response) {
+                  var answer = new Array();
                   $.getJSON(srcUrl, {
                       term: extractLast(request.term)
-                  }, response);
+                  }, function (data) {
+                      var _len = data.length;
+                      for (var _i = 0; _i < _len; _i++) {
+                          var line = data[_i];
+                          answer.push({
+                              value: line.user_name,
+                              label: line.user_firstname
+                                      + " " + line.user_lastname
+                                      + " (" + line.user_name + ")"
+                          });
+                      }
+                      response(answer);
+                  });
               },
               search: function () {
                   // custom minLength
