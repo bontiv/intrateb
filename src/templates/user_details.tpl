@@ -153,7 +153,8 @@
               <p>Login utilisateur incorrect.</p>
             </div>
         {else}
-            <div class="col-md-6">
+            <div class="col-md-4">
+              <h4>Infos BOCAL</h4>
               <dl class="dl-horizontal">
                 <dt>Login</dt>
                 <dd>{$bocal.login}</dd>
@@ -171,12 +172,105 @@
                 <dd>{$bocal.promo}</dd>
               </dl>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
+              <h4>Infos EPITECH</h4>
+              <dl class="dl-horizontal">
+                <dt>email</dt>
+                <dd>{$intra->internal_email}</dd>
+                {if isset($intra->userinfo->email)}
+                    <dt>PERSO: email</dt>
+                    <dd><a href="mailto:{$intra->userinfo->email}">{$intra->userinfo->email}</a></dd>
+                {/if}
+                {if isset($intra->userinfo->address)}
+                    <dt>PERSO: adresse</dt>
+                    <dd>{$intra->userinfo->address}</dd>
+                {/if}
+                {if isset($intra->userinfo->city)}
+                    <dt>PERSO: ville</dt>
+                    <dd>{$intra->userinfo->city}</dd>
+                {/if}
+                {if isset($intra->userinfo->country)}
+                    <dt>PERSO: pays</dt>
+                    <dd>{$intra->userinfo->country}</dd>
+                {/if}
+                {if isset($intra->userinfo->telephone)}
+                    <dt>PERSO: téléphone</dt>
+                    <dd><a href="tel:{$intra->userinfo->telephone}">{$intra->userinfo->telephone}</a></dd>
+                {/if}
+                {if isset($intra->userinfo->website)}
+                    <dt>PERSO: site web</dt>
+                    <dd><a href="{$intra->userinfo->website}">{$intra->userinfo->website}</a></dd>
+                    {/if}
+                    {if isset($intra->userinfo->job)}
+                    <dt>PERSO: métier</dt>
+                    <dd>{$intra->userinfo->job}</dd>
+                {/if}
+                {if isset($intra->userinfo->poste)}
+                    <dt>PERSO: poste</dt>
+                    <dd>{$intra->userinfo->poste}</dd>
+                {/if}
+                {if isset($intra->userinfo->birthplace)}
+                    <dt>PERSO: lieu de naissance</dt>
+                    <dd>{$intra->userinfo->birthplace}</dd>
+                {/if}
+                {if isset($intra->userinfo->birthday)}
+                    <dt>PERSO: date de naissance</dt>
+                    <dd>{$intra->userinfo->birthday}</dd>
+                {/if}
+                {if isset($intra->userinfo->facebook)}
+                    <dt>PERSO: facebook</dt>
+                    <dd><a href="{$intra->userinfo->facebook}">{$intra->userinfo->facebook}</a></dd>
+                {/if}
+                {if isset($intra->userinfo->twitter)}
+                    <dt>PERSO: twitter</dt>
+                    <dd>
+                      <a href="{$intra->userinfo->twitter}">{$intra->userinfo->twitter}</a>
+                    </dd>
+                {/if}
+                {if isset($intra->userinfo->googleplus)}
+                    <dt>PERSO: google plus</dt>
+                    <dd><a href="{$intra->userinfo->googleplus}">{$intra->userinfo->googleplus}</a></dd>
+                {/if}
+                <dt>Localisation</dt>
+                <dd>{$intra->location}</dd>
+                {if isset($intra->course_code)}
+                    <dt>Parcours</dt>
+                    <dd>{$intra->course_code}</dd>
+                {/if}
+                {if $intra->semester_code}
+                    <dt>Semestre</dt>
+                    <dd>{$intra->semester_code}</dd>
+                {/if}
+                {if isset($intra->studentyear)}
+                    <dt>Année</dt>
+                    <dd>{$intra->studentyear}<sup>{if $intra->studentyear == 1}er{else}e{/if}</sup></dd>
+                {/if}
+                {if isset($intra->credits)}
+                    <dt>Credits</dt>
+                    <dd>{$intra->credits}</dd>
+                {/if}
+                {if isset($intra->gpa)}
+                    <dt>GPA</dt>
+                    <dd>{foreach $intra->gpa as $gpa}{if not $gpa@first}, {/if}{$gpa->cycle} ({$gpa->gpa}){/foreach}</dd>
+                {/if}
+                <dt>Groupes</dt>
+                <dd>{foreach $intra->groups as $grp}{if not $grp@first}, {/if}{$grp->name}{/foreach}</dd>
+                {if isset($intra->spice)}
+                    <dt>EPICES disponibles</dt>
+                    <dd>{if $intra->spice->available_spice}{$intra->spice->available_spice}{else}0{/if}</dd>
+                    <dt>EPICES utilsés</dt>
+                    <dd>{if $intra->spice->consumed_spice}{$intra->spice->consumed_spice}{else}0{/if}</dd>
+                {/if}
+
+              </dl>
+            </div>
+            <div class="col-md-4">
+              <h4>PHOTO</h4>
               {if $bocal.school == "epitech"}
                   {* <img src="https://intra-bocal.epitech.eu/trombi/{$bocal.login}.jpg" /> *}
-                  <img src="https://cdn.local.epitech.eu/userprofil/profilview/{$bocal.login}.jpg" />
+                  <img  width="150px" src="https://cdn.local.epitech.eu/userprofil/profilview/{$bocal.login}.jpg" />
               {elseif $bocal.school == "epita"}
-                  <img src="https://intra-bocal.epitech.eu/trombi/{$bocal.login}.jpg" />
+                  <img width="150px" src="https://intra-bocal.epitech.eu/trombi/{$bocal.login}.jpg" />
               {/if}
             </div>
         {/if}

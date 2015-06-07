@@ -9,3 +9,7 @@ fields:
         type: var
         label: Mot de passe UNIX
         default: ""
+    baseUrl:
+        type: var
+        label: Adresse de l'intra
+        default: "https://intra.epitech.eu"

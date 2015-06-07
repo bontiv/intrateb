@@ -303,7 +303,14 @@ function user_view() {
     if ($user['user_login']) {
         include_once $srcdir . '/libs/bocal.php';
         $bocal = new Bocal();
-        $tpl->assign('bocal', $bocal->getUser($user['user_login']));
+        $bdata = $bocal->getUser($user['user_login']);
+        $tpl->assign('bocal', $bdata);
+
+        if ($bdata !== false) {
+            include_once $srcdir . '/libs/intra.php';
+            $intra = new EIntranet();
+            $tpl->assign('intra', $intra->getUserInfos($user['user_login']));
+        }
     }
 
     $tpl->display('user_details.tpl');

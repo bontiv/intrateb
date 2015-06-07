@@ -57,6 +57,7 @@ function bulletin_toTemplate($period_id) {
     $mdl->find(array('bu_period' => $period_id));
 
     $colums = array();
+    $sumSpices = 0;
 
     while ($mdl->next()) {
         $marks = unserialize($mdl->bu_data);
@@ -79,9 +80,15 @@ function bulletin_toTemplate($period_id) {
         }
 
         $tpl->append('marks', $line);
+        if ($line['spice'] > 360) {
+            $sumSpices += 360;
+        } else {
+            $sumSpices += $line['spice'];
+        }
     }
 
     $tpl->assign('colums', $colums);
+    $tpl->assign('sumSpices', $sumSpices);
 }
 
 function bulletin_view($period_id) {
@@ -140,7 +147,7 @@ function bulletin_download($period_id) {
 }
 
 function bulletin_view_user($id) {
-    global $tpl, $root;
+    global $tpl, $srcdir;
 
     $mdl = new Modele('bulletin_user');
     $mdl->fetch($id);
@@ -156,5 +163,20 @@ function bulletin_view_user($id) {
     }
 
     $tpl->assign('bulletin', $bulletin);
-    $tpl->display($root . 'libs/bulletins/epitech/user.tpl');
+    $tpl->display($srcdir . '/libs/bulletins/epitech/user.tpl');
+}
+
+function bulletin_valid($mdl) {
+    global $tpl, $srcdir;
+
+    include_once $srcdir . "/libs/intra.php";
+
+    bulletin_toTemplate($_REQUEST['id']);
+
+    $intra = new EIntranet();
+    if (!isset($_REQUEST['period'])) {
+        $tpl->assign('attrib', $intra->getSpicesList());
+        $tpl->display($srcdir . '/libs/bulletins/epitech/choose.tpl');
+        quit();
+    }
 }

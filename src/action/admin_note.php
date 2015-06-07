@@ -160,24 +160,29 @@ function admin_note_viewbulletin() {
 }
 
 function admin_note_editbulletin() {
-    global $pdo, $root;
+    global $pdo, $srcdir;
 
     $mdl = new Modele("periods");
     $mdl->fetch($_GET['id']);
     $mdl->assignTemplate('bulletin');
 
-    require $root . 'libs' . DS . 'bulletins' . DS . $mdl->period_generator . DS . 'bulletin.php';
+    require $srcdir . '/libs' . DS . 'bulletins' . DS . $mdl->period_generator . DS . 'bulletin.php';
 
     bulletin_edit($_GET['id']);
     quit();
 }
 
 function admin_note_validbulletin() {
+    global $srcdir;
+
     $mdl = new Modele("periods");
     $mdl->fetch($_GET['id']);
-    $mdl->period_state = 'VALID';
 
-    redirect("admin_note", "bulletin", array("hsuccess" => 1));
+    require $srcdir . '/libs' . DS . 'bulletins' . DS . $mdl->period_generator . DS . 'bulletin.php';
+
+    bulletin_valid($mdl);
+
+    //redirect("admin_note", "bulletin", array("hsuccess" => 1));
 }
 
 function admin_note_downbulletin() {
