@@ -176,12 +176,14 @@
               <h4>Infos EPITECH</h4>
               <dl class="dl-horizontal">
                 <dt>email</dt>
-                <dd>{$intra->internal_email}</dd>
+                <dd>
+                  <a href="mailto:{$intra->internal_email}">{$intra->internal_email}</a>
+                </dd>
                 {if isset($intra->userinfo->email)}
                     <dt>PERSO: email</dt>
                     <dd><a href="mailto:{$intra->userinfo->email}">{$intra->userinfo->email}</a></dd>
-                {/if}
-                {if isset($intra->userinfo->address)}
+                    {/if}
+                    {if isset($intra->userinfo->address)}
                     <dt>PERSO: adresse</dt>
                     <dd>{$intra->userinfo->address}</dd>
                 {/if}
@@ -270,7 +272,7 @@
                   {* <img src="https://intra-bocal.epitech.eu/trombi/{$bocal.login}.jpg" /> *}
                   <img  width="150px" src="https://cdn.local.epitech.eu/userprofil/profilview/{$bocal.login}.jpg" />
               {elseif $bocal.school == "epita"}
-                  <img width="150px" src="https://intra-bocal.epitech.eu/trombi/{$bocal.login}.jpg" />
+                  <img width="150px" alt="Pas d'image" src="https://intra-bocal.epitech.eu/trombi/{$bocal.login}.jpg" />
               {/if}
             </div>
         {/if}
