@@ -234,6 +234,7 @@ function user_delete() {
 function user_view() {
     global $pdo, $tpl, $srcdir;
 
+    $utime = microtime(true);
     $sql = $pdo->prepare('SELECT * FROM users LEFT JOIN user_types ON ut_id = user_type WHERE user_id = ?');
     $sql->bindValue(1, $_REQUEST['user']);
     $sql->execute();
@@ -313,6 +314,20 @@ function user_view() {
         }
     }
 
+    //Get activities
+    $sql = $pdo->prepare('SELECT * FROM marks '
+            . 'LEFT JOIN participations ON part_id = mark_participation '
+            . 'LEFT JOIN sections ON part_section = section_id '
+            . 'LEFT JOIN events ON part_event = event_id '
+            . 'WHERE mark_user = ? '
+            . 'ORDER BY part_attribution_date DESC');
+    $sql->bindValue(1, $user['user_id']);
+    $sql->execute();
+    while ($line = $sql->fetch()) {
+        $tpl->append('activities', $line);
+    }
+
+    $tpl->assign('time', microtime(true) - $utime);
     $tpl->display('user_details.tpl');
     quit();
 }

@@ -86,6 +86,7 @@
       <li role="presentation"><a href="#adhesions" aria-controls="adhesions" role="tab" data-toggle="tab">Adhésions</a></li>
       <li role="presentation"><a href="#school" aria-controls="school" role="tab" data-toggle="tab">Info école</a></li>
       <li role="presentation"><a href="#events" aria-controls="events" role="tab" data-toggle="tab">Events</a></li>
+      <li role="presentation"><a href="#activities" aria-controls="activities" role="tab" data-toggle="tab">Activités</a></li>
       <li role="presentation"><a href="#cartes" aria-controls="cartes" role="tab" data-toggle="tab">Cartes</a></li>
       <li role="presentation"><a href="#mailling" aria-controls="mailling" role="tab" data-toggle="tab">Groupes de diffusion</a></li>
     </ul>
@@ -319,6 +320,50 @@
             </div>
         {/if}
       </div>
+      <div role="tabpanel" class="tab-pane" id="activities">
+        {if isset($activities)}
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Description</th>
+                  <th>Valide</th>
+                  <th>Durée</th>
+                  <th>Date</th>
+                  <th>Section</th>
+                  <th>Event</th>
+                  <th>Note</th>
+                </tr>
+              </thead>
+              <tbody>
+                {foreach $activities as $activity}
+                    <tr>
+                      <td>{$activity.part_title}</td>
+                      <td>
+                        {if $activity.part_status == "SUBMITTED"}
+                            <div class="label label-info">En attente</div>
+                        {elseif $activity.part_status == "ACCEPTED"}
+                            <div class="label label-success">Validé</div>
+                        {elseif $activity.part_status == "REFUSED"}
+                            <div class="label label-success">Refusé</div>
+                        {else}
+                            {$activity.part_status}
+                        {/if}
+                      </td>
+                      <td>{$activity.part_duration}h</td>
+                      <td>{$activity.part_attribution_date|date_format}</td>
+                      <td><a href="{mkurl action="section" page="details" section=$activity.section_id}">{$activity.section_name}</a></td>
+                      <td>{if $activity.part_event}<a href="{mkurl action="event" page="view" event=$activity.event_id}">{$activity.event_name}</a>{else}<div class="text-muted">N/A</div>{/if}</td>
+                      <td>{$activity.mark_mark}</td>
+                    </tr>
+                {/foreach}
+              </tbody>
+            </table>
+        {else}
+            <div class="alert alert-info">
+              <p>Cet utilisateur n'a réalisé aucune activité.</p>
+            </div>
+        {/if}
+      </div>
       <div role="tabpanel" class="tab-pane" id="cartes">
         {if isset($cards)}
             <table class="table table-striped table-hover">
@@ -428,4 +473,7 @@
     </div>
   </div>
 </div>
+
+<div class="text-muted"><small>Page généré en {$time}s.</small></div>
+
 {include "foot.tpl"}
