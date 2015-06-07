@@ -127,8 +127,8 @@ function bulletin_edit($period_id) {
 function bulletin_download($period_id) {
     global $tpl, $root;
 
-    header('Content-Type: text/plain;charset=UTF-8');
-    //header("Content-Disposition: attachment; filename=\"Period$period_id-$_GET[format].csv\"");
+    header('Content-Type: text/csv;charset=UTF-8');
+    header("Content-Disposition: attachment; filename=\"Period$period_id-$_GET[format].csv\"");
 
     bulletin_toTemplate($period_id);
 
