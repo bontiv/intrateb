@@ -181,57 +181,57 @@
                 </dd>
                 {if isset($intra->userinfo->email)}
                     <dt>PERSO: email</dt>
-                    <dd><a href="mailto:{$intra->userinfo->email}">{$intra->userinfo->email}</a></dd>
+                    <dd><a href="mailto:{$intra->userinfo->email->value}">{$intra->userinfo->email->value}</a></dd>
                     {/if}
                     {if isset($intra->userinfo->address)}
                     <dt>PERSO: adresse</dt>
-                    <dd>{$intra->userinfo->address}</dd>
+                    <dd>{$intra->userinfo->address->value}</dd>
                 {/if}
                 {if isset($intra->userinfo->city)}
                     <dt>PERSO: ville</dt>
-                    <dd>{$intra->userinfo->city}</dd>
+                    <dd>{$intra->userinfo->city->value}</dd>
                 {/if}
                 {if isset($intra->userinfo->country)}
                     <dt>PERSO: pays</dt>
-                    <dd>{$intra->userinfo->country}</dd>
+                    <dd>{$intra->userinfo->country->value}</dd>
                 {/if}
                 {if isset($intra->userinfo->telephone)}
                     <dt>PERSO: téléphone</dt>
-                    <dd><a href="tel:{$intra->userinfo->telephone}">{$intra->userinfo->telephone}</a></dd>
+                    <dd><a href="tel:{$intra->userinfo->telephone->value}">{$intra->userinfo->telephone->value}</a></dd>
                 {/if}
                 {if isset($intra->userinfo->website)}
                     <dt>PERSO: site web</dt>
-                    <dd><a href="{$intra->userinfo->website}">{$intra->userinfo->website}</a></dd>
+                    <dd><a href="{$intra->userinfo->website->value}">{$intra->userinfo->website->value}</a></dd>
                     {/if}
                     {if isset($intra->userinfo->job)}
                     <dt>PERSO: métier</dt>
-                    <dd>{$intra->userinfo->job}</dd>
+                    <dd>{$intra->userinfo->job->value}</dd>
                 {/if}
                 {if isset($intra->userinfo->poste)}
                     <dt>PERSO: poste</dt>
-                    <dd>{$intra->userinfo->poste}</dd>
+                    <dd>{$intra->userinfo->poste->value}</dd>
                 {/if}
                 {if isset($intra->userinfo->birthplace)}
                     <dt>PERSO: lieu de naissance</dt>
-                    <dd>{$intra->userinfo->birthplace}</dd>
+                    <dd>{$intra->userinfo->birthplace->value}</dd>
                 {/if}
                 {if isset($intra->userinfo->birthday)}
                     <dt>PERSO: date de naissance</dt>
-                    <dd>{$intra->userinfo->birthday}</dd>
+                    <dd>{$intra->userinfo->birthday->value}</dd>
                 {/if}
                 {if isset($intra->userinfo->facebook)}
                     <dt>PERSO: facebook</dt>
-                    <dd><a href="{$intra->userinfo->facebook}">{$intra->userinfo->facebook}</a></dd>
+                    <dd><a href="{$intra->userinfo->facebook->value}">{$intra->userinfo->facebook->value}</a></dd>
                 {/if}
                 {if isset($intra->userinfo->twitter)}
                     <dt>PERSO: twitter</dt>
                     <dd>
-                      <a href="{$intra->userinfo->twitter}">{$intra->userinfo->twitter}</a>
+                      <a href="{$intra->userinfo->twitter->value}">{$intra->userinfo->twitter->value}</a>
                     </dd>
                 {/if}
                 {if isset($intra->userinfo->googleplus)}
                     <dt>PERSO: google plus</dt>
-                    <dd><a href="{$intra->userinfo->googleplus}">{$intra->userinfo->googleplus}</a></dd>
+                    <dd><a href="{$intra->userinfo->googleplus->value}">{$intra->userinfo->googleplus->value}</a></dd>
                 {/if}
                 <dt>Localisation</dt>
                 <dd>{$intra->location}</dd>
