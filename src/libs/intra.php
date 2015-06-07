@@ -36,6 +36,7 @@ class EIntranet {
     public function connect() {
         $ch = curl_init($this->baseUrl);
         curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, array(
             'login' => $this->login,
             'password' => $this->password,
