@@ -299,6 +299,13 @@ function user_view() {
         }
     }
 
+    //Get Bocal data
+    if ($user['user_login']) {
+        include_once $srcdir . '/libs/bocal.php';
+        $bocal = new Bocal();
+        $tpl->assign('bocal', $bocal->getUser($user['user_login']));
+    }
+
     $tpl->display('user_details.tpl');
     quit();
 }

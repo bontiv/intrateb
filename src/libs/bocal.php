@@ -173,4 +173,55 @@ class Bocal {
         return false;
     }
 
+    public function getUser($login) {
+        $ch = curl_init($this->baseUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_COOKIEFILE, $this->cookies);
+        curl_setopt($ch, CURLOPT_COOKIEJAR, $this->cookies);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, array(
+            'pgid' => 'userinfo',
+            'm_userinfo_user_name' => '',
+            'm_userinfo_user_firstname' => '',
+            'm_userinfo_user_login' => $login,
+            'm_userinfo_user_prom' => '',
+            'm_userinfo_user_school' => '',
+            'm_userinfo_user_town' => '',
+            'm_userinfo_submit' => 'Rechercher',
+        ));
+        $ret = curl_exec($ch);
+
+        //Erreur et connexion
+        if (strpos($ret, '<p id=\'error\'>') !== false) {
+            if (strpos($ret, 'demande une identification')) {
+                $this->connect();
+                return $this->getUser($login);
+            } else {
+                return false;
+            }
+        }
+
+        $dom = new DOMDocument();
+        @$dom->loadHTML($ret);
+        $xpath = new DOMXPath($dom);
+
+        if ($xpath->query('/html/body/div[6]/table/tr[2]')->length == 0)
+            return false;
+
+        $userInfos = array(
+            'login' => trim($xpath->query('/html/body/div[6]/table/tr[2]/td[1]')->item(0)->textContent),
+            'lastname' => trim($xpath->query('/html/body/div[6]/table/tr[2]/td[2]')->item(0)->textContent),
+            'raw_firstname' => trim($xpath->query('/html/body/div[6]/table/tr[2]/td[3]')->item(0)->textContent),
+            'uid' => trim($xpath->query('/html/body/div[6]/table/tr[2]/td[4]')->item(0)->textContent),
+            'gid' => trim($xpath->query('/html/body/div[6]/table/tr[2]/td[5]')->item(0)->textContent),
+            'raw_promo' => trim($xpath->query('/html/body/div[6]/table/tr[2]/td[6]')->item(0)->textContent),
+            'school' => trim($xpath->query('/html/body/div[6]/table/tr[2]/td[7]')->item(0)->textContent),
+            'town' => trim($xpath->query('/html/body/div[6]/table/tr[2]/td[8]')->item(0)->textContent),
+            'close' => trim($xpath->query('/html/body/div[6]/table/tr[2]/td[9]')->item(0)->textContent),
+        );
+
+        $userInfos['firstname'] = preg_replace('`[0-9]`', '', $userInfos['raw_firstname']);
+        $userInfos['promo'] = preg_replace('`^[^0-9]*([0-9]*)$`', '\1', $userInfos['raw_promo']);
+        return $userInfos;
+    }
+
 }

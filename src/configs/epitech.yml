@@ -1,0 +1,11 @@
+name: epitech
+label: Identifiants EPITECH
+fields:
+    login:
+        type: var
+        label: Identifiant
+        default: ""
+    pass:
+        type: var
+        label: Mot de passe UNIX
+        default: ""

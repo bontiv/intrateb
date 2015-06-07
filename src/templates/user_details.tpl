@@ -58,9 +58,10 @@
       <strong>Prenom : </strong>{$user.user_firstname}<br/>
       <strong>ID : </strong>{$user.user_id}<br/>
       <strong>Ecole : </strong>{$user.ut_name}<br/>
+      <strong>Promotion : </strong>{$user.user_promo}<br/>
       <strong>Login IONIS : </strong>{$user.user_login}<br/>
-      <strong>email : </strong>{$user.user_email}<br/>
-      <strong>Téléphone : </strong>{$user.user_phone}<br/>
+      <strong>email : </strong><a href="mailto:{$user.user_email}">{$user.user_email}</a><br/>
+      <strong>Téléphone : </strong><a href="tel:{$user.user_phone}">{$user.user_phone}</a><br/>
       <strong>Accès : </strong>{$user.user_role}</p>
 
     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#passwordRecover">
@@ -83,6 +84,7 @@
     <ul class="nav nav-tabs" role="tablist">
       <li role="presentation" class="active"><a href="#sections" aria-controls="sections" role="tab" data-toggle="tab">Sections</a></li>
       <li role="presentation"><a href="#adhesions" aria-controls="adhesions" role="tab" data-toggle="tab">Adhésions</a></li>
+      <li role="presentation"><a href="#school" aria-controls="school" role="tab" data-toggle="tab">Info école</a></li>
       <li role="presentation"><a href="#events" aria-controls="events" role="tab" data-toggle="tab">Events</a></li>
       <li role="presentation"><a href="#cartes" aria-controls="cartes" role="tab" data-toggle="tab">Cartes</a></li>
       <li role="presentation"><a href="#mailling" aria-controls="mailling" role="tab" data-toggle="tab">Groupes de diffusion</a></li>
@@ -139,6 +141,44 @@
             </table>
         {else}
             <p>Cet utilisateur n'a jamais été membre.</p>
+        {/if}
+      </div>
+      <div role="tabpanel" class="tab-pane" id="school">
+        {if not isset($bocal)}
+            <div class="alert alert-info">
+              <p>Cet utilisateur n'est pas membre de IONIS.</p>
+            </div>
+        {elseif not $bocal}
+            <div class="alert alert-danger">
+              <p>Login utilisateur incorrect.</p>
+            </div>
+        {else}
+            <div class="col-md-6">
+              <dl class="dl-horizontal">
+                <dt>Login</dt>
+                <dd>{$bocal.login}</dd>
+                <dt>Nom</dt>
+                <dd>{$bocal.lastname}</dd>
+                <dt>Prenom</dt>
+                <dd>{$bocal.firstname}</dd>
+                <dt>UID</dt>
+                <dd>{$bocal.uid}</dd>
+                <dt>GID</dt>
+                <dd>{$bocal.gid}</dd>
+                <dt>Ecole<dt>
+                <dd>{$bocal.school}</dd>
+                <dt>Promotion</dt>
+                <dd>{$bocal.promo}</dd>
+              </dl>
+            </div>
+            <div class="col-md-6">
+              {if $bocal.school == "epitech"}
+                  {* <img src="https://intra-bocal.epitech.eu/trombi/{$bocal.login}.jpg" /> *}
+                  <img src="https://cdn.local.epitech.eu/userprofil/profilview/{$bocal.login}.jpg" />
+              {elseif $bocal.school == "epita"}
+                  <img src="https://intra-bocal.epitech.eu/trombi/{$bocal.login}.jpg" />
+              {/if}
+            </div>
         {/if}
       </div>
       <div role="tabpanel" class="tab-pane" id="events">

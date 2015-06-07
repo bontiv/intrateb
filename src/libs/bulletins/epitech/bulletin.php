@@ -1,11 +1,14 @@
 <?php
 
 function bulletin_add($period_id) {
-    global $pdo;
+    global $pdo, $srcdir;
+
+    include_once $srcdir . '/libs/bocal.php';
 
     $req = 'SELECT * '
             . 'FROM marks '
             . 'LEFT JOIN participations ON mark_participation = part_id '
+            . 'LEFT JOIN users ON mark_user = user_id '
             . 'WHERE part_status = \'ACCEPTED\' '
             . 'AND mark_period = ?';
 
@@ -14,9 +17,19 @@ function bulletin_add($period_id) {
     $sql->execute();
 
     $users = array();
+    $bocal = new Bocal();
 
     while ($mark = $sql->fetch()) {
-        var_dump($mark);
+
+        if ($mark['user_login'] == "") {
+            continue;
+        }
+
+        $buser = $bocal->getUser($mark['user_login']);
+        if ($buser['school'] != "epitech" || $buser['promo'] < date('Y')) {
+            continue; //Skip no Epitech students and old promotions
+        }
+
         isset($users[$mark['mark_user']]) || $users[$mark['mark_user']] = array();
         $users[$mark['mark_user']][] = array(
             "label" => $mark['part_title'],
@@ -39,6 +52,7 @@ function bulletin_add($period_id) {
 function bulletin_toTemplate($period_id) {
     global $tpl;
 
+
     $mdl = new Modele('bulletin_user');
     $mdl->find(array('bu_period' => $period_id));
 
@@ -48,6 +62,7 @@ function bulletin_toTemplate($period_id) {
         $marks = unserialize($mdl->bu_data);
         $line = array(
             'user' => $mdl->bu_user,
+            'school' => '',
             'spice' => 0,
         );
 
@@ -55,7 +70,11 @@ function bulletin_toTemplate($period_id) {
             if (!in_array($mark['label'], $colums)) {
                 $colums[] = $mark['label'];
             }
-            $line[$mark['label']] = $mark['duration'];
+            if (isset($line[$mark['label']])) {
+                $line[$mark['label']] += $mark['duration'];
+            } else {
+                $line[$mark['label']] = $mark['duration'];
+            }
             $line['spice'] += $mark['duration'];
         }
 

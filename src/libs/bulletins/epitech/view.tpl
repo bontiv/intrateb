@@ -22,6 +22,7 @@
   <thead>
     <tr>
       <th>Utilisateur</th>
+      <th>Total</th>
         {foreach $colums as $colum}
         <th>{$colum}</th>
         {/foreach}
@@ -31,6 +32,8 @@
     {foreach $marks as $mark}
         <tr>
           <td>{$mark.user->user_name}</td>
+          <td>{$mark.spice}</td>
+
           {foreach $colums as $colum}
               {if isset($mark[$colum])}
                   <td>{$mark[$colum]} h</td>
