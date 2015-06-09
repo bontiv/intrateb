@@ -73,6 +73,12 @@
         {acl action="user" page="viewphoto"}
         <img src="{mkurl action="user" page="viewphoto" user=$user.user_id}" />
         {/acl}
+    {elseif isset($intra->picture) and $intra->picture != ""}
+        <img  width="150px" src="{$intra->picture}" />
+    {elseif $bocal.school == "epita" and $bocal.promo >= 2015}
+        <img  width="150px" src="http://static.acu.epita.fr/photos/{if $user.user_promo > 0}{$user.user_promo}{else}{$bocal.promo}{/if}/{$bocal.login}" />
+    {else}
+        <img width="150px" alt="Pas d'image" src="https://intra-bocal.epitech.eu/trombi/{$bocal.login}.jpg" />
     {/if}
   </div>
 </div>
