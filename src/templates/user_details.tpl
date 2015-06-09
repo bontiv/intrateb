@@ -199,8 +199,8 @@
                 {if isset($intra->userinfo->telephone)}
                     <dt>PERSO: téléphone</dt>
                     <dd><a href="tel:{$intra->userinfo->telephone->value}">{$intra->userinfo->telephone->value}</a></dd>
-                {/if}
-                {if isset($intra->userinfo->website)}
+                    {/if}
+                    {if isset($intra->userinfo->website)}
                     <dt>PERSO: site web</dt>
                     <dd><a href="{$intra->userinfo->website->value}">{$intra->userinfo->website->value}</a></dd>
                     {/if}
@@ -223,8 +223,8 @@
                 {if isset($intra->userinfo->facebook)}
                     <dt>PERSO: facebook</dt>
                     <dd><a href="{$intra->userinfo->facebook->value}">{$intra->userinfo->facebook->value}</a></dd>
-                {/if}
-                {if isset($intra->userinfo->twitter)}
+                    {/if}
+                    {if isset($intra->userinfo->twitter)}
                     <dt>PERSO: twitter</dt>
                     <dd>
                       <a href="{$intra->userinfo->twitter->value}">{$intra->userinfo->twitter->value}</a>
@@ -233,7 +233,7 @@
                 {if isset($intra->userinfo->googleplus)}
                     <dt>PERSO: google plus</dt>
                     <dd><a href="{$intra->userinfo->googleplus->value}">{$intra->userinfo->googleplus->value}</a></dd>
-                {/if}
+                    {/if}
                 <dt>Localisation</dt>
                 <dd>{$intra->location}</dd>
                 {if isset($intra->course_code)}
@@ -269,10 +269,11 @@
             </div>
             <div class="col-md-4">
               <h4>PHOTO</h4>
-              {if $bocal.school == "epitech"}
-                  {* <img src="https://intra-bocal.epitech.eu/trombi/{$bocal.login}.jpg" /> *}
-                  <img  width="150px" src="https://cdn.local.epitech.eu/userprofil/profilview/{$bocal.login}.jpg" />
-              {elseif $bocal.school == "epita"}
+              {if isset($intra->picture) and $intra->picture != ""}
+                  <img  width="150px" src="{$intra->picture}" />
+              {elseif $bocal.school == "epita" and $bocal.promo >= 2015}
+                  <img  width="150px" src="http://static.acu.epita.fr/photos/{$bocal.promo}/{$bocal.login}" />
+              {else}
                   <img width="150px" alt="Pas d'image" src="https://intra-bocal.epitech.eu/trombi/{$bocal.login}.jpg" />
               {/if}
             </div>
@@ -474,6 +475,6 @@
   </div>
 </div>
 
-<div class="text-muted"><small>Page généré en {$time}s.</small></div>
+<div class="text-muted"><i><small>Page généré en {$time|string_format:"%.3f"}s.</small></i></div>
 
 {include "foot.tpl"}
