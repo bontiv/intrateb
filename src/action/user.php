@@ -327,6 +327,23 @@ function user_view() {
         $tpl->append('activities', $line);
     }
 
+    //Compta
+    $mdl = new Modele('user_accounts');
+    $mdl->find(array('ua_user' => $user['user_id']));
+
+    $accounts = array(array(
+            'ua_id' => 0,
+            'ua_identifier' => 'Chèque',
+            'ua_type' => 'cheq',
+            'ua_number' => '',
+    ));
+    while ($mdl->next()) {
+        $accounts[] = $mdl->toArray();
+    }
+
+    $tpl->assign('accounts', $accounts);
+    //Fin compta
+
     $tpl->assign('time', microtime(true) - $utime);
     $tpl->display('user_details.tpl');
     quit();
@@ -464,4 +481,26 @@ function user_addGroup() {
     $api = new GoogleApi();
     $ret = $api->addGroupMember($_POST['group'], $usr->user_email);
     redirect("user", "view", array('user' => $usr->user_id, 'hsuccess' => isset($ret->error) ? 0 : 1));
+}
+
+function user_setcompta() {
+    $usr = new Modele('users');
+    $usr->fetch($_SESSION['user']['user_id']);
+
+    if ($_GET['account'] == 0) {
+        $usr->user_compta = 0;
+        $_SESSION['user']['user_compta'] = 0;
+        redirect("user", "view", array('hsuccess' => 1, 'user' => $usr->getKey()));
+    }
+
+    $mdlAcc = new Modele('user_accounts');
+    $mdlAcc->fetch($_GET['account']);
+
+    if ($mdlAcc->raw_ua_user == $_SESSION['user']['user_id']) {
+        $usr->user_compta = $mdlAcc->getKey();
+        $_SESSION['user']['user_compta'] = $mdlAcc->getKey();
+        redirect("user", "view", array('hsuccess' => 1, 'user' => $usr->getKey()));
+    }
+
+    redirect("user", "view", array('hsuccess' => 0, 'user' => $usr->getKey()));
 }

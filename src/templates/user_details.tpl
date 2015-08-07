@@ -95,6 +95,7 @@
       <li role="presentation"><a href="#activities" aria-controls="activities" role="tab" data-toggle="tab">Activités</a></li>
       <li role="presentation"><a href="#cartes" aria-controls="cartes" role="tab" data-toggle="tab">Cartes</a></li>
       <li role="presentation"><a href="#mailling" aria-controls="mailling" role="tab" data-toggle="tab">Groupes de diffusion</a></li>
+      <li role="presentation"><a href="#bankAccounts" aria-controls="bankAccounts" role="tab" data-toggle="tab">Comptes banquaire</a></li>
     </ul>
     <br />
 
@@ -351,7 +352,7 @@
                         {elseif $activity.part_status == "ACCEPTED"}
                             <div class="label label-success">Validé</div>
                         {elseif $activity.part_status == "REFUSED"}
-                            <div class="label label-success">Refusé</div>
+                            <div class="label label-danger">Refusé</div>
                         {else}
                             {$activity.part_status}
                         {/if}
@@ -476,6 +477,39 @@
               <p>Cet utilisateur n'est dans aucun groupe de diffusion.</p>
             </div>
         {/if}
+      </div>
+      <div role="tabpanel" class="tab-pane" id="bankAccounts">
+        <p>Liste des comptes banquaires.</p>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Intitulé</th>
+              <th>Type</th>
+              <th>Identifiant</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {foreach $accounts as $acc}
+                <tr>
+                  <td>
+                    {$acc.ua_identifier}
+                    {if $acc.ua_id==$user.user_compta}
+                        <div class="label label-primary">Par défaut</div>
+                    {/if}
+                  </td>
+                  <td>{$acc.ua_type}</td>
+                  <td>{$acc.ua_number}</td>
+                  <td>
+                    {if $acc.ua_id!=$user.user_compta}
+                        <a class="btn btn-default" href="{mkurl action="user" page="setcompta" account=$acc.ua_id user=$user.user_id}">Mettre par défaut</a>
+                    {/if}
+                  </td>
+                </tr>
+            {/foreach}
+          </tbody>
+        </table>
+
       </div>
     </div>
   </div>

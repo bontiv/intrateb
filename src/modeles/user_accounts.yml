@@ -1,0 +1,31 @@
+## Table User_sections
+name: user_accounts
+key: ua_id
+fields:
+  ua_id:
+    type: auto_int
+  ua_user:
+    type: external
+    table: users
+    display: %user_firstname% %user_lastname% (%user_name%)
+  ua_type:
+    type: enum
+    label: Type de compte
+    default: bank
+    readonly: true
+    visible: admin
+    items:
+      paypal: PayPal
+      bank: Compte banquaire
+  ua_identifier:
+      type: var
+      label: Intitulé
+  ua_number:
+      type: var
+      label: IBAN (compte banquaire)
+
+
+indexes:
+  ua_user:
+    type: index
+    fields: [ua_user]

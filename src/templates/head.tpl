@@ -94,6 +94,7 @@
                   <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                     <li><a href="{mkurl action="index" page="logout"}">Déconnexion</a></li>
                     <li><a href="{mkurl action="index" page="profile"}">Mon profil</a></li>
+                    <li><a href="{mkurl action="compta"}">Ma compta</a></li>
                   </ul>
                 </li>
             {else}
@@ -115,8 +116,10 @@
     <div class="container container-fluid">
 
       {if isset($hsuccess) or isset($smarty.get.hsuccess)}
-          {if (isset($smarty.get.hsuccess) and $smarty.get.hsuccess==1) or (isset($hsuccess) and $hsuccess)}
+          {if (isset($smarty.get.hsuccess) and $smarty.get.hsuccess==1) or (isset($hsuccess) and $hsuccess===true)}
               <div class="alert alert-success"><p>Opération effectué avec succès.</p></div>
+          {elseif isset($hsuccess) and $hsuccess!==0 and $hsuccess!==false}
+              <div class="alert alert-danger"><p>Une erreur a empêché l'opération : {$hsuccess}.</p></div>
           {else}
               <div class="alert alert-danger"><p>Une erreur a empêché l'opération.</p></div>
           {/if}

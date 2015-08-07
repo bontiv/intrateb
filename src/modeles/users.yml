@@ -75,6 +75,13 @@ fields:
       USER: Utilisateur validé
       SUPERUSER: Utilisateur acrédité
       ADMINISTRATOR: Administrateur
+
+  user_compta:
+      type: int
+      label: Compte par défaut
+      readonly: true
+      default: 0
+
 indexes:
   user_name:
     type: unique
