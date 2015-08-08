@@ -52,6 +52,7 @@
   <li class=""><a href="#password" role="tablist" data-toggle="pill">Mot de passe</a></li>
   <li class=""><a href="#card" role="tablist" data-toggle="pill">Carte de membre</a></li>
   <li class=""><a href="#print" role="tablist" data-toggle="pill">Fiche de membre</a></li>
+  <li class=""><a href="#2factors" role="tablist" data-toggle="pill">Google Authenticator</a></li>
 </ul>
 
 <div class="pill-content">
@@ -72,6 +73,7 @@
       </div>
     </form>
   </div>
+
   <div class="pill-pane" id="password">
     <form class="form-horizontal" method="POST" onsubmit="return crypt(this)">
       <fieldset>
@@ -200,79 +202,168 @@
                                 {else}label-default{/if}
                                 ">
                           {$card->card_status}</span></td>
-                      <td>{if $card->card_bundle}
-                        <span class="label
-                              {if $card->card_bundle->raw_cbundle_status=="CREATED"}
-                                  label-warning
-                              {elseif $card->card_bundle->raw_cbundle_status=="OK"}
-                                  label-success
-                              {else}
-                                  label-default
-                              {/if}">
-                          {$card->card_bundle->cbundle_status}
-                        </span>
-                        {else}<span class="label label-danger">Non envoyé</span>{/if}</td>
-                            <td>{$card->card_mandate->mandate_label}</td>
-                            <td>
-                              {if $card->raw_card_status=="NOPICTURE" or $card->raw_card_status=="CREATED"}<a href="{mkurl action="cards" page="delmycard" card=$card->card_id}" class="btn btn-danger glyphicon glyphicon-trash"></a>{/if}
-                              <a title="Voir la carte" href="#cardView" data-toggle="modal" onclick="$('#cardImage').attr('src', '{mkurl action="cards" page="viewmycard" card=$card->card_id}')" class="btn btn-default glyphicon glyphicon-eye-open"></a>
-                            </td>
-                        </tr>
-                        {/foreach}
-                        </tbody>
-                      </table>
-                      {else}
-                          <p>Vous n'avez encore aucune carte</p>
-                          {/if}
-                              {else}
+                      <td>
+                        {if $card->card_bundle}
+                            <span class="label
+                                  {if $card->card_bundle->raw_cbundle_status=="CREATED"}
+                                      label-warning
+                                  {elseif $card->card_bundle->raw_cbundle_status=="OK"}
+                                      label-success
+                                  {else}
+                                      label-default
+                                  {/if}">
+                              {$card->card_bundle->cbundle_status}
+                            </span>
+                        {else}
+                            <span class="label label-danger">Non envoyé</span>
+                        {/if}
+                      </td>
+                      <td>{$card->card_mandate->mandate_label}</td>
+                      <td>
+                        {if $card->raw_card_status=="NOPICTURE" or $card->raw_card_status=="CREATED"}<a href="{mkurl action="cards" page="delmycard" card=$card->card_id}" class="btn btn-danger glyphicon glyphicon-trash"></a>{/if}
+                        <a title="Voir la carte" href="#cardView" data-toggle="modal" onclick="$('#cardImage').attr('src', '{mkurl action="cards" page="viewmycard" card=$card->card_id}')" class="btn btn-default glyphicon glyphicon-eye-open"></a>
+                      </td>
+                    </tr>
+                {/foreach}
+              </tbody>
+            </table>
+        {else}
+            <p>Vous n'avez encore aucune carte</p>
+        {/if}
+    {else}
 
-                                  <p>La création de la carte n'est possible qu'après la validation de votre adhésion par le bureau.</p>
-                                  {/if}
-                                  </div>
+        <p>La création de la carte n'est possible qu'après la validation de votre adhésion par le bureau.</p>
+    {/if}
+  </div>
 
-                                  <div class="pill-pane" id="print">
-                                    <h2>Création de la fiche de membre</h2>
-                                    <p>
-                                      La fiche de membre vous permet de valider votre adhésion à Epitanime.
-                                      Elle peut être pré-remplie mais doit être signée par vous même. En
-                                      signant la fiche de membre, vous approuvez l'exactitude des informations
-                                      qui y sont inscrites.
-                                    </p>
-                                    <p>
-                                      Le montant de la cotisation est isncrit dans le règlement intérieur
-                                      de l'association.
-                                    </p>
-                                    <form target="_blank" class="form-horizontal" action="{mkurl action="index" page="print"}" method="POST">
+  <div class="pill-pane" id="print">
+    <h2>Création de la fiche de membre</h2>
+    <p>
+      La fiche de membre vous permet de valider votre adhésion à Epitanime.
+      Elle peut être pré-remplie mais doit être signée par vous même. En
+      signant la fiche de membre, vous approuvez l'exactitude des informations
+      qui y sont inscrites.
+    </p>
+    <p>
+      Le montant de la cotisation est isncrit dans le règlement intérieur
+      de l'association.
+    </p>
+    <form target="_blank" class="form-horizontal" action="{mkurl action="index" page="print"}" method="POST">
 
-                                      <!-- List mandate -->
-                                      <div class="form-group">
-                                        <label class="col-md-4 control-label" for="mandate">Mandat</label>
-                                        <div class="col-md-5">
-                                          <select id="mandate" name="mandate" class="form-control input-md" onchange="updateSub()">
-                                            {foreach from=$mandate item="l"}
-                                                <option value="{$l.mandate_id}">{$l.mandate_label}</option>
-                                            {/foreach}
-                                          </select>
-                                        </div>
-                                      </div>
+      <!-- List mandate -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="mandate">Mandat</label>
+        <div class="col-md-5">
+          <select id="mandate" name="mandate" class="form-control input-md" onchange="updateSub()">
+            {foreach from=$mandate item="l"}
+                <option value="{$l.mandate_id}">{$l.mandate_label}</option>
+            {/foreach}
+          </select>
+        </div>
+      </div>
 
-                                      <!-- List cotisation -->
-                                      <div class="form-group">
-                                        <label class="col-md-4 control-label" for="subscription">Type de cotisation</label>
-                                        <div class="col-md-5">
-                                          <select id="subscription" name="subscription" class="form-control input-md">
-                                          </select>
-                                        </div>
-                                      </div>
+      <!-- List cotisation -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="subscription">Type de cotisation</label>
+        <div class="col-md-5">
+          <select id="subscription" name="subscription" class="form-control input-md">
+          </select>
+        </div>
+      </div>
 
-                                      <div class="form-group">
-                                        <label class="col-md-4 control-label" for="editpass"></label>
-                                        <div class="col-md-8">
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="editpass"></label>
+        <div class="col-md-8">
 
-                                          <input type="submit" class="btn btn-primary" value="Imprimer" />
-                                        </div>
-                                      </div>
-                                    </form>
-                                  </div>
-                              </div>
-                              {include "foot.tpl"}
+          <input type="submit" class="btn btn-primary" value="Imprimer" />
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="pill-pane" id="2factors">
+
+    {if $smarty.session.user.user_otp}
+        <div class="alert alert-info">
+          <p>L'authentification deux facteurs est actuellement mis en place
+            sur votre compte.</p>
+        </div>
+    {else}
+        <div class="alert alert-danger">
+          <p>L'authentification deux facteurs n'est pas activé.</p>
+        </div>
+    {/if}
+
+    <h2>Google Authenticator</h2>
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        Note importante
+      </div>
+      <div class="panel-body">
+        <p>
+          Cetaines fonctionnalité de l'intra ne sont utilisables qu'après
+          avoir configuré Google Authenticator. Il faut alors l'utiliser pour la
+          connexion.
+        </p>
+      </div>
+    </div>
+    <p>
+      Google Authenticator est une application pour la connexion en deux étapes.
+      En activant ce paramètre, vous augmentez considérablement la sécurité
+      de votre compte d'utilisateur.
+    </p>
+    {if not $smarty.session.user.user_otp}
+        <p>
+          Procédure d'activation :
+        </p>
+        <ol>
+          <li>Installez l'application depuis <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=fr">Google Play Store</a></li>
+          <li>Scannez le QR Code via Google Authenticator</li>
+          <li>Entrez le code généré ci-dessous</li>
+        </ol>
+        <p>
+          <img src="{mkurl action="twofactors" page="getQR"}" />
+        </p>
+    {/if}
+
+    <form method="POST" action="{mkurl action="twofactors" page="set"}" class="form-horizontal">
+      <fieldset>
+
+        {if $smarty.session.user.user_otp}
+
+            <input name="activation" id="activation-1" value="false" type="hidden" />
+
+            <!-- Validation input-->
+            <div class="form-group">
+              <div class="col-md-offset-4 col-md-5">
+                <input id="go" name="go" class="btn btn-danger" value="Désactiver Google Authenticator" type="submit" />
+
+              </div>
+            </div>
+        {else}
+            <input name="activation" id="activation-0" value="true" checked="checked" type="hidden" />
+
+            <!-- Code input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="code">Code généré</label>
+              <div class="col-md-5">
+                <input id="code" name="code" placeholder="****" class="form-control input-md" type="text"/>
+
+              </div>
+            </div>
+
+
+
+            <!-- Validation input-->
+            <div class="form-group">
+              <div class="col-md-offset-4 col-md-5">
+                <input id="go" name="go" class="btn btn-primary" value="Valider" type="submit" />
+
+              </div>
+            </div>
+        {/if}
+      </fieldset>
+    </form>
+  </div>
+</div>
+{include "foot.tpl"}

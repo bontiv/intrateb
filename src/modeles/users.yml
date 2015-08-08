@@ -80,7 +80,14 @@ fields:
       type: int
       label: Compte par défaut
       readonly: true
+      visible: admin
       default: 0
+  user_otp:
+      type: var
+      label: Authentification deux facteurs
+      readonly: true
+      visible: admin
+      default: ""
 
 indexes:
   user_name:

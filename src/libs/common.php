@@ -551,8 +551,8 @@ function uc($txt) {
  * @param type $pass Mot de passe chiffré
  * @return boolean True si authentification réussie
  */
-function login_user($user, $pass) {
-    global $pdo;
+function login_user($user, $pass, $otp_code = null) {
+    global $pdo, $srcdir;
 
     $sql = $pdo->prepare('SELECT * FROM users WHERE user_name = ?');
     $sql->bindValue(1, $user);
@@ -562,10 +562,19 @@ function login_user($user, $pass) {
         if (strlen($user['user_pass']) != 32) // Mot de passe non chiffré ...
             $user['user_pass'] = md5($user['user_name'] . ':' . $user['user_pass']);
 
+        if (strlen($user['user_otp'])) {
+            require_once $srcdir . '/libs/GoogleAuthenticator/GoogleAuthenticator.php';
+            $otp = new GoogleAuthenticator();
+            if (!$otp->checkCode($user['user_otp'], $otp_code)) {
+                return -1;
+            }
+        }
+
         //Mot de passe correct ?
         if (md5($user['user_pass'] . $_SESSION['random']) == $pass) {
             $_SESSION['user'] = $user;
             $_SESSION['user']['role'] = aclFromText($user['user_role']);
+            unset($_SESSION['random']);
             return true;
         }
     }

@@ -31,9 +31,28 @@ function index_login() {
 
     //Tentative de connexion
     if (isset($_POST['login'])) {
-        if (login_user($_POST['login'], $_POST['password']))
-            redirect('index');
+        if (isset($_POST['otp_code'])) {
+            $result = login_user($_POST['login'], $_POST['password'], $_POST['otp_code']);
+        } else {
+            $result = login_user($_POST['login'], $_POST['password']);
+        }
 
+        if ($result === true) {
+            $url = explode('/', $_REQUEST['redirect'], 3);
+            $opt = array();
+            if (isset($url[2])) {
+                parse_str($url[2], $opt);
+            }
+            redirect($url[0], $url[1], $opt);
+        }
+
+        if ($result === -1) { //Erreur µ-1 = OTP requis
+            if (isset($_POST['otp_code'])) {
+                $tpl->assign('msg', 'Code erroné.');
+            }
+            $tpl->display('index_login_otp.tpl');
+            quit();
+        }
         // Et oui, pas de redirection = erreur de login ...
         $tpl->assign('msg', 'Utilisateur ou mot de passe erroné.');
     }
@@ -108,7 +127,7 @@ function index_create() {
  * @global type $tpl
  */
 function index_profile() {
-    global $tpl;
+    global $tpl, $srcdir;
 
     $mdl = new Modele('users');
 
@@ -150,6 +169,12 @@ function index_profile() {
         $l = $mdl->next();
     }
 
+    //GoogleAuthentificator
+    require_once $srcdir . '/libs/GoogleAuthenticator/GoogleAuthenticator.php';
+    $api = new GoogleAuthenticator();
+    $_SESSION['user']['GoogleAuthenticator'] = $api->generateSecret();
+    $tpl->assign('GoogleAuth', $api);
+    //FIN GoogleAuthentificator
 
     display();
 }

@@ -154,6 +154,9 @@ function wifi_login() {
     global $tpl;
     $redirect = $_GET['url'];
 
+    redirect("index", "login", array('redirect' => 'wifi/allow/url=' . urlencode($redirect)));
+    exit;
+
     if (isset($_POST['login'])) {
         $tpl->assign('hsuccess', login_user($_POST['login'], $_POST['password']));
     }

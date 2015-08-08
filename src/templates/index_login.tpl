@@ -22,6 +22,7 @@
      -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
      box-shadow: 0 1px 2px rgba(0,0,0,.05);">
   <form id="login" name="login" class="form-signin" onsubmit="return crytogun(this)" method="POST">
+    <input type="hidden" name="redirect" value="{if isset($smarty.request.redirect)}{$smarty.request.redirect}{else}index/index{/if}" />
     <center><h2 class="form-signin-heading">Identifiez-vous</h2></center>
     <table border="0" style="">
       <tbody><tr>
@@ -41,6 +42,7 @@
 {* Affichage mobile *}
 <div class="hidden-md hidden-lg container-fluid container">
   <form id="login-xs" name="login" class="form-signin form-horizontal" onsubmit="return crytogun(this)" method="POST">
+    <input type="hidden" name="redirect" value="{if isset($smarty.request.redirect)}{$smarty.request.redirect}{else}index/index{/if}" />
     <legend>Identifiez-vous</legend>
 
     <fieldset>
