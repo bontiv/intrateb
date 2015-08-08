@@ -71,5 +71,113 @@ function toyunda_add() {
         }
     }
 
+    //Récupération des langues
+    $lngs = new Modele('toyunda_langs');
+    $lngs->find();
+    $lngs->appendTemplate('langs');
+
+    //Récupération des types
+    $typs = new Modele('toyunda_types');
+    $typs->find();
+    $typs->appendTemplate('types');
+
     display();
+}
+
+function toyunda_admstatus() {
+    $mdl = new Modele('toyunda_status');
+    $mdl->find();
+    $mdl->appendTemplate('status');
+    display();
+}
+
+function toyunda_admaddstatus() {
+    global $tpl;
+
+    $mdl = new Modele('toyunda_status');
+    $tpl->assign('form', $mdl->edit());
+
+    if (isset($_POST['ts_name'])) {
+        if ($mdl->addFrom($_POST)) {
+            redirect("toyunda", "admstatus", array('hsuccess' => 1));
+        }
+        $tpl->assign('hsuccess', false);
+    }
+
+    display();
+}
+
+function toyunda_admdelstatus() {
+    $mdl = new Modele('toyunda_status');
+    $mdl->fetch($_GET['id']);
+    $mdl->delete();
+    redirect("toyunda", "admstatus", array('hsuccess' => 1));
+}
+
+function toyunda_admtypes() {
+    $mdl = new Modele('toyunda_types');
+    $mdl->find();
+    $mdl->appendTemplate('types');
+    display();
+}
+
+function toyunda_admaddtype() {
+    global $tpl;
+
+    $mdl = new Modele('toyunda_types');
+    $tpl->assign('form', $mdl->edit());
+
+    if (isset($_POST['tt_name'])) {
+        if ($mdl->addFrom($_POST)) {
+            redirect("toyunda", "admtypes", array('hsuccess' => 1));
+        }
+        $tpl->assign('hsuccess', false);
+    }
+
+    display();
+}
+
+function toyunda_admdeltype() {
+    $mdl = new Modele('toyunda_types');
+    $mdl->fetch($_GET['id']);
+    $mdl->delete();
+    redirect("toyunda", "admtypes", array('hsuccess' => 1));
+}
+
+function toyunda_admlangs() {
+    $mdl = new Modele('toyunda_langs');
+    $mdl->find();
+    $mdl->appendTemplate('langs');
+    display();
+}
+
+function toyunda_admaddlang() {
+    global $tpl;
+
+    $mdl = new Modele('toyunda_langs');
+    $tpl->assign('form', $mdl->edit(array(
+                'tl_code', 'tl_name'
+    )));
+
+    foreach (scandir('images/flags/png/') as $flag) {
+        if ($flag[0] != '.' && is_file('images/flags/png/' . $flag)) {
+            $tpl->append('flags', $flag);
+        }
+    }
+
+    if (isset($_POST['tl_name'])) {
+        if ($mdl->addFrom($_POST)) {
+            redirect("toyunda", "admlangs", array('hsuccess' => 1));
+        }
+        $tpl->assign('hsuccess', false);
+    }
+
+    display();
+}
+
+function toyunda_admdellang() {
+    $mdl = new Modele('toyunda_langs');
+    $mdl->fetch($_GET['id']);
+    $mdl->delete();
+    redirect("toyunda", "admlangs", array('hsuccess' => 1));
 }

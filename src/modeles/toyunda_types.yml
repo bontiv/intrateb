@@ -1,0 +1,11 @@
+name: toyunda_types
+key: tt_id
+fields:
+  tt_id:
+    type: auto_int
+  tt_code:
+    type: var
+    label: Code court (OP par exemple)
+  tt_name:
+      type: var
+      label: Nom

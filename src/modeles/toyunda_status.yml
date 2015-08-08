@@ -1,0 +1,14 @@
+name: toyunda_status
+key: ts_id
+fields:
+  ts_id:
+    type: auto_int
+  ts_name:
+    type: var
+    label: Nom du statut
+  ts_closed:
+    type: enum
+    label: Affichage en todo
+    items:
+      closed: Statut fermé (non mis en todo)
+      open: Statut ouvert (en liste todo)

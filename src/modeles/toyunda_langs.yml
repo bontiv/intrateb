@@ -1,0 +1,14 @@
+name: toyunda_langs
+key: tl_id
+fields:
+  tl_id:
+    type: auto_int
+  tl_code:
+    type: var
+    label: Code court (FR par exemple)
+  tl_name:
+      type: var
+      label: Nom de la langue
+  tl_flag:
+      type: var
+      label: Drapeau

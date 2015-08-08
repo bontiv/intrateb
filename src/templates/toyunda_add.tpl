@@ -7,13 +7,7 @@
   <li><a href="{mkurl action="toyunda" page="add"}" class="active">Ajout d'une demande</a></li>
 </ol>
 
-<ul class="nav nav-pills">
-  <li role="presentation"><a href="{mkurl action="toyunda" page="index"}">Liste des demandes</a></li>
-  <li role="presentation" class="active"><a href="{mkurl action="toyunda" page="add"}">Ajout d'une demande</a></li>
-  <li role="presentation" class="disabled"><a href="#">Liste complète</a></li>
-</ul>
-
-<br />
+{include "toyunda_menu.tpl"}
 
 {if isset($errmsg)}
     <div class="panel panel-danger">
@@ -65,8 +59,12 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="version">Version</label>
       <div class="col-md-4">
-        <input id="version" name="version" placeholder="" class="form-control input-md" type="text">
-        <span class="help-block">Version (OP / OST) - Optionnel</span>
+        <select class="form-control" name="version">
+          {foreach $types as $type}
+              <option value="{$type->tt_code}">{$type->tt_name}</option>
+          {/foreach}
+        </select>
+        <span class="help-block">Version</span>
       </div>
     </div>
 
@@ -74,18 +72,12 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="langue">Langue</label>
       <div class="col-md-4">
-        <label class="radio-inline" for="langue-0">
-          <input name="langue" id="langue-0" value="FR" checked="checked" type="radio">
-          <img src="images/flags/png/fr.png" alt="FR" />
-        </label>
-        <label class="radio-inline" for="langue-1">
-          <input name="langue" id="langue-1" value="ANG" type="radio">
-          <img src="images/flags/png/us.png" alt="ANG" />
-        </label>
-        <label class="radio-inline" for="langue-2">
-          <input name="langue" id="langue-2" value="JAP" type="radio">
-          <img src="images/flags/png/jp.png" alt="JAP" />
-        </label>
+        {foreach $langs as $lang}
+            <label class="radio-inline" for="langue-{$lang@index}">
+              <input name="langue" id="langue-{$lang@index}" value="{$lang->tl_code}" {if $lang@first}checked="checked"{/if} type="radio">
+              <img src="images/flags/png/{$lang->tl_flag}" alt="{$lang->tl_code}" />
+            </label>
+        {/foreach}
       </div>
     </div>
 
