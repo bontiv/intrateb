@@ -13,8 +13,26 @@
  * @global type $tpl
  */
 function index_index() {
-    global $tpl;
+    global $tpl, $pdo;
 
+    $nbEvents = $pdo->query("SELECT COUNT(*) FROM events WHERE event_start > NOW()")->fetch();
+    $tpl->assign('nbEvents', $nbEvents[0]);
+
+    if (hasAcl(ACL_USER)) {
+        $nbSQL = $pdo->prepare("SELECT COUNT(*) FROM card RIGHT JOIN mandate ON card_mandate = mandate_id AND mandate_end > NOW() WHERE card_user = ? AND card_status != 'NOPICTURE'");
+        $nbSQL->bindValue(1, $_SESSION['user']['user_id']);
+        $nbSQL->execute();
+        $nbCards = $nbSQL->fetch();
+        $tpl->assign('nbCards', $nbCards[0]);
+    }
+
+    $nbSQL = $pdo->prepare("SELECT COUNT(*) FROM ftp_users WHERE fu_member = ?");
+    $nbSQL->bindValue(1, $_SESSION['user']['user_id']);
+    $nbSQL->execute();
+    $nbFtp = $nbSQL->fetch();
+    $tpl->assign('nbFtp', $nbFtp[0]);
+
+    $tpl->assign('isMember', hasAcl(ACL_USER));
     $tpl->display('index.tpl');
     quit();
 }
