@@ -81,6 +81,12 @@ function toyunda_add() {
     $typs->find();
     $typs->appendTemplate('types');
 
+    //Récupération des types
+    $sttr = new Modele('toyunda_transition');
+    $sttr->find();
+    $sttr->appendTemplate('trans');
+
+
     display();
 }
 
@@ -180,4 +186,34 @@ function toyunda_admdellang() {
     $mdl->fetch($_GET['id']);
     $mdl->delete();
     redirect("toyunda", "admlangs", array('hsuccess' => 1));
+}
+
+function toyunda_admtrans() {
+    $mdl = new Modele('toyunda_transition');
+    $mdl->find();
+    $mdl->appendTemplate('trans');
+    display();
+}
+
+function toyunda_admaddtrans() {
+    global $tpl;
+
+    $mdl = new Modele('toyunda_transition');
+    $tpl->assign('form', $mdl->edit());
+
+    if (isset($_POST['tr_from'])) {
+        if ($mdl->addFrom($_POST)) {
+            redirect("toyunda", "admtrans", array('hsuccess' => 1));
+        }
+        $tpl->assign('hsuccess', false);
+    }
+
+    display();
+}
+
+function toyunda_admdeltrans() {
+    $mdl = new Modele('toyunda_transition');
+    $mdl->fetch($_GET['id']);
+    $mdl->delete();
+    redirect("toyunda", "admtrans", array('hsuccess' => 1));
 }

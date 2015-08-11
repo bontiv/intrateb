@@ -78,8 +78,23 @@
               <img src="images/flags/png/{$lang->tl_flag}" alt="{$lang->tl_code}" />
             </label>
         {/foreach}
+        <span class="help-block">Langue du titre</span>
       </div>
     </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="transition">Statut du titre</label>
+      <div class="col-md-4">
+        <select class="form-control" name="transition" id="transition">
+          {foreach $trans as $tr}
+              <option value="{$tr->tr_id}">{$tr->tr_to->ts_name}</option>
+          {/foreach}
+        </select>
+        <span class="help-block">Statut de base</span>
+      </div>
+    </div>
+
 
     <!-- Button -->
     <div class="form-group">

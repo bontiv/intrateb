@@ -11,6 +11,7 @@
       <li><a href="{mkurl action="toyunda" page="admstatus"}">Statuts</a></li>
       <li><a href="{mkurl action="toyunda" page="admtypes"}">Types</a></li>
       <li><a href="{mkurl action="toyunda" page="admlangs"}">Langues</a></li>
+      <li><a href="{mkurl action="toyunda" page="admtrans"}">Transitions</a></li>
     </ul>
   </li>
 
