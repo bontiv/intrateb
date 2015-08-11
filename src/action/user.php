@@ -495,7 +495,7 @@ function user_setcompta() {
     $mdlAcc = new Modele('user_accounts');
     $mdlAcc->fetch($_GET['account']);
 
-    if ($mdlAcc->raw_ua_user == $_SESSION['user']['user_id']) {
+    if ($mdlAcc->raw_ua_user == $usr->getKey()) {
         $usr->user_compta = $mdlAcc->getKey();
         redirect("user", "view", array('hsuccess' => 1, 'user' => $usr->getKey()));
     }
