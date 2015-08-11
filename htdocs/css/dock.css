@@ -18,6 +18,7 @@ Dock for Home
     display: inline-block;
     -webkit-perspective: 400;
     -moz-perspective: 400;
+    z-index: 999;
 }
 .dock .base {
     position: absolute;

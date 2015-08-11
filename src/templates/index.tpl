@@ -70,27 +70,29 @@
           </div>
       {/if}
 
-      <div class="col-md-6">
-        <div class="panel {if $isMember and $nbCards gt 0}panel-default{elseif $isMember}panel-marning{else}panel-danger{/if}">
-          <div class="panel-heading">
-            <h4>Adhésion EPITANIME</h4>
-          </div>
-          <div class="panel-body">
-            <ul style="list-style-type: square;">
-              <li><a href="{mkurl action="index" page="profile"}">Gestion du compte</a></li>
-            </ul>
-            {if $isMember}
-                {if $nbCards eq 0}
-                    <p>Vous n'avez pas encore fait votre carte de membre.</p>
+      {if isset($smarty.session.user) and $smarty.session.user}
+          <div class="col-md-6">
+            <div class="panel {if $isMember and $nbCards gt 0}panel-default{elseif $isMember}panel-marning{else}panel-danger{/if}">
+              <div class="panel-heading">
+                <h4>Adhésion EPITANIME</h4>
+              </div>
+              <div class="panel-body">
+                <ul style="list-style-type: square;">
+                  <li><a href="{mkurl action="index" page="profile"}">Gestion du compte</a></li>
+                </ul>
+                {if $isMember}
+                    {if $nbCards eq 0}
+                        <p>Vous n'avez pas encore fait votre carte de membre.</p>
+                    {else}
+                        <p>Vous êtes bien membre d'Epitanime. Votre dossier est à jour.</p>
+                    {/if}
                 {else}
-                    <p>Vous êtes bien membre d'Epitanime. Votre dossier est à jour.</p>
+                    <p>Vous n'êtes pas membre.</p>
                 {/if}
-            {else}
-                <p>Vous n'êtes pas membre.</p>
-            {/if}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+      {/if}
 
       {if $nbFtp gt 0}
           <div class="col-md-6">
