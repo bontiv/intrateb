@@ -28,7 +28,7 @@
               <td><img src="images/flags/png/{$st->tl_flag}" /></td>
               <td>{$st->tl_code}</td>
               <td>{$st->tl_name}</td>
-              <td><a href="{mkurl action="toyunda" page="admdeltype" id=$st->tl_id}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a></td>
+              <td><a href="{mkurl action="toyunda" page="admdellang" id=$st->tl_id}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a></td>
             </tr>
         {/foreach}
       </tbody>

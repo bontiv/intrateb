@@ -485,11 +485,10 @@ function user_addGroup() {
 
 function user_setcompta() {
     $usr = new Modele('users');
-    $usr->fetch($_SESSION['user']['user_id']);
+    $usr->fetch($_GET['user']);
 
     if ($_GET['account'] == 0) {
         $usr->user_compta = 0;
-        $_SESSION['user']['user_compta'] = 0;
         redirect("user", "view", array('hsuccess' => 1, 'user' => $usr->getKey()));
     }
 
@@ -498,7 +497,6 @@ function user_setcompta() {
 
     if ($mdlAcc->raw_ua_user == $_SESSION['user']['user_id']) {
         $usr->user_compta = $mdlAcc->getKey();
-        $_SESSION['user']['user_compta'] = $mdlAcc->getKey();
         redirect("user", "view", array('hsuccess' => 1, 'user' => $usr->getKey()));
     }
 
