@@ -45,6 +45,7 @@
               <li><a href="{mkurl action="toyunda"}">Liste en cours</a></li>
               <li><a href="{mkurl action="toyunda" page="todo"}">Participer aux times</a></li>
               <li><a href="{mkurl action="toyunda" page="add"}">Proposer un titre</a></li>
+              <li><a href="{mkurl action="karaoke" page="webplay"}">Tester Toyunda web Player</a></li>
             </ul>
           </div>
         </div>

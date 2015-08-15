@@ -37,3 +37,7 @@ function karaoke_play() {
     $tpl->assign('karaoke', $matches);
     display();
 }
+
+function karaoke_webplay() {
+    display();
+}
