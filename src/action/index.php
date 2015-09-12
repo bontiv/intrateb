@@ -225,8 +225,6 @@ function index_print() {
     if (!isset($_POST['subscription']))
         $_POST['subscription'] = 1;
 
-    ob_start();
-
     $mdt = new Modele('mandate');
     $mdt->fetch($_POST['mandate']);
     $sub = new Modele('subscription');
@@ -235,6 +233,12 @@ function index_print() {
     $usr->fetch($_SESSION['user']['user_id']);
     $sublist = new Modele('subscription');
     $sublist->find(array('subscription_mandate' => $mdt->mandate_id));
+
+    if (new DateTime($mdt->mandate_start) > new DateTime() || new DateTime($mdt->mandate_end) < new DateTime()) {
+        modexec('syscore', 'moderror');
+    }
+
+    ob_start();
 
     $pdf = new FPDF();
     $pdf->AddPage();

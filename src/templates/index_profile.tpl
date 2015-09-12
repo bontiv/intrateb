@@ -248,37 +248,42 @@
       Le montant de la cotisation est isncrit dans le règlement intérieur
       de l'association.
     </p>
-    <form target="_blank" class="form-horizontal" action="{mkurl action="index" page="print"}" method="POST">
 
-      <!-- List mandate -->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="mandate">Mandat</label>
-        <div class="col-md-5">
-          <select id="mandate" name="mandate" class="form-control input-md" onchange="updateSub()">
-            {foreach from=$mandate item="l"}
-                <option value="{$l.mandate_id}">{$l.mandate_label}</option>
-            {/foreach}
-          </select>
-        </div>
-      </div>
+    {if isset($mandate)}
+        <form target="_blank" class="form-horizontal" action="{mkurl action="index" page="print"}" method="POST">
 
-      <!-- List cotisation -->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="subscription">Type de cotisation</label>
-        <div class="col-md-5">
-          <select id="subscription" name="subscription" class="form-control input-md">
-          </select>
-        </div>
-      </div>
+          <!-- List mandate -->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="mandate">Mandat</label>
+            <div class="col-md-5">
+              <select id="mandate" name="mandate" class="form-control input-md" onchange="updateSub()">
+                {foreach from=$mandate item="l"}
+                    <option value="{$l.mandate_id}">{$l.mandate_label}</option>
+                {/foreach}
+              </select>
+            </div>
+          </div>
 
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="editpass"></label>
-        <div class="col-md-8">
+          <!-- List cotisation -->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="subscription">Type de cotisation</label>
+            <div class="col-md-5">
+              <select id="subscription" name="subscription" class="form-control input-md">
+              </select>
+            </div>
+          </div>
 
-          <input type="submit" class="btn btn-primary" value="Imprimer" />
-        </div>
-      </div>
-    </form>
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="editpass"></label>
+            <div class="col-md-8">
+
+              <input type="submit" class="btn btn-primary" value="Imprimer" />
+            </div>
+          </div>
+        </form>
+    {else}
+        <div class="alert alert-warning">Aucun mandat n'est actuellement actif.</div>
+    {/if}
   </div>
 
   <div class="pill-pane" id="2factors">
