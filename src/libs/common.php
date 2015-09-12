@@ -228,8 +228,8 @@ function redirect($action, $page = 'index', $options = null) {
     if (!CONSOLE) {
         $url = mkurl($action, $page, $options);
         header("Location: $url");
+        quit();
     }
-    quit();
 }
 
 /**

@@ -161,15 +161,17 @@ function ml_execUpdate() {
         }
 
         $reelMembers = $api->getGroupMembers($section->section_ml);
-        foreach ($reelMembers->members as $member) {
-            $key = array_keys($toAdd, strtolower($member->email));
-            if (strpos($member->email, 'save_') !== 0) { //Skip sauvegarde
-                if ($member->type == "GROUP") {
-                    continue;
-                } elseif (count($key) == 0) {
-                    $toDelete[] = strtolower($member->email);
-                } else {
-                    unset($toAdd[$key[0]]);
+        if (isset($reelMembers->members)) {
+            foreach ($reelMembers->members as $member) {
+                $key = array_keys($toAdd, strtolower($member->email));
+                if (strpos($member->email, 'save_') !== 0) { //Skip sauvegarde
+                    if ($member->type == "GROUP") {
+                        continue;
+                    } elseif (count($key) == 0) {
+                        $toDelete[] = strtolower($member->email);
+                    } else {
+                        unset($toAdd[$key[0]]);
+                    }
                 }
             }
         }
