@@ -36,15 +36,19 @@ function user_sync2() {
     require_once $srcdir . '/libs/GoogleApi.php';
 
     $api = new GoogleApi();
-    $members = $api->getGroupMembers($config['GoogleApps']['members_ml']);
     $Gregistred = array();
     $Sregistred = array();
+    $pageToken = null;
 
-    foreach ($members->members as $member) {
-        if (isset($member->email)) {
-            $Gregistred[] = strtolower($member->email);
+    do {
+        $members = $api->getGroupMembers($config['GoogleApps']['members_ml'], $pageToken);
+        foreach ($members->members as $member) {
+            if (isset($member->email)) {
+                $Gregistred[] = strtolower($member->email);
+            }
         }
-    }
+        $pageToken = isset($members->nextPageToken) ? $members->nextPageToken : null;
+    } while ($pageToken !== null);
 
     $mdl = new Modele('users');
     $mdl->find();
