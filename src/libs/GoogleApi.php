@@ -144,8 +144,11 @@ class GoogleApi {
         return $this->bearer;
     }
 
-    public function getGroupMembers($ml = 'membres@epitanime.com') {
-        $ch = curl_init('https://www.googleapis.com/admin/directory/v1/groups/' . $ml . '/members?maxResults=1000&access_token=' . $this->getTocken());
+    public function getGroupMembers($ml = 'membres@epitanime.com', $token = null) {
+        if ($token !== null) {
+            $token = '&pageToken=' . $token;
+        }
+        $ch = curl_init('https://www.googleapis.com/admin/directory/v1/groups/' . $ml . '/members?maxResults=100' . $token . '&access_token=' . $this->getTocken());
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $ret = curl_exec($ch);
         return json_decode($ret);
