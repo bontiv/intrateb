@@ -145,7 +145,7 @@ function index_create() {
  * @global type $tpl
  */
 function index_profile() {
-    global $tpl, $srcdir;
+    global $tpl, $srcdir, $pdo;
 
     $mdl = new Modele('users');
 
@@ -167,6 +167,13 @@ function index_profile() {
         while ($line = $mdt->next()) {
             $tpl->append('mandate', $line);
         }
+    }
+
+    $mdtu = $pdo->prepare('SELECT * FROM user_mandate LEFT JOIN mandate ON um_mandate = mandate_id WHERE um_user = ? ORDER BY `mandate_end` DESC');
+    $mdtu->bindValue(1, $_SESSION['user']['user_id']);
+    $mdtu->execute();
+    while ($line = $mdtu->fetch()) {
+        $tpl->append('usr_mandate', $line);
     }
 
     $_SESSION['random'] = md5(uniqid('epicenote'));

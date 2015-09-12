@@ -167,7 +167,7 @@
             <label class="col-md-4 control-label" for="mandate">Mandat</label>
             <div class="col-md-5">
               <select id="mandate" name="mandate" class="form-control input-md" onchange="updateSub()">
-                {foreach from=$mandate item="l"}
+                {foreach from=$usr_mandate item="l"}
                     <option value="{$l.mandate_id}">{$l.mandate_label}</option>
                 {/foreach}
               </select>

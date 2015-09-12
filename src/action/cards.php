@@ -5,6 +5,17 @@ function cards_makeme() {
 
     include_once $srcdir . DS . 'libs' . DS . 'barcode.php';
 
+    //Verif
+    $sql = $pdo->prepare('SELECT COUNT(*) FROM user_mandate WHERE um_user = ? AND um_mandate = ?');
+    $sql->bindValue(1, $_SESSION['user']['user_id']);
+    $sql->bindValue(2, $_POST['mandate']);
+    $sql->execute();
+    $TEST = $sql->fetch();
+    if ($TEST[0] == 0) {
+        modexec('syscore', 'moderror');
+        quit();
+    }
+
     $mdl = new Modele('card');
     $mdt = new Modele('mandate');
     $mdt->fetch($_POST['mandate']);
