@@ -571,7 +571,7 @@ class Modele {
         }
     }
 
-    function find($where = false) {
+    function find($where = false, $order = false) {
         global $pdo;
 
         $values = array();
@@ -599,6 +599,10 @@ class Modele {
             }
         } else {
             $sql .= ' ' . $where;
+        }
+
+        if ($order) {
+            $sql .= ' ORDER BY ' . $order;
         }
 
         $stmt = $pdo->prepare($sql);

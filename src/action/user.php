@@ -421,7 +421,7 @@ function user_check() {
     global $tpl;
 
     $mdt = new Modele('mandate');
-    $mdt->find();
+    $mdt->find(false, 'mandate_end DESC');
 
     $tpl->assign('mandates', array());
 
