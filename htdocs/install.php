@@ -11,17 +11,34 @@ define('DS', DIRECTORY_SEPARATOR);
 define('NPE_INDEX', true);
 
 //Variables par défaut
-$variables = array(
-    'dsn' => 'mysql:host=localhost;dbname=epicenote',
-    'db_user' => 'epicenote',
-    'db_pass' => 'epicenote',
-    'env' => 'def',
-    'urlbase' => 'index.php?',
-    'srcdir' => '..' . DIRECTORY_SEPARATOR . 'src',
-    'tmpdir' => '..' . DIRECTORY_SEPARATOR . 'tmp',
-    'admin_user' => null,
-    'admin_pass' => null,
-);
+
+if (file_exists(dirname(__FILE__) . '/bootstrap.php')) {
+    include_once dirname(__FILE__) . '/bootstrap.php';
+
+    $variables = array(
+        'dsn' => $dsn,
+        'db_user' => $db_user,
+        'db_pass' => $db_pass,
+        'env' => $env,
+        'urlbase' => $urlbase,
+        'srcdir' => $srcdir,
+        'tmpdir' => $tmpdir,
+        'admin_user' => null,
+        'admin_pass' => null,
+    );
+} else {
+    $variables = array(
+        'dsn' => 'mysql:host=localhost;dbname=epicenote',
+        'db_user' => 'epicenote',
+        'db_pass' => 'epicenote',
+        'env' => 'def',
+        'urlbase' => 'index.php?',
+        'srcdir' => '..' . DIRECTORY_SEPARATOR . 'src',
+        'tmpdir' => '..' . DIRECTORY_SEPARATOR . 'tmp',
+        'admin_user' => null,
+        'admin_pass' => null,
+    );
+}
 
 $defined = array();
 
@@ -477,10 +494,10 @@ function tpl_pge_dbsync() {
           <h3>Requêtes SQL à exécuter</h3>
           <p>Voilà le fichier SQL généré qui sera exécuté sur la base de donnée.</p>
           <p><pre>
-                                # ------------------------------------------------------------
-                                # Fichier SQL généré par le système d'installation automatique
-                                # @Copyright bonnetlive
-                                # ------------------------------------------------------------
+                                        # ------------------------------------------------------------
+                                        # Fichier SQL généré par le système d'installation automatique
+                                        # @Copyright bonnetlive
+                                        # ------------------------------------------------------------
 
             <?php
             echo "\n";
