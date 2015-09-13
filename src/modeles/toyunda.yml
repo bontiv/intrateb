@@ -1,2 +1,19 @@
-## YAML Template.
----
+name: toyunda
+key: toy_id
+fields:
+  toy_id:
+    type: auto_int
+  toy_title:
+    type: var
+  toy_serie:
+    type: var
+  toy_type:
+    type: external
+    table: toyunda_types
+    display: %tt_name%
+  toy_num:
+    type: int
+  toy_lang:
+    type: external
+    table: toyunda_langs
+    display: tl_name

@@ -37,6 +37,49 @@ function toyunda_index() {
     display();
 }
 
+function toyunda_add_v1($fields) {
+    if ($fields['version'] != '') {
+        $str = "$fields[langue] - $fields[serie] - $fields[version]$fields[number] - $fields[title]";
+    } elseif ($fields['serie']) {
+        $str = "$fields[langue] - $fields[serie] - $fields[title]";
+    } else {
+        $str = "$fields[langue] - $fields[title]";
+    }
+
+    $ci = curl_init($config['Zanark']['todolist'] . 'ajax.php?newTask');
+    curl_setopt($ci, CURLOPT_POST, true);
+    curl_setopt($ci, CURLOPT_POSTFIELDS, array(
+        "list" => "1",
+        "tag" => "",
+        "title" => $str,
+    ));
+    return (curl_exec($ci));
+}
+
+function toyunda_add_v2($fields) {
+    $mdl = new Modele('toyunda');
+
+    $ver = new Modele('toyunda_types');
+    $ver->find(array('tt_code' => $fields['version']));
+    $ver->next();
+
+    $lng = new Modele('toyunda_langs');
+    $lng->find(array('tl_code' => $fields['langue']));
+    $lng->next();
+
+    if (!$mdl->addFrom(array(
+                'toy_title' => $fields['title'],
+                'toy_serie' => $fields['serie'],
+                'toy_type' => $ver->getKey(),
+                'toy_num' => $fields['number'],
+                'toy_lang' => $lng->getKey(),
+            ))) {
+        return false;
+    }
+
+    return true;
+}
+
 function toyunda_add() {
     global $tpl, $config;
 
@@ -48,22 +91,8 @@ function toyunda_add() {
         } elseif ($_POST['version'] != "" && $_POST['serie'] == "") {
             $tpl->assign('errmsg', 'La version ne peut pas être spécifié sans la série.');
         } else {
-            if ($_POST['version'] != '') {
-                $str = "$_POST[langue] - $_POST[serie] - $_POST[version] - $_POST[title]";
-            } elseif ($_POST['serie']) {
-                $str = "$_POST[langue] - $_POST[serie] - $_POST[title]";
-            } else {
-                $str = "$_POST[langue] - $_POST[title]";
-            }
 
-            $ci = curl_init($config['Zanark']['todolist'] . 'ajax.php?newTask');
-            curl_setopt($ci, CURLOPT_POST, true);
-            curl_setopt($ci, CURLOPT_POSTFIELDS, array(
-                "list" => "1",
-                "tag" => "",
-                "title" => $str,
-            ));
-            if (curl_exec($ci)) {
+            if (toyunda_add_v1($_POST)) {
                 redirect('toyunda', 'index', array('hsuccess' => 1));
             } else {
                 $tpl->assign('errmsg', 'Erreur de communication.');
@@ -83,7 +112,7 @@ function toyunda_add() {
 
     //Récupération des types
     $sttr = new Modele('toyunda_transition');
-    $sttr->find();
+    $sttr->find(array('tr_first' => 'YES'));
     $sttr->appendTemplate('trans');
 
 
@@ -216,4 +245,8 @@ function toyunda_admdeltrans() {
     $mdl->fetch($_GET['id']);
     $mdl->delete();
     redirect("toyunda", "admtrans", array('hsuccess' => 1));
+}
+
+function toyunda_listall() {
+    display();
 }

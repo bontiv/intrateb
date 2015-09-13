@@ -68,6 +68,15 @@
       </div>
     </div>
 
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="number">Numéro de la version</label>
+      <div class="col-md-4">
+        <input type="number" min="0" id="number" class="form-control input-md" value="0" name="number" />
+        <span class="help-block">Numéro de la version (si plusieurs version) - Optionnel</span>
+      </div>
+    </div>
+
     <!-- Multiple Radios (inline) -->
     <div class="form-group">
       <label class="col-md-4 control-label" for="langue">Langue</label>
