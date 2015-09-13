@@ -19,6 +19,7 @@
       <div class="col-md-4">
         <select name="tl_flag" class="form-control" id="flag">
           {foreach $flags as $flag}
+              <option value="">No Flag</option>
               <option value="{$flag}">{$flag}</option>
           {/foreach}
         </select>

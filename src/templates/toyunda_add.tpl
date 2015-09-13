@@ -75,36 +75,36 @@
         {foreach $langs as $lang}
             <label class="radio-inline" for="langue-{$lang@index}">
               <input name="langue" id="langue-{$lang@index}" value="{$lang->tl_code}" {if $lang@first}checked="checked"{/if} type="radio">
-              <img src="images/flags/png/{$lang->tl_flag}" alt="{$lang->tl_code}" />
-            </label>
+            {if $lang->tl_flag != ""}<img src="images/flags/png/{$lang->tl_flag}" alt="{$lang->tl_code}" />{else}{$lang->tl_name}{/if}
+        </label>
+      {/foreach}
+      <span class="help-block">Langue du titre</span>
+    </div>
+  </div>
+
+  <!-- Text input-->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="transition">Statut du titre</label>
+    <div class="col-md-4">
+      <select class="form-control" name="transition" id="transition">
+        {foreach $trans as $tr}
+            <option value="{$tr->tr_id}">{$tr->tr_to->ts_name}</option>
         {/foreach}
-        <span class="help-block">Langue du titre</span>
-      </div>
+      </select>
+      <span class="help-block">Statut de base</span>
     </div>
+  </div>
 
-    <!-- Text input-->
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="transition">Statut du titre</label>
-      <div class="col-md-4">
-        <select class="form-control" name="transition" id="transition">
-          {foreach $trans as $tr}
-              <option value="{$tr->tr_id}">{$tr->tr_to->ts_name}</option>
-          {/foreach}
-        </select>
-        <span class="help-block">Statut de base</span>
-      </div>
+
+  <!-- Button -->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="singlebutton"></label>
+    <div class="col-md-4">
+      <button id="singlebutton" name="singlebutton" class="btn btn-primary">Valider</button>
     </div>
+  </div>
 
-
-    <!-- Button -->
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="singlebutton"></label>
-      <div class="col-md-4">
-        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Valider</button>
-      </div>
-    </div>
-
-  </fieldset>
+</fieldset>
 </form>
 
 {include "foot.tpl"}
