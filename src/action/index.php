@@ -232,7 +232,8 @@ function index_print() {
     $usr = new Modele('users');
     $usr->fetch($_SESSION['user']['user_id']);
     $sublist = new Modele('subscription');
-    $sublist->find(array('subscription_mandate' => $mdt->mandate_id));
+    //$sublist->find(array('subscription_mandate' => $mdt->mandate_id));
+    $sublist->find();
 
     if (new DateTime($mdt->mandate_start) > new DateTime() || new DateTime($mdt->mandate_end) < new DateTime()) {
         modexec('syscore', 'moderror');
