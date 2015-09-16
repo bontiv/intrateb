@@ -206,7 +206,8 @@ function index_profile() {
 
 function index_subscriptions() {
     $sub = new Modele('subscription');
-    if ($sub->find(array('subscription_mandate' => $_GET['mandate']))) {
+    if ($sub->find()) {
+        //if ($sub->find(array('subscription_mandate' => $_GET['mandate']))) {
         while ($line = $sub->next()) {
             echo '<option value="' . $line['subscription_id'] . '">' . $line['subscription_label'] . ' (montant ' . $line['subscription_price'] . ' €)</option>';
         }
