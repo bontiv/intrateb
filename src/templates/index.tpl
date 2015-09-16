@@ -73,7 +73,7 @@
 
       {if isset($smarty.session.user) and $smarty.session.user}
           <div class="col-md-6">
-            <div class="panel {if $isMember and $nbCards gt 0}panel-default{elseif $isMember}panel-marning{else}panel-danger{/if}">
+            <div class="panel {if $isMember and $nbCards gt 0}panel-default{elseif $isMember}panel-warning{else}panel-danger{/if}">
               <div class="panel-heading">
                 <h4>Adhésion EPITANIME</h4>
               </div>
@@ -97,7 +97,7 @@
 
       {if $nbFtp gt 0}
           <div class="col-md-6">
-            <div class="panel {if $isMember and $nbCards gt 0}panel-default{elseif $isMember}panel-marning{else}panel-danger{/if}">
+            <div class="panel panel-default">
               <div class="panel-heading">
                 <h4>Gestion FTP</h4>
               </div>
