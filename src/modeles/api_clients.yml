@@ -1,0 +1,18 @@
+## Table config
+name: api_clients
+key: ac_id
+fields:
+  ac_id:
+    type:auto_int
+  ac_name:
+    type: var
+  ac_client:
+    type: var
+  ac_secret:
+    type: var
+  ac_callback:
+    type: text
+  ac_owner:
+    type: external
+    table: users
+    display: %user_name%

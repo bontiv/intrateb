@@ -3,14 +3,13 @@
 /**
  * Fichier de chargement type. Il permet de charger un projet
  * en êtant le plus flexible possible.
- * 
+ *
  * Pour éviter d'avoir des problèmes lors des déploiement à partir du GIT,
  * toutes les variables ici-présente peuvent être redéfinies dans un fichier
  * boostrap.php dans ce même dossier.
- * 
+ *
  * @package FrameTool
  */
-
 /**
  * Annonce le démarrage du framework
  */
@@ -19,7 +18,6 @@ define('NPE_INDEX', true);
 /**
  * Liste des paramètres
  */
-
 // Chaine de connexion SQL
 $dsn = 'mysql:host=localhost;dbname=epicenote';
 
@@ -56,6 +54,6 @@ if (file_exists('bootstrap.php'))
 /*
  * Ensuite on lance le tout !
  */
+unset($page, $action);
 require_once $srcdir . DIRECTORY_SEPARATOR . 'loader.php';
-
 ?>

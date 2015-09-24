@@ -1,0 +1,40 @@
+## Table config
+name: api_tokens
+key: at_id
+fields:
+  at_id:
+    type: auto_int
+  at_user:
+    type: external
+    null: yes
+    default: NULL
+    table: users
+    display: %user_name%
+  at_client:
+    type: external
+    table: api_clients
+    display: %ac_name%
+  at_type:
+    type: enum
+    items:
+        AUTH: Authorization
+        ACCESS: Access
+        REFRESH: Refresh
+  at_uri:
+    type: var
+    size: 255
+  at_code:
+    type: var
+    size: 35
+  at_nonce:
+    type: var
+    size: 35
+  at_state:
+    type: var
+    size: 35
+  at_scope:
+    type: text
+  at_start:
+    type: int
+  at_expire:
+    type: int

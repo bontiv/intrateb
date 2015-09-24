@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Module système
  * Le module système est un module un peu requis qui va avec FrameTool. Il
@@ -15,12 +16,10 @@
  * @global type $tpl
  * @param type $page
  */
-function syscore_autoload($page)
-{
+function syscore_autoload($page) {
     global $tpl;
-    
-    switch ($page)
-    {
+
+    switch ($page) {
         case 'forbidden':
             $tpl->assign('msg', 'Vous n\'avez pas le niveau d\'accès nécessaire pour cette action.');
             break;
@@ -33,6 +32,9 @@ function syscore_autoload($page)
         case 'nopage':
             $tpl->assign('msg', 'Le module n\'a pas executer cette page.');
             break;
+        case 'custom':
+            $tpl->assign('msg', $_GET['error']);
+            break;
         default:
             $tpl->assign('msg', 'Erreur inconnu : ' . $page);
             break;
@@ -40,4 +42,5 @@ function syscore_autoload($page)
     $tpl->display('syscore_error.tpl');
     quit();
 }
+
 ?>

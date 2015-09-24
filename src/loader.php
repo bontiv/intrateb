@@ -88,19 +88,24 @@ while ($dat = $conf->fetch()) {
 //Etapes 2 à 4 seulement si HTTP
 if (!CONSOLE) {
 
-    // Etape 2, calcul du chemin d'execution
-    if (!isset($_REQUEST['action']))
-        redirect('index');
 
-    $action = null;
-    if (isset($_GET['action']))
-        $action = $_GET['action'];
-    $action = basename($action);
+    if (!isset($action)) {
+        // Etape 2, calcul du chemin d'execution
+        if (!isset($_REQUEST['action']))
+            redirect('index');
 
-    $page = 'index';
-    if (isset($_GET['page']))
-        $page = $_GET['page'];
-    $page = basename($page);
+        $action = null;
+        if (isset($_GET['action']))
+            $action = $_GET['action'];
+        $action = basename($action);
+    }
+
+    if (!isset($page)) {
+        $page = 'index';
+        if (isset($_GET['page']))
+            $page = $_GET['page'];
+        $page = basename($page);
+    }
 
     if (!file_exists($root . 'action' . DS . $action . '.php')) {
         $action = 'syscore';
