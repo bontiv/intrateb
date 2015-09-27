@@ -7,7 +7,7 @@
  */
 
 function _api_config() {
-    $baseAPI = "$_SERVER[REQUEST_SCHEME]://$_SERVER[HTTP_HOST]$_SERVER[SCRIPT_NAME]";
+    $baseAPI = "http://$_SERVER[HTTP_HOST]$_SERVER[SCRIPT_NAME]";
     return array(
         'issuer' => $baseAPI,
         'authorization_endpoint' => $baseAPI . '/authorize',
