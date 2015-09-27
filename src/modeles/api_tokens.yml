@@ -38,3 +38,18 @@ fields:
     type: int
   at_expire:
     type: int
+
+indexes:
+  idx_at_type:
+    type: index
+    fields: [at_type]
+  idx_at_user:
+    type: index
+    fields: [at_user]
+  idx_at_client:
+    type: index
+    fields: [at_client]
+  idx_at_code:
+    type: unique
+    fields: [at_code]
+

@@ -1,0 +1,6 @@
+name: api
+label: Configuration oAuth et OpenID
+fields:
+    rsakey:
+        type: text
+        label: Clé RSA privé

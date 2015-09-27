@@ -59,7 +59,7 @@ function api_config() {
 }
 
 function b64url2b64($base64url) {
-    // "Shouldn't" be necessary, but why not
+// "Shouldn't" be necessary, but why not
     $padding = strlen($base64url) % 4;
     if ($padding > 0) {
         $base64url .= str_repeat("=", 4 - $padding);
@@ -81,13 +81,13 @@ function base64url_encode($text) {
 
 function api_authorize() {
 
-    //response_type code uniquement
+//response_type code uniquement
     if ($_GET['response_type'] != 'code') {
         redirect('syscore', 'custom', array('error' => 'Type de reponse non supporté.'));
         return; //Force l'arrêt
     }
 
-    //Recherche du client
+//Recherche du client
     $cli = new Modele('api_clients');
     $cli->find(array('ac_client' => $_GET['client_id']));
     if (!$cli->next()) {
@@ -95,16 +95,19 @@ function api_authorize() {
         return; //Force l'arrêt
     }
 
-    //Verif callback client
+//Verif callback client
     $allowed_callbaks = explode("\n", $cli->ac_callback);
+    foreach ($allowed_callbaks as &$callback) {
+        $callback = trim($callback, " \t\n\r\0\x0B/");
+    }
     if (isset($_GET['redirect_uri']) && $_GET['redirect_uri'] == '' || !in_array($_GET['redirect_uri'], $allowed_callbaks)) {
-        redirect('syscore', 'custom', array('error' => 'Callback non enregistré.'));
+        redirect('syscore', 'custom', array('error' => 'Callback non enregistré:' . $_GET['redirect_uri']));
         return; //Force l'arrêt
     }
 
-    // FIXME : vérifier le scope.
-    // Pas login ? Go login.
-    if (!isset($_SESSION['user'])) {
+// FIXME : vérifier le scope.
+// Pas login ? Go login.
+    if (!isset($_SESSION['user']) || $_SESSION['user'] === false) {
         $options = http_build_query(array(
             'redirect_uri' => $_GET['redirect_uri'],
             'response_type' => $_GET['response_type'],
@@ -117,7 +120,6 @@ function api_authorize() {
         redirect("index", "login", array('redirect' => 'api/authorize/' . $options));
         return;
     }
-
     $token = array(
         'at_client' => $cli->getKey(),
         'at_type' => 'AUTH',
@@ -148,7 +150,31 @@ function api_authorize() {
         $answer['state'] = $token['at_state'];
     }
 
-    header('Location: ' . $_GET['redirect_uri'] . '?' . http_build_query($answer));
+    $url = parse_url($_GET['redirect_uri']);
+    $args = false;
+    $uri = "$url[scheme]://";
+
+    if (isset($url['query'])) {
+        parse_str($url['query'], $args);
+        $url['query'] = http_build_query(array_merge($args, $answer));
+    } else {
+        $url['query'] = http_build_query($answer);
+    }
+
+    if (isset($url['user'])) {
+        $uri .= urlencode($url['user']);
+        if (isset($url['pass'])) {
+            $uri .= ':' . urlencode($pass);
+        }
+        $uri .= '@';
+    }
+
+    $uri .= $url['host'] . $url['path'] . '?' . $url['query'];
+    if (isset($url['fragment'])) {
+        $uri .= '#' . $url['fragment'];
+    }
+
+    header('Location: ' . $uri);
     quit();
 }
 
@@ -161,11 +187,11 @@ function _api_error($id = 1000, $desc = 'Une erreur est survenue') {
 }
 
 function _api_sign($payload) {
-    global $srcdir;
+    global $srcdir, $config;
 
     $sign = '';
 
-    $key = openssl_pkey_get_private(file_get_contents($srcdir . '/kee.pem'));
+    $key = openssl_pkey_get_private($config['api']['rsakey']);
     $hash = defined("OPENSSL_ALGO_SHA256") ? OPENSSL_ALGO_SHA256 : "sha256";
     openssl_sign($payload, $sign, $key, $hash);
 
@@ -195,8 +221,11 @@ function api_token() {
 
     //Verif callback client
     $allowed_callbaks = explode("\n", $cli->ac_callback);
+    foreach ($allowed_callbaks as &$callback) {
+        $callback = trim($callback, " \t\n\r\0\x0B/");
+    }
     if ($_REQUEST['redirect_uri'] == '' || !in_array($_REQUEST['redirect_uri'], $allowed_callbaks)) {
-        return _api_error('invalid_request_uri', 'Callback not registred'); //Force l'arrêt
+        return _api_error('invalid_request_uri', 'Callback not registred 1 :' . $_REQUEST['redirect_uri']); //Force l'arrêt
     }
 
     //Recherche du token
@@ -267,9 +296,25 @@ function api_token() {
 }
 
 function api_jwks() {
-    global $srcdir;
+    global $srcdir, $config, $pdo;
 
-    $pub = openssl_pkey_get_private(file_get_contents($srcdir . '/kee.pem'));
+    if (!isset($config['api']['rsakey']) || $config['api']['rsakey'] == '') {
+        $key = openssl_pkey_new(array(
+            'private_key_bits' => 512,
+            'encrypt_key' => false,
+        ));
+        $update = isset($config['api']['rsakey']);
+        openssl_pkey_export($key, $config['api']['rsakey']);
+        if ($update) {
+            $sql = $pdo->prepare('UPDATE config SET value = ? WHERE name = \'api!!rsakey\'');
+        } else {
+            $sql = $pdo->prepare('INSERT INTO config (value, name, env) VALUES (?, \'api!!rsakey\', \'def\')');
+        }
+        $sql->bindValue(1, $config['api']['rsakey']);
+        $sql->execute();
+    }
+
+    $pub = openssl_pkey_get_private($config['api']['rsakey']);
     $ext = openssl_pkey_get_details($pub);
 
     $jwks = array(
@@ -319,7 +364,19 @@ function api_userinfo() {
         'phone_number' => $usr->user_phone,
         'phone_number_verified' => false,
         'acl' => $usr->raw_user_role,
+        'groups' => array(),
     );
+
+    $sections = new Modele('user_sections');
+    $sections->find(array('us_user' => $usr->getKey()));
+
+    while ($sections->next()) {
+        $infos['groups'][] = array(
+            'gid' => $sections->us_section->section_id,
+            'name' => $sections->us_section->section_name,
+            'role' => $sections->raw_us_type,
+        );
+    }
 
     echo json_encode($infos);
     quit();

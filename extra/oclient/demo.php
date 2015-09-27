@@ -21,3 +21,5 @@ echo 'Prénom: ' . $oidc->requestUserInfo('given_name') . "\n";
 echo 'Email: ' . $oidc->requestUserInfo('email') . "\n";
 
 echo 'Epitanime ACL: ' . $oidc->requestUserInfo('acl') . "\n";
+
+var_dump($oidc->requestUserInfo('groups'));
