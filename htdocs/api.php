@@ -13,7 +13,6 @@ if (file_exists('bootstrap.php')) {
 }
 
 $action = 'api';
-$urlbase = dirname($_SERVER['SCRIPT_NAME']) . '/' . $urlbase;
 
 //Auto config
 if ($_SERVER['PATH_INFO'] == '/.well-known/openid-configuration') {

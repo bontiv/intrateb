@@ -28,6 +28,7 @@ $root = dirname(__FILE__) . DS;
 CONSOLE || session_start();
 
 $tmpdir .= DS;
+$urlbase = dirname($_SERVER['SCRIPT_NAME']) . '/' . $urlbase;
 
 /**
  * Chargmenet des bibliothèques nécessaire au fonctionnement
