@@ -16,3 +16,21 @@ fields:
     type: external
     table: users
     display: %user_name%
+  ac_active:
+    type: enum
+    display: Actif
+    default: WAITING
+    items:
+      VALID: Autorisé
+      REFUSED: Refusé
+      WAITING: Attente
+  ac_apikey:
+    type: text
+    display: Clé RSA
+  ac_trust:
+    type: enum
+    display: Confiance
+    default: PUBLIC
+    items:
+      CONFIDENTIAL: Absolue
+      PUBLIC: Modéré
