@@ -15,7 +15,7 @@
     <script src="js/datetime-picker.min.js"></script>
     <!-- /Scripts -->
 
-    <title>Intranet EPITANIME</title>
+    <title>Intranet LATEB</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
@@ -31,7 +31,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{mkurl action="index"}">Intra EPITANIME</a>
+          <a class="navbar-brand" href="{mkurl action="index"}">Intra LATEB</a>
         </div>
 
 
@@ -44,7 +44,6 @@
               <a href="#" data-toggle="dropdown" class="dropdown-toggle">Outils
                 <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="{mkurl action="karaoke" page="play"}">Karaoke Play</a></li>
                 <li><a href="{mkurl action="ftp" page="index"}">Comptes FTP</a></li>
                 <li><a href="{mkurl action="toyunda" page="index"}">Toyunda</a></li>
                 <li><a href="{mkurl action="developer" page="index"}">Développeurs</a></li>
