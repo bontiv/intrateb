@@ -49,19 +49,19 @@
 </form>
 
 <h1>Utilisateurs</h1>
-<h2>{$user.user_name}</h2>
+<h2>{$user.user_name|escape}</h2>
 
 <div class="row">
 
   <div class="col-lg-6">
-    <p><strong>Nom : </strong>{$user.user_lastname}<br/>
-      <strong>Prenom : </strong>{$user.user_firstname}<br/>
+    <p><strong>Nom : </strong>{$user.user_lastname|escape}<br/>
+      <strong>Prenom : </strong>{$user.user_firstname|escape}<br/>
       <strong>ID : </strong>{$user.user_id}<br/>
       <strong>Ecole : </strong>{$user.ut_name}<br/>
       <strong>Promotion : </strong>{$user.user_promo}<br/>
       <strong>Login IONIS : </strong>{$user.user_login}<br/>
-      <strong>email : </strong><a href="mailto:{$user.user_email}">{$user.user_email}</a><br/>
-      <strong>Téléphone : </strong><a href="tel:{$user.user_phone}">{$user.user_phone}</a><br/>
+      <strong>email : </strong><a href="mailto:{$user.user_email|escape:'url'}">{$user.user_email|escape}</a><br/>
+      <strong>Téléphone : </strong><a href="tel:{$user.user_phone|escape:'url'}">{$user.user_phone|escape}</a><br/>
       <strong>Accès : </strong>{$user.user_role}</p>
 
     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#passwordRecover">

@@ -7,9 +7,9 @@
                         alert('Les mots de passe ne sont pas identiques.')
                         return false
   {rdelim}
-          form.elements.oldpass.value = My_Crypt(My_Crypt("{$smarty.session.user.user_name}:" + form.elements.oldpass.value) + "{$random}")
+          form.elements.oldpass.value = My_Crypt(My_Crypt("{$smarty.session.user.user_name|escape:'javascript'}:" + form.elements.oldpass.value) + "{$random}")
           form.elements.pwd2.value = ''
-          form.elements.pwd1.value = My_Crypt("{$smarty.session.user.user_name}:" + form.elements.pwd1.value)
+          form.elements.pwd1.value = My_Crypt("{$smarty.session.user.user_name|escape:'javascript'}:" + form.elements.pwd1.value)
           return true
   {rdelim}
 

@@ -39,7 +39,7 @@
               </td>
               <td>{if $line.section_ml}<a href="mailto:{$line.section_ml}">{$line.section_ml}</a>{/if}</td>
               <td>{$line.section_type}</td>
-              <td>{$line.user_name}</td>
+              <td>{$line.user_name|escape}</td>
               <td>
                 <div class="btn-group">
                   {acl level="ADMINISTRATOR"}<a href="{mkurl action="section" page="delete" section=$line.section_id}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a>{/acl}

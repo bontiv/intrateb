@@ -36,9 +36,9 @@
       <tbody>
         {foreach $staffs as $staff}
             <tr>
-              <td>{$staff.user_name}</td>
-              <td>{$staff.user_lastname}</td>
-              <td>{$staff.user_firstname}</td>
+              <td>{$staff.user_name|escape}</td>
+              <td>{$staff.user_lastname|escape}</td>
+              <td>{$staff.user_firstname|escape}</td>
               <td>
                 <select class="input-md form-control" name="staff-{$staff.user_id}-period">
                   {foreach $periods[$staff.user_type] as $period}

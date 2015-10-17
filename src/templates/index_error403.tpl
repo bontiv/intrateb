@@ -13,12 +13,12 @@
     {if isset($smarty.session.user) && $smarty.session.user != false}
         <p>
           Il semblerait que vous soyez déjà connecté. Si vous n'êtes pas
-          {$smarty.session.user.user_name}, alors déconnectez-vous puis
+          {$smarty.session.user.user_name|escape}, alors déconnectez-vous puis
           connectez-vous avec votre compte personnel pour tenter d'accéder
           à cette ressource.
         </p>
         <p>
-          Si vous êtes bien {$smarty.session.user.user_name}, alors vous
+          Si vous êtes bien {$smarty.session.user.user_name|escape}, alors vous
           n'avez pas le droit d'accéder à cette ressource. Vous pouvez
           tenter d'envoyer un email au bureau pour que vous droits
           d'accès soient redéfinis : <a href="mailto:bureau@epitanime.com?subject=Accès Intra&body=Pouvez-vous vérifier mes accès sur l'intra...">bureau@epitanime.com</a>.

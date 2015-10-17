@@ -82,7 +82,7 @@
               </td>
               <td>
                 {if $member.user}
-                    <a href="{mkurl action="user" page="view" user=$member.user.user_id}">{$member.user.user_name}</a>
+                    <a href="{mkurl action="user" page="view" user=$member.user.user_id}">{$member.user.user_name|escape}</a>
                 {else}
                     <div class="text-muted">N/A</div>
                 {/if}

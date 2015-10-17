@@ -91,7 +91,7 @@
             {if $_user}
                 <li class="dropdown">
                   <a href="#" data-toggle="dropdown" role="menu" style="color:grey">
-                    {$_user.user_name} <b class="caret"></b></a>
+                    {$_user.user_name|escape} <b class="caret"></b></a>
                   <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                     <li><a href="{mkurl action="index" page="logout"}">Déconnexion</a></li>
                     <li><a href="{mkurl action="index" page="profile"}">Mon profil</a></li>

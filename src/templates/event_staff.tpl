@@ -101,7 +101,7 @@
   <tbody>
     {foreach from=$users item="line"}
         <tr>
-          <td><a href="{mkurl action="user" page="view" user=$line.user_id}">{$line.user_name}</a></td>
+          <td><a href="{mkurl action="user" page="view" user=$line.user_id}">{$line.user_name|escape}</a></td>
           <td>{if $line.us_type=="user"}<span class="label label-success">Staff</span>{elseif $line.us_type=="manager"}<span class="label label-primary">Manager</span>{else}<span class="label label-default">Guest</span>{/if}</td>
           <td>{if $line.est_status=="OK"}<span class="label label-success">Accepté</span>{elseif $line.est_status=="NO"}<span class="label label-danger">Refusé</span>{else}<span class="label label-default">Candidat</span>{/if}</td>
           <td>{$line.user_login}</td>

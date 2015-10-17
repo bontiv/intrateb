@@ -24,7 +24,7 @@
               <tr>
                 <td>{$line.wtg_roll}</td>
                 <td>{$line.wt_token}</td>
-                <td><a href="{mkurl action="user" page="view" user=$line.user_id}">{$line.user_name}</a></td>
+                <td><a href="{mkurl action="user" page="view" user=$line.user_id}">{$line.user_name|escape}</a></td>
                 <td>{$line.wt_date}</td>
               </tr>
           {/foreach}

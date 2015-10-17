@@ -36,7 +36,7 @@
             {/if}
           </td>
           <td>{$cli->ac_client}</td>
-          <td><a href="{mkurl action=user page=view user=$cli->ac_owner->user_id}">{$cli->ac_owner->user_name}</a></td>
+          <td><a href="{mkurl action=user page=view user=$cli->ac_owner->user_id}">{$cli->ac_owner->user_name|escape}</a></td>
         </tr>
     {/foreach}
   </tbody>

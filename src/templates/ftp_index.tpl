@@ -24,7 +24,7 @@
                 <div id="{$account.fu_id}-pass" style="display:none;">{$account.fu_pass}</div>
                 <div id="{$account.fu_id}-label">********* <a href="#" onclick="show({$account.fu_id})"><i class="glyphicon glyphicon-user"></i><span class="hide">Voir</span></a></div>
               </td>
-              <td><a href="{mkurl action="user" page="view" user=$account.user_id}">{$account.user_name}</a></td>
+              <td><a href="{mkurl action="user" page="view" user=$account.user_id}">{$account.user_name|escape}</a></td>
               <td><a href="{mkurl action="section" page="details" section=$account.section_id}">{$account.section_name}</a></td>
               <td>{$account.fu_path}</td>
               <td>

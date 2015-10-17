@@ -61,7 +61,7 @@
               </td>
               <td>
                 {if $member.user}
-                    <a href="{mkurl action="user" page="view" user=$member.user.user_id}">{$member.user.user_name}</a>
+                    <a href="{mkurl action="user" page="view" user=$member.user.user_id}">{$member.user.user_name|escape}</a>
                 {elseif $member.obj->type == "GROUP"}
                     <div class="label label-info">Groupe</div>
                 {else}

@@ -22,21 +22,21 @@
   <tbody>
     {foreach from=$managers item="line"}
         <tr>
-          <td><a href="{mkurl action="user" page="view" user=$line.user_id}">{$line.user_name}</a></td>
+          <td><a href="{mkurl action="user" page="view" user=$line.user_id}">{$line.user_name|escape}</a></td>
           <td><span class="label label-primary">Manager</span></td>
           <td>{$line.user_login}</td>
-          <td><a href="mailto:{$line.user_email}">{$line.user_email}</a></td>
-          <td><a href="tel:{$line.user_phone}">{$line.user_phone}</a></td>
+          <td><a href="mailto:{$line.user_email|escape:'url'}">{$line.user_email|escape}</a></td>
+          <td><a href="tel:{$line.user_phone|escape:'url'}">{$line.user_phone|escape}</a></td>
           <td><a href="{mkurl action="section" page="accept" user=$line.user_id section=$section->section_id}" class="btn btn-warning"><span class="glyphicon-thumbs-down glyphicon"></span></td>
         </tr>
     {/foreach}
     {foreach from=$users item="line"}
         <tr>
-          <td>{$line.user_name}</td>
+          <td>{$line.user_name|escape}</td>
           <td><span class="label label-success">Staff</span></td>
-          <td>{$line.user_login}</td>
-          <td><a href="mailto:{$line.user_email}">{$line.user_email}</a></td>
-          <td><a href="tel:{$line.user_phone}">{$line.user_phone}</a></td>
+          <td>{$line.user_login|escape}</td>
+          <td><a href="mailto:{$line.user_email|escape:'url'}">{$line.user_email|escape}</a></td>
+          <td><a href="tel:{$line.user_phone|escape:'url'}">{$line.user_phone|escape}</a></td>
           <td>
             <div class="btn-group">
               <a href="{mkurl action="section" page="reject" user=$line.user_id section=$section->section_id}" class="btn btn-danger"><span class="glyphicon-remove glyphicon"></span></a>
@@ -47,11 +47,11 @@
     {/foreach}
     {foreach from=$guests item="line"}
         <tr>
-          <td>{$line.user_name}</td>
+          <td>{$line.user_name|escape}</td>
           <td><span class="label label-default">En attente</span></td>
-          <td>{$line.user_login}</td>
-          <td><a href="mailto:{$line.user_email}">{$line.user_email}</a></td>
-          <td><a href="tel:{$line.user_phone}">{$line.user_phone}</a></td>
+          <td>{$line.user_login|escape}</td>
+          <td><a href="mailto:{$line.user_email|escape:'url'}">{$line.user_email|escape}</a></td>
+          <td><a href="tel:{$line.user_phone|escape:'url'}">{$line.user_phone|escape}</a></td>
           <td>
             <div class="btn-group">
               <a href="{mkurl action="section" page="reject" user=$line.user_id section=$section->section_id}" class="btn btn-danger"><span class="glyphicon-remove glyphicon"></span></a>

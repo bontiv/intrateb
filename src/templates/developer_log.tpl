@@ -28,7 +28,7 @@
                 <div class="label label-default">Expiré</div>
             {/if}
           </td>
-          <td><a href="{mkurl action=user page=view user=$log.user_id}">{$log.user_name}</a></td>
+          <td><a href="{mkurl action=user page=view user=$log.user_id}">{$log.user_name|escape}</a></td>
           <td><a href="{mkurl action=developer page=view appli=$log.ac_id}">{$log.ac_name}</a></td>
           <td><a href="{$log.at_uri}">{$log.at_uri}</a></td>
           <td>{$log.at_scope}</td>

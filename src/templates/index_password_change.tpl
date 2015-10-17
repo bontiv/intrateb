@@ -8,7 +8,7 @@
                         return false
   {rdelim}
           form.elements.pwd2.value = ''
-          form.elements.pwd1.value = My_Crypt("{$user->user_name}:" + form.elements.pwd1.value)
+          form.elements.pwd1.value = My_Crypt("{$user->user_name|escape:'javascript'}:" + form.elements.pwd1.value)
           return true
   {rdelim}
 </script>

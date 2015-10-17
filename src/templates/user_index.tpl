@@ -117,20 +117,20 @@
       {foreach from=$ptable.rows item="line"}
           <tr>
             <td>
-              <a href="{mkurl action="user" page="view" user=$line.user_id}">{$line.user_name}</a>
+              <a href="{mkurl action="user" page="view" user=$line.user_id}">{$line.user_name|escape}</a>
               {if $line.user_role=='USER'}<span class="label label-default">Membre</span>{/if}
               {if $line.user_role=='ADMINISTRATOR'}<span class="label label-primary">Admin</span>{/if}
             </td>
-            <td>{$line.user_lastname}</td>
-            <td>{$line.user_firstname}</td>
-            <td><a href="tel:{$line.user_phone}">{$line.user_phone}</a></td>
+            <td>{$line.user_lastname|escape}</td>
+            <td>{$line.user_firstname|escape}</td>
+            <td><a href="tel:{$line.user_phone|escape:'url'}">{$line.user_phone|escape}</a></td>
             <td>
-              <a class="email-field" href="mailto:{$line.user_email}">{$line.user_email}</a>
+              <a class="email-field" href="mailto:{$line.user_email|escape:'url'}">{$line.user_email|escape}</a>
               <script type="text/javascript">
                   addAddress('{$line.user_email}');
               </script>
             </td>
-            <td><a href="https://intra.epitech.eu/user/{$line.user_login}/">{$line.user_login}</a></td>
+            <td><a href="https://intra.epitech.eu/user/{$line.user_login|escape:'url'}/">{$line.user_login|escape}</a></td>
             <td>
               <div class="btn-group">
                 <a href="{mkurl action="user" page="delete" user=$line.user_id}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a>

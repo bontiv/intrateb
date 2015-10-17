@@ -14,7 +14,7 @@
   <strong>Verrouillage des inscriptions :</strong> {$event.event_lock}<br/>
   <strong>Première étape de notation :</strong> {$event.event_note1}<br/>
   <strong>Deuxième étape de notation :</strong> {$event.event_note2}<br/>
-  <strong>Créateur de l'événement :</strong> <a href="{mkurl action="user" page="view" user=$event.user_id}">{$event.user_name}</a><br/>
+  <strong>Créateur de l'événement :</strong> <a href="{mkurl action="user" page="view" user=$event.user_id}">{$event.user_name|escape}</a><br/>
   <strong>Evénement de la section :</strong> <a href="{mkurl action="section" page="details" section=$event.section_id}">{$event.section_name}</a><br/>
   <strong>Coef de l'évent :</strong> {$event.event_coef}<br/>
 </p>

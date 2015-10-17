@@ -68,9 +68,9 @@
       <tbody>
         {foreach $staffs as $staff}
             <tr>
-              <td>{$staff->mark_user->user_name}</td>
-              <td>{$staff->mark_user->user_lastname}</td>
-              <td>{$staff->mark_user->user_firstname}</td>
+              <td>{$staff->mark_user->user_name|escape}</td>
+              <td>{$staff->mark_user->user_lastname|escape}</td>
+              <td>{$staff->mark_user->user_firstname|escape}</td>
               <td>{$staff->mark_period->period_label}</td>
               <td>{$staff->mark_mark}</td>
             </tr>
