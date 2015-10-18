@@ -21,7 +21,7 @@
           Si vous êtes bien {$smarty.session.user.user_name|escape}, alors vous
           n'avez pas le droit d'accéder à cette ressource. Vous pouvez
           tenter d'envoyer un email au bureau pour que vous droits
-          d'accès soient redéfinis : <a href="mailto:bureau@epitanime.com?subject=Accès Intra&body=Pouvez-vous vérifier mes accès sur l'intra...">bureau@epitanime.com</a>.
+          d'accès soient redéfinis : <a href="mailto:contact@lateb.eu?subject=Accès Intra&body=Pouvez-vous vérifier mes accès sur l'intra...">contact@lateb.eu</a>.
         </p>
     {else}
         <p>

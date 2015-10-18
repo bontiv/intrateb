@@ -44,8 +44,6 @@
               <a href="#" data-toggle="dropdown" class="dropdown-toggle">Outils
                 <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="{mkurl action="ftp" page="index"}">Comptes FTP</a></li>
-                <li><a href="{mkurl action="toyunda" page="index"}">Toyunda</a></li>
                 <li><a href="{mkurl action="developer" page="index"}">Développeurs</a></li>
               </ul>
             </li>
@@ -94,8 +92,8 @@
                   <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                     <li><a href="{mkurl action="index" page="logout"}">Déconnexion</a></li>
                     <li><a href="{mkurl action="index" page="profile"}">Mon profil</a></li>
-                    <li><a href="{mkurl action="compta"}">Ma compta</a></li>
-                  </ul>
+<!--                     <li><a href="{mkurl action="compta"}">Ma compta</a></li>
+ -->                  </ul>
                 </li>
             {else}
                 <li>

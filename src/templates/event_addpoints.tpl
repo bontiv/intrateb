@@ -29,7 +29,7 @@
           <th>Nom</th>
           <th>Prénom</th>
           <th>Période</th>
-          <th>Ingorer</th>
+          <th>Ignorer</th>
           <th>Note (sur 20)</th>
         </tr>
       </thead>

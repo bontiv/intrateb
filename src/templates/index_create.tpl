@@ -41,7 +41,10 @@
         <input class="form-control" type="password" name="user_pass" />
       </div>
       <br/>
-      <input class="form-control" type="password" name="confirmPassword" placeholder="Confirmez le mot de passe" />
+      <div class="input-group">
+        <span class="input-group-addon">Confirmation</span>
+        <input class="form-control" type="password" name="confirmPassword" placeholder="Confirmez le mot de passe" />
+      </div>
       <br/>
     </div>
 
@@ -72,11 +75,11 @@
       <br/>
     </div>
     <div class="col-lg-4">
-      <div class="btn btn-default btn-disable">
-        Captcha <br/>
+<!--       <div class="btn btn-default btn-disable">
+        Captcha <br/> -->
         <!-- Captcha ICI !!! -->
-      </div>
-      <br/><br/>
+<!--       </div>
+      <br/><br/> -->
       <div>
         <input type="submit" name="Inscription" class="btn btn-success" />
       </div>
