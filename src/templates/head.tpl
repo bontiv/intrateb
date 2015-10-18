@@ -7,6 +7,9 @@
     <link href="css/bootstrap-select.css" rel="stylesheet">
     <link href="css/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
     <!-- /Css -->
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+    <!-- /Favicon -->
     <!-- Scripts -->
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
