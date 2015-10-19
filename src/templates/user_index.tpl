@@ -134,8 +134,8 @@
             <td>
               <div class="btn-group">
                 <a href="{mkurl action="user" page="delete" user=$line.user_id}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
-                <a href="{mkurl action="user" page="edit" user=$line.user_id}" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
-                {if $line.user_role=='GUEST'}<a href="#" class="btn btn-info" data-toggle="modal" data-target="#addMember"><i class="glyphicon glyphicon-heart"></i></a>{/if}
+<!--                 <a href="{mkurl action="user" page="edit" user=$line.user_id}" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
+                {if $line.user_role=='GUEST'}<a href="#" class="btn btn-info" data-toggle="modal" data-target="#addMember"><i class="glyphicon glyphicon-heart"></i></a>{/if} -->
               </div>
             </td>
           </tr>
