@@ -75,6 +75,7 @@
                   {acl action="ecole"}
                 <li><a href="{mkurl action="ecole"}">Ecoles</a></li>
                   {/acl}
+                <li><a href="{mkurl action="mandate"}">Mandats</a></li>
                 <li><a href="{mkurl action="admin_note"}">Notation</a></li>
                 <li><a href="{mkurl action="ml"}">Mailling list</a></li>
                 <li><a href="{mkurl action="admin_modeles"}">Instances de donnée</a></li>
