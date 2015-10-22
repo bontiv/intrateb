@@ -1,57 +1,5 @@
 {include "head.tpl"}
 
-{* BLOCK : Modal ajout membre *}
-<!-- <div class="modal fade" id="addMember" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Passer en membre</h4>
-      </div>
-      <div class="modal-body">
-        Vous allez passer <span id="member_firstname"></span> membre de l'association sur
-        le mandat :
-
-        <form class="form-horizontal" action="{mkurl action="user" page="checkone"}" method="POST">
-
-          <fieldset>
-
-            <!--  Select Basic -->
-          <!--   <div class="form-group">
-              <label class="col-md-4 control-label" for="mandate">Mandat</label>
-              <div class="col-md-4">
-                <select id="mandate" name="mandate" class="form-control">
-                  {foreach from=$mandates item="m"}
-                      <option {if isset($smarty.post.mandate)&&$smarty.post.mandate==$m.mandate_id}selected{/if} value="{$m.mandate_id}">{$m.mandate_label}</option>
-                  {/foreach}
-                </select>
-              </div>
-            </div> -->
-
-            <!-- Text input-->
-            <!-- <div class="form-group">
-              <label class="col-md-4 control-label" for="idfiche">Fiche</label>
-              <div class="col-md-4">
-                <input id="idUser" name="idUser" placeholder="Numéro de fiche" class="form-control input-md" required="" type="text">
-                <span class="help-block">Le numéro de la fiche figure en haut à droite ou le code barre en haut à gauche.</span>
-              </div>
-            </div>
-
-          </fieldset>
-
-        </form>
-
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btn-primary" id="send" name="send">Valider</button>
-      </div>
-    </div>
-  </div>
-</div> -->
-{* END BLOCK : Modal ajout membre *}
-
 {* BLOCK : Modal google *}
 <div class="modal fade" id="googleCopy" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -73,7 +21,6 @@
 {* END BLOCK : Modal google *}
 
 <script type="text/javascript">
-  var url = "{mkurl action="user" page="addmember"}";
   {literal}
       var clipboard = '';
 
@@ -94,26 +41,6 @@
           $('#googleCopyText').get(0).focus();
           $('#googleCopyText').get(0).select();
       }
-
-      $(function() {
-        $("[name='addMember']").click(function (event) {
-          var user_id = $(this).data('userid');
-          $.ajax({
-              type: "POST",
-              url: url,
-              data: {
-                'iduser' : user_id
-              },
-              dataType: "text",
-              beforeSend: function(xhr) {
-                  xhr.setRequestHeader("Ajax-Request", "true");
-              },
-              success: function(response) {
-                  location.reload();
-              }
-          });
-        });
-      });
 
   {/literal}
 </script>
@@ -185,7 +112,7 @@
               <div class="btn-group">
                 <a href="{mkurl action="user" page="delete" user=$line.user_id}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
                 <a href="{mkurl action="user" page="edit" user=$line.user_id}" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
-                {if $line.user_role=='GUEST'}<a href="#" class="btn btn-info"  name="addMember" data-userId="{$line.user_id}" data-userFirstname="{$line.user_firstname}"><i class="glyphicon glyphicon-heart"></i></a>{/if}
+                {if $line.user_role=='GUEST'}<a href="{mkurl action="user" page="addmember" user=$line.user_id}" class="btn btn-info"><i class="glyphicon glyphicon-heart"></i></a>{/if}
               </div>
             </td>
           </tr>

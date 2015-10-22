@@ -191,6 +191,7 @@ function user_index() {
 
 	$pager->run($tpl);
 
+	error_log("DISPLAY USER INDEX");
 	$tpl->display('user_index.tpl');
 	quit();
 }
@@ -431,9 +432,11 @@ function user_addmember() {
 
 	$last_mandate = $mdt->next();
 
-	if (isset($_POST['iduser'])) {
-		user_add_mandate($_POST['iduser'], $last_mandate["mandate_id"]);
+	if (isset($_GET['user'])) {
+		$tpl->assign('hsuccess', user_add_mandate($_GET['user'], $last_mandate["mandate_id"]));
 	}
+
+	user_index();
 }
 
 function user_check() {
