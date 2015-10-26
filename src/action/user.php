@@ -191,7 +191,6 @@ function user_index() {
 
 	$pager->run($tpl);
 
-	error_log("DISPLAY USER INDEX");
 	$tpl->display('user_index.tpl');
 	quit();
 }
