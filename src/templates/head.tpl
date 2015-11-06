@@ -43,6 +43,7 @@
             {acl action="section"}
             <li><a href="{mkurl action="section"}">Sections</a></li>
               {/acl}
+              {acl action="admin"}
             <li class="dropdown">
               <a href="#" data-toggle="dropdown" class="dropdown-toggle">Outils
                 <b class="caret"></b></a>
@@ -50,6 +51,7 @@
                 <li><a href="{mkurl action="developer" page="index"}">Développeurs</a></li>
               </ul>
             </li>
+            {/acl}
             {acl action="event"}
             <li><a href="{mkurl action="event"}">Events</a></li>
               {/acl}
