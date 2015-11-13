@@ -51,7 +51,7 @@
   <li class="active"><a href="#edit" role="tablist" data-toggle="pill">Profile</a></li>
   <li class=""><a href="#password" role="tablist" data-toggle="pill">Mot de passe</a></li>
   <li class=""><a href="#card" role="tablist" data-toggle="pill">Carte de membre</a></li>
-  <li class=""><a href="#print" role="tablist" data-toggle="pill">Fiche de membre</a></li>
+<!--   <li class=""><a href="#print" role="tablist" data-toggle="pill">Fiche de membre</a></li> -->
   <li class=""><a href="#2factors" role="tablist" data-toggle="pill">Google Authenticator</a></li>
 </ul>
 
@@ -236,7 +236,7 @@
     {/if}
   </div>
 
-  <div class="pill-pane" id="print">
+<!--   <div class="pill-pane" id="print">
     <h2>Création de la fiche de membre</h2>
     <p>
       La fiche de membre vous permet de valider votre adhésion à Epitanime.
@@ -250,10 +250,10 @@
     </p>
 
     {if isset($mandate)}
-        <form target="_blank" class="form-horizontal" action="{mkurl action="index" page="print"}" method="POST">
+        <form target="_blank" class="form-horizontal" action="{mkurl action="index" page="print"}" method="POST"> -->
 
           <!-- List mandate -->
-          <div class="form-group">
+<!--           <div class="form-group">
             <label class="col-md-4 control-label" for="mandate">Mandat</label>
             <div class="col-md-5">
               <select id="mandate" name="mandate" class="form-control input-md" onchange="updateSub()">
@@ -262,10 +262,10 @@
                 {/foreach}
               </select>
             </div>
-          </div>
+          </div> -->
 
           <!-- List cotisation -->
-          <div class="form-group">
+    <!--       <div class="form-group">
             <label class="col-md-4 control-label" for="subscription">Type de cotisation</label>
             <div class="col-md-5">
               <select id="subscription" name="subscription" class="form-control input-md">
@@ -284,7 +284,7 @@
     {else}
         <div class="alert alert-warning">Aucun mandat n'est actuellement actif.</div>
     {/if}
-  </div>
+  </div> -->
 
   <div class="pill-pane" id="2factors">
 

@@ -1,29 +1,5 @@
 {include "head.tpl"}
 
-{* BLOCK : Modal ajout membre *}
-<div class="modal fade" id="addMember" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Passer en membre</h4>
-      </div>
-      <div class="modal-body">
-        Vous allez passer <span id="member_firstname"></span> membre de l'association sur
-        le mandat :
-
-        Passez par le bouton de validation. J'ai la flème pour cet écran.
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btn-primary">Valider</button>
-      </div>
-    </div>
-  </div>
-</div>
-{* END BLOCK : Modal ajout membre *}
-
 {* BLOCK : Modal google *}
 <div class="modal fade" id="googleCopy" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -65,6 +41,7 @@
           $('#googleCopyText').get(0).focus();
           $('#googleCopyText').get(0).select();
       }
+
   {/literal}
 </script>
 
@@ -134,8 +111,8 @@
             <td>
               <div class="btn-group">
                 <a href="{mkurl action="user" page="delete" user=$line.user_id}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
-                <a href="{mkurl action="user" page="edit" user=$line.user_id}" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
-                {if $line.user_role=='GUEST'}<a href="#" class="btn btn-info" data-toggle="modal" data-target="#addMember"><i class="glyphicon glyphicon-heart"></i></a>{/if}
+                <a href="{mkurl action="admin_modeles" page="modinst" modele=users key=$line.user_id}" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
+                {if $line.user_role=='GUEST'}<a href="{mkurl action="user" page="addmember" user=$line.user_id}" class="btn btn-info"><i class="glyphicon glyphicon-heart"></i></a>{/if}
               </div>
             </td>
           </tr>

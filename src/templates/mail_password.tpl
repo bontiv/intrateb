@@ -6,4 +6,4 @@
   <a href="{$url}">{$url}</a>
 </p>
 <p>Cordialement,<br>
-  L'équipe EPITANIME</p>
+  L'équipe LATEB</p>

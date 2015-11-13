@@ -1,6 +1,6 @@
 {include "head.tpl"}
 
-{* Lib pour le Dock *}
+<!-- {* Lib pour le Dock *}
 <script type="text/javascript" src="js/dock.js"></script>
 
 <div class="dock-container hidden-xs">
@@ -21,11 +21,11 @@
     </ul>
     <div class="base"></div>
   </div>
-</div>
+</div> -->
 
 <ul class="nav nav-pills" role="pilllist">
   <li role="presentation" class="active"><a role="pill" data-toggle="pill" aria-controls="dashboard" href="#dashboard">Accueil</a></li>
-  <li role="presentation"><a role="pill" data-toggle="pill" aria-controls="markfaq" href="#markfaq">FAQ Notation</a></li>
+<!--   <li role="presentation"><a role="pill" data-toggle="pill" aria-controls="markfaq" href="#markfaq">FAQ Notation</a></li> -->
 </ul>
 
 <br />
@@ -35,7 +35,20 @@
   <div id="dashboard" role="pillpanel" class="pill-pane active in fade">
     <div class="row">
 
-      <div class="col-md-6">
+    {if $nbEvents eq 0 and (!isset($smarty.session.user) or !$smarty.session.user) and $nbFtp eq 0}
+    	<div>
+        	<div class="panel panel-default">
+                <div class="panel-heading">
+            		<h4>Bienvenue chez </h4>
+          		</div>
+          		<div class="panel-body">
+          			<img src="images/logotxt.png">
+          		</div>
+          	</div>
+        </div>
+    {/if}
+
+<!--       <div class="col-md-6">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4>Karaoke</h4>
@@ -49,7 +62,7 @@
             </ul>
           </div>
         </div>
-      </div>
+      </div> -->
 
       {if $nbEvents gt 0}
           <div class="col-md-6">
@@ -75,7 +88,7 @@
           <div class="col-md-6">
             <div class="panel {if $isMember and $nbCards gt 0}panel-default{elseif $isMember}panel-warning{else}panel-danger{/if}">
               <div class="panel-heading">
-                <h4>Adhésion EPITANIME</h4>
+                <h4>Adhésion LATEB</h4>
               </div>
               <div class="panel-body">
                 <ul style="list-style-type: square;">
@@ -85,7 +98,7 @@
                     {if $nbCards eq 0}
                         <p>Vous n'avez pas encore fait votre carte de membre.</p>
                     {else}
-                        <p>Vous êtes bien membre d'Epitanime. Votre dossier est à jour.</p>
+                        <p>Vous êtes bien membre de LATEB. Votre dossier est à jour.</p>
                     {/if}
                 {else}
                     <p>Vous n'êtes pas membre.</p>
@@ -114,7 +127,7 @@
     </div>
   </div>
 
-  <div id="markfaq" role="pillpanel" class="pill-pane fade">
+<!--   <div id="markfaq" role="pillpanel" class="pill-pane fade">
 
     <h1>La notation</h1>
     <hr/>
@@ -152,7 +165,7 @@
       travail que vous avez effectué. Si vous avez passé toute la durée de l'activité
       à regarder les autres travailler, vous aurez peu de change d'avoir une bonne
       note.</p>
-  </div>
+  </div> -->
 </div>
 
 {include "foot.tpl"}

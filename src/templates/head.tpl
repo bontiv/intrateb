@@ -7,6 +7,9 @@
     <link href="css/bootstrap-select.css" rel="stylesheet">
     <link href="css/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
     <!-- /Css -->
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+    <!-- /Favicon -->
     <!-- Scripts -->
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
@@ -40,15 +43,15 @@
             {acl action="section"}
             <li><a href="{mkurl action="section"}">Sections</a></li>
               {/acl}
+              {acl action="admin"}
             <li class="dropdown">
               <a href="#" data-toggle="dropdown" class="dropdown-toggle">Outils
                 <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="{mkurl action="ftp" page="index"}">Comptes FTP</a></li>
-                <li><a href="{mkurl action="toyunda" page="index"}">Toyunda</a></li>
                 <li><a href="{mkurl action="developer" page="index"}">Développeurs</a></li>
               </ul>
             </li>
+            {/acl}
             {acl action="event"}
             <li><a href="{mkurl action="event"}">Events</a></li>
               {/acl}
@@ -74,6 +77,7 @@
                   {acl action="ecole"}
                 <li><a href="{mkurl action="ecole"}">Ecoles</a></li>
                   {/acl}
+                <li><a href="{mkurl action="mandate"}">Mandats</a></li>
                 <li><a href="{mkurl action="admin_note"}">Notation</a></li>
                 <li><a href="{mkurl action="ml"}">Mailling list</a></li>
                 <li><a href="{mkurl action="admin_modeles"}">Instances de donnée</a></li>
@@ -94,8 +98,8 @@
                   <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                     <li><a href="{mkurl action="index" page="logout"}">Déconnexion</a></li>
                     <li><a href="{mkurl action="index" page="profile"}">Mon profil</a></li>
-                    <li><a href="{mkurl action="compta"}">Ma compta</a></li>
-                  </ul>
+<!--                     <li><a href="{mkurl action="compta"}">Ma compta</a></li>
+ -->                  </ul>
                 </li>
             {else}
                 <li>
