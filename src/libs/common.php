@@ -48,7 +48,9 @@ function aclFromText($txt) {
         return ACL_USER;
     if ($txt == "SUPERUSER")
         return ACL_SUPERUSER;
-    return ACL_ADMINISTRATOR;
+    if ($txt == "ADMINISTRATOR")
+        return ACL_ADMINISTRATOR;
+    throw new Exception("ACL not valid: " . $txt);
 }
 
 /**
