@@ -52,8 +52,14 @@ fields:
     type: enum
     label: Sexe
     items:
+      LITTLEBOY: petit garçon
+      LITTLEGIRL: petite fille
       GIRL: fille
-      MAN: garçon
+      BOY: garçon
+      MAN: homme
+      WOMAN: femme
+      OTHER: autre
+      NONE: non renseigné
   user_born:
     type: date
     label: date de naissance
