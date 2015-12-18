@@ -1,34 +1,54 @@
 <?php
 
-global $srcdir;
-require_once $srcdir . '/libs/GoogleApi.php';
+// global $srcdir;
+// require_once $srcdir . '/libs/GoogleApi.php';
 
 function ml_index() {
     global $tpl, $pdo, $config;
 
-    $api = new GoogleApi();
-    $rlst = $api->getGroupsList();
+    // $api = new GoogleApi();
+    // $rlst = $api->getGroupsList();
 
-    $sql = $pdo->query('SELECT * FROM sections WHERE section_ml != ""');
-    $sections = array();
-    while ($s = $sql->fetch()) {
-        $sections[$s['section_ml']] = $s;
+
+
+
+    // $sql = $pdo->query('SELECT * FROM section_ml LEFT JOIN sections ON section_id = sm_section');
+    // $managed = array();
+    // while ($m = $sql->fetch()) {
+    //     $managed[$m['sm_ml']][] = $m;
+    // }
+    //
+    // foreach ($rlst->groups as $group) {
+    //     $tpl->append('groups', array(
+    //         'obj' => $group,
+    //         'isSection' => isset($sections[$group->email]) ? $sections[$group->email] : false,
+    //         'isMembersList' => $group->email == $config['GoogleApps']['members_ml'],
+    //         'isManaged' => isset($managed[$group->id]) ? $managed[$group->id] : false,
+    //     ));
+    // }
+    display();
+    //$tpl->display('mail_send.tpl');
+}
+
+function ml_send() {
+    global $tpl, $pdo;
+
+    $tpl->assign("title", $_POST['title']);
+    $tpl->assign("content", $_POST['content']);
+    $sql = $pdo->query('SELECT * FROM users WHERE user_name != "admin"');
+    $users = array();
+    while ($s = $sql->fetch(PDO::FETCH_OBJ)) {
+        $users[] = $s;
+        $tpl->assign('user', $s);
+        $mail = getMailer();
+        $mail->AddAddress($s->user_email);
+        $mail->Subject = '[intra LATEB] '.$_POST['title'];
+        $mail->Body = $tpl->fetch('mail_send.tpl');
+        $tpl->assign('msuccess', $mail->Send());
+        //var_dump($mail->ErrorInfo);
     }
 
-    $sql = $pdo->query('SELECT * FROM section_ml LEFT JOIN sections ON section_id = sm_section');
-    $managed = array();
-    while ($m = $sql->fetch()) {
-        $managed[$m['sm_ml']][] = $m;
-    }
-
-    foreach ($rlst->groups as $group) {
-        $tpl->append('groups', array(
-            'obj' => $group,
-            'isSection' => isset($sections[$group->email]) ? $sections[$group->email] : false,
-            'isMembersList' => $group->email == $config['GoogleApps']['members_ml'],
-            'isManaged' => isset($managed[$group->id]) ? $managed[$group->id] : false,
-        ));
-    }
+    //var_dump($users);
     display();
 }
 

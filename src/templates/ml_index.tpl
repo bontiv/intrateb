@@ -1,55 +1,39 @@
 {include "head.tpl"}
 
-<h2>Gestion des groupes de diffusion</h2>
+<form class="form-horizontal" method="POST" action="{mkurl action="ml" page="send"}" id="sendform">
+  <fieldset>
 
-<p>
-  <a href="{mkurl action="ml" page="autoUpdate"}" class="btn btn-warning">MAJ Auto</a>
-</p>
+    <!-- Form Name -->
+    <legend>Envoi de mail à la mailling list</legend>
 
-{if isset($groups)}
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Nom</th>
-          <th>Email</th>
-          <th>Section</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        {foreach $groups as $group}
-            <tr>
-              <td>
-                {if $group.isMembersList}
-                    <div class="label label-default">G.D. Membres</div>
-                {elseif $group.isSection}
-                    <div class="label label-primary">Section</div>
-                {elseif $group.isManaged}
-                    <div class="label label-info">Géré</div>
-                {elseif $group.obj->directMembersCount == 1}
-                    <div class="label label-warning">Alias</div>
-                {/if}
+    <!-- Title input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="pwd1">Titre</label>
+      <div class="col-md-5">
+        <input id="title" name="title" placeholder="Title" class="form-control input-md" required="" type="text">
 
-                <a href="{mkurl action="ml" page="view" ml=$group.obj->id}">{$group.obj->name}</a></td>
-              <td>{$group.obj->email}</td>
-              <td>
-                {if $group.isSection}
-                    <a class="text-info" style="font-style: italic; font-size: 0.8em" href="{mkurl action="section" page="details" section=$group.isSection.section_id}">{$group.isSection.section_name}</a>
-                {/if}
-                {if $group.isManaged}
-                    {foreach $group.isManaged as $section}
-                        <a class="text-primary" href="{mkurl action="section" page="details" section=$section.section_id}">{$section.section_name}</a>
-                    {/foreach}
-                {/if}
-              </td>
-              <td>{$group.obj->description}</td>
-            </tr>
-        {/foreach}
-      </tbody>
-    </table>
-{else}
-    <div class="panel panel-body panel-warning">
-      <p>Aucun groupe détecté.</p>
+      </div>
     </div>
-{/if}
+
+    <!-- Message input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="pwd2">Message</label>
+      <div class="col-md-5">
+        <textarea id="content" name="content" class="form-control input-md" required="" form="sendform">
+        </textarea>
+      </div>
+    </div>
+
+    <!-- Button (Double) -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="send"></label>
+      <div class="col-md-8">
+        <button id="send" name="send" class="btn btn-success">Valider</button>
+      </div>
+    </div>
+
+  </fieldset>
+</form>
+
+
 {include "foot.tpl"}
