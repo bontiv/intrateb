@@ -29,9 +29,11 @@ fields:
   user_login:
     type: var
     label: Login IONIS (étudiant seulement)
+    null: true
   user_promo:
     type: int
     label: Promotion (étudiant seulement)
+    null: true
   user_email:
     type: var
     size: 100
@@ -39,17 +41,22 @@ fields:
   user_phone:
     type: tel
     label: Numéro de téléphone
+    null: true
   user_address:
     type: text
     label: Adresse postale
+    null: true
   user_cp:
     type: int
     label: Code postal
+    null: true
   user_town:
     type: var
     label: Ville
+    null: true
   user_sexe:
     type: enum
+    default: NONE
     label: Sexe
     items:
       LITTLEBOY: petit garçon
@@ -63,6 +70,7 @@ fields:
   user_born:
     type: date
     label: date de naissance
+    null: true
   user_photo:
     type: var
     size: 200
