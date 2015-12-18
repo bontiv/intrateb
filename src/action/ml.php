@@ -37,6 +37,7 @@ function ml_send() {
     $tpl->assign("content", $_POST['content']);
     $sql = $pdo->query('SELECT * FROM users WHERE user_name != "admin"');
     $users = array();
+    $valid = array();
     while ($s = $sql->fetch(PDO::FETCH_OBJ)) {
         $users[] = $s;
         $tpl->assign('user', $s);
@@ -44,10 +45,11 @@ function ml_send() {
         $mail->AddAddress($s->user_email);
         $mail->Subject = '[intra LATEB] '.$_POST['title'];
         $mail->Body = $tpl->fetch('mail_send.tpl');
-        $tpl->assign('msuccess', $mail->Send());
+        $valid[] = $mail->Send();
         //var_dump($mail->ErrorInfo);
     }
 
+    $tpl->assign('hsuccess', count(array_keys($valid, false)) == 0);
     //var_dump($users);
     display();
 }
