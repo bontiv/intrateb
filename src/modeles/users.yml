@@ -102,7 +102,12 @@ fields:
       readonly: true
       visible: admin
       default: ""
-
+  user_newsletter:
+      type: enum
+      default: SUBSCRIBED
+      items:
+          SUBSCRIBED: Inscrit à la newsletter
+          UNSUBSRIBED: Non inscrit à la newsletter
 indexes:
   user_name:
     type: unique

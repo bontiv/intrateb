@@ -6,6 +6,12 @@
 function ml_index() {
     global $tpl, $pdo, $config;
 
+    $groups = array(
+        "'GUEST'"=> array("value" => "Nouvel inscrit", "checked" => ""),
+        "'USER'" => array("value" => "Utilisateur validé (ayant payé leur inscription)", "checked" => "checked"),
+        "'SUPERUSER'" => array("value" => "Utilisateur acrédité", "checked" => "checked"),
+        "'ADMINISTRATOR'" => array("value" => "Administrateur", "checked" => "checked"));
+    $tpl->assign("group_list", $groups);
     // $api = new GoogleApi();
     // $rlst = $api->getGroupsList();
 
@@ -35,7 +41,11 @@ function ml_send() {
 
     $tpl->assign("title", $_POST['title']);
     $tpl->assign("content", $_POST['content']);
-    $sql = $pdo->query('SELECT * FROM users WHERE user_name != "admin"');
+    //var_dump($_POST["group"]);
+    $group = implode(",", $_POST["group"]);
+    $query = 'SELECT * FROM users WHERE user_name != "admin" and user_newsletter = "SUBSCRIBED" and user_role in ('.$group.')';
+    //var_dump($query);
+    $sql = $pdo->query($query);
     $users = array();
     $valid = array();
     while ($s = $sql->fetch(PDO::FETCH_OBJ)) {

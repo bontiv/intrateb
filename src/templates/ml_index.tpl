@@ -8,6 +8,17 @@
 
     <!-- Title input-->
     <div class="form-group">
+      <label class="col-md-4 control-label" for="pwd1">Groupes à envoyer</label>
+      <div class="col-md-5">
+          {foreach from=$group_list key=key item=i}
+              <input type="checkbox" name="group[]" value="{$key}" {$i.checked}>{$i.value}</option>
+          {/foreach}
+
+      </div>
+    </div>
+
+    <!-- Title input-->
+    <div class="form-group">
       <label class="col-md-4 control-label" for="pwd1">Titre</label>
       <div class="col-md-5">
         <input id="title" name="title" placeholder="Title" class="form-control input-md" required="" type="text">
