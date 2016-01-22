@@ -166,7 +166,7 @@ if (isset($_GET['etape']) && $_GET['etape'] == 'dbsync') {
         $pdo->beginTransaction();
         foreach ($sql_queries as $sql)
             if ($pdo->exec($sql) === false)
-                $valid[] = false;
+                $valid['installed_base'] = false;
 
         // Ajout du compte admin
         $sql = $pdo->prepare('SELECT * FROM users WHERE user_name = ?');
@@ -183,18 +183,20 @@ if (isset($_GET['etape']) && $_GET['etape'] == 'dbsync') {
             $sql->bindValue(7, 'root@localhost');
             $sql->bindValue(8, '0000000000');
             $sql->bindValue(9, 'ADMINISTRATOR');
-            if (!$sql->execute())
-                $valid[] = false;
+            if ($sql->execute() === false) {
+                echo '<div class="alert alert-warning"><h4>Erreur SQL</h4><p>Impossible de creer l\'admin.</p><p>' . nl2br(var_dump($sql->errorInfo())) . '</p><p>'.var_dump($valid).'</p></div>';
+                $valid['installed_admin'] = false;
+            }
         }
         // TODO : il y a surement d'autres choses à faire mais bon...
         if ($pdo->commit() === false)
-            $valid[] = false;
+            $valid['commit'] = false;
         if (count(array_keys($valid, false)) == 0)
             $_SESSION['installed'] = true;
     }
 }
 
-// installation BDD
+// Ecriture de la configuration
 if (isset($_GET['etape']) && $_GET['etape'] == 'configwrite') {
     $configwrite = '<?php
 
@@ -403,7 +405,7 @@ function tpl_pge_dbsync() {
     <h2><?php echo $titles['dbsync']; ?></h2>
     <?php
     if (count(array_keys($valid, false))) {
-        echo '<div class="alert alert-warning"><h4>Erreur SQL</h4><p>Une erreur d\'exécution SQL s\'est produite.</p><p>' . nl2br(print_r($pdo->errorInfo(), true)) . '</p></div>';
+        echo '<div class="alert alert-warning"><h4>Erreur SQL</h4><p>Une erreur d\'exécution SQL s\'est produite.</p><p>' . nl2br(var_dump($pdo->errorInfo())) . '</p><p>'.var_dump($valid).'</p></div>';
     }
     ?>
     <form role="form" method="POST" action="install.php?etape=dbsync">

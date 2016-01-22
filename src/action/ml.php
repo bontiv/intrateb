@@ -1,34 +1,66 @@
 <?php
 
-global $srcdir;
-require_once $srcdir . '/libs/GoogleApi.php';
+// global $srcdir;
+// require_once $srcdir . '/libs/GoogleApi.php';
 
 function ml_index() {
     global $tpl, $pdo, $config;
 
-    $api = new GoogleApi();
-    $rlst = $api->getGroupsList();
+    $groups = array(
+        "'GUEST'"=> array("value" => "Nouvel inscrit", "checked" => ""),
+        "'USER'" => array("value" => "Utilisateur validé (ayant payé leur inscription)", "checked" => "checked"),
+        "'SUPERUSER'" => array("value" => "Utilisateur acrédité", "checked" => "checked"),
+        "'ADMINISTRATOR'" => array("value" => "Administrateur", "checked" => "checked"));
+    $tpl->assign("group_list", $groups);
+    // $api = new GoogleApi();
+    // $rlst = $api->getGroupsList();
 
-    $sql = $pdo->query('SELECT * FROM sections WHERE section_ml != ""');
-    $sections = array();
-    while ($s = $sql->fetch()) {
-        $sections[$s['section_ml']] = $s;
+
+
+
+    // $sql = $pdo->query('SELECT * FROM section_ml LEFT JOIN sections ON section_id = sm_section');
+    // $managed = array();
+    // while ($m = $sql->fetch()) {
+    //     $managed[$m['sm_ml']][] = $m;
+    // }
+    //
+    // foreach ($rlst->groups as $group) {
+    //     $tpl->append('groups', array(
+    //         'obj' => $group,
+    //         'isSection' => isset($sections[$group->email]) ? $sections[$group->email] : false,
+    //         'isMembersList' => $group->email == $config['GoogleApps']['members_ml'],
+    //         'isManaged' => isset($managed[$group->id]) ? $managed[$group->id] : false,
+    //     ));
+    // }
+    display();
+    //$tpl->display('mail_send.tpl');
+}
+
+function ml_send() {
+    global $tpl, $pdo;
+
+    $tpl->assign("title", $_POST['title']);
+    $tpl->assign("content", $_POST['content']);
+    //var_dump($_POST["group"]);
+    $group = implode(",", $_POST["group"]);
+    $query = 'SELECT * FROM users WHERE user_name != "admin" and user_newsletter = "SUBSCRIBED" and user_role in ('.$group.')';
+    //var_dump($query);
+    $sql = $pdo->query($query);
+    $users = array();
+    $valid = array();
+    while ($s = $sql->fetch(PDO::FETCH_OBJ)) {
+        $users[] = $s;
+        $tpl->assign('user', $s);
+        $mail = getMailer();
+        $mail->AddAddress($s->user_email);
+        $mail->Subject = '[intra LATEB] '.$_POST['title'];
+        $mail->Body = $tpl->fetch('mail_send.tpl');
+        $valid[] = $mail->Send();
+        //var_dump($mail->ErrorInfo);
     }
 
-    $sql = $pdo->query('SELECT * FROM section_ml LEFT JOIN sections ON section_id = sm_section');
-    $managed = array();
-    while ($m = $sql->fetch()) {
-        $managed[$m['sm_ml']][] = $m;
-    }
-
-    foreach ($rlst->groups as $group) {
-        $tpl->append('groups', array(
-            'obj' => $group,
-            'isSection' => isset($sections[$group->email]) ? $sections[$group->email] : false,
-            'isMembersList' => $group->email == $config['GoogleApps']['members_ml'],
-            'isManaged' => isset($managed[$group->id]) ? $managed[$group->id] : false,
-        ));
-    }
+    $tpl->assign('hsuccess', count(array_keys($valid, false)) == 0);
+    //var_dump($users);
     display();
 }
 
