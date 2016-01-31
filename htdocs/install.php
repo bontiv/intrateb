@@ -88,6 +88,7 @@ if (isset($_GET['etape']) && $_GET['etape'] == 'dbsync') {
     require_once $root . 'libs' . DS . 'spyc.php';
     require_once $root . 'libs' . DS . 'common.php';
     require_once $root . 'libs' . DS . 'models.php';
+    require_once $root . 'libs' . DS . 'extend.php';
     $pdo = new PDO($dsn, $db_user, $db_pass);
 
     $need_tables = array();
@@ -184,7 +185,7 @@ if (isset($_GET['etape']) && $_GET['etape'] == 'dbsync') {
             $sql->bindValue(8, '0000000000');
             $sql->bindValue(9, 'ADMINISTRATOR');
             if ($sql->execute() === false) {
-                echo '<div class="alert alert-warning"><h4>Erreur SQL</h4><p>Impossible de creer l\'admin.</p><p>' . nl2br(var_dump($sql->errorInfo())) . '</p><p>'.var_dump($valid).'</p></div>';
+                echo '<div class="alert alert-warning"><h4>Erreur SQL</h4><p>Impossible de creer l\'admin.</p><p>' . nl2br(var_dump($sql->errorInfo())) . '</p><p>' . var_dump($valid) . '</p></div>';
                 $valid['installed_admin'] = false;
             }
         }
@@ -405,7 +406,7 @@ function tpl_pge_dbsync() {
     <h2><?php echo $titles['dbsync']; ?></h2>
     <?php
     if (count(array_keys($valid, false))) {
-        echo '<div class="alert alert-warning"><h4>Erreur SQL</h4><p>Une erreur d\'exécution SQL s\'est produite.</p><p>' . nl2br(var_dump($pdo->errorInfo())) . '</p><p>'.var_dump($valid).'</p></div>';
+        echo '<div class="alert alert-warning"><h4>Erreur SQL</h4><p>Une erreur d\'exécution SQL s\'est produite.</p><p>' . nl2br(var_dump($pdo->errorInfo())) . '</p><p>' . var_dump($valid) . '</p></div>';
     }
     ?>
     <form role="form" method="POST" action="install.php?etape=dbsync">
@@ -496,10 +497,10 @@ function tpl_pge_dbsync() {
           <h3>Requêtes SQL à exécuter</h3>
           <p>Voilà le fichier SQL généré qui sera exécuté sur la base de donnée.</p>
           <p><pre>
-                                        # ------------------------------------------------------------
-                                        # Fichier SQL généré par le système d'installation automatique
-                                        # @Copyright bonnetlive
-                                        # ------------------------------------------------------------
+                                            # ------------------------------------------------------------
+                                            # Fichier SQL généré par le système d'installation automatique
+                                            # @Copyright bonnetlive
+                                            # ------------------------------------------------------------
 
             <?php
             echo "\n";

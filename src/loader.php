@@ -40,6 +40,7 @@ require_once $root . 'libs' . DS . 'spyc.php';
  */
 require_once $root . 'libs' . DS . 'common.php';
 require_once $root . 'libs' . DS . 'models.php';
+require_once $root . 'libs' . DS . 'extend.php';
 
 //Initialisation des mails
 require_once $root . 'libs' . DS . 'phpmailer' . DS . 'class.phpmailer.php';
@@ -60,6 +61,7 @@ $tpl = new Smarty();
 $tpl->compile_dir = $tmpdir;
 $tpl->template_dir = $root . 'templates';
 $tpl->registerPlugin('function', 'mkurl', 'mkurl_smarty');
+$tpl->registerPlugin('function', 'mkmenu', 'mkmenu_smarty');
 $tpl->registerPlugin('block', 'acl', 'acl_smarty');
 
 if (!is_dir($tpl->compile_dir))
@@ -108,22 +110,25 @@ if (!CONSOLE) {
         $page = basename($page);
     }
 
-    if (!file_exists($root . 'action' . DS . $action . '.php')) {
+    // Recherche du module ...
+    if (Extend::getAction($action) == false && !file_exists($root . 'action' . DS . $action . '.php')) {
         $action = 'syscore';
         $page = 'nomod';
     }
 
     // Etape 3, vérification des droits d'accès
-    if (!isset($_SESSION['user']))
+    if (!isset($_SESSION['user'])) {
         $_SESSION['user'] = false;
+    }
     $tpl->assign('_user', $_SESSION['user']);
     if ($_SESSION['user']) {
         $sections = $pdo->prepare('SELECT * FROM user_sections LEFT JOIN sections ON us_section = section_id WHERE us_user = ?');
         $sections->bindValue(1, $_SESSION['user']['user_id']);
         $sections->execute();
         $_SESSION['user']['sections'] = array();
-        while ($line = $sections->fetch())
+        while ($line = $sections->fetch()) {
             $_SESSION['user']['sections'][$line['section_id']] = $line;
+        }
     }
 
     modsecu($action, $page, $_GET);

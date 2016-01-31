@@ -36,6 +36,93 @@ define('ACL_SUPERUSER', 3);
 define('ACL_ADMINISTRATOR', 4);
 
 /**
+ * Menus par défaut
+ */
+$menu = array();
+
+$menu['DEFAULT'] = array(
+    'SECTIONS' => array(
+        'label' => 'Sections',
+        'url' => 'section',
+    ),
+    'TOOLS' => array(
+        'label' => 'Outils',
+        'sub' => array(
+            'DEV' => array(
+                'label' => 'Développeurs',
+                'url' => 'developer',
+            ),
+        ),
+    ),
+    'EVENTS' => array(
+        'label' => 'Events',
+        'url' => 'event',
+    ),
+    'MARKING' => array(
+        'label' => 'Notation',
+        'sub' => array(
+            'MARK' => array(
+                'label' => 'Notes',
+                'url' => 'note',
+            ),
+            'REPORT' => array(
+                'label' => 'Bulletins',
+                'url' => 'bulletin',
+            ),
+        ),
+    ),
+    'ADMIN' => array(
+        'label' => 'Administration',
+        'sub' => array(
+            'USERS' => array(
+                'label' => 'Utilisateurs',
+                'url' => 'user',
+            ),
+            'SCHOOL' => array(
+                'label' => 'Ecoles',
+                'url' => 'ecole',
+            ),
+            'MANDATE' => array(
+                'label' => 'Mandats',
+                'url' => 'mandate',
+            ),
+            'MARKING' => array(
+                'label' => 'Notation',
+                'url' => 'admin_note',
+            ),
+            'MAILLING' => array(
+                'label' => 'Mailling list',
+                'url' => 'mls',
+            ),
+            'MODELS' => array(
+                'label' => 'Instances de donnée',
+                'url' => 'admin_modeles',
+            ),
+            'ACLS' => array(
+                'label' => 'Droits d\'accès',
+                'url' => 'admin',
+            ),
+            'CARDS' => array(
+                'label' => 'Gestion des cartes',
+                'url' => 'cards',
+            ),
+            'WIFI' => array(
+                'label' => 'Gestion du Wifi',
+                'url' => 'wifi',
+            ),
+            'CONFIG' => array(
+                'label' => 'Configuration',
+                'url' => 'config',
+            ),
+            'MODS' => array(
+                'label' => 'Extensions',
+                'url' => 'mod',
+            ),
+        ),
+    ),
+);
+
+/**
  * Pour récupérer la valeur numérique associé à un rôle
  * @param type $txt
  */
@@ -215,6 +302,122 @@ function mkurl_smarty($params, $smarty) {
 }
 
 /**
+ * Créé un item de menu
+ *
+ * @param type $item tableau d'items
+ * @param type $level niveau du menu
+ * @return string HTML
+ */
+function mkmenuItem($item, $level = 0) {
+    $txt = "";
+
+    if (isset($item['sub'])) {
+        $stxt = '';
+        $txt = '<li class="dropdown">
+              <a href="#" data-toggle="dropdown" class="dropdown-toggle">'
+                . $item['label'] . '
+                <b class="caret"></b></a>
+              <ul class="dropdown-menu">';
+        foreach ($item['sub'] as $sub) {
+            $stxt .= mkmenuItem($sub, $level + 1);
+        }
+        if (strlen($stxt) == 0) {
+            return "";
+        }
+        $txt .= $stxt;
+        $txt .= '</ul></li>';
+    } else {
+        $opts = array();
+        $action = 'index';
+        $page = 'index';
+
+        if (is_string($item['url'])) {
+            $action = $item['url'];
+        } else {
+            if (isset($item['url']['action'])) {
+                $action = $item['url']['action'];
+            }
+
+            if (isset($item['url']['page'])) {
+                $page = $item['url']['page'];
+            }
+            $opts = $item['url'];
+            unset($opts['action']);
+            unset($opts['page']);
+        }
+        $url = mkurl($action, $page, $opts);
+        $need = getAclLevel($action, $page);
+        $acl = hasAcl($need, $action, $page, $opts);
+
+        if ($acl) {
+            $txt = '<li><a href="' . $url . '">' . $item['label'] . '</a></li>';
+        }
+    }
+
+    return $txt;
+}
+
+/**
+ * Efface le cache du menu
+ *
+ * @global type $tmpdir Dossier tmp
+ * @param type $type Type de menu
+ */
+function cleanMenu($type = 'DEFAULT') {
+    global $tmpdir;
+
+    $cachefile = $tmpdir . '/menu_' . $type . '.php';
+
+    if (file_exists($cachefile)) {
+        unlink($cachefile);
+    }
+}
+
+/**
+ * Construit un menu
+ *
+ * @global array $menu menus par défault
+ * @global type $tmpdir dossier tmp
+ * @param type $type type de menu
+ * @return str HTML
+ */
+function mkmenu($type = 'DEFAULT') {
+    global $menu, $tmpdir;
+
+    $html = "";
+    $cachefile = $tmpdir . '/menu_' . $type . '.php';
+    $xmenu = array();
+
+    if (!file_exists($cachefile)) {
+        $xmenu = $menu[$type];
+
+        foreach (Extend::getInstalledMods() as $mod) {
+            $xmenu = array_merge_recursive($xmenu, $mod->getMenu($type));
+        }
+
+        file_put_contents($cachefile, "<?php\n\$xmenu = " . var_export($xmenu, true) . ";\n");
+    } else {
+        include $cachefile;
+    }
+
+    foreach ($xmenu as $item) {
+        $html .= mkmenuItem($item);
+    }
+
+    return $html;
+}
+
+/**
+ * Créé le menu (smarty)
+ *
+ * @param type $params
+ * @param type $smarty
+ */
+function mkmenu_smarty($params, $smarty) {
+    return mkmenu();
+}
+
+/**
  * Permet de quitter proprement le CMS
  */
 function quit() {
@@ -263,7 +466,12 @@ function modsecu($action, $page = 'index', $params = null) {
 function modexec($action, $page = 'index') {
     global $root, $exec_mod, $exec_action;
 
-    include_once $root . 'action' . DS . $action . '.php';
+    if (file_exists($root . 'action' . DS . $action . '.php')) {
+        include_once $root . 'action' . DS . $action . '.php';
+    } else {
+        $act = Extend::getAction($action);
+        $act->init($action);
+    }
 
     $exec = false;
     if (function_exists($action . '_autoload')) {

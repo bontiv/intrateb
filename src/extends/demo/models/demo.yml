@@ -1,0 +1,9 @@
+#Table demo
+name: demo
+key: demo_id
+fields:
+  demo_id:
+    type: auto_int
+  demo_name:
+    type: var
+    label: "Ceci est un test..."

@@ -1,0 +1,16 @@
+## Table users
+name: mod_list
+key: mod_id
+fields:
+  mod_id:
+    type: auto_int
+  mod_dir:
+    type: var
+    label: "Dossier"
+  mod_action:
+    type: var
+    label: "action"
+indexes:
+  idx_mod_action:
+    type: unique
+    fields: [ 'mod_action' ]

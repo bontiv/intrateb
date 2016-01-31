@@ -1,0 +1,20 @@
+# Informations générales
+infos:
+  name: "Demo"
+  author: "Remi BONNET <prog.bontiv@gmail.com>"
+  description: "Module de demonstration pour la gestion des extentions"
+
+# Liste des accès
+acces:
+  demo:
+    index: GUEST
+
+# Menus
+menu:
+    # Menu par défault
+    DEFAULT:
+        DEMO:
+            label: "Démonstration"
+            url:
+                action: demo
+                page: index

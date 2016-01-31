@@ -50,8 +50,8 @@ function admin_modeles_addinst() {
         dbg_error(__FILE__, "Le nom de la table est incorrect");
 
     $modele = new Modele($_GET['modele']);
-    $tpl->assign('result','');
-    
+    $tpl->assign('result', '');
+
     if (isset($_POST['action'])) {
         if ($modele->addFrom($_POST)) {
             $tpl->assign('result', 'success');
@@ -68,7 +68,7 @@ function admin_modeles_addinst() {
 
 function admin_modeles_delinst() {
     global $tpl;
-    
+
     $modele = new Modele($_GET['modele']);
     $modele->fetch($_GET['key']);
     $modele->delete();
@@ -78,11 +78,11 @@ function admin_modeles_delinst() {
 
 function admin_modeles_modinst() {
     global $tpl;
-    
+
     $modele = new Modele($_GET['modele']);
     $modele->fetch($_GET['key']);
-    $tpl->assign('result','');
-    
+    $tpl->assign('result', '');
+
     if (isset($_POST['action'])) {
         if ($modele->modFrom($_POST)) {
             $tpl->assign('result', 'success');
@@ -94,6 +94,4 @@ function admin_modeles_modinst() {
     $tpl->assign('edit', $modele->edit());
     $tpl->display('adminmodeles_modinst.tpl');
     quit();
-
 }
-?>

@@ -17,18 +17,18 @@
     </tr>
   </thead>
   <tbody>
-{foreach from=$tables item="line"}
-    <tr>
-      <td>
-          <a href="{mkurl action="admin_modeles" page="modele" modele=$line.name}">{$line.name}</a>
-      </td>
-      <td>{$line.file}</td>
-      <td>{$line.nbr}</td>
-      <td><a href="{mkurl action="admin_modeles" page="addinst" modele=$line.name}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-plus"></span></a></td>
-    </tr>
-{/foreach}
+    {foreach from=$tables item="line"}
+        <tr>
+          <td>
+            <a href="{mkurl action="admin_modeles" page="modele" modele=$line.name}">{$line.name}</a>
+          </td>
+          <td>{if isset($line.mod)}<abbr title="Modèle de module">{$line.mod}</abbr>::{/if}{$line.file}</td>
+          <td>{$line.nbr}</td>
+          <td><a href="{mkurl action="admin_modeles" page="addinst" modele=$line.name}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-plus"></span></a></td>
+        </tr>
+    {/foreach}
   </tbody>
 </table>
-    
+
 
 {include "foot.tpl"}
