@@ -92,7 +92,7 @@ $menu['DEFAULT'] = array(
             ),
             'MAILLING' => array(
                 'label' => 'Mailling list',
-                'url' => 'mls',
+                'url' => 'ml',
             ),
             'MODELS' => array(
                 'label' => 'Instances de donnée',
