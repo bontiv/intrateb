@@ -34,14 +34,14 @@ function cards_makeme() {
     } else
         $tpl->assign('hsuccess', false);
 
-
+    
     $imgd = imagecreatefrompng($srcdir . DS . 'libs' . DS . 'card_bg.png');
     $fdir = $srcdir . DS . 'libs' . DS . 'font' . DS;
 
     $c_black = imagecolorallocate($imgd, 0, 0, 0);
     $picture = imagecreatefrompng($usr->user_photo);
     imagecopy($imgd, $picture, 66, 60, 0, 0, 210, 270);
-    imagettftext($imgd, 90, 0, 400, 100, $c_black, $fdir . 'data-latin.ttf', 'EPITANIME');
+    imagettftext($imgd, 90, 0, 400, 100, $c_black, $fdir . 'data-latin.ttf', 'LATEB');
     imagettftext($imgd, 30, 0, 400, 150, $c_black, $fdir . 'go3v2.ttf', $mdt->mandate_label);
     imagettftext($imgd, 50, 0, 400, 240, $c_black, $fdir . 'AccidentalPresidency.ttf', "Id: " . $usr->user_id);
     imagettftext($imgd, 50, 0, 400, 300, $c_black, $fdir . 'AccidentalPresidency.ttf', "Pseudo: " . $usr->user_name);
