@@ -8,8 +8,8 @@
 
     <!-- Title input-->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="pwd1">Groupes à envoyer</label>
-      <div class="col-md-5">
+      <label class="col-md-1 control-label" for="pwd1">Groupes à envoyer</label>
+      <div class="col-md-11">
           {foreach from=$group_list key=key item=i}
               <input type="checkbox" name="group[]" value="{$key}" {$i.checked}>{$i.value}</option>
           {/foreach}
@@ -19,8 +19,8 @@
 
     <!-- Title input-->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="pwd1">Titre</label>
-      <div class="col-md-5">
+      <label class="col-md-1 control-label" for="pwd1">Titre</label>
+      <div class="col-md-11">
         <input id="title" name="title" placeholder="Title" class="form-control input-md" required="" type="text">
 
       </div>
@@ -28,23 +28,30 @@
 
     <!-- Message input-->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="pwd2">Message</label>
-      <div class="col-md-5">
+      <label class="col-md-1 control-label" for="pwd2">Message</label>
+      <div class="col-md-11">
         <textarea id="content" name="content" class="form-control input-md" required="" form="sendform">
         </textarea>
+        <script>
+                // Replace the <textarea id="editor1"> with a CKEditor
+                // instance, using default configuration.
+                CKEDITOR.replace( 'content' );
+        </script>
       </div>
     </div>
 
     <!-- Button (Double) -->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="send"></label>
-      <div class="col-md-8">
+      <label class="col-md-1 control-label" for="send"></label>
+      <div class="col-md-1">
         <button id="send" name="send" class="btn btn-success">Valider</button>
+      </div>
+      <div class="col-md-1">
+        <button id="preview" name="preview" class="btn btn-success">Preview</button>
       </div>
     </div>
 
   </fieldset>
 </form>
-
 
 {include "foot.tpl"}
