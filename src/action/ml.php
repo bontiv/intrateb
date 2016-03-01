@@ -43,27 +43,31 @@ function ml_send() {
     $tpl->assign("content", $_POST['content']);
     //var_dump($_POST["group"]);
     $group = implode(",", $_POST["group"]);
-
+//SELECT u.user_email, u.user_name FROM user_sections as s, users as u where s.us_section = 2 and s.us_type != 'rejected' and s.us_user = u.user_id;
     $query = 'SELECT * FROM users WHERE user_name != "admin" and user_newsletter = "SUBSCRIBED" and user_role in ('.$group.')';
     //var_dump($query);
     $users = array();
     $valid = array();
     
-    if (isset($_POST["send"])) {
-        $sql = $pdo->query($query);
-        while ($s = $sql->fetch(PDO::FETCH_OBJ)) {
-            $users[] = $s;
-            $tpl->assign('user', $s);
+
+    $sql = $pdo->query($query);
+    while ($s = $sql->fetch(PDO::FETCH_OBJ)) {
+        $users[] = $s;
+        $tpl->assign('user', $s);
+        if (isset($_POST["send"])) {
             $mail = getMailer();
             $mail->AddAddress($s->user_email);
             $mail->Subject = '[intra LATEB] '.$_POST['title'];
             $mail->Body = $tpl->fetch('mail_send.tpl');
             $valid[] = $mail->Send();
-            //var_dump($mail->ErrorInfo);
         }
+        //var_dump($mail->ErrorInfo);
     }
-   
-    //$tpl->assign('hsuccess', count(array_keys($valid, false)) == 0);
+    if (isset($_POST["send"])) {
+        $tpl->assign('hsuccess', count(array_keys($valid, false)) == 0);
+    } else {
+        $tpl->assign('users', $users);
+    }
     //var_dump($users);
     display();
 }
