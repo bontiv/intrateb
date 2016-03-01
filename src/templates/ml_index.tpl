@@ -43,8 +43,11 @@
     <!-- Button (Double) -->
     <div class="form-group">
       <label class="col-md-1 control-label" for="send"></label>
-      <div class="col-md-11">
+      <div class="col-md-1">
         <button id="send" name="send" class="btn btn-success">Valider</button>
+      </div>
+      <div class="col-md-1">
+        <button id="preview" name="preview" class="btn btn-success">Preview</button>
       </div>
     </div>
 
