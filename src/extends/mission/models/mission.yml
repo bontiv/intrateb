@@ -1,0 +1,18 @@
+#Table mission
+name: mission
+key: m_id
+fields:
+  m_id:
+    type: auto_int
+  m_name:
+    type: var
+    label: "Nom de mission"
+  m_desc:
+      type: text
+      label: "Description de la mission"
+  m_date_start:
+      type: date_time
+      label: "Début de la mission"
+  m_date_end:
+      type: date_time
+      label: "Fin de la mission"

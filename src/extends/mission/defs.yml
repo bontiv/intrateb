@@ -1,0 +1,21 @@
+# Informations générales
+infos:
+  name: "Mission"
+  author: "Remi BONNET <prog.bontiv@gmail.com>"
+  description: "Gestion de mission pour les staffs"
+
+# Liste des accès
+acces:
+  mission:
+    index: USER
+    create: ADMINISTRATOR
+
+# Menus
+menu:
+    # Menu par défault
+    DEFAULT:
+        DEMO:
+            label: "Missions"
+            url:
+                action: mission
+                page: index

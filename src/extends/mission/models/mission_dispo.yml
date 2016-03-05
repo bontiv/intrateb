@@ -1,0 +1,25 @@
+#Table mission_dispo
+name: mission_dispo
+key: md_id
+fields:
+  md_id:
+    type: auto_int
+  md_mission:
+    type: external
+    table: mission
+    display: %m_name%
+    label: "Nom de mission"
+  md_user:
+      type: external
+      table: users
+      display: %user_name%
+      label: "Description de la mission"
+  md_dispo:
+      type: enum
+      label: "Début de la mission"
+      default: NO_ANSWER
+      items:
+          NO_ANSWER: Pas de réponse
+          AVAILABLE: Disponible
+          UNKNOW: Peut-être
+          BUSY: Non disponible
