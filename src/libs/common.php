@@ -740,7 +740,14 @@ function dbg_warning($file, $msg, $pile = 0) {
 function display() {
     global $tpl, $exec_mod, $exec_action;
 
-    $tpl->display($exec_mod . '_' . $exec_action . '.tpl');
+    $act = Extend::getAction($exec_mod);
+    $tplName = $exec_mod . '_' . $exec_action;
+
+    if ($act != null) {
+        $tpl->display($act->getTemplates($tplName));
+    } else {
+        $tpl->display($tplName . '.tpl');
+    }
     quit();
 }
 

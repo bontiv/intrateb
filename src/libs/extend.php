@@ -308,6 +308,25 @@ class Extend {
         require_once $this->extdir . '/actions/' . $action . '.php';
     }
 
+    public function getTemplates($tplName = null) {
+        $moddir = $this->extdir . '/templates';
+        $matchs = null;
+        $templates = array();
+
+        if ($tplName !== null) {
+            $tplfile = $moddir . '/' . $tplName . '.tpl';
+            return (file_exists($tplfile) ? $tplfile : false);
+        }
+
+        foreach (scandir($moddir) as $tplfile) {
+            if (preg_match('`^(.*)\.tpl$`', $tplfile, $matchs)) {
+                $templates[] = $moddir . '/' . $tplfile;
+            }
+        }
+
+        return $templates;
+    }
+
     public function getModels() {
         $moddir = $this->extdir . '/models';
         $matchs = null;
