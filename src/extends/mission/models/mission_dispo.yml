@@ -23,3 +23,9 @@ fields:
           AVAILABLE: Disponible
           UNKNOW: Peut-être
           BUSY: Non disponible
+          REFUSED: Refusé
+          ACCEPTED: En mission
+  md_last_reminder:
+      type: date
+      label: Dernier rappel
+      null: true

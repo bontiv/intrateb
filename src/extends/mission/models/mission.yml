@@ -16,3 +16,13 @@ fields:
   m_date_end:
       type: date_time
       label: "Fin de la mission"
+  m_wanted:
+      type: int
+      label: Nombre nécessaire
+  m_state:
+      type: enum
+      default: CLOSE
+      visible: false
+      items:
+          CLOSE: Fermé
+          OPEN: Ouvert

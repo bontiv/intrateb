@@ -394,13 +394,15 @@ class Modele {
     private $desc;
     private $instance;
     private $iterator;
+    private $join;
 
     function __construct($table, $id = null) {
 
         #Support pour le clonage
         if ($table instanceof Modele) {
-            $id = $table->getKey();
-            $table = $table->getName();
+            $this->desc = $table->desc;
+            $this->instance = $table->instance;
+            return;
         }
 
         $this->desc = mdle_need_desc($table);
@@ -416,6 +418,8 @@ class Modele {
                 $this->fetch($id);
             }
         }
+
+        $this->join = '';
     }
 
     private function hasRight($field) {
@@ -563,8 +567,9 @@ class Modele {
         foreach ($values as $index => $val) {
             if ($val['type'] == 'file') {
                 $stmt->bindValue($index + 1, $val['val'], PDO::PARAM_LOB);
-            } else
+            } else {
                 $stmt->bindValue($index + 1, $val['val']);
+            }
         }
         $stmt->bindValue($nbVals + 1, $this->getKey());
         $result = $stmt->execute();
@@ -572,10 +577,28 @@ class Modele {
         return $result;
     }
 
+    function addExternalTable($table, $extraFilters = null) {
+        global $pdo;
+
+        $infos = mdle_need_desc($table);
+        foreach ($infos['fields'] as $name => $f) {
+            if ($f['type'] == 'external' && $f['table'] == $this->getName()) {
+                $this->join .= ' LEFT JOIN `' . $table . '` ON `' . $name . '` = `' . $this->desc['key'] . '`';
+                break;
+            }
+        }
+
+        if ($extraFilters) {
+            foreach ($extraFilters as $key => $value) {
+                $this->join .= ' AND `' . $key . '` = ' . $pdo->quote($value);
+            }
+        }
+    }
+
     function fetch($id) {
         global $pdo;
 
-        $sql = 'SELECT * FROM `' . $this->desc['name'] . '` WHERE `'
+        $sql = 'SELECT * FROM `' . $this->desc['name'] . $this->join . '` WHERE `'
                 . $this->desc['key'] . '` = ?';
         $rst = $pdo->prepare($sql);
         $rst->bindValue(1, $id);
@@ -592,7 +615,7 @@ class Modele {
         global $pdo;
 
         $values = array();
-        $sql = 'SELECT * FROM `' . $this->desc['name'] . '`';
+        $sql = 'SELECT * FROM `' . $this->desc['name'] . '`' . $this->join;
         $first = true;
 
         if ($where !== false)
@@ -607,9 +630,19 @@ class Modele {
                     } else {
                         $sql .= ' AND';
                     }
-                    // TODO : Il faut utiliser LIKE pour les alphabetiques
-                    $sql .= ' `' . $colum . '` = ?';
-                    $values[] = $value;
+
+                    if (is_array($value)) {
+                        $sql .= " ("
+                                . implode(' OR ', array_fill(0, count($value), "`$colum` = ?"))
+                                . ")";
+                        foreach ($value as $part) {
+                            $values[] = $part;
+                        }
+                    } else {
+                        // TODO : Il faut utiliser LIKE pour les alphabetiques
+                        $sql .= ' `' . $colum . '` = ?';
+                        $values[] = $value;
+                    }
                 } else {
                     dbg_warning(__FILE__, "Colone $colum invalide dans la table " . $this->desc['name']);
                 }
@@ -673,12 +706,17 @@ class Modele {
         }
 
         if (!isset($this->desc['fields'][$name])) {
+            if (isset($this->instance[$name])) {
+                return $this->instance[$name];
+            }
             throw new ModeleFieldNotFound($this->getName(), $name);
         }
-        if (!isset($this->instance[$name]))
+        if (!isset($this->instance[$name])) {
             return null;
-        if (!$raw && $this->desc['fields'][$name]['type'] == 'enum')
+        }
+        if (!$raw && $this->desc['fields'][$name]['type'] == 'enum') {
             return $this->desc['fields'][$name]['items'][$this->instance[$name]];
+        }
         if (!$raw && $this->desc['fields'][$name]['type'] == 'external' && is_string($this->instance[$name])) {
             $id = $this->instance[$name];
             try {
@@ -694,8 +732,9 @@ class Modele {
     function __set($name, $value) {
         global $pdo;
 
-        if (!isset($this->desc['fields'][$name]))
+        if (!isset($this->desc['fields'][$name])) {
             throw new ModeleFieldNotFound($this->getName(), $name);
+        }
 
         if ($this->desc['fields'][$name]['type'] == 'external' && !is_string($value)) {
             $value = $value->getKey();
