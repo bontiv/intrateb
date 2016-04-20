@@ -26,13 +26,21 @@
     </p>
     <p>
         Date de début</span> <i>format YYYY-MM-DD hh:mm:ss</i><br />
-        <input type="text" name="event_start" class="form-control" />
+        <input type="datetime" name="event_start" class="form-control datetimepicker" />
     </p>
     <p>
         Date de fin <i>format YYYY-MM-DD hh:mm:ss</i><br />
-        <input type="text" name="event_end" class="form-control" />
+        <input type="datetime" name="event_end" class="form-control datetimepicker" />
     </p>
     <p><input type="submit" value="Créer" class="form-control btn btn-primary" /></p>
 </form>
+
+<script type='text/javascript'>
+    $(function() {
+            $('.datetimepicker').datetimepicker({
+                dateFormat: 'yy-mm-dd'
+            });
+    });
+</script>
 
 {include "foot.tpl"}
