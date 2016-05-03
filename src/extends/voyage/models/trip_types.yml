@@ -1,0 +1,27 @@
+#Table trip_types (types de billets)
+name: trip_types
+key: tt_id
+fields:
+  tt_id:
+    type: auto_int
+  tt_name:
+    type: var
+    label: "Nom du billet"
+  tt_trip:
+      type: external
+      label: Voyage
+      display: %tr_name%
+  tt_price:
+      #Le prix est en centimes
+      type: int
+      label: Prix
+  tt_restriction:
+      type: enum
+      label: Restriction
+      default: ALL
+      items:
+          ALL: Tout le monde
+          GROUP: Modéré (groupe)
+          USER: Tous les membres
+          SCRIPT: Scripté
+

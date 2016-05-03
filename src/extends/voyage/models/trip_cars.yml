@@ -1,0 +1,13 @@
+#Table trip_cars (cars)
+#Liste des cars pour le voyage
+name: trip_cars
+key: tu_id
+fields:
+  tc_id:
+    type: auto_int
+  tc_name:
+      type: var
+      label: Nom du car
+  tc_places:
+      type: int
+      label: Nombre de places

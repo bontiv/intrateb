@@ -1,0 +1,28 @@
+#Table trips (voyages)
+name: trips
+key: tr_id
+fields:
+  tr_id:
+    type: auto_int
+  tr_name:
+    type: var
+    label: "Nom du voyage"
+  tr_start:
+      type: datetime
+      label: Départ
+  tr_end:
+      type: datetime
+      label: Retour
+  tr_deftype:
+      type: external
+      table: trip_types
+      label: Billet par défaut
+      display: %tt_name%
+      null: true
+      visible: admin
+  tr_caution:
+      type: int
+      label: Montant de la caution
+  tr_places:
+      type: int
+      label: Nombre de places

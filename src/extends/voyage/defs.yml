@@ -1,0 +1,20 @@
+# Informations générales
+infos:
+  name: "Voyages"
+  author: "Remi BONNET <prog.bontiv@gmail.com>"
+  description: "Gestion des voyages."
+
+# Liste des accès
+acces:
+  trip:
+    index: USER
+
+# Menus
+menu:
+    # Menu par défault
+    DEFAULT:
+        DEMO:
+            label: "Voyage"
+            url:
+                action: trip
+                page: index
