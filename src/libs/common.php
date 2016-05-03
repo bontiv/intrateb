@@ -835,6 +835,7 @@ function getMailer() {
     $m->Mailer = $mc['enable'];
     $m->From = $mc['from'];
     $m->FromName = $mc['from_name'];
+    $m->AddReplyTo($mc['from'], $mc['from_name']);
     $m->Sender = $mc['from'];
     $m->Host = $mc['smtp_host'];
     $m->Port = $mc['smtp_port'];
