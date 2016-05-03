@@ -52,21 +52,28 @@ function ml_send() {
 
     $sql = $pdo->query($query);
     while ($s = $sql->fetch(PDO::FETCH_OBJ)) {
-        $users[] = $s;
-        $tpl->assign('user', $s);
-        if (isset($_POST["send"])) {
-            $mail = getMailer();
-            $mail->AddAddress($s->user_email);
-            $mail->Subject = '[intra LATEB] '.$_POST['title'];
-            $mail->Body = $tpl->fetch('mail_send.tpl');
-            $valid[] = $mail->Send();
+        if ($s->user_email) {
+            $users[] = $s;
+            $tpl->assign('user', $s);
+            if (isset($_POST["send"])) {
+                $mail = getMailer();
+                $mail->AddAddress($s->user_email);
+                $mail->Subject = '[intra LATEB] '.$_POST['title'];
+                $mail->Body = $tpl->fetch('mail_send.tpl');
+                if ($mail->Send() == false) {
+                    $valid[] = $s->user_email;   
+                }
+            }
         }
         //var_dump($mail->ErrorInfo);
     }
+    $err = "";
+    $tpl->assign('users', $users);
+    if (count($valid) > 0) {
+        $err = "Impossible d'envoyer des mails aux adresses suivantes: " . implode(", ", $valid);
+    }
     if (isset($_POST["send"])) {
-        $tpl->assign('hsuccess', count(array_keys($valid, false)) == 0);
-    } else {
-        $tpl->assign('users', $users);
+        $tpl->assign('hsuccess', $err == "" ? true : $err);
     }
     //var_dump($users);
     display();
