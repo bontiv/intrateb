@@ -464,13 +464,15 @@ function modsecu($action, $page = 'index', $params = null) {
  * @param type $page
  */
 function modexec($action, $page = 'index') {
-    global $root, $exec_mod, $exec_action;
+    global $root, $exec_mod, $exec_action, $exec_extend;
+
+    $exec_extend = false;
 
     if (file_exists($root . 'action' . DS . $action . '.php')) {
         include_once $root . 'action' . DS . $action . '.php';
     } else {
-        $act = Extend::getAction($action);
-        $act->init($action);
+        $exec_extend = Extend::getAction($action);
+        $exec_extend->init($action);
     }
 
     $exec = false;
@@ -738,9 +740,13 @@ function dbg_warning($file, $msg, $pile = 0) {
  * Affiche le template pour le module en exécution
  */
 function display() {
-    global $tpl, $exec_mod, $exec_action;
+    global $tpl, $exec_mod, $exec_action, $exec_extend;
 
-    $tpl->display($exec_mod . '_' . $exec_action . '.tpl');
+    if (!$exec_extend) {
+        $tpl->display($exec_mod . '_' . $exec_action . '.tpl');
+    } else {
+        $exec_extend->useTemplate($exec_mod . '_' . $exec_action);
+    }
     quit();
 }
 

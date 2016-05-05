@@ -1,7 +1,7 @@
 #Table trip_cars (cars)
 #Liste des cars pour le voyage
 name: trip_cars
-key: tu_id
+key: tc_id
 fields:
   tc_id:
     type: auto_int
@@ -11,3 +11,8 @@ fields:
   tc_places:
       type: int
       label: Nombre de places
+  tc_trip:
+      type: external
+      table: trips
+      display: %tr_name%
+      label: Voyage

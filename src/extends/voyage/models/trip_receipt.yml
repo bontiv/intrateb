@@ -1,0 +1,9 @@
+#Table trip_receipt (encaissement)
+name: trip_receipt
+key: tp_id
+fields:
+  tp_id:
+    type: auto_int
+  tp_date:
+      type: date
+      label: Date d'encaissement

@@ -11,6 +11,7 @@ fields:
       type: external
       label: Voyage
       display: %tr_name%
+      table: trips
   tt_price:
       #Le prix est en centimes
       type: int

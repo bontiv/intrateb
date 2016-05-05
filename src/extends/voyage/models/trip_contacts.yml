@@ -1,0 +1,36 @@
+#Table trip_contacts (carnet d'adresse)
+name: trip_contacts
+key: ta_id
+fields:
+  ta_id:
+    type: auto_int
+  ta_user:
+      type: external
+      label: Utilisateur
+      display: %user_firstname% %user_lastname% (%user_name%)
+  ta_fistname:
+      type: var
+      label: Prénom
+  ta_lastname:
+      type: var
+      label: Nom
+  ta_mail:
+      type: var
+      label: email
+  ta_phone:
+      type: var
+      label: Téléphone fixe
+  ta_cell:
+      type: var
+      label: Téléphone portable
+  ta_street1:
+      type: var
+      size: 200
+      label: Adresse (numéro et rue)
+  ta_zipcode:
+      type: int
+      label: Code postal
+  ta_town:
+      type: var
+      label: Ville
+      

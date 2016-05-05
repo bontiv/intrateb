@@ -8,13 +8,14 @@ infos:
 acces:
   trip:
     index: USER
+    add: ADMINISTRATOR
 
 # Menus
 menu:
     # Menu par défault
     DEFAULT:
-        DEMO:
-            label: "Voyage"
+        TRIP:
+            label: "Voyages"
             url:
                 action: trip
                 page: index

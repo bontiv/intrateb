@@ -25,12 +25,17 @@ fields:
       type: external
       label: Type de billet
       display: %tt_name%
-  tu_firstname:
-      type: var
-      label: Prénom
-  tu_lastname:
-      type: var
-      label: Prénom
+  tu_participant:
+      type: external
+      null: true
+      label: Voyageur (participant)
+      table: trip_contacts
+      display: %ta_fistname% %ta_lastname%
+  tu_emergency:
+      type: external
+      label: contact d'urgence
+      table: trip_contacts
+      display: %ta_fistname% %ta_lastname%
   tu_user:
       type: external
       label: Utilisateur
@@ -47,13 +52,15 @@ fields:
   tu_car:
     type: external
     label: Car
+    table: trip_cars
     null: true
     display: %tc_name%
-  tu_bungalow:
+  tu_room:
     type: external
     null: true
     label: Logement
-    display: %tb_name%
+    table: trip_rooms
+    display: %to_name%
   tu_credits:
       type: int
       default: 0

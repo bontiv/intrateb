@@ -8,10 +8,10 @@ fields:
     type: var
     label: "Nom du voyage"
   tr_start:
-      type: datetime
+      type: date_time
       label: Départ
   tr_end:
-      type: datetime
+      type: date_time
       label: Retour
   tr_deftype:
       type: external
