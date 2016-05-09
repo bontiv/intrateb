@@ -25,7 +25,8 @@
           <thead>
             <tr>
               <th>Nom (admin)</th>
-              <th>Alias (choix orga)</th>
+              <th><abbr title="Nom commun choisi par le participant">Alias</abbr></th>
+              <th>Restriction</th>
               <th>Places prises</th>
               <th>Places disponibles</th>
               <th>Gestion</th>
@@ -35,7 +36,8 @@
             {foreach $rooms as $room}
                 <tr>
                   <td>{$room->to_name}</td>
-                  <td></td>
+                  <td>{$room->to_alias}</td>
+                  <td>{$room->to_type}</td>
                   <td>{$room->to_places}</td>
                   <td>???</td>
                   <td>

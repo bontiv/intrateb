@@ -22,6 +22,8 @@ function trip_add() {
         'tr_name',
         'tr_start',
         'tr_end',
+        'tr_maxdate',
+        'tr_retractdate',
         'tr_caution',
         'tr_places',
     ));
@@ -56,6 +58,8 @@ function trip_edit() {
                 'tr_name',
                 'tr_start',
                 'tr_end',
+                'tr_maxdate',
+                'tr_retractdate',
                 'tr_caution',
                 'tr_places',
     )));
@@ -174,7 +178,9 @@ function trip_room_add() {
     $mod = new Modele('trip_rooms');
     $form = $mod->edit(array(
         'to_name',
+        'to_alias',
         'to_places',
+        'to_type',
     ));
     $tpl->assign('form', $form);
 
@@ -212,7 +218,9 @@ function trip_room_edit() {
 
     $tpl->assign('form', $mod->edit(array(
                 'to_name',
+                'to_alias',
                 'to_places',
+                'to_type',
     )));
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {

@@ -7,6 +7,9 @@ fields:
   to_name:
       type: var
       label: Nom du logement
+  to_alias:
+      type: var
+      label: Alias
   to_places:
       type: int
       label: Nombre de places
@@ -15,6 +18,14 @@ fields:
       display: %tu_firstname% %tu_lastname%
       label: Responsable du logement
       table: trip_userfiles
+  to_type:
+      type: enum
+      label: Type de réservation
+      items:
+          ALL: Ouvert (tout le monde)
+          RANDOM: Aléatoire
+          RESERVED: Restreint (admin)
+          MANAGED: Géré (1er arrivé gère)
   to_trip:
       type: external
       display: %tu_firstname% %tu_lastname%

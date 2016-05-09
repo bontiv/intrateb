@@ -1,0 +1,16 @@
+#Table trip_bungalow (logements sur place)
+name: trip_option_userfile
+key: tou_id
+fields:
+  tou_id:
+    type: auto_int
+  tou_option:
+      type: external
+      label: Option choisie
+      table: trip_option_options
+      display: %too_value%
+  too_userfiles:
+      type: external
+      label: Dossier voyageur
+      table: trip_userfiles
+      display: %tu_id%

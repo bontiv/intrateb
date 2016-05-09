@@ -49,6 +49,7 @@ fields:
       #Vide = non présenté lors de son arrivé
       type: var
       label: Identifiant tiket
+      null: true
   tu_car:
     type: external
     label: Car
@@ -80,34 +81,35 @@ fields:
   tu_allergy:
       type: text
       label: Alergies
+      null: true
   tu_comment:
       type: text
       label: Remarques complémentaires
   tu_responsability_agreement:
       type: enum
       label: Accord responsabilité déposé
-      default: NO
+      default: "NO"
       items:
           NO: Non
           YES: Oui
   tu_payment:
       type: enum
       label: Paiement déposé
-      default: NO
+      default: "NO"
       items:
           NO: Non
           YES: Oui
   tu_caution:
       type: enum
       label: Caution déposé
-      default: NO
+      default: "NO"
       items:
           NO: Non
           YES: Oui
   tu_parent_agreement:
       type: enum
       label: Accord parental déposé
-      default: NOT_NEEDED
+      default: "NOT_NEEDED"
       items:
           NO: Non
           YES: Oui
@@ -119,7 +121,7 @@ fields:
   tu_mailok:
       type: enum
       label: Email de validation envoyé
-      default: NO
+      default: "NO"
       items:
           NO: Non
           YES: Oui

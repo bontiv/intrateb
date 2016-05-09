@@ -1,0 +1,18 @@
+#Table trip_option_options (Les différents choix des questions)
+name: trip_option_options
+key: too_id
+fields:
+  too_id:
+    type: auto_int
+  too_option:
+      type: external
+      label: Question
+      display: %topt_label%
+      table: trip_options
+  too_value:
+      type: var
+      label: Valeur (texte)
+  too_price:
+      type: int
+      label: Prix
+

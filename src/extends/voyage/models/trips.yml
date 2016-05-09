@@ -13,6 +13,12 @@ fields:
   tr_end:
       type: date_time
       label: Retour
+  tr_maxdate:
+      type: date
+      label: Date limite (nouveau dossier)
+  tr_retractdate:
+      type: date
+      label: Date limite (Rétractation)
   tr_deftype:
       type: external
       table: trip_types
