@@ -10,7 +10,7 @@
  * @global type $pdo
  * @global type $tpl
  */
-function beer_index() {
+function beers_index() {
 	global $pdo, $tpl;
 
 	if (isset($_POST['search'])) {
@@ -34,7 +34,7 @@ function beer_index() {
 
 	$pager->run($tpl);
 
-	$tpl->display('beer_index.tpl');
+	$tpl->display('beers_index.tpl');
 	quit();
 }
 
