@@ -7,14 +7,14 @@ infos:
 # Liste des accès
 acces:
   beers:
-    index: GUEST
+    index: USER
 
 # Menus
 menu:
     # Menu par défault
     DEFAULT:
-        BEER:
-            label: "Liste des bières"
+        BEERS:
+            label: "Bières"
             url:
                 action: beers
                 page: index

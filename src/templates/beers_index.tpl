@@ -5,7 +5,7 @@
     <h3>Constitution de la nouvelle liste de bières</h3>
 
     {* START BLOCK recherche *}
-    <form class="form-inline" method="POST" action="{mkurl action="beer" page="index"}">
+    <form class="form-inline" method="POST" action="{mkurl action="beers" page="index"}">
         <fieldset>
             <div class="form-group">
                 <div class="col-md-8">
