@@ -1,0 +1,16 @@
+## Table beers
+name: beers
+key: beer_id
+fields:
+  beer_id:
+    type: auto_int
+  beer_name:
+    readonly: true
+    type: var
+    size: 50
+    label: Pseudo
+
+indexes:
+  beer_name:
+    type: unique
+    fields: [beer_name]
