@@ -32,7 +32,9 @@
         <th>Section</th>
         <th>Nombre de staffs</th>
         <th>Candidature</th>
-        <th>Action</th>
+        {acl level="USER"}
+          <th>Action</th>
+        {/acl}
         </thead>
         <tbody>
           {foreach from=$es item="i"}
@@ -46,16 +48,20 @@
                       {if $i.cdat.est_status=="OK"}<span class="label label-success">Accepté</span>{elseif $i.cdat.est_status=="NO"}<span class="label label-danger">Refusé</span>{else}<span class="label label-default">Candidat</span>{/if}
                   {/if}
                 </td>
-                <td>
-                  <a class="btn btn-danger" href="{mkurl action="event" page="delsection" event=$event.event_id admsec=$i.section_id}">
-                    <span class="glyphicon glyphicon-remove"></span>
-                  </a>
-                  {if not $i.cdat}
-                      <a class="btn btn-primary" href="{mkurl action="event" page="joinsection" event=$event.event_id section=$i.section_id}"><span class="">Rejoindre</span></a>
-                  {else}
-                      <a class="btn btn-danger" href="{mkurl action="event" page="quitsection" event=$event.event_id section=$i.section_id}"><span class="">Quitter</span></a>
-                  {/if}
-                </td>
+                {acl level="USER"}
+                  <td>
+                    {acl level="ADMINISTRATOR"}
+                      <a class="btn btn-danger" href="{mkurl action="event" page="delsection" event=$event.event_id admsec=$i.section_id}">
+                        <span class="glyphicon glyphicon-remove"></span>
+                      </a>
+                    {/acl}
+                    {if not $i.cdat}
+                        <a class="btn btn-primary" href="{mkurl action="event" page="joinsection" event=$event.event_id section=$i.section_id}"><span class="">Rejoindre</span></a>
+                    {else}
+                        <a class="btn btn-danger" href="{mkurl action="event" page="quitsection" event=$event.event_id section=$i.section_id}"><span class="">Quitter</span></a>
+                    {/if}
+                  </td>
+                {/acl}
               </tr>
           {/foreach}
         </tbody>

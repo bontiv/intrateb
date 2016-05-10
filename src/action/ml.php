@@ -43,23 +43,38 @@ function ml_send() {
     $tpl->assign("content", $_POST['content']);
     //var_dump($_POST["group"]);
     $group = implode(",", $_POST["group"]);
+//SELECT u.user_email, u.user_name FROM user_sections as s, users as u where s.us_section = 2 and s.us_type != 'rejected' and s.us_user = u.user_id;
     $query = 'SELECT * FROM users WHERE user_name != "admin" and user_newsletter = "SUBSCRIBED" and user_role in ('.$group.')';
     //var_dump($query);
-    $sql = $pdo->query($query);
     $users = array();
     $valid = array();
+    
+
+    $sql = $pdo->query($query);
     while ($s = $sql->fetch(PDO::FETCH_OBJ)) {
-        $users[] = $s;
-        $tpl->assign('user', $s);
-        $mail = getMailer();
-        $mail->AddAddress($s->user_email);
-        $mail->Subject = '[intra LATEB] '.$_POST['title'];
-        $mail->Body = $tpl->fetch('mail_send.tpl');
-        $valid[] = $mail->Send();
+        if ($s->user_email) {
+            $users[] = $s;
+            $tpl->assign('user', $s);
+            if (isset($_POST["send"])) {
+                $mail = getMailer();
+                $mail->AddAddress($s->user_email);
+                $mail->Subject = '[intra LATEB] '.$_POST['title'];
+                $mail->Body = $tpl->fetch('mail_send.tpl');
+                if ($mail->Send() == false) {
+                    $valid[] = $s->user_email;   
+                }
+            }
+        }
         //var_dump($mail->ErrorInfo);
     }
-
-    $tpl->assign('hsuccess', count(array_keys($valid, false)) == 0);
+    $err = "";
+    $tpl->assign('users', $users);
+    if (count($valid) > 0) {
+        $err = "Impossible d'envoyer des mails aux adresses suivantes: " . implode(", ", $valid);
+    }
+    if (isset($_POST["send"])) {
+        $tpl->assign('hsuccess', $err == "" ? true : $err);
+    }
     //var_dump($users);
     display();
 }

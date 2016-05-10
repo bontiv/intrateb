@@ -12,8 +12,10 @@
       <th>Date début</th>
       <th>Date fin</th>
       <th>Description</th>
+      {acl level="ADMINISTRATOR"}
       <th>Coef</th>
       <th>Action</th>
+      {/acl}
     </tr>
   </thead>
   <tbody>
@@ -23,6 +25,7 @@
           <td>{$line.event_start}</td>
           <td>{$line.event_end}</td>
           <td>{$line.event_desc}</td>
+          {acl level="ADMINISTRATOR"}
           <td>{$line.event_coef}</td>
           <td>
             <div class="btn-group">
@@ -30,6 +33,7 @@
               <a href="{mkurl action="event" page="edit" event=$line.event_id}" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
             </div>
           </td>
+          {/acl}
         </tr>
     {/foreach}
   </tbody>
