@@ -5,11 +5,20 @@ fields:
   beer_id:
     type: auto_int
   beer_name:
-    readonly: true
     type: var
     size: 50
-    label: Pseudo
-
+    label: Nom
+  desc:
+    type: text
+    label: Description
+  barcode:
+    type: var
+    size: 25
+    label: Code Barre
+  capacity:
+    type: int
+    label: Contenance
+## TODO beers prices
 indexes:
   beer_name:
     type: unique

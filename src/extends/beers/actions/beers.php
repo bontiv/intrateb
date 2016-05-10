@@ -42,14 +42,14 @@ function beers_index() {
  * Ajoute une bière
  * Des fois c'est bien de pouvoir rajouter un utilisateur depuis le panneau d'admin pour l'ajout des nouveaux adhérents.
  */
-/*function user_add() {
+function beer_add() {
 	global $pdo, $tpl;
 
 	$tpl->assign('error', false);
 	$tpl->assign('succes', false);
 
-	if (isset($_POST['user_name'])) {
-		if (autoInsert('users', 'user_')) {
+	if (isset($_POST['beer_name'])) {
+		if (autoInsert('beers', 'beer_')) {
 			$tpl->assign('succes', true);
 		} else {
 			$tpl->assign('error', true);
@@ -57,7 +57,7 @@ function beers_index() {
 
 	}
 
-	$sql = $pdo->prepare('SELECT * FROM user_types');
+	$sql = $pdo->prepare('SELECT * FROM beer_types');
 	$sql->execute();
 	while ($type = $sql->fetch()) {
 		$tpl->append('types', $type);
@@ -66,7 +66,7 @@ function beers_index() {
 	$tpl->display('user_add.tpl');
 	quit();
 }
-*/
+
 /**
  * Suppresion d'un utilisateur
  */

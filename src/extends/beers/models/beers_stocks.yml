@@ -1,0 +1,2 @@
+## where beers are stocked
+## TODO beer_id (PK, FK), nb, stock_id(PK, FK), primary(bool)
