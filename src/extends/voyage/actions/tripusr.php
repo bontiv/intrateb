@@ -20,17 +20,17 @@ function tripusr_index() {
 }
 
 function _tripusr_new_contact($form, &$ferr) {
-    // Nom obligatoire
+// Nom obligatoire
     if ($form['lastname'] == '') {
         $ferr['lastname'] = 'Le nom est obligatoire sur un contact';
     }
 
-    // Prénom obligatoire
+// Prénom obligatoire
     if ($form['firstname'] == '') {
         $ferr['firstname'] = 'Le prénom est obligatoire sur un contact';
     }
 
-    // Un numéro de tel obligatoire
+// Un numéro de tel obligatoire
     if ($form['phone'] == '' && $form['cell'] == '') {
         $ferr['phone'] = 'Un numéro de téléphone est obligatoire sur un contact';
         $ferr['cell'] = 'Un numéro de téléphone est obligatoire sur un contact';
@@ -133,7 +133,7 @@ function tripusr_new() {
     $errors = array_merge($errors, _tripusr_error($ferr));
     $errors = array_unique($errors);
 
-    // Recherche des contacts
+// Recherche des contacts
     $ctx = new Modele('trip_contacts');
     $ctx->find(array('ta_user' => $_SESSION['user']['user_id']));
     $ctx->appendTemplate('contacts');
@@ -149,4 +149,92 @@ function tripusr_continue() {
     if ($mdl->raw_tu_user == $_SESSION['user']['user_id']) {
         redirect('tripusr', 'step' . $mdl->tu_step, array('file' => $mdl->getKey()));
     }
+}
+
+function _tripusr_load() {
+    $ufile = new Modele('trip_userfiles');
+
+    try {
+        $ufile->fetch($_GET['file']);
+    } catch (SQLFetchNotFound $e) {
+        redirect('syscore', 'invcall');
+    }
+
+    if ($ufile->raw_tu_user != $_SESSION['user']['user_id']) {
+        redirect('syscore', 'forbidden');
+    }
+
+    $ufile->assignTemplate('ufile');
+    $ufile->tu_trip->assignTemplate('trip');
+
+    return $ufile;
+}
+
+function _tripusr_data($fields, $from = null) {
+    $data = array();
+
+    if ($from === null) {
+        $from = $_POST;
+    }
+
+    foreach ($fields as $field) {
+        if (isset($from[$field])) {
+            $data[$field] = $from[$field];
+        }
+    }
+
+    return $data;
+}
+
+function tripusr_step2() {
+    global $tpl;
+
+    $ufile = _tripusr_load();
+
+    if ($ufile->tu_step != 2) {
+        redirect('tripusr', 'continue', array('file' => $ufile->getKey()));
+    }
+
+    $health = $ufile->edit(array(
+        'tu_vertigo',
+        'tu_travel_sickness',
+        'tu_allergy',
+    ));
+
+    $memo = $ufile->edit(array(
+        'tu_comment',
+    ));
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $data = _tripusr_data(array(
+            'tu_vertigo',
+            'tu_travel_sickness',
+            'tu_allergy',
+            'tu_comment',
+        ));
+
+        $data['tu_step'] = 3;
+
+        if ($ufile->modFrom($data)) {
+            redirect('tripusr', 'step3', array('file' => $ufile->getKey()));
+        } else {
+            $tpl->assign('hsuccess', false);
+        }
+    }
+
+    $tpl->assign('health', $health);
+    $tpl->assign('memo', $memo);
+    display();
+}
+
+function tripusr_step3() {
+    global $tpl;
+
+    $ufile = _tripusr_load();
+
+    if ($ufile->tu_step != 3) {
+        redirect('tripusr', 'continue', array('file' => $ufile->getKey()));
+    }
+
+    display();
 }

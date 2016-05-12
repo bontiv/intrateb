@@ -4,6 +4,11 @@ key: topt_id
 fields:
   topt_id:
     type: auto_int
+  topt_trip:
+      type: external
+      label: Voyage
+      table: trips
+      display: %tr_id%
   topt_group:
       type: var
       label: Groupe de la question

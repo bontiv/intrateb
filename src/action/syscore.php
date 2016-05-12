@@ -32,6 +32,9 @@ function syscore_autoload($page) {
         case 'nopage':
             $tpl->assign('msg', 'Le module n\'a pas executer cette page.');
             break;
+        case 'invcall':
+            $tpl->assign('msg', 'Un paramètre est incorrect et empêche l\'exécution.');
+            break;
         case 'custom':
             $tpl->assign('msg', $_GET['error']);
             break;

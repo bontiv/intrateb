@@ -317,3 +317,79 @@ function trip_ticket_default() {
 
     redirect('trip', 'admin_tickets', array('hsuccess' => 1, 'trip' => $trip->getKey()));
 }
+
+function trip_admin_options() {
+    $mdl = new Modele('trips');
+    $mdl->fetch($_GET['trip']);
+    $mdl->assignTemplate('trip');
+
+    $ext = new Modele('trip_options');
+    $ext->find(array('topt_trip' => $mdl->getKey()));
+    $ext->appendTemplate('options');
+
+    display();
+}
+
+function trip_option_add() {
+    global $tpl;
+
+    $mdl = new Modele('trips');
+    $mdl->fetch($_GET['trip']);
+    $mdl->assignTemplate('trip');
+
+    $mod = new Modele('trip_options');
+    $form = $mod->edit(array(
+        'topt_group',
+        'topt_question',
+        'topt_label',
+    ));
+    $tpl->assign('form', $form);
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $data = array_merge_recursive($_POST, array(
+            'topt_trip' => $mdl->getKey(),
+        ));
+        var_dump($data);
+        if ($mod->addFrom($data)) {
+            redirect('trip', 'admin_options', array('trip' => $mdl->getKey(), 'hsuccess' => 1));
+        } else {
+            $tpl->assign("hsuccess", false);
+        }
+    }
+
+    display();
+}
+
+function trip_option_delete() {
+    $mod = new Modele('trip_options');
+    $mod->fetch($_GET['option']);
+    $trip = $mod->raw_topt_trip;
+
+    redirect('trip', 'admin_options', array('trip' => $trip, 'hsuccess' => $mod->delete() ? '0' : '1'));
+}
+
+function trip_option_edit() {
+    global $tpl;
+
+    $mod = new Modele('trip_options');
+    $mod->fetch($_GET['option']);
+    $mod->assignTemplate('option');
+    $mdl = $mod->topt_trip;
+    $mdl->assignTemplate('trip');
+
+    $tpl->assign('form', $mod->edit(array(
+                'topt_group',
+                'topt_question',
+                'topt_label',
+    )));
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($mod->modFrom($_POST)) {
+            redirect('trip', 'admin_options', array('trip' => $mdl->getKey(), 'hsuccess' => '1'));
+        } else {
+            $tpl->assign('hsuccess', 0);
+        }
+    }
+
+    display();
+}
