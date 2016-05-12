@@ -308,6 +308,14 @@ class Extend {
         require_once $this->extdir . '/actions/' . $action . '.php';
     }
 
+    public function useTemplate($file) {
+        global $tpl;
+
+        $tpldir = realpath($this->extdir . '/templates');
+        $tpl->assign('extendTpls', $tpldir);
+        $tpl->display($tpldir . '/' . $file . '.tpl');
+    }
+
     public function getModels() {
         $moddir = $this->extdir . '/models';
         $matchs = null;

@@ -1,0 +1,31 @@
+#Table trip_cheq (chèques)
+name: trip_cheq
+key: tq_id
+fields:
+  tq_id:
+    type: auto_int
+  tq_from:
+      type: var
+      label: Emetteur
+  tq_bank:
+      type: var
+      label: Banque
+  tq_number:
+      type: int
+      label: Numéro
+  tq_type:
+      type: enum
+      label: Type de chèque
+      items:
+          PAYMENT: Paiement
+          CAUTION: Caution
+  tq_date:
+      type: date
+      label: Date de réception
+      readonly: true
+  tq_receipt:
+      type: external
+      null: true
+      label: Encaissement
+      table: trip_receipt
+      display: %tr_id% - %tr_date%

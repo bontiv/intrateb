@@ -1,0 +1,130 @@
+#Table trip_userfiles (dossier voyageur)
+name: trip_userfiles
+key: tu_id
+fields:
+  tu_id:
+    type: auto_int
+  tu_trip:
+      type: external
+      label: Voyage
+      display: %tr_name%
+  tu_step:
+      type: int
+      default: 0
+      label: Etape du dossier
+      # 0 : Ouvert
+      # 1 : Infos de base
+      # 2 : Infos santé
+      # 3 : Choix billet
+      # 4 : Attente validation billet
+      # 5 : Choix chambre
+      # 6 : Attente validation chambre
+      # 7 : Attentes des pièces du dossier
+      # 8 : Dossier complet
+  tu_type:
+      type: external
+      label: Type de billet
+      display: %tt_name%
+  tu_participant:
+      type: external
+      null: true
+      label: Voyageur (participant)
+      table: trip_contacts
+      display: %ta_fistname% %ta_lastname%
+  tu_emergency:
+      type: external
+      label: contact d'urgence
+      table: trip_contacts
+      display: %ta_fistname% %ta_lastname%
+  tu_user:
+      type: external
+      label: Utilisateur
+      display: %user_firstname% %user_lastname% (%user_name%)
+  tu_token:
+      #token : liaison vers le site source (si externe)
+      type: var
+      null: true
+  tu_ticket:
+      #Ticket : numéro du ticket justificatif présence
+      #Vide = non présenté lors de son arrivé
+      type: var
+      label: Identifiant tiket
+      null: true
+  tu_car:
+    type: external
+    label: Car
+    table: trip_cars
+    null: true
+    display: %tc_name%
+  tu_room:
+    type: external
+    null: true
+    label: Logement
+    table: trip_rooms
+    display: %to_name%
+  tu_credits:
+      type: int
+      default: 0
+      label: Crédits (paiement sur place)
+  tu_vertigo:
+      type: enum
+      label: Vertige
+      items:
+          NO: Non
+          YES: Oui
+  tu_travel_sickness:
+      type: enum
+      label: Mal des transports
+      items:
+          NO: Non
+          YES: Oui
+  tu_allergy:
+      type: text
+      label: Alergies
+      null: true
+  tu_comment:
+      type: text
+      label: Remarques complémentaires
+  tu_responsability_agreement:
+      type: enum
+      label: Accord responsabilité déposé
+      default: "NO"
+      items:
+          NO: Non
+          YES: Oui
+  tu_payment:
+      type: enum
+      label: Paiement déposé
+      default: "NO"
+      items:
+          NO: Non
+          YES: Oui
+  tu_caution:
+      type: enum
+      label: Caution déposé
+      default: "NO"
+      items:
+          NO: Non
+          YES: Oui
+  tu_parent_agreement:
+      type: enum
+      label: Accord parental déposé
+      default: "NOT_NEEDED"
+      items:
+          NO: Non
+          YES: Oui
+          NOT_NEEDED: Non nécessaire
+  tu_price:
+      #Le prix est en centimes
+      type: int
+      label: Prix
+  tu_mailok:
+      type: enum
+      label: Email de validation envoyé
+      default: "NO"
+      items:
+          NO: Non
+          YES: Oui
+  tu_admin_comment:
+      type: text
+      label: Commentaire privé

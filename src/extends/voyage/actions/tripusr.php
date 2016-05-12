@@ -1,0 +1,152 @@
+<?php
+
+/*
+ * Gestion des dossiers utilisateur
+ */
+
+function tripusr_index() {
+    $mdl = new Modele('trips');
+    $mdl->fetch($_GET['trip']);
+    $mdl->assignTemplate('trip');
+
+    $ufile = new Modele('trip_userfiles');
+    $ufile->find(array(
+        'tu_user' => $_SESSION['user']['user_id'],
+        'tu_trip' => $mdl->getKey(),
+    ));
+    $ufile->appendTemplate('userfiles');
+
+    display();
+}
+
+function _tripusr_new_contact($form, &$ferr) {
+    // Nom obligatoire
+    if ($form['lastname'] == '') {
+        $ferr['lastname'] = 'Le nom est obligatoire sur un contact';
+    }
+
+    // Prénom obligatoire
+    if ($form['firstname'] == '') {
+        $ferr['firstname'] = 'Le prénom est obligatoire sur un contact';
+    }
+
+    // Un numéro de tel obligatoire
+    if ($form['phone'] == '' && $form['cell'] == '') {
+        $ferr['phone'] = 'Un numéro de téléphone est obligatoire sur un contact';
+        $ferr['cell'] = 'Un numéro de téléphone est obligatoire sur un contact';
+    }
+
+    if (count($ferr) > 0) {
+        return false;
+    }
+
+    $mdl = new Modele('trip_contacts');
+    $valid = $mdl->addFrom(array(
+        'ta_user' => $_SESSION['user']['user_id'],
+        'ta_firstname' => $form['firstname'],
+        'ta_lastname' => $form['lastname'],
+        'ta_mail' => $form['mail'],
+        'ta_phone' => $form['phone'],
+        'ta_cell' => $form['cell'],
+        'ta_street1' => $form['street'],
+        'ta_zipcode' => $form['zipcode'],
+        'ta_town' => $form['town'],
+    ));
+
+    if (!$valid) {
+        $ferr['sql'] = 'Erreur SQL';
+        return false;
+    }
+
+    return $mdl->getKey();
+}
+
+function _tripusr_error($from_array) {
+    $return = array();
+
+    foreach ($from_array as $elmt) {
+        if (is_array($elmt)) {
+            $return = array_merge($return, _tripusr_error($elmt));
+        } else {
+            $return[] = $elmt;
+        }
+    }
+
+    return $return;
+}
+
+function tripusr_new() {
+    global $tpl;
+
+    $ferr = array(
+        't' => array(),
+        'e' => array(),
+    );
+    $errors = array();
+
+    $mdl = new Modele('trips');
+    $mdl->fetch($_GET['trip']);
+    $mdl->assignTemplate('trip');
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($_POST['traveller'] == $_POST['emergency'] && $_POST['emergency'] != 'new') {
+            $errors[] = 'Le contact en cas d\'urgence ne peut pas être le participant.';
+            $ferr['emergency'] = true;
+            $ferr['traveller'] = true;
+        } elseif ($_POST['traveller'] == 'new' || $_POST['emergency'] == 'new') {
+            if ($_POST['traveller'] == 'new' && isset($_POST['t'])) {
+                $contact = _tripusr_new_contact($_POST['t'], $ferr['t']);
+                if ($contact !== false) {
+                    $_POST['traveller'] = $contact;
+                }
+            }
+            if ($_POST['emergency'] == 'new' && isset($_POST['e'])) {
+                $contact = _tripusr_new_contact($_POST['e'], $ferr['e']);
+                if ($contact !== false) {
+                    $_POST['emergency'] = $contact;
+                }
+            }
+        }
+
+        if (count($errors)) {
+            $tpl->assign('errors', $errors);
+        } elseif ($_POST['emergency'] != 'new' && $_POST['traveller'] != 'new') {
+            $ufile = new Modele('trip_userfiles');
+            $valid = $ufile->addFrom(array(
+                'tu_trip' => $mdl->getKey(),
+                'tu_step' => 2,
+                'tu_type' => $mdl->raw_tr_deftype,
+                'tu_participant' => $_POST['traveller'] == 'me' ? 0 : $_POST['traveller'],
+                'tu_emergency' => $_POST['emergency'] == 'me' ? 0 : $_POST['emergency'],
+                'tu_user' => $_SESSION['user']['user_id'],
+            ));
+
+            if ($valid) {
+                redirect('tripusr', 'step2', array(
+                    'file' => $ufile->getKey(),
+                ));
+            }
+            $errors[] = 'Erreur SQL création dossier';
+        }
+    }
+
+    $errors = array_merge($errors, _tripusr_error($ferr));
+    $errors = array_unique($errors);
+
+    // Recherche des contacts
+    $ctx = new Modele('trip_contacts');
+    $ctx->find(array('ta_user' => $_SESSION['user']['user_id']));
+    $ctx->appendTemplate('contacts');
+
+    $tpl->assign('ferr', $ferr);
+    display();
+}
+
+function tripusr_continue() {
+    $mdl = new Modele('trip_userfiles');
+    $mdl->fetch($_GET['file']);
+
+    if ($mdl->raw_tu_user == $_SESSION['user']['user_id']) {
+        redirect('tripusr', 'step' . $mdl->tu_step, array('file' => $mdl->getKey()));
+    }
+}

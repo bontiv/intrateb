@@ -1,0 +1,15 @@
+#Table trip_options (Options facultatives du voyage)
+name: trip_options
+key: topt_id
+fields:
+  topt_id:
+    type: auto_int
+  topt_group:
+      type: var
+      label: Groupe de la question
+  topt_question:
+      type: var
+      label: Question à poser
+  topt_label:
+      type: var
+      label: Nom affiché (facture)
