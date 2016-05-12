@@ -1,0 +1,20 @@
+# Informations générales
+infos:
+  name: "Beers"
+  author: "Julien Treiber <julien.treiber.54@gmail.com>"
+  description: "Module de gestion des bières"
+
+# Liste des accès
+acces:
+  beers:
+    index: USER
+
+# Menus
+menu:
+    # Menu par défault
+    DEFAULT:
+        BEERS:
+            label: "Bières"
+            url:
+                action: beers
+                page: index

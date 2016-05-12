@@ -7,4 +7,4 @@
 #/src/libs/card_bg.*
 /tmp/*.cache
 .idea/
-
+deplay.sh

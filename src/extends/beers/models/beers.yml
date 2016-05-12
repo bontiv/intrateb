@@ -1,0 +1,25 @@
+## Table beers
+name: beers
+key: beer_id
+fields:
+  beer_id:
+    type: auto_int
+  beer_name:
+    type: var
+    size: 50
+    label: Nom
+  desc:
+    type: text
+    label: Description
+  barcode:
+    type: var
+    size: 25
+    label: Code Barre
+  capacity:
+    type: int
+    label: Contenance
+## TODO beers prices
+indexes:
+  beer_name:
+    type: unique
+    fields: [beer_name]
