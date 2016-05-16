@@ -236,5 +236,72 @@ function tripusr_step3() {
         redirect('tripusr', 'continue', array('file' => $ufile->getKey()));
     }
 
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        foreach ($_POST['opt'] as $answer) {
+            $tou = new Modele('trip_option_userfile');
+            $valid = $tou->addFrom(array(
+                'tou_option' => $answer,
+                'too_userfiles' => $ufile->getKey(),
+            ));
+
+            if ($valid) {
+                $ufile->tu_step = 4;
+                redirect('tripusr', 'step4', array('file' => $ufile->getKey()));
+            }
+            $tpl->assign('hsuccess', false);
+        }
+    }
+
+    $optlist = array();
+    $questions = new Modele('trip_options');
+    $questions->find(array('topt_trip' => $ufile->raw_tu_trip));
+
+    // Pas de complements, go etape 4
+    if ($questions->count() == 0) {
+        $ufile->tu_step = 4;
+        redirect('tripusr', 'step4', array('file' => $ufile->getKey()));
+    }
+
+    while ($questions->next()) {
+        if (!isset($optlist[$questions->topt_group])) {
+            $optlist[$questions->topt_group] = array();
+        }
+
+        $qinfo = array(
+            'question' => new Modele($questions),
+            'options' => array(),
+        );
+
+        $opts = new Modele('trip_option_options');
+        $opts->find(array('too_option' => $questions->getKey()));
+        while ($opts->next()) {
+            $qinfo['options'][] = new Modele($opts);
+        }
+        $optlist[$questions->topt_group][] = $qinfo;
+    }
+
+    $tpl->assign('groups', $optlist);
+
+    display();
+}
+
+// Choix billet
+function tripusr_step4() {
+    global $tpl;
+
+    $ufile = _tripusr_load();
+
+    if ($ufile->tu_step != 4) {
+        redirect('tripusr', 'continue', array('file' => $ufile->getKey()));
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    }
+
+    $tickets = new Modele('trip_types');
+    $tickets->find(array('tt_trip' => $ufile->raw_tu_trip));
+    $tickets->appendTemplate('tickets');
+
     display();
 }

@@ -393,3 +393,82 @@ function trip_option_edit() {
 
     display();
 }
+
+function trip_opt_list() {
+    global $tpl;
+
+    $mod = new Modele('trip_options');
+    $mod->fetch($_GET['option']);
+    $mod->assignTemplate('option');
+    $mdl = $mod->topt_trip;
+    $mdl->assignTemplate('trip');
+
+    $opt = new Modele('trip_option_options');
+    $opt->find(array('too_option' => $mod->getKey()));
+    $opt->appendTemplate('ooptions');
+
+    display();
+}
+
+function trip_opt_add() {
+    global $tpl;
+
+    $mod = new Modele('trip_options');
+    $mod->fetch($_GET['option']);
+    $mod->assignTemplate('option');
+    $mdl = $mod->topt_trip;
+    $mdl->assignTemplate('trip');
+
+    $opt = new Modele('trip_option_options');
+    $tpl->assign('form', $opt->edit(array(
+                'too_value',
+                'too_price',
+    )));
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $data = array_merge($_POST, array(
+            'too_option' => $mod->getKey(),
+        ));
+
+        if ($opt->addFrom($data)) {
+            redirect('trip', 'opt_list', array('option' => $mod->getKey(), 'hsuccess' => 1));
+        }
+        $tpl->assign('hsuccess', false);
+    }
+
+    display();
+}
+
+function trip_opt_delete() {
+    $mod = new Modele('trip_option_options');
+    $mod->fetch($_GET['option']);
+    $option = $mod->raw_too_option;
+
+    redirect('trip', 'opt_list', array('option' => $option, 'hsuccess' => $mod->delete() ? '0' : '1'));
+}
+
+function trip_opt_edit() {
+    global $tpl;
+
+    $opt = new Modele('trip_option_options');
+    $opt->fetch($_GET['option']);
+    $opt->assignTemplate('ooption');
+    $mod = $opt->too_option;
+    $mod->assignTemplate('option');
+    $mdl = $mod->topt_trip;
+    $mdl->assignTemplate('trip');
+
+    $tpl->assign('form', $opt->edit(array(
+                'too_value',
+                'too_price',
+    )));
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($opt->modFrom($_POST)) {
+            redirect('trip', 'opt_list', array('option' => $mod->getKey(), 'hsuccess' => 1));
+        }
+        $tpl->assign('hsuccess', false);
+    }
+
+    display();
+}

@@ -3,7 +3,7 @@
   <li class=""><a href="{mkurl action="trip" page="index"}">Voyages</a></li>
   <li><a href="{mkurl action="trip" page="view" trip=$trip->tr_id}">{$trip->tr_name|escape}</a></li>
   <li><a href="{mkurl action="trip" page="admin" trip=$trip->tr_id}">Gestion</a></li>
-  <li class="active">Options</li>
+  <li class="active">Compléments</li>
 </ol>
 
 <h1>Gestion Voyage <small>{$trip->tr_name|escape}</small></h1>
