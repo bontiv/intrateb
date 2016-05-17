@@ -296,12 +296,37 @@ function tripusr_step4() {
     }
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+        $bill = new Modele('trip_types');
+        $bill->fetch($_POST['ticket']);
+        switch ($bill->raw_tt_restriction) {
+            case 'ALL':
+                $ufile->tu_type = $bill->getKey();
+                $ufile->tu_step = 5;
+                redirect('tripusr', 'step5', array('file' => $ufile->getKey()));
+                break;
+            case 'USER':
+                $ufile->tu_type = $bill->getKey();
+                if (aclFromText($_SESSION['user']['user_role']) >= ACL_USER) {
+                    $ufile->tu_step = 5;
+                    redirect('tripusr', 'step5', array('file' => $ufile->getKey()));
+                }
+                break;
+            default:
+                echo 'ERROR: not implemented';
+                quit();
+                break;
+        }
     }
 
     $tickets = new Modele('trip_types');
     $tickets->find(array('tt_trip' => $ufile->raw_tu_trip));
     $tickets->appendTemplate('tickets');
+
+    display();
+}
+
+function tripusr_step5() {
+    $ufile = _tripusr_load();
 
     display();
 }
