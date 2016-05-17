@@ -20,17 +20,17 @@ function tripusr_index() {
 }
 
 function _tripusr_new_contact($form, &$ferr) {
-    // Nom obligatoire
+// Nom obligatoire
     if ($form['lastname'] == '') {
         $ferr['lastname'] = 'Le nom est obligatoire sur un contact';
     }
 
-    // Prénom obligatoire
+// Prénom obligatoire
     if ($form['firstname'] == '') {
         $ferr['firstname'] = 'Le prénom est obligatoire sur un contact';
     }
 
-    // Un numéro de tel obligatoire
+// Un numéro de tel obligatoire
     if ($form['phone'] == '' && $form['cell'] == '') {
         $ferr['phone'] = 'Un numéro de téléphone est obligatoire sur un contact';
         $ferr['cell'] = 'Un numéro de téléphone est obligatoire sur un contact';
@@ -133,7 +133,7 @@ function tripusr_new() {
     $errors = array_merge($errors, _tripusr_error($ferr));
     $errors = array_unique($errors);
 
-    // Recherche des contacts
+// Recherche des contacts
     $ctx = new Modele('trip_contacts');
     $ctx->find(array('ta_user' => $_SESSION['user']['user_id']));
     $ctx->appendTemplate('contacts');
@@ -149,4 +149,159 @@ function tripusr_continue() {
     if ($mdl->raw_tu_user == $_SESSION['user']['user_id']) {
         redirect('tripusr', 'step' . $mdl->tu_step, array('file' => $mdl->getKey()));
     }
+}
+
+function _tripusr_load() {
+    $ufile = new Modele('trip_userfiles');
+
+    try {
+        $ufile->fetch($_GET['file']);
+    } catch (SQLFetchNotFound $e) {
+        redirect('syscore', 'invcall');
+    }
+
+    if ($ufile->raw_tu_user != $_SESSION['user']['user_id']) {
+        redirect('syscore', 'forbidden');
+    }
+
+    $ufile->assignTemplate('ufile');
+    $ufile->tu_trip->assignTemplate('trip');
+
+    return $ufile;
+}
+
+function _tripusr_data($fields, $from = null) {
+    $data = array();
+
+    if ($from === null) {
+        $from = $_POST;
+    }
+
+    foreach ($fields as $field) {
+        if (isset($from[$field])) {
+            $data[$field] = $from[$field];
+        }
+    }
+
+    return $data;
+}
+
+function tripusr_step2() {
+    global $tpl;
+
+    $ufile = _tripusr_load();
+
+    if ($ufile->tu_step != 2) {
+        redirect('tripusr', 'continue', array('file' => $ufile->getKey()));
+    }
+
+    $health = $ufile->edit(array(
+        'tu_vertigo',
+        'tu_travel_sickness',
+        'tu_allergy',
+    ));
+
+    $memo = $ufile->edit(array(
+        'tu_comment',
+    ));
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $data = _tripusr_data(array(
+            'tu_vertigo',
+            'tu_travel_sickness',
+            'tu_allergy',
+            'tu_comment',
+        ));
+
+        $data['tu_step'] = 3;
+
+        if ($ufile->modFrom($data)) {
+            redirect('tripusr', 'step3', array('file' => $ufile->getKey()));
+        } else {
+            $tpl->assign('hsuccess', false);
+        }
+    }
+
+    $tpl->assign('health', $health);
+    $tpl->assign('memo', $memo);
+    display();
+}
+
+function tripusr_step3() {
+    global $tpl;
+
+    $ufile = _tripusr_load();
+
+    if ($ufile->tu_step != 3) {
+        redirect('tripusr', 'continue', array('file' => $ufile->getKey()));
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        foreach ($_POST['opt'] as $answer) {
+            $tou = new Modele('trip_option_userfile');
+            $valid = $tou->addFrom(array(
+                'tou_option' => $answer,
+                'too_userfiles' => $ufile->getKey(),
+            ));
+
+            if ($valid) {
+                $ufile->tu_step = 4;
+                redirect('tripusr', 'step4', array('file' => $ufile->getKey()));
+            }
+            $tpl->assign('hsuccess', false);
+        }
+    }
+
+    $optlist = array();
+    $questions = new Modele('trip_options');
+    $questions->find(array('topt_trip' => $ufile->raw_tu_trip));
+
+    // Pas de complements, go etape 4
+    if ($questions->count() == 0) {
+        $ufile->tu_step = 4;
+        redirect('tripusr', 'step4', array('file' => $ufile->getKey()));
+    }
+
+    while ($questions->next()) {
+        if (!isset($optlist[$questions->topt_group])) {
+            $optlist[$questions->topt_group] = array();
+        }
+
+        $qinfo = array(
+            'question' => new Modele($questions),
+            'options' => array(),
+        );
+
+        $opts = new Modele('trip_option_options');
+        $opts->find(array('too_option' => $questions->getKey()));
+        while ($opts->next()) {
+            $qinfo['options'][] = new Modele($opts);
+        }
+        $optlist[$questions->topt_group][] = $qinfo;
+    }
+
+    $tpl->assign('groups', $optlist);
+
+    display();
+}
+
+// Choix billet
+function tripusr_step4() {
+    global $tpl;
+
+    $ufile = _tripusr_load();
+
+    if ($ufile->tu_step != 4) {
+        redirect('tripusr', 'continue', array('file' => $ufile->getKey()));
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    }
+
+    $tickets = new Modele('trip_types');
+    $tickets->find(array('tt_trip' => $ufile->raw_tu_trip));
+    $tickets->appendTemplate('tickets');
+
+    display();
 }

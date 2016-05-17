@@ -688,6 +688,11 @@ class Modele {
                 $this->instance[$name] = false;
             }
         }
+
+        if ($raw && $this->instance[$name] instanceof Modele) {
+            return $this->instance[$name]->getKey();
+        }
+
         return $this->instance[$name];
     }
 

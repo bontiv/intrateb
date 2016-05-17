@@ -8,6 +8,7 @@ fields:
       type: external
       label: Voyage
       display: %tr_name%
+      table: trips
   tu_step:
       type: int
       default: 0
@@ -15,12 +16,13 @@ fields:
       # 0 : Ouvert
       # 1 : Infos de base
       # 2 : Infos santé
-      # 3 : Choix billet
-      # 4 : Attente validation billet
-      # 5 : Choix chambre
-      # 6 : Attente validation chambre
-      # 7 : Attentes des pièces du dossier
-      # 8 : Dossier complet
+      # 3 : Options voyage
+      # 4 : Choix billet
+      # 5 : Attente validation billet
+      # 6 : Choix chambre
+      # 7 : Attente validation chambre
+      # 8 : Attentes des pièces du dossier
+      # 9 : Dossier complet
   tu_type:
       type: external
       label: Type de billet
