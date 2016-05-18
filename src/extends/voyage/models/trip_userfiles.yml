@@ -130,3 +130,8 @@ fields:
   tu_admin_comment:
       type: text
       label: Commentaire privé
+  tu_complete:
+      type: date_time
+      label: Date de completion
+      null: true
+      
