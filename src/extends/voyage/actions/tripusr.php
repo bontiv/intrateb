@@ -301,12 +301,14 @@ function tripusr_step4() {
         switch ($bill->raw_tt_restriction) {
             case 'ALL':
                 $ufile->tu_type = $bill->getKey();
+                $ufile->tu_price = $bill->tt_price;
                 $ufile->tu_step = 5;
                 redirect('tripusr', 'step5', array('file' => $ufile->getKey()));
                 break;
             case 'USER':
                 $ufile->tu_type = $bill->getKey();
                 if (aclFromText($_SESSION['user']['user_role']) >= ACL_USER) {
+                    $ufile->tu_price = $bill->tt_price;
                     $ufile->tu_step = 5;
                     redirect('tripusr', 'step5', array('file' => $ufile->getKey()));
                 }

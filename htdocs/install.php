@@ -102,6 +102,7 @@ if (isset($_GET['etape']) && $_GET['etape'] == 'dbsync') {
     $delete_tables = array_diff($installed_tables, $need_tables);
     $install_tables = array_diff($need_tables, $installed_tables);
     $verify_tables = array_intersect($need_tables, $installed_tables);
+    
 
     $modify_tables = array();
     foreach ($verify_tables as $table) {

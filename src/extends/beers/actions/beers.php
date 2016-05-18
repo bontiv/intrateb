@@ -34,8 +34,7 @@ function beers_index() {
 
 	$pager->run($tpl);
 
-	$tpl->display('beers_index.tpl');
-	quit();
+	display();
 }
 
 /**

@@ -1,2 +1,7 @@
 ## What kind of beer is that?
 ## TODO IPA, APA, Pills, ...
+name: beers_types
+key: beer_id
+fields:
+  beer_id:
+    type: auto_int

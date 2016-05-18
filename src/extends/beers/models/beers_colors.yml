@@ -1,2 +1,7 @@
 ## what color is your beer
 ## TODO
+name: beers_color
+key: beer_id
+fields:
+  beer_id:
+    type: auto_int

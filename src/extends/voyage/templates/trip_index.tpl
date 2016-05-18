@@ -31,7 +31,9 @@
               <td>
                 <div class="btn-group btn-group-xs">
                   <a href="{mkurl action="tripusr" page="index" trip=$trip->tr_id}" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-folder-open"></span> Dossiers</a>
+                  {acl level="ADMINISTRATOR"}
                   <a href="{mkurl action="trip" page="admin" trip=$trip->tr_id}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-wrench"></span> Admin</a>
+                  {/acl}
                 </div>
               </td>
             </tr>

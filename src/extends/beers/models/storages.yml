@@ -1,2 +1,7 @@
 ## physical places where beers are stocked
 ## TODO stock_id(PK), name
+name: storage
+key: stock_id
+fields:
+  stock_id:
+    type: auto_int

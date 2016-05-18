@@ -1,2 +1,7 @@
 ## where upvotes goes
 ## TODO beer_id, user_id PK & FK
+name: beers_notes
+key: beer_id
+fields:
+  beer_id:
+    type: auto_int

@@ -156,6 +156,54 @@ function trip_car_edit() {
     display();
 }
 
+function trip_admin_files() {
+    $mdl = new Modele('trips');
+    $mdl->fetch($_GET['trip']);
+    $mdl->assignTemplate('trip');
+
+    $ufiles = new Modele('trip_userfiles');
+    $ufiles->find(array(
+        'tu_trip' => $mdl->getKey()
+    ));
+    $ufiles->appendTemplate('ufiles');
+
+    display();
+}
+
+function trip_files_delete() {
+    $mod = new Modele('trip_userfiles');
+    $mod->fetch($_GET['file']);
+    $trip = $mod->raw_tu_trip;
+
+    redirect('trip', 'admin_files', array('trip' => $trip, 'hsuccess' => $mod->delete() ? '0' : '1'));
+}
+
+function trip_files_edit() {
+    global $tpl;
+
+    $mod = new Modele('trip_userfiles');
+    $mod->fetch($_GET['file']);
+    $mod->assignTemplate('file');
+    $mdl = $mod->tu_trip;
+    $mdl->assignTemplate('trip');
+    
+    $tpl->assign('form', $mod->edit(array(
+                'tu_payment',
+                'tu_caution',
+                'tu_responsability_agreement'
+    )));
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($mod->modFrom($_POST)) {
+            redirect('trip', 'trip_admin_files', array('trip' => $mdl->getKey(), 'hsuccess' => '1'));
+        } else {
+            $tpl->assign('hsuccess', 0);
+        }
+    }
+
+    display();
+}
+
 function trip_admin_rooms() {
     $mdl = new Modele('trips');
     $mdl->fetch($_GET['trip']);

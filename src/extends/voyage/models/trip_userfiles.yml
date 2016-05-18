@@ -32,12 +32,12 @@ fields:
       null: true
       label: Voyageur (participant)
       table: trip_contacts
-      display: %ta_fistname% %ta_lastname%
+      display: %ta_firstname% %ta_lastname%
   tu_emergency:
       type: external
       label: contact d'urgence
       table: trip_contacts
-      display: %ta_fistname% %ta_lastname%
+      display: %ta_firstname% %ta_lastname%
   tu_user:
       type: external
       label: Utilisateur

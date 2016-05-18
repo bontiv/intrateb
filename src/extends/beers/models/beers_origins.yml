@@ -1,2 +1,7 @@
 ## from where beers came from
 ## TODO 
+name: beers_origins
+key: beer_id
+fields:
+  beer_id:
+    type: auto_int
