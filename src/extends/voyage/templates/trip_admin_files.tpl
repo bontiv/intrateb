@@ -43,9 +43,9 @@
                   <td>
                     <a href="{mkurl action="tripadm" file=$ufile->tu_id}">
                       {if $ufile->raw_tu_participant==0}
-                          {$_user.user_firstname|escape} {$_user.user_lastname|escape}
+                          {$ufile->tu_user->user_firstname|escape} {$ufile->tu_user->user_lastname|escape}
                       {else}
-                          {$ufile->tu_participant->ca_firstname} {$ufile->tu_participant->ca_lastname}
+                          {$ufile->tu_participant->user_firstname} {$ufile->tu_participant->ca_lastname}
                       {/if}
                   </td>
                   <td>
