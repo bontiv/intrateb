@@ -72,7 +72,7 @@
                   </td>
                   <td>
                     <div class="btn-group btn-group-xs">
-                      <a href="{mkurl action="trip" page="files_edit" file=$ufile->tu_id}" class="btn btn-warning btn-xs">
+                      <a href="{mkurl action="tripadm" page="index" file=$ufile->tu_id}" class="btn btn-warning btn-xs">
                         <span class="glyphicon glyphicon-edit"></span>
                         Edition
                       </a>

@@ -206,20 +206,26 @@ function tripusr_step2() {
     ));
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $data = _tripusr_data(array(
-            'tu_vertigo',
-            'tu_travel_sickness',
-            'tu_allergy',
-            'tu_comment',
-        ));
-
-        $data['tu_step'] = 3;
-
-        if ($ufile->modFrom($data)) {
-            redirect('tripusr', 'step3', array('file' => $ufile->getKey()));
+        if (isset($_POST["next"])) {
+            $data = _tripusr_data(array(
+                'tu_vertigo',
+                'tu_travel_sickness',
+                'tu_allergy',
+                'tu_comment',
+            ));
+    
+            $data['tu_step'] = 3;
+    
+            if ($ufile->modFrom($data)) {
+                redirect('tripusr', 'step3', array('file' => $ufile->getKey()));
+            } else {
+                $tpl->assign('hsuccess', false);
+            }
         } else {
-            $tpl->assign('hsuccess', false);
+            $data['tu_step'] = 1;
+            redirect('tripusr', 'new', array('file' => $ufile->getKey(), 'trip' => $ufile->raw_tu_trip));
         }
+
     }
 
     $tpl->assign('health', $health);
@@ -258,6 +264,7 @@ function tripusr_step3() {
 
     // Pas de complements, go etape 4
     if ($questions->count() == 0) {
+        
         $ufile->tu_step = 4;
         redirect('tripusr', 'step4', array('file' => $ufile->getKey()));
     }
@@ -296,28 +303,42 @@ function tripusr_step4() {
     }
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $bill = new Modele('trip_types');
-        $bill->fetch($_POST['ticket']);
-        switch ($bill->raw_tt_restriction) {
-            case 'ALL':
-                $ufile->tu_type = $bill->getKey();
-                $ufile->tu_price = $bill->tt_price;
-                $ufile->tu_step = 5;
-                redirect('tripusr', 'step5', array('file' => $ufile->getKey()));
-                break;
-            case 'USER':
-                $ufile->tu_type = $bill->getKey();
-                if (aclFromText($_SESSION['user']['user_role']) >= ACL_USER) {
+        if (isset($_POST["next"])) {
+            $bill = new Modele('trip_types');
+            $bill->fetch($_POST['ticket']);
+            switch ($bill->raw_tt_restriction) {
+                case 'ALL':
+                    $ufile->tu_type = $bill->getKey();
                     $ufile->tu_price = $bill->tt_price;
                     $ufile->tu_step = 5;
                     redirect('tripusr', 'step5', array('file' => $ufile->getKey()));
-                }
-                break;
-            default:
-                echo 'ERROR: not implemented';
-                quit();
-                break;
+                    break;
+                case 'USER':
+                    $ufile->tu_type = $bill->getKey();
+                    if (aclFromText($_SESSION['user']['user_role']) >= ACL_USER) {
+                        $ufile->tu_price = $bill->tt_price;
+                        $ufile->tu_step = 5;
+                        redirect('tripusr', 'step5', array('file' => $ufile->getKey()));
+                    }
+                    break;
+                default:
+                    echo 'ERROR: not implemented';
+                    quit();
+                    break;
+            }
+        } else {
+            $questions = new Modele('trip_options');
+            $questions->find(array('topt_trip' => $ufile->raw_tu_trip));
+            // Pas de complements, go back etape 2
+            if ($questions->count() == 0) {
+                $ufile->tu_step = 2;
+                redirect('tripusr', 'step2', array('file' => $ufile->getKey()));
+            } else {
+                $ufile->tu_step = 3;
+                redirect('tripusr', 'step3', array('file' => $ufile->getKey()));
+            }
         }
+
     }
 
     $tickets = new Modele('trip_types');
@@ -329,6 +350,9 @@ function tripusr_step4() {
 
 function tripusr_step5() {
     $ufile = _tripusr_load();
-
+    if (isset($_POST["prev"])) {
+        $ufile->tu_step = 4;
+        redirect('tripusr', 'step4', array('file' => $ufile->getKey()));
+    }
     display();
 }
