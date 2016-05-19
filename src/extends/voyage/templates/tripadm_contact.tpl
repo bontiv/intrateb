@@ -69,7 +69,7 @@
 
         <!-- Text input-->
         <div class="row info">
-          <label class="col-md-4 control-label" for="{$prefix}_street">Adresse portale</label>
+          <label class="col-md-4 control-label" for="{$prefix}_street">Adresse postale</label>
           <div class="col-md-4">
             Tootoo
             <span class="help-block">Numéro et rue</span>
@@ -160,7 +160,7 @@
 
         <!-- Text input-->
         <div class="row info">
-          <label class="col-md-4 control-label" for="{$prefix}_street">Adresse portale</label>
+          <label class="col-md-4 control-label" for="{$prefix}_street">Adresse postale</label>
           <div class="col-md-4">
             Tootoo
             <span class="help-block">Numéro et rue</span>

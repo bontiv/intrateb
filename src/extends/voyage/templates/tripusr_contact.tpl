@@ -61,7 +61,7 @@
 
   <!-- Text input-->
   <div class="form-group{if isset($ferr.$prefix.street)} has-error{/if}">
-    <label class="col-md-4 control-label" for="{$prefix}_street">Adresse portale</label>
+    <label class="col-md-4 control-label" for="{$prefix}_street">Adresse postale</label>
     <div class="col-md-4">
       <input id="{$prefix}_street" name="{$prefix}[street]" placeholder="placeholder" class="form-control input-md" type="text" value="{if isset($smarty.post.$prefix.street)}{$smarty.post.$prefix.street}{/if}" />
       <span class="help-block">Numéro et rue</span>
