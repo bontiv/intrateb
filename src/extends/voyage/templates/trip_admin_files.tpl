@@ -45,7 +45,7 @@
                       {if $ufile->raw_tu_participant==0}
                           {$ufile->tu_user->user_firstname|escape} {$ufile->tu_user->user_lastname|escape}
                       {else}
-                          {$ufile->tu_participant->user_firstname} {$ufile->tu_participant->ca_lastname}
+                          {$ufile->tu_participant->ta_firstname} {$ufile->tu_participant->ta_lastname}
                       {/if}
                   </td>
                   <td>
