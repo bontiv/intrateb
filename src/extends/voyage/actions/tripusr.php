@@ -221,10 +221,10 @@ function tripusr_step2() {
             } else {
                 $tpl->assign('hsuccess', false);
             }
-        } else {
+        }/* else {
             $data['tu_step'] = 1;
             redirect('tripusr', 'new', array('file' => $ufile->getKey(), 'trip' => $ufile->raw_tu_trip));
-        }
+        }*/
 
     }
 
@@ -326,7 +326,8 @@ function tripusr_step4() {
                     quit();
                     break;
             }
-        } else {
+        } 
+        /*else {
             $questions = new Modele('trip_options');
             $questions->find(array('topt_trip' => $ufile->raw_tu_trip));
             // Pas de complements, go back etape 2
@@ -337,7 +338,7 @@ function tripusr_step4() {
                 $ufile->tu_step = 3;
                 redirect('tripusr', 'step3', array('file' => $ufile->getKey()));
             }
-        }
+        }*/
 
     }
 
@@ -350,9 +351,9 @@ function tripusr_step4() {
 
 function tripusr_step5() {
     $ufile = _tripusr_load();
-    if (isset($_POST["prev"])) {
-        $ufile->tu_step = 4;
-        redirect('tripusr', 'step4', array('file' => $ufile->getKey()));
-    }
+    //if (isset($_POST["prev"])) {
+    //    $ufile->tu_step = 4;
+    //    redirect('tripusr', 'step4', array('file' => $ufile->getKey()));
+    //}
     display();
 }

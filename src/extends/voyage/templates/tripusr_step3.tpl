@@ -52,7 +52,6 @@
     {* Panel Footer *}
     <div class="panel panel-default">
       <div class="panel-footer">
-        <input type="submit" class="btn btn-primary" name="prev" value="Précédent" />
         <input type="submit" class="btn btn-primary" name="next" value="Suivant" />
       </div>
     </div>
