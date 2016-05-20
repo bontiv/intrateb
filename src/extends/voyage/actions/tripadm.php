@@ -13,9 +13,9 @@ function _tripadm_load() {
         redirect('syscore', 'invcall');
     }
 
-    if ($ufile->raw_tu_user != $_SESSION['user']['user_id']) {
-        redirect('syscore', 'forbidden');
-    }
+//    if ($ufile->raw_tu_user != $_SESSION['user']['user_id']) {
+//        redirect('syscore', 'forbidden');
+ //   }
 
     $ufile->assignTemplate('ufile');
     $ufile->tu_trip->assignTemplate('trip');
