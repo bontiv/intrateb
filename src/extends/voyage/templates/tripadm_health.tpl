@@ -21,14 +21,14 @@
       <div class="row">
         <label class="col-md-offset-2 col-md-4">Mal des transports</label>
         <div class="col-md-4">
-          Hopopo !!!
+          {$ufile->tu_travel_sickness}
         </div>
       </div>
 
       <div class="row">
         <label class="col-md-offset-2 col-md-4">Vertiges</label>
         <div class="col-md-4">
-          Hopopo !!!
+         {$ufile->tu_vertigo}
         </div>
       </div>
 
@@ -41,7 +41,7 @@
     </div>
     <div class="panel-body">
 
-      Info...
+     {$ufile->tu_allergy}
 
     </div>
   </div>
@@ -52,7 +52,7 @@
     </div>
     <div class="panel-body">
 
-      Info...
+      {$ufile->tu_comment}
 
     </div>
   </div>
