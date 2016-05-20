@@ -14,28 +14,44 @@
       <div class="row">
         <label class="col-md-offset-2 col-md-4">Nom de famille</label>
         <div class="col-md-4">
-          Hopopo !!!
+          {if $ufile->raw_tu_participant==0}
+             {$ufile->tu_user->user_lastname|escape}
+          {else}
+              {$ufile->tu_participant->ta_lastname}
+          {/if}
         </div>
       </div>
 
       <div class="row">
         <label class="col-md-offset-2 col-md-4">Prénom</label>
         <div class="col-md-4">
-          Hopopo !!!
+          {if $ufile->raw_tu_participant==0}
+              {$ufile->tu_user->user_firstname|escape}
+          {else}
+              {$ufile->tu_participant->ta_firstname}
+          {/if}
         </div>
       </div>
 
       <div class="row">
         <label class="col-md-offset-2 col-md-4">Courriel</label>
         <div class="col-md-4">
-          Hopopo !!!
+          {if $ufile->raw_tu_participant==0}
+              {$ufile->tu_user->user_email}
+          {else}
+              {$ufile->tu_participant->ta_mail}
+          {/if}
         </div>
       </div>
 
       <div class="row">
         <label class="col-md-offset-2 col-md-4">Téléphone</label>
         <div class="col-md-4">
-          Hopopo !!!
+          {if $ufile->raw_tu_participant==0}
+              {$ufile->tu_user->user_phone}
+          {else}
+              {$ufile->tu_participant->ta_phone}
+          {/if}
         </div>
       </div>
 
@@ -81,41 +97,53 @@
     <div class="panel-body">
 
       <div class="row info">
-        <label class="col-md-offset-2 col-md-4">Paiement (xx €)</label>
+        <label class="col-md-offset-2 col-md-4">Paiement ({$ufile->raw_tu_price} €)</label>
         <div class="col-md-4">
-          Nop
-          <a href="#" class="btn btn-success">
-            <span class="glyphicon glyphicon-ok-circle"></span>
-          </a>
-          <a href="#" class="btn btn-danger">
-            <span class="glyphicon glyphicon-remove-circle"></span>
-          </a>
+          {if $ufile->raw_tu_payment=="YES"}
+              <span class="text-success">Déposé</span>
+              <a href="{mkurl action="tripadm" page="index" tu_payment=NO file=$ufile->tu_id}" class="btn btn-danger">
+                <span class="glyphicon glyphicon-remove-circle"></span>
+              </a>
+          {else}
+              <span class="text-danger">Non déposé</span>
+              <a href="{mkurl action="tripadm" page="index" tu_payment=YES file=$ufile->tu_id}" class="btn btn-success">
+                <span class="glyphicon glyphicon-ok-circle"></span>
+              </a>
+          {/if}
         </div>
       </div>
 
       <div class="row info">
         <label class="col-md-offset-2 col-md-4">Caution</label>
         <div class="col-md-4">
-          Nop
-          <a href="#" class="btn btn-success">
-            <span class="glyphicon glyphicon-ok-circle"></span>
-          </a>
-          <a href="#" class="btn btn-danger">
-            <span class="glyphicon glyphicon-remove-circle"></span>
-          </a>
+          {if $ufile->raw_tu_caution=="YES"}
+              <span class="text-success">Déposé</span>
+              <a href="{mkurl action="tripadm" page="index" tu_caution=NO file=$ufile->tu_id}" class="btn btn-danger">
+                <span class="glyphicon glyphicon-remove-circle"></span>
+              </a>
+          {else}
+              <span class="text-danger">Non déposé</span>
+              <a href="{mkurl action="tripadm" page="index" tu_caution=YES file=$ufile->tu_id}" class="btn btn-success">
+                <span class="glyphicon glyphicon-ok-circle"></span>
+              </a>
+          {/if}
         </div>
       </div>
 
       <div class="row info">
         <label class="col-md-offset-2 col-md-4">Décharge</label>
         <div class="col-md-4">
-          Nop
-          <a href="#" class="btn btn-success">
-            <span class="glyphicon glyphicon-ok-circle"></span>
-          </a>
-          <a href="#" class="btn btn-danger">
-            <span class="glyphicon glyphicon-remove-circle"></span>
-          </a>
+           {if $ufile->raw_tu_responsability_agreement=="YES"}
+                <span class="text-success">Déposé</span>
+                <a href="{mkurl action="tripadm" page="index" tu_responsability_agreement=NO file=$ufile->tu_id}" class="btn btn-danger">
+                  <span class="glyphicon glyphicon-remove-circle"></span>
+                </a>
+            {else}
+                <span class="text-danger">Non déposé</span>
+                <a href="{mkurl action="tripadm" page="index" tu_responsability_agreement=YES file=$ufile->tu_id}" class="btn btn-success">
+                  <span class="glyphicon glyphicon-ok-circle"></span>
+                </a>
+            {/if}
         </div>
       </div>
 
