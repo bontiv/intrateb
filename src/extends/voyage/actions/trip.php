@@ -186,7 +186,7 @@ function trip_files_edit() {
     $mod->assignTemplate('file');
     $mdl = $mod->tu_trip;
     $mdl->assignTemplate('trip');
-    
+
     $tpl->assign('form', $mod->edit(array(
                 'tu_payment',
                 'tu_caution',
@@ -516,6 +516,36 @@ function trip_opt_edit() {
             redirect('trip', 'opt_list', array('option' => $mod->getKey(), 'hsuccess' => 1));
         }
         $tpl->assign('hsuccess', false);
+    }
+
+    display();
+}
+
+function trip_search() {
+    global $pdo, $tpl;
+
+    $mdl = new Modele('trips');
+    $mdl->fetch($_GET['trip']);
+    $mdl->assignTemplate('trip');
+
+    if (isset($_POST['search'])) {
+        $search = $pdo->prepare('SELECT * FROM trip_userfiles'
+                . ' LEFT JOIN users ON tu_user = user_id AND tu_participant = 0'
+                . ' LEFT JOIN trip_contacts ON tu_participant = ta_id'
+                . ' WHERE user_lastname LIKE :search'
+                . ' OR user_name LIKE :search'
+                . ' OR user_firstname LIKE :search'
+                . ' OR user_email LIKE :search'
+                . ' OR ta_firstname LIKE :search'
+                . ' OR ta_lastname LIKE :search'
+                . ' OR ta_mail LIKE :search');
+        $search->bindValue(':search', $_POST['search']);
+
+        $search->execute();
+
+        while ($line = $search->fetch()) {
+            $tpl->append('ufiles', $line);
+        }
     }
 
     display();

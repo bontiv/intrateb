@@ -13,7 +13,7 @@
   {include "{$extendTpls}/trip_admin_head.tpl"}
 
   <div class="col-md-9">
-    <h2>Gestion des participants</h2>
+    <h2>Gestion des participants <small>Recherche</small></h2>
 
     <form class="form-inline" method="POST" action="{mkurl action="trip" page="search" trip=$trip->tr_id}">
       <div class="form-group">
@@ -28,11 +28,11 @@
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu">
-            <li><a href="{mkurl action="trip" page="search" field="tu_caution" value="0"}">Sans caution</a></li>
-            <li><a href="{mkurl action="trip" page="search" field="tu_payment" value="0"}">Sans paiement</a></li>
-            <li><a href="{mkurl action="trip" page="search" field="tu_responsability_agreement" value="0"}">Sans décharge</a></li>
+            <li><a href="{mkurl action="trip" trip=$trip->tr_id page="search" field="tu_caution" value="0"}">Sans caution</a></li>
+            <li><a href="{mkurl action="trip" trip=$trip->tr_id page="search" field="tu_payment" value="0"}">Sans paiement</a></li>
+            <li><a href="{mkurl action="trip" trip=$trip->tr_id page="search" field="tu_responsability_agreement" value="0"}">Sans décharge</a></li>
             <li><a href="#">Mineurs</a></li>
-            <li><a href="{mkurl action="trip" page="search" field="tu_step" value="10"}">Dossiers complets</a></li>
+            <li><a href="{mkurl action="trip" trip=$trip->tr_id page="search" field="tu_step" value="10"}">Dossiers complets</a></li>
           </ul>
         </div>
       </div>
@@ -53,15 +53,15 @@
             {foreach $ufiles as $ufile}
                 <tr>
                   <td>
-                    <a href="{mkurl action="tripadm" file=$ufile->tu_id}">
-                      {if $ufile->raw_tu_participant==0}
+                    <a href="{mkurl action="tripadm" file=$ufile.tu_id}">
+                      {if $ufile.tu_participant==0}
                           {$_user.user_firstname|escape} {$_user.user_lastname|escape}
                       {else}
-                          {$ufile->tu_participant->ca_firstname} {$ufile->tu_participant->ca_lastname}
+                          {$ufile.ca_firstname} {$ufile.ca_lastname}
                       {/if}
                   </td>
                   <td>
-                    {if $ufile->raw_tu_payment=="YES"}
+                    {if $ufile.tu_payment=="YES"}
                         <div class="text-success">Déposé</div>
                     {else}
                         <div class="text-danger">Non déposé</div>
@@ -69,14 +69,14 @@
                     </a>
                   </td>
                   <td>
-                    {if $ufile->raw_tu_caution=="YES"}
+                    {if $ufile.tu_caution=="YES"}
                         <div class="text-success">Déposé</div>
                     {else}
                         <div class="text-danger">Non déposé</div>
                     {/if}
                   </td>
                   <td>
-                    {if $ufile->raw_tu_responsability_agreement=="YES"}
+                    {if $ufile.tu_responsability_agreement=="YES"}
                         <div class="text-success">Déposé</div>
                     {else}
                         <div class="text-danger">Non déposé</div>
@@ -84,11 +84,11 @@
                   </td>
                   <td>
                     <div class="btn-group btn-group-xs">
-                      <a href="{mkurl action="trip" page="files_edit" file=$ufile->tu_id}" class="btn btn-warning btn-xs">
+                      <a href="{mkurl action="trip" page="files_edit" file=$ufile.tu_id}" class="btn btn-warning btn-xs">
                         <span class="glyphicon glyphicon-edit"></span>
                         Edition
                       </a>
-                      <a href="{mkurl action="trip" page="files_delete" file=$ufile->tu_id}" class="btn btn-danger btn-xs">
+                      <a href="{mkurl action="trip" page="files_delete" file=$ufile.tu_id}" class="btn btn-danger btn-xs">
                         <span class="glyphicon glyphicon-trash"></span>
                         Supprimer
                       </a>
@@ -100,7 +100,7 @@
         </table>
     {else}
         <div class="alert alert-warning">
-          Aucun utilisateur sur ce voyage.
+          Aucun dossier répondant à cette recherche.
         </div>
     {/if}
   </div>
