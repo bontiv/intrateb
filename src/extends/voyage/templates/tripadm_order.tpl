@@ -18,26 +18,26 @@
       </thead>
       <tbody>
         <tr>
-          <td>Billet</td>
-          <td>100 €</td>
+          <td>Billet : {$ufile->tu_type->tt_name}</td>
+          <td>{$ufile->tu_type->tt_price} €</td>
         </tr>
-        <tr>
-          <td>Oh !</td>
-          <td>30 €</td>
-        </tr>
-        <tr>
-          <td>Truc</td>
-          <td>20 €</td>
-        </tr>
-        <tr>
-          <td>Le machin à 5€</td>
-          <td>5 €</td>
-        </tr>
+        {if isset($opts)}
+            {foreach $opts as $opt}
+                <tr>
+                  <td>{$opt->tou_option->too_option->topt_label} {$opt->tou_option->too_value}</td>
+                  <td>{$opt->tou_option->too_price} €</td>
+                </tr>
+            {/foreach}
+        {else}
+            <tr>
+              <td class="text-muted" colspan="2">Aucune option</td>
+            </tr>
+        {/if}
       </tbody>
       <tfoot>
         <tr>
           <th>TOTAL</th>
-          <th>155 €</th>
+          <th>{$total} €</th>
         </tr>
       </tfoot>
     </table>

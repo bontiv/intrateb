@@ -16,7 +16,7 @@
           <label class="col-md-4 control-label" for="{$prefix}_lastname">Nom</label>
           <div class="col-md-4">
             {if $ufile->raw_tu_participant==0}
-             {$ufile->tu_user->user_lastname|escape}
+                {$ufile->tu_user->user_lastname|escape}
             {else}
                 {$ufile->tu_participant->ta_lastname}
             {/if}
@@ -28,7 +28,7 @@
           <label class="col-md-4 control-label" for="{$prefix}_firstname">Prénom</label>
           <div class="col-md-4">
             {if $ufile->raw_tu_participant==0}
-              {$ufile->tu_user->user_firstname|escape}
+                {$ufile->tu_user->user_firstname|escape}
             {else}
                 {$ufile->tu_participant->ta_firstname}
             {/if}
@@ -39,17 +39,12 @@
         <div class="row info">
           <label class="col-md-4 control-label" for="{$prefix}_phone">Téléphone fixe</label>
           <div class="col-md-4">
-            <div class="input-group">
-              <span class="input-group-addon">
-                <span class="glyphicon glyphicon-earphone"></span>
-              </span>
-               {if $ufile->raw_tu_participant==0}
-                  {$ufile->tu_user->user_phone}
-              {else}
-                  {$ufile->tu_participant->ta_phone}
-              {/if}
-            </div>
-
+            <span class="glyphicon glyphicon-earphone"></span>
+            {if $ufile->raw_tu_participant==0}
+                {$ufile->tu_user->user_phone}
+            {else}
+                {$ufile->tu_participant->ta_phone}
+            {/if}
           </div>
         </div>
 
@@ -57,17 +52,12 @@
         <div class="row info">
           <label class="col-md-4 control-label" for="{$prefix}_cell">Téléphone portable</label>
           <div class="col-md-4">
-            <div class="input-group">
-              <span class="input-group-addon">
-                <span class="glyphicon glyphicon-earphone"></span>
-              </span>
-               {if $ufile->raw_tu_participant==0}
-                  {$ufile->tu_user->user_phone}
-              {else}
-                  {$ufile->tu_participant->ta_cell}
-              {/if}
-            </div>
-
+            <span class="glyphicon glyphicon-earphone"></span>
+            {if $ufile->raw_tu_participant==0}
+                {$ufile->tu_user->user_phone}
+            {else}
+                {$ufile->tu_participant->ta_cell}
+            {/if}
           </div>
         </div>
 
@@ -75,15 +65,11 @@
         <div class="row info">
           <label class="col-md-4 control-label" for="{$prefix}_mail">Adresse email</label>
           <div class="col-md-4">
-            <div class="input-group">
-              <span class="input-group-addon">@</span>
-              {if $ufile->raw_tu_participant==0}
-                  {$ufile->tu_user->user_email}
-              {else}
-                  {$ufile->tu_participant->ta_mail}
-              {/if}
-            </div>
-
+            {if $ufile->raw_tu_participant==0}
+                {$ufile->tu_user->user_email}
+            {else}
+                {$ufile->tu_participant->ta_mail}
+            {/if}
           </div>
         </div>
 
@@ -137,7 +123,11 @@
         <div class="row info">
           <label class="col-md-4 control-label" for="{$prefix}_lastname">Nom</label>
           <div class="col-md-4">
-            {$ufile->tu_emergency->ta_lastname}
+            {if $ufile->raw_tu_emergency==0}
+                {$ufile->tu_user->user_lastname}
+            {else}
+                {$ufile->tu_emergency->ta_lastname}
+            {/if}
           </div>
         </div>
 
@@ -145,7 +135,11 @@
         <div class="row info">
           <label class="col-md-4 control-label" for="{$prefix}_firstname">Prénom</label>
           <div class="col-md-4">
-            {$ufile->tu_emergency->ta_firstname}
+            {if $ufile->raw_tu_emergency==0}
+                {$ufile->tu_user->user_firstname}
+            {else}
+                {$ufile->tu_emergency->ta_firstname}
+            {/if}
           </div>
         </div>
 
@@ -153,13 +147,12 @@
         <div class="row info">
           <label class="col-md-4 control-label" for="{$prefix}_phone">Téléphone fixe</label>
           <div class="col-md-4">
-            <div class="input-group">
-              <span class="input-group-addon">
-                <span class="glyphicon glyphicon-earphone"></span>
-              </span>
-              {$ufile->tu_emergency->ta_phone}
-            </div>
-
+            <span class="glyphicon glyphicon-earphone"></span>
+            {if $ufile->raw_tu_emergency==0}
+                {$ufile->tu_user->user_phone}
+            {else}
+                {$ufile->tu_emergency->ta_phone}
+            {/if}
           </div>
         </div>
 
@@ -167,13 +160,12 @@
         <div class="row info">
           <label class="col-md-4 control-label" for="{$prefix}_cell">Téléphone portable</label>
           <div class="col-md-4">
-            <div class="input-group">
-              <span class="input-group-addon">
-                <span class="glyphicon glyphicon-earphone"></span>
-              </span>
-              {$ufile->tu_emergency->ta_cell}
-            </div>
-
+            <span class="glyphicon glyphicon-earphone"></span>
+            {if $ufile->raw_tu_emergency==0}
+                {$ufile->tu_user->user_phone}
+            {else}
+                {$ufile->tu_emergency->ta_cell}
+            {/if}
           </div>
         </div>
 
@@ -181,11 +173,11 @@
         <div class="row info">
           <label class="col-md-4 control-label" for="{$prefix}_mail">Adresse email</label>
           <div class="col-md-4">
-            <div class="input-group">
-              <span class="input-group-addon">@</span>
-              {$ufile->tu_emergency->ta_mail}
-            </div>
-
+            {if $ufile->raw_tu_emergency==0}
+                {$ufile->tu_user->user_email}
+            {else}
+                {$ufile->tu_emergency->ta_mail}
+            {/if}
           </div>
         </div>
 
@@ -193,7 +185,11 @@
         <div class="row info">
           <label class="col-md-4 control-label" for="{$prefix}_street">Adresse postale</label>
           <div class="col-md-4">
-            {$ufile->tu_emergency->ta_street1}
+            {if $ufile->raw_tu_emergency==0}
+                {$ufile->tu_user->user_address}
+            {else}
+                {$ufile->tu_emergency->ta_street1}
+            {/if}
           </div>
         </div>
 
@@ -201,7 +197,11 @@
         <div class="row info">
           <label class="col-md-4 control-label" for="{$prefix}_zipcode">Code postal</label>
           <div class="col-md-4">
-            {$ufile->tu_emergency->ta_zipcode}
+            {if $ufile->raw_tu_emergency==0}
+                {$ufile->tu_user->user_cp}
+            {else}
+                {$ufile->tu_emergency->ta_zipcode}
+            {/if}
           </div>
         </div>
 
@@ -209,7 +209,11 @@
         <div class="row info">
           <label class="col-md-4 control-label" for="{$prefix}_town">Ville</label>
           <div class="col-md-4">
-            {$ufile->tu_emergency->ta_town}
+            {if $ufile->raw_tu_emergency==0}
+                {$ufile->tu_user->user_town}
+            {else}
+                {$ufile->tu_emergency->ta_town}
+            {/if}
           </div>
         </div>
 

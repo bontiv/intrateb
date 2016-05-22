@@ -15,7 +15,7 @@ function _tripadm_load() {
 
 //    if ($ufile->raw_tu_user != $_SESSION['user']['user_id']) {
 //        redirect('syscore', 'forbidden');
- //   }
+    //   }
 
     $ufile->assignTemplate('ufile');
     $ufile->tu_trip->assignTemplate('trip');
@@ -41,16 +41,16 @@ function _tripadm_data($fields, $from = null) {
 
 function tripadm_index() {
     global $tpl;
-    
+
     $ufile = _tripadm_load();
     $data = array();
-    
+
     if (isset($_GET["tu_payment"])) {
-       $data[] = "tu_payment";
+        $data[] = "tu_payment";
     }
     if (isset($_GET["tu_caution"])) {
         $data[] = "tu_caution";
-    } 
+    }
     if (isset($_GET["tu_responsability_agreement"])) {
         $data[] = "tu_responsability_agreement";
     }
@@ -63,7 +63,7 @@ function tripadm_index() {
             $tpl->assign('hsuccess', false);
         }
     }
-    
+
     display();
 }
 
@@ -80,7 +80,22 @@ function tripadm_health() {
 }
 
 function tripadm_order() {
-    $ufile = _tripadm_load();
+    global $tpl;
 
+
+    $ufile = _tripadm_load();
+    $total = $ufile->tu_type->tt_price;
+
+    $opt = new Modele('trip_option_userfile');
+    $opt->find(array('too_userfiles' => $ufile->getKey()));
+
+    while ($opt->next()) {
+        $tpl->append('opts', new Modele($opt));
+        $total += $opt->tou_option->too_price;
+    }
+
+    $chq = new Modele('trip_cheq');
+
+    $tpl->assign('total', $total);
     display();
 }

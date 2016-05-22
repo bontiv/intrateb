@@ -27,6 +27,7 @@ fields:
       type: external
       label: Type de billet
       display: %tt_name%
+      table: trip_types
   tu_participant:
       type: external
       null: true
@@ -135,4 +136,3 @@ fields:
       type: date_time
       label: Date de completion
       null: true
-      

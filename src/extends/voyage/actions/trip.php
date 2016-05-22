@@ -325,30 +325,31 @@ function trip_ticket_add() {
 }
 
 function trip_ticket_delete() {
-    $mod = new Modele('trip_rooms');
-    $mod->fetch($_GET['room']);
-    $trip = $mod->raw_to_trip;
+    $mod = new Modele('trip_types');
+    $mod->fetch($_GET['ticket']);
+    $trip = $mod->raw_tt_trip;
 
-    redirect('trip', 'admin_rooms', array('trip' => $trip, 'hsuccess' => $mod->delete() ? '0' : '1'));
+    redirect('trip', 'admin_tickets', array('trip' => $trip, 'hsuccess' => $mod->delete() ? '0' : '1'));
 }
 
 function trip_ticket_edit() {
     global $tpl;
 
-    $mod = new Modele('trip_rooms');
-    $mod->fetch($_GET['room']);
-    $mod->assignTemplate('room');
-    $mdl = $mod->to_trip;
+    $mod = new Modele('trip_types');
+    $mod->fetch($_GET['ticket']);
+    $mod->assignTemplate('ticket');
+    $mdl = $mod->tt_trip;
     $mdl->assignTemplate('trip');
 
     $tpl->assign('form', $mod->edit(array(
-                'to_name',
-                'to_places',
+                'tt_name',
+                'tt_price',
+                'tt_restriction',
     )));
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($mod->modFrom($_POST)) {
-            redirect('trip', 'admin_rooms', array('trip' => $mdl->getKey(), 'hsuccess' => '1'));
+            redirect('trip', 'admin_tickets', array('trip' => $mdl->getKey(), 'hsuccess' => '1'));
         } else {
             $tpl->assign('hsuccess', 0);
         }

@@ -4,6 +4,11 @@ key: tq_id
 fields:
   tq_id:
     type: auto_int
+  tq_file:
+      type: external
+      label: Dossier
+      table: trip_userfiles
+      display: Dossier %tu_id%
   tq_from:
       type: var
       label: Emetteur

@@ -14,11 +14,6 @@
   </div>
 </div>
 
-{if $ufile->raw_tu_type<>0}
-    <div class="alert alert-warning">
-      <p><strong>Attention !</strong> Vous n'êtes pas éligible au billet séléctionné. Veuillez séléctionner un autre billet ou contacter un administrateur de l'intra (bureau).</p>
-    </div>
-{/if}
 
 <form method="POST" action="{mkurl action="tripusr" page="step4" file=$ufile->tu_id}" class="form-horizontal">
   <div class="panel-group">
