@@ -53,6 +53,10 @@
     <div class="panel panel-default">
       <div class="panel-footer">
         <input type="submit" class="btn btn-primary" name="next" value="Suivant" />
+        <a href="{mkurl action="tripusr" page="delete" file=$ufile->tu_id}" class="btn btn-danger" onclick="return confirm('Supprimer totalement la candidature ?');">
+          <span class="glyphicon glyphicon-trash"></span>
+          Supprimer
+        </a>
       </div>
     </div>
     {* / Panel Footer *}

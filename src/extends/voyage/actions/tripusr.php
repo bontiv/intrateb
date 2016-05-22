@@ -108,6 +108,16 @@ function tripusr_new() {
             }
         }
 
+        #Recherche dossier existant
+        $file = new Modele('trip_userfiles');
+        $file->find(array(
+            'tu_participant' => $_POST['traveller'] == 'me' ? 0 : $_POST['traveller'],
+            'tu_trip' => $mdl->getKey(),
+        ));
+        if ($file->count() > 0) {
+            $errors[] = 'Un dossier existe déjà pour ce participant sur ce voyage.';
+        }
+
         if (count($errors)) {
             $tpl->assign('errors', $errors);
         } elseif ($_POST['emergency'] != 'new' && $_POST['traveller'] != 'new') {
@@ -149,6 +159,25 @@ function tripusr_continue() {
     if ($mdl->raw_tu_user == $_SESSION['user']['user_id']) {
         redirect('tripusr', 'step' . $mdl->tu_step, array('file' => $mdl->getKey()));
     }
+}
+
+function tripusr_delete() {
+    $ufile = _tripusr_load();
+
+    $opts = new Modele('trip_option_userfile');
+    $opts->find(array(
+        'tou_userfile' => $ufile->getKey()
+    ));
+    while ($opts->next()) {
+        $opts->delete();
+    }
+
+    //TODO : Faire la suppression des cheques
+
+    redirect('tripusr', 'index', array(
+        'trip' => $ufile->raw_tu_trip,
+        'hsuccess' => !$ufile->delete(),
+    ));
 }
 
 function _tripusr_load() {
@@ -213,19 +242,18 @@ function tripusr_step2() {
                 'tu_allergy',
                 'tu_comment',
             ));
-    
+
             $data['tu_step'] = 3;
-    
+
             if ($ufile->modFrom($data)) {
                 redirect('tripusr', 'step3', array('file' => $ufile->getKey()));
             } else {
                 $tpl->assign('hsuccess', false);
             }
         }/* else {
-            $data['tu_step'] = 1;
-            redirect('tripusr', 'new', array('file' => $ufile->getKey(), 'trip' => $ufile->raw_tu_trip));
-        }*/
-
+          $data['tu_step'] = 1;
+          redirect('tripusr', 'new', array('file' => $ufile->getKey(), 'trip' => $ufile->raw_tu_trip));
+          } */
     }
 
     $tpl->assign('health', $health);
@@ -264,7 +292,7 @@ function tripusr_step3() {
 
     // Pas de complements, go etape 4
     if ($questions->count() == 0) {
-        
+
         $ufile->tu_step = 4;
         redirect('tripusr', 'step4', array('file' => $ufile->getKey()));
     }
@@ -326,20 +354,19 @@ function tripusr_step4() {
                     quit();
                     break;
             }
-        } 
-        /*else {
-            $questions = new Modele('trip_options');
-            $questions->find(array('topt_trip' => $ufile->raw_tu_trip));
-            // Pas de complements, go back etape 2
-            if ($questions->count() == 0) {
-                $ufile->tu_step = 2;
-                redirect('tripusr', 'step2', array('file' => $ufile->getKey()));
-            } else {
-                $ufile->tu_step = 3;
-                redirect('tripusr', 'step3', array('file' => $ufile->getKey()));
-            }
-        }*/
-
+        }
+        /* else {
+          $questions = new Modele('trip_options');
+          $questions->find(array('topt_trip' => $ufile->raw_tu_trip));
+          // Pas de complements, go back etape 2
+          if ($questions->count() == 0) {
+          $ufile->tu_step = 2;
+          redirect('tripusr', 'step2', array('file' => $ufile->getKey()));
+          } else {
+          $ufile->tu_step = 3;
+          redirect('tripusr', 'step3', array('file' => $ufile->getKey()));
+          }
+          } */
     }
 
     $tickets = new Modele('trip_types');
