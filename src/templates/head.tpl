@@ -54,8 +54,8 @@
                   <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                     <li><a href="{mkurl action="index" page="logout"}">Déconnexion</a></li>
                     <li><a href="{mkurl action="index" page="profile"}">Mon profil</a></li>
-                    <li><a href="{mkurl action="beer" page="index"}">Bières</a></li>
-                    <!-- <li><a href="{mkurl action="compta"}">Ma compta</a></li> -->
+<!--                    <li><a href="{mkurl action="beer" page="index"}">Bières</a></li>--> 
+<!-- <li><a href="{mkurl action="compta"}">Ma compta</a></li> -->
                   </ul>
                 </li>
             {else}

@@ -55,9 +55,9 @@
                   <td>
                     <a href="{mkurl action="tripadm" file=$ufile->tu_id}">
                       {if $ufile->raw_tu_participant==0}
-                          {$_user.user_firstname|escape} {$_user.user_lastname|escape}
+                          {$ufile->tu_user->user_firstname|escape} {$ufile->tu_user->user_lastname|escape}
                       {else}
-                          {$ufile->tu_participant->ca_firstname} {$ufile->tu_participant->ca_lastname}
+                          {$ufile->tu_participant->ta_firstname} {$ufile->tu_participant->ta_lastname}
                       {/if}
                   </td>
                   <td>
@@ -84,7 +84,7 @@
                   </td>
                   <td>
                     <div class="btn-group btn-group-xs">
-                      <a href="{mkurl action="trip" page="files_edit" file=$ufile->tu_id}" class="btn btn-warning btn-xs">
+                      <a href="{mkurl action="tripadm" page="index" file=$ufile->tu_id}" class="btn btn-warning btn-xs">
                         <span class="glyphicon glyphicon-edit"></span>
                         Edition
                       </a>

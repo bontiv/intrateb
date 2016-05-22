@@ -15,7 +15,11 @@
         <div class="row info">
           <label class="col-md-4 control-label" for="{$prefix}_lastname">Nom</label>
           <div class="col-md-4">
-            Tootoo
+            {if $ufile->raw_tu_participant==0}
+             {$ufile->tu_user->user_lastname|escape}
+            {else}
+                {$ufile->tu_participant->ta_lastname}
+            {/if}
           </div>
         </div>
 
@@ -23,7 +27,11 @@
         <div class="row info">
           <label class="col-md-4 control-label" for="{$prefix}_firstname">Prénom</label>
           <div class="col-md-4">
-            Tootoo
+            {if $ufile->raw_tu_participant==0}
+              {$ufile->tu_user->user_firstname|escape}
+            {else}
+                {$ufile->tu_participant->ta_firstname}
+            {/if}
           </div>
         </div>
 
@@ -35,7 +43,11 @@
               <span class="input-group-addon">
                 <span class="glyphicon glyphicon-earphone"></span>
               </span>
-              Tootoo
+               {if $ufile->raw_tu_participant==0}
+                  {$ufile->tu_user->user_phone}
+              {else}
+                  {$ufile->tu_participant->ta_phone}
+              {/if}
             </div>
 
           </div>
@@ -49,7 +61,11 @@
               <span class="input-group-addon">
                 <span class="glyphicon glyphicon-earphone"></span>
               </span>
-              Tootoo
+               {if $ufile->raw_tu_participant==0}
+                  {$ufile->tu_user->user_phone}
+              {else}
+                  {$ufile->tu_participant->ta_cell}
+              {/if}
             </div>
 
           </div>
@@ -61,7 +77,11 @@
           <div class="col-md-4">
             <div class="input-group">
               <span class="input-group-addon">@</span>
-              Tootoo
+              {if $ufile->raw_tu_participant==0}
+                  {$ufile->tu_user->user_email}
+              {else}
+                  {$ufile->tu_participant->ta_mail}
+              {/if}
             </div>
 
           </div>
@@ -71,8 +91,11 @@
         <div class="row info">
           <label class="col-md-4 control-label" for="{$prefix}_street">Adresse postale</label>
           <div class="col-md-4">
-            Tootoo
-            <span class="help-block">Numéro et rue</span>
+            {if $ufile->raw_tu_participant==0}
+                {$ufile->tu_user->user_address}
+            {else}
+                {$ufile->tu_participant->ta_street1}
+            {/if}
           </div>
         </div>
 
@@ -80,7 +103,11 @@
         <div class="row info">
           <label class="col-md-4 control-label" for="{$prefix}_zipcode">Code postal</label>
           <div class="col-md-4">
-            Tootoo
+            {if $ufile->raw_tu_participant==0}
+                {$ufile->tu_user->user_cp}
+            {else}
+                {$ufile->tu_participant->ta_zipcode}
+            {/if}
           </div>
         </div>
 
@@ -88,7 +115,11 @@
         <div class="row info">
           <label class="col-md-4 control-label" for="{$prefix}_town">Ville</label>
           <div class="col-md-4">
-            Tootoo
+            {if $ufile->raw_tu_participant==0}
+                {$ufile->tu_user->user_town}
+            {else}
+                {$ufile->tu_participant->ta_town}
+            {/if}
           </div>
         </div>
 
@@ -106,7 +137,7 @@
         <div class="row info">
           <label class="col-md-4 control-label" for="{$prefix}_lastname">Nom</label>
           <div class="col-md-4">
-            Tootoo
+            {$ufile->tu_emergency->ta_lastname}
           </div>
         </div>
 
@@ -114,7 +145,7 @@
         <div class="row info">
           <label class="col-md-4 control-label" for="{$prefix}_firstname">Prénom</label>
           <div class="col-md-4">
-            Tootoo
+            {$ufile->tu_emergency->ta_firstname}
           </div>
         </div>
 
@@ -126,7 +157,7 @@
               <span class="input-group-addon">
                 <span class="glyphicon glyphicon-earphone"></span>
               </span>
-              Tootoo
+              {$ufile->tu_emergency->ta_phone}
             </div>
 
           </div>
@@ -140,7 +171,7 @@
               <span class="input-group-addon">
                 <span class="glyphicon glyphicon-earphone"></span>
               </span>
-              Tootoo
+              {$ufile->tu_emergency->ta_cell}
             </div>
 
           </div>
@@ -152,7 +183,7 @@
           <div class="col-md-4">
             <div class="input-group">
               <span class="input-group-addon">@</span>
-              Tootoo
+              {$ufile->tu_emergency->ta_mail}
             </div>
 
           </div>
@@ -162,8 +193,7 @@
         <div class="row info">
           <label class="col-md-4 control-label" for="{$prefix}_street">Adresse postale</label>
           <div class="col-md-4">
-            Tootoo
-            <span class="help-block">Numéro et rue</span>
+            {$ufile->tu_emergency->ta_street1}
           </div>
         </div>
 
@@ -171,7 +201,7 @@
         <div class="row info">
           <label class="col-md-4 control-label" for="{$prefix}_zipcode">Code postal</label>
           <div class="col-md-4">
-            Tootoo
+            {$ufile->tu_emergency->ta_zipcode}
           </div>
         </div>
 
@@ -179,7 +209,7 @@
         <div class="row info">
           <label class="col-md-4 control-label" for="{$prefix}_town">Ville</label>
           <div class="col-md-4">
-            Tootoo
+            {$ufile->tu_emergency->ta_town}
           </div>
         </div>
 

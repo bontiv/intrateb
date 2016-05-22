@@ -41,6 +41,7 @@ fields:
   tu_user:
       type: external
       label: Utilisateur
+      table: users
       display: %user_firstname% %user_lastname% (%user_name%)
   tu_token:
       #token : liaison vers le site source (si externe)
