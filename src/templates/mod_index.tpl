@@ -28,13 +28,16 @@
           </td>
           <td>
             {if $ext.enabled}
-                <a class="btn btn-warning" href="{mkurl action="mod" page="desactivate" mod=$ext.sysdir}">Désactiver</div>
-                {else}
-                    <a class="btn btn-success" href="{mkurl action="mod" page="activate" mod=$ext.sysdir}">Activer</div>
-                    {/if}
-                    </td>
-                    </tr>
-                {/foreach}
-                </tbody>
-                </table>
-                {include "foot.tpl"}
+                <div class="btn-group">
+                  <a class="btn btn-danger" href="{mkurl action="mod" page="desactivate" mod=$ext.sysdir}">Désactiver</a>
+                  <a class="btn btn-warning" href="{mkurl action="mod" page="update" mod=$ext.sysdir}">Mise à jour</a>
+                </div>
+            {else}
+                <a class="btn btn-success" href="{mkurl action="mod" page="activate" mod=$ext.sysdir}">Activer</a>
+            {/if}
+          </td>
+        </tr>
+    {/foreach}
+  </tbody>
+</table>
+{include "foot.tpl"}

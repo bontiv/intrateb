@@ -154,6 +154,10 @@ class Extend {
         return true;
     }
 
+    public function _updateModels() {
+        
+    }
+
     /**
      * Insert ACL if not exists
      *
@@ -345,6 +349,17 @@ class Extend {
         }
 
         return $this->defs['menu'][$type];
+    }
+
+    public function update() {
+        $err = 0;
+
+        $this->_uninstallActions() or $err++;
+        $this->_installActions() or $err++;
+        $this->_updateModels() or $err++;
+        $this->_syncMenu();
+
+        return $err == 0;
     }
 
 }

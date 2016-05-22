@@ -28,3 +28,9 @@ function mod_desactivate() {
 
     redirect('mod', 'index', array('hsuccess' => $mod->uninstall()));
 }
+
+function mod_update() {
+    $mod = new Extend($_GET['mod']);
+
+    redirect('mod', 'index', array('hsuccess' => $mod->update()));
+}
