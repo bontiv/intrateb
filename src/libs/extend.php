@@ -155,7 +155,87 @@ class Extend {
     }
 
     public function _updateModels() {
-        
+        global $pdo;
+
+        $moddir = $this->extdir . '/models';
+        $matchs = null;
+
+        $sqlTables = $pdo->query('show tables');
+        $inTables = array();
+        $defTables = array();
+
+        while ($line = $sqlTables->fetch()) {
+            $inTables[$line[0]] = array();
+        }
+
+        foreach (scandir($moddir) as $modfile) {
+            if (preg_match('`^(.*)\.yml$`', $modfile, $matchs)) {
+                $def = spyc_load_file($moddir . '/' . $modfile);
+                $defTables[$def['name']] = $def;
+            }
+        }
+
+        //Ajout des tables
+        $addTables = array_diff_key($defTables, $inTables);
+        foreach ($addTables as $table) {
+            $pdo->execute(mdle_sql_create($table));
+        }
+
+        $checkTables = array_intersect_key($defTables, $inTables);
+        $modTables = array();
+        foreach ($checkTables as $table => $def) {
+            $sql = $pdo->query("SHOW COLUMNS FROM $table");
+            $fields = array();
+            $modify_fields = array();
+            while ($c = $sql->fetch()) {
+                $fields[] = $c['Field'];
+                if ($c['Type'] != mdle_field_type($defTables[$table], $c['Field']))
+                    $modify_fields[] = $c['Field'];
+                elseif (isset($defTables[$table]['fields'][$c['Field']]['null']) && $c['Null'] != 'YES')
+                    $modify_fields[] = $c['Field'];
+            }
+            $del_fields = array_diff($fields, array_keys($defTables[$table]['fields']));
+            $add_fields = array_diff(array_keys($defTables[$table]['fields']), $fields);
+            if (count($add_fields) + count($del_fields) + count($modify_fields) != 0) {
+                $modTables[] = array(
+                    'table' => $table,
+                    'add' => $add_fields,
+                    'del' => $del_fields,
+                    'modify' => $modify_fields,
+                );
+            }
+        }
+
+        foreach ($modTables as $tdef) {
+            $sql = 'ALTER TABLE `' . $tdef['table'] . "`";
+            $first = true;
+            foreach ($tdef['del'] as $col) {
+                if ($first)
+                    $first = false;
+                else
+                    $sql .= ',';
+                $sql .= "\n    DEL `$col`";
+            }
+            foreach ($tdef['add'] as $col) {
+                if ($first)
+                    $first = false;
+                else
+                    $sql .= ',';
+                $sql .= "\n    ADD `$col` ";
+                $sql .= mdle_sql_fielddef($defTables[$tdef['table']], $col);
+            }
+            foreach ($tdef['modify'] as $col) {
+                if ($first)
+                    $first = false;
+                else
+                    $sql .= ',';
+                $sql .= "\n    MODIFY `$col` ";
+                $sql .= mdle_sql_fielddef($defTables[$tdef['table']], $col);
+            }
+            $pdo->query($sql);
+        }
+
+        return true;
     }
 
     /**
@@ -242,6 +322,7 @@ class Extend {
         while ($mod->next()) {
             $mod->delete();
         }
+        return true;
     }
 
     /**
