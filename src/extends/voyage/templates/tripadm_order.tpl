@@ -33,13 +33,11 @@
               <td class="text-muted" colspan="2">Aucune option</td>
             </tr>
         {/if}
-      </tbody>
-      <tfoot>
         <tr>
           <th>TOTAL</th>
           <th>{$total} €</th>
         </tr>
-      </tfoot>
+      </tbody>
     </table>
   </div>
 
@@ -56,34 +54,38 @@
           <th>Banque</th>
           <th>Numéro</th>
           <th>Encaissement</th>
-          <th style="min-width: 80px; width: 10%;">Prix</th>
+          <th style="min-width: 80px; width: 10%;">Paiement</th>
+          <th style="min-width: 80px; width: 10%;">Caution</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>PAIEMENT</td>
-          <td>Admin</td>
-          <td>Espèces</td>
-          <td></td>
-          <td>N/A</td>
-          <td>55 €</td>
-        </tr>
-        <tr>
-          <td>PAIEMENT</td>
-          <td>Père Noël</td>
-          <td>LCL</td>
-          <td>1234522</td>
-          <td>N/A</td>
-          <td>100 €</td>
-        </tr>
-        <tr>
-          <td>CAUTION</td>
-          <td>Papa</td>
-          <td>LCL</td>
-          <td>1234542</td>
-          <td>N/A</td>
-          <td>200 €</td>
-        </tr>
+        {if isset($chqs)}
+            {foreach $chqs as $chq}
+                <tr>
+                  <td>{$chq->tq_type}</td>
+                  <td>{$chq->tq_from}</td>
+                  <td>{$chq->tq_bank}</td>
+                  <td>{$chq->tq_number}</td>
+                  <td>N/A</td>
+                  <td>
+                    {if $chq->raw_tq_type=='PAIEMENT'}
+                        {$chq->tq_amount}
+                    {/if}
+                  </td>
+                  <td>
+                    {if $chq->raw_tq_type<>'PAIEMENT'}
+                        {$chq->tq_amount}
+                    {/if}
+                  </td>
+                </tr>
+            {/foreach}
+        {else}
+            <tr>
+              <td colspan="7" class="warning">
+                Aucun dépôt effectué.
+              </td>
+            </tr>
+        {/if}
       </tbody>
     </table>
   </div>
@@ -92,8 +94,8 @@
   {* Panel Footer *}
   <div class="panel panel-default">
     <div class="panel-footer">
-      <a href="#" class="btn btn-primary">Paiement</a>
-      <a href="#" class="btn btn-info">Caution</a>
+      <a href="{mkurl action="tripadm" page="add_pay" file=$ufile->tu_id}" class="btn btn-primary">Paiement</a>
+      <a href="{mkurl action="tripadm" page="add_caution" file=$ufile->tu_id}" class="btn btn-info">Caution</a>
       <a href="#" class="btn btn-default">Facture (PDF)</a>
     </div>
   </div>

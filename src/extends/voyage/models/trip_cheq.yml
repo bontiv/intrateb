@@ -9,6 +9,9 @@ fields:
       label: Dossier
       table: trip_userfiles
       display: Dossier %tu_id%
+  tq_amount:
+      type: int
+      label: Montant
   tq_from:
       type: var
       label: Emetteur

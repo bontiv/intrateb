@@ -95,7 +95,36 @@ function tripadm_order() {
     }
 
     $chq = new Modele('trip_cheq');
+    $totalPay = 0;
+    $totalCaution = 0;
+
+    $chq->find(array(
+        'tq_file' => $ufile->getKey(),
+    ));
+    while ($chq->next()) {
+        $tpl->append('chqs', new Modele($chq));
+        if ($chq->raw_cq_type == 'PAYMENT') {
+            $totalPay += $chq->cq_amount;
+        } else {
+            $totalCaution += $chq->cq_amount;
+        }
+    }
+
 
     $tpl->assign('total', $total);
+    $tpl->assign('paiement', $totalPay);
+    $tpl->assign('caution', $totalCaution);
+    display();
+}
+
+function tripadm_add_pay() {
+    $ufile = _tripadm_load();
+
+    display();
+}
+
+function tripadm_add_caution() {
+    $ufile = _tripadm_load();
+
     display();
 }
