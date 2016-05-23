@@ -2,7 +2,8 @@
 
 <ol class="breadcrumb">
   <li role="presentation"><a href="{mkurl action="trip"}">Voyages</a></li>
-  <li role="presentation" class="active">{$trip->tr_name|escape}</li>
+  <li role="presentation"><a href="{mkurl action="tripusr" page="index" trip=$trip->tr_id}">{$trip->tr_name|escape}</a></li>
+  <li role="presentation" class="active">Dossier n&deg; {$ufile->tu_id}</li>
 </ol>
 
 <h1>Voyage <small>{$trip->tr_name|escape}</small></h1>
@@ -62,7 +63,6 @@
     {* Panel Footer *}
     <div class="panel panel-default">
       <div class="panel-footer">
-        <input type="submit" class="btn btn-primary" name="next" value="Suivant" />
         <a href="{mkurl action="tripusr" page="delete" file=$ufile->tu_id}" class="btn btn-danger" onclick="return confirm('Supprimer totalement la candidature ?');">
           <span class="glyphicon glyphicon-trash"></span>
           Supprimer

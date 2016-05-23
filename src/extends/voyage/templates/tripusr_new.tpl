@@ -2,7 +2,8 @@
 
 <ol class="breadcrumb">
   <li role="presentation"><a href="{mkurl action="trip"}">Voyages</a></li>
-  <li role="presentation" class="active">{$trip->tr_name|escape}</li>
+  <li role="presentation"><a href="{mkurl action="tripusr" page="index" trip=$trip->tr_id}">{$trip->tr_name|escape}</a></li>
+  <li role="presentation" class="active">Nouveau dossier</li>
 </ol>
 
 <h1>Voyage <small>{$trip->tr_name|escape}</small></h1>
