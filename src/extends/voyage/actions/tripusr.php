@@ -110,10 +110,14 @@ function tripusr_new() {
 
         #Recherche dossier existant
         $file = new Modele('trip_userfiles');
-        $file->find(array(
-            'tu_participant' => $_POST['traveller'] == 'me' ? 0 : $_POST['traveller'],
-            'tu_trip' => $mdl->getKey(),
-        ));
+        $find = array('tu_trip' => $mdl->getKey());
+        if ($_POST['traveller'] == 'me') {
+            $find['tu_user'] = $_SESSION['user']['user_id'];
+            $find['tu_participant'] = 0;
+        } else {
+            $find['tu_participant'] = $_POST['traveller'];
+        }
+        $file->find($find);
         if ($file->count() > 0) {
             $errors[] = 'Un dossier existe déjà pour ce participant sur ce voyage.';
         }
