@@ -273,21 +273,21 @@ function tripusr_step3() {
     if ($ufile->tu_step != 3) {
         redirect('tripusr', 'continue', array('file' => $ufile->getKey()));
     }
-
+    
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $valid = true;
         foreach ($_POST['opt'] as $answer) {
             $tou = new Modele('trip_option_userfile');
-            $valid = $tou->addFrom(array(
+            $valid = $valid && $tou->addFrom(array(
                 'tou_option' => $answer,
                 'too_userfiles' => $ufile->getKey(),
             ));
-
-            if ($valid) {
-                $ufile->tu_step = 4;
-                redirect('tripusr', 'step4', array('file' => $ufile->getKey()));
-            }
-            $tpl->assign('hsuccess', false);
         }
+        if ($valid) {
+           $ufile->tu_step = 4;
+            redirect('tripusr', 'step4', array('file' => $ufile->getKey()));
+        }
+        $tpl->assign('hsuccess', false);
     }
 
     $optlist = array();
