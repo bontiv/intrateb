@@ -17,7 +17,7 @@
 
     <form class="form-inline" method="POST" action="{mkurl action="trip" page="search" trip=$trip->tr_id}">
       <div class="form-group">
-        <input type="search" name="search" placeholder="Recherche" class="form-control" />
+        <input type="search" name="search" placeholder="Recherche" class="form-control" value="{$search}"/>
       </div>
       <div class="form-group">
         <div class="btn-group">
@@ -34,6 +34,9 @@
             <li><a href="#">Mineurs</a></li>
             <li><a href="{mkurl action="trip" trip=$trip->tr_id page="search" field="tu_step" value="10"}">Dossiers complets</a></li>
           </ul>
+          <button type="submit" name="mailing" class="form-actions btn btn-info">
+            <span class="glyphicon glyphicon-envelope"></span>
+          </button>
         </div>
       </div>
     </form>

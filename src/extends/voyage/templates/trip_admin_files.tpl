@@ -34,7 +34,7 @@
             <li><a href="#">Mineurs</a></li>
             <li><a href="{mkurl action="trip" page="search" field="tu_step" value="10"}">Dossiers complets</a></li>
           </ul>
-           <button type="submit" name="mailing" class="form-actions btn btn-info">
+          <button type="submit" name="mailing" class="form-actions btn btn-info">
             <span class="glyphicon glyphicon-envelope"></span>
           </button>
         </div>

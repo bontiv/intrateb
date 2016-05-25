@@ -2,8 +2,8 @@
 <button data-toggle="collapse" data-target="#emails" class="btn">Afficher/cacher la liste des mails</button>
 <div id='emails' class='collapse'>
     <h2>Mail envoyé à:</h2>
-    {foreach from=$users item="u"}
-        {$u->user_email};
+    {foreach from=$mails item="m"}
+        {$m};
     {/foreach}
 </div>
 {include "mail_send.tpl"}
