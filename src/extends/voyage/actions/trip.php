@@ -522,15 +522,10 @@ function trip_opt_edit() {
     display();
 }
 
-function trip_search() {
+function search_user($search_string) {
     global $pdo, $tpl;
-
-    $mdl = new Modele('trips');
-    $mdl->fetch($_GET['trip']);
-    $mdl->assignTemplate('trip');
-
-    if (isset($_POST['search'])) {
-        $search = $pdo->prepare('SELECT * FROM trip_userfiles'
+    
+    $search = $pdo->prepare('SELECT * FROM trip_userfiles'
                 . ' LEFT JOIN users ON tu_user = user_id AND tu_participant = 0'
                 . ' LEFT JOIN trip_contacts ON tu_participant = ta_id'
                 . ' WHERE user_lastname LIKE :search'
@@ -540,13 +535,23 @@ function trip_search() {
                 . ' OR ta_firstname LIKE :search'
                 . ' OR ta_lastname LIKE :search'
                 . ' OR ta_mail LIKE :search');
-        $search->bindValue(':search', $_POST['search']);
+    $search->bindValue(':search', '%'.$search_string.'%');
 
-        $search->execute();
+    $search->execute();
+    
+    while ($line = $search->fetch()) {
+        $tpl->append('ufiles', $line);
+    }
+}
 
-        while ($line = $search->fetch()) {
-            $tpl->append('ufiles', $line);
-        }
+function trip_search() {
+
+    $mdl = new Modele('trips');
+    $mdl->fetch($_GET['trip']);
+    $mdl->assignTemplate('trip');
+
+    if (isset($_POST['search'])) {
+       search_user($_POST['search']);
     }
 
     display();
