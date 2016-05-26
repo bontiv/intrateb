@@ -21,18 +21,39 @@
     {* Panel santé *}
     <div class="panel panel-default">
       <div class="panel-heading panel-title">
-        Félicitaion
+        Félicitation !
       </div>
       <div class="panel-body">
         <p>
-            Dossier complet, bravo!
+            Ton inscription est terminée et validée. Nous t'attendons donc le {$trip->tr_start} au 24 rue Pasteur 94270 Le Kremlin-Bicêtre pour le départ.
         </p>
-   
+        <p>
+            Surtout n'oublie pas:<br>
+            <ul>
+                <li>Sandwich pour le trajet du vendredi soir / boisson soft</li>
+                <li>Tente</li>
+                <li>Sac de couchage, lampe de poche/frontale</li>
+                <li>Serviette, savon, brosse à dent, dentifrice, ... (nécessaire de toilette)</li>
+                <li>crème solaire, chapeau, lunette de soleil, ...</li>
+            </ul>
+        </p>
+        <p>
+            A bientôt!
+        </p>   
         
       </div>
     </div>
     {* / Panel traveller *}
-
+    
+    <div class="panel panel-warning">
+      <div class="panel-heading panel-title">
+        Annulation
+      </div>
+      <div class="panel-body">
+          En cas d'empêchement, tu as jusqu'au {$trip->tr_retractdate} pour annuler ton voyage. Pour ce faire, il suffit de venir nous voir et nous te rembourserons tout.<br>
+          Après cette date il ne sera plus possible de récupérer l'argent du voyage (la caution te sera  restituée dans tous les cas).
+      </div>
+    </div>
 
     {* Panel Footer *}
     {if $delete}
