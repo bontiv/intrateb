@@ -58,7 +58,19 @@ function tripadm_index() {
     $data = _tripadm_data($data, $_GET);
     if (!empty($data)) {
         if ($ufile->modFrom($data)) {
-            $tpl->assign('hsuccess', true);
+            if ($ufile->raw_tu_payment == "YES" && $ufile->raw_tu_caution == "YES" && $ufile->raw_tu_responsability_agreement == "YES") {
+                if (!$ufile->modFrom(array(
+                        'tu_complete' => (new DateTime("now"))->format('Y-m-d H:i:s'),
+                        "tu_step" => 9
+                    )))
+                    {
+                        $tpl->assign('hsuccess', false);
+                    } else {
+                         $tpl->assign('hsuccess', true);
+                    }
+            } else {
+                $tpl->assign('hsuccess', true);
+            }
         } else {
             $tpl->assign('hsuccess', false);
         }

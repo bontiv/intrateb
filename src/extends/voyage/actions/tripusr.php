@@ -418,3 +418,9 @@ function tripusr_step5() {
     //}
     display();
 }
+
+function tripusr_step9() {
+    $ufile = _tripusr_load();
+
+    display();
+}
