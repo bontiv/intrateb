@@ -26,6 +26,7 @@ function trip_add() {
         'tr_retractdate',
         'tr_caution',
         'tr_places',
+        'tr_link'
     ));
     $tpl->assign('form', $form);
 
@@ -62,6 +63,7 @@ function trip_edit() {
                 'tr_retractdate',
                 'tr_caution',
                 'tr_places',
+                'tr_link'
     )));
 
     if (isset($_POST['tr_name'])) {

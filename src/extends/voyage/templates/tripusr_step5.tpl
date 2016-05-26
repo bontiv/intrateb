@@ -44,7 +44,7 @@
                 <div class="text-danger">Non déposé</div>
             {/if}
           </dd>
-          <dt>Décharge</dt>
+          <dt><a href="{$trip->tr_link}">Décharge</a></dt>
           <dd>
             {if $ufile->raw_tu_responsability_agreement=="YES"}
                 <div class="text-success">Déposé</div>
