@@ -26,6 +26,7 @@ function trip_add() {
         'tr_retractdate',
         'tr_caution',
         'tr_places',
+        'tr_link'
     ));
     $tpl->assign('form', $form);
 
@@ -62,6 +63,7 @@ function trip_edit() {
                 'tr_retractdate',
                 'tr_caution',
                 'tr_places',
+                'tr_link'
     )));
 
     if (isset($_POST['tr_name'])) {
@@ -522,31 +524,65 @@ function trip_opt_edit() {
     display();
 }
 
-function trip_search() {
+function _trip_search_user($search_string, $search_field, $search_value) {
     global $pdo, $tpl;
-
-    $mdl = new Modele('trips');
-    $mdl->fetch($_GET['trip']);
-    $mdl->assignTemplate('trip');
-
-    if (isset($_POST['search'])) {
-        $search = $pdo->prepare('SELECT * FROM trip_userfiles'
+    
+    $sql = 'SELECT * FROM trip_userfiles'
                 . ' LEFT JOIN users ON tu_user = user_id AND tu_participant = 0'
                 . ' LEFT JOIN trip_contacts ON tu_participant = ta_id'
-                . ' WHERE user_lastname LIKE :search'
+                . ' WHERE (user_lastname LIKE :search'
                 . ' OR user_name LIKE :search'
                 . ' OR user_firstname LIKE :search'
                 . ' OR user_email LIKE :search'
                 . ' OR ta_firstname LIKE :search'
                 . ' OR ta_lastname LIKE :search'
-                . ' OR ta_mail LIKE :search');
-        $search->bindValue(':search', $_POST['search']);
+                . ' OR ta_mail LIKE :search)';
 
-        $search->execute();
+    if (!empty($search_field) && !empty($search_value)) {
+        $sql .= ' AND '. $search_field . ' = :value';
+    }
+    $search = $pdo->prepare($sql);
+    
+    $search->bindValue(':search', '%'.$search_string.'%');
+     if (!empty($search_field) && !empty($search_value))
+        $search->bindValue(':value', $search_value);
 
+    $search->execute();
+    
+    return $search;
+}
+
+//Variable: $groups: the group of user i want
+//          $users: the users i want
+function trip_mail() {
+    global $tpl;
+    
+    $search = _trip_search_user($_GET['search'], $_GET['field'], $_GET['value']);
+    
+    while ($line = $search->fetch(PDO::FETCH_OBJ)) {
+        $tpl->append('users', $line);
+    }
+    $tpl->display('ml_index.tpl');
+    quit();
+}
+
+function trip_search() {
+    global $tpl;
+    
+    $mdl = new Modele('trips');
+    $mdl->fetch($_GET['trip']);
+    $mdl->assignTemplate('trip');
+    
+    if (isset($_POST['mailing'])) {
+        redirect('trip', 'mail', array('search' => $_POST['search'], 'field' => $_POST['field'], 'value' => $_POST['value']));
+    } else {
+        $search = _trip_search_user($_POST['search'], $_GET['field'], $_GET['value']);
         while ($line = $search->fetch()) {
             $tpl->append('ufiles', $line);
         }
+        $tpl->assign('search', $_POST['search']);
+        $tpl->assign('field', $_GET['field']);
+        $tpl->assign('value', $_GET['value']);
     }
 
     display();

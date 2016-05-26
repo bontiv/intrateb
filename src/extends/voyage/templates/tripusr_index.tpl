@@ -19,12 +19,14 @@
   </div>
 </div>
 
+{if $new}
 <p>
   <a href="{mkurl action="tripusr" page="new" trip=$trip->tr_id}" class="btn btn-primary">
     <span class="glyphicon glyphicon-plus"></span>
     Nouveau dossier
   </a>
 </p>
+{/if}
 
 <div class="container-fluid">
   {if isset($userfiles)}
@@ -54,6 +56,12 @@
                     <span class="glyphicon glyphicon-file"></span>
                     Continuer / éditer
                   </a>
+                   {if $delete}
+                    <a href="{mkurl action="tripusr" page="delete" file=$ufile->tu_id}" class="btn btn-danger btn-xs" onclick="return confirm('Supprimer totalement la candidature ?');">
+                      <span class="glyphicon glyphicon-trash"></span>
+                      Supprimer
+                    </a>
+                  {/if}
                 </td>
               </tr>
           {/foreach}

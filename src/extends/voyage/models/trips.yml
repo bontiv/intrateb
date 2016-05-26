@@ -32,3 +32,6 @@ fields:
   tr_places:
       type: int
       label: Nombre de places
+  tr_link:
+      type: var
+      label: "Lien vers la décharge"

@@ -44,7 +44,7 @@
                 <div class="text-danger">Non déposé</div>
             {/if}
           </dd>
-          <dt>Décharge</dt>
+          <dt><a href="{$trip->tr_link}">Décharge</a></dt>
           <dd>
             {if $ufile->raw_tu_responsability_agreement=="YES"}
                 <div class="text-success">Déposé</div>
@@ -61,16 +61,19 @@
 
 
     {* Panel Footer *}
+    {if $delete}
     <div class="panel panel-default">
       <div class="panel-footer">
+       
         <a href="{mkurl action="tripusr" page="delete" file=$ufile->tu_id}" class="btn btn-danger" onclick="return confirm('Supprimer totalement la candidature ?');">
           <span class="glyphicon glyphicon-trash"></span>
           Supprimer
         </a>
+  
       </div>
     </div>
     {* / Panel Footer *}
-
+   {/if}
   </div>
 </form>
 

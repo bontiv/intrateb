@@ -42,7 +42,7 @@
             		<h4>Bienvenue chez </h4>
           		</div>
           		<div class="panel-body">
-          			<img src="images/logotxt.png">
+          			<img style="width: 100%;" src="images/logotxt.png">
           		</div>
           	</div>
         </div>

@@ -5,6 +5,8 @@
  */
 
 function tripusr_index() {
+    global $tpl;
+    
     $mdl = new Modele('trips');
     $mdl->fetch($_GET['trip']);
     $mdl->assignTemplate('trip');
@@ -16,6 +18,9 @@ function tripusr_index() {
     ));
     $ufile->appendTemplate('userfiles');
 
+    $tpl->assign('delete', new DateTime($mdl->tr_retractdate) >= new DateTime("now"));
+    $tpl->assign('new',new DateTime($mdl->tr_maxdate) >= new DateTime("now"));
+    
     display();
 }
 
@@ -88,6 +93,12 @@ function tripusr_new() {
     $mdl->fetch($_GET['trip']);
     $mdl->assignTemplate('trip');
 
+    if (new DateTime($mdl->tr_maxdate) < new DateTime("now")) 
+    {
+        $tpl->assign('errors', array("La date de fin de création de dossier est passée, vous ne pouvez plus vous inscrire."));
+        display();
+    }
+    
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($_POST['traveller'] == $_POST['emergency'] && $_POST['emergency'] != 'new') {
             $errors[] = 'Le contact en cas d\'urgence ne peut pas être le participant.';
@@ -168,6 +179,18 @@ function tripusr_continue() {
 function tripusr_delete() {
     $ufile = _tripusr_load();
 
+    $mdl = new Modele('trips');
+    $mdl->fetch($ufile->raw_tu_trip);
+    
+    $now = new DateTime("now");
+    if (new DateTime($mdl->tr_retractdate) < $now) 
+    {
+         redirect('tripusr', 'index', array(
+            'trip' => $ufile->raw_tu_trip,
+            'hsuccess' => false,
+        ));
+    }
+    
     $opts = new Modele('trip_option_userfile');
     $opts->find(array(
         'tou_userfile' => $ufile->getKey()
@@ -185,6 +208,8 @@ function tripusr_delete() {
 }
 
 function _tripusr_load() {
+    global $tpl;
+    
     $ufile = new Modele('trip_userfiles');
 
     try {
@@ -196,6 +221,11 @@ function _tripusr_load() {
     if ($ufile->raw_tu_user != $_SESSION['user']['user_id']) {
         redirect('syscore', 'forbidden');
     }
+
+    $mdl = new Modele('trips');
+    $mdl->fetch($ufile->raw_tu_trip);
+    
+    $tpl->assign('delete', new DateTime($mdl->tr_retractdate) >= new DateTime("now")); 
 
     $ufile->assignTemplate('ufile');
     $ufile->tu_trip->assignTemplate('trip');
@@ -386,5 +416,11 @@ function tripusr_step5() {
     //    $ufile->tu_step = 4;
     //    redirect('tripusr', 'step4', array('file' => $ufile->getKey()));
     //}
+    display();
+}
+
+function tripusr_step9() {
+    $ufile = _tripusr_load();
+
     display();
 }

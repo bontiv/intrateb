@@ -12,6 +12,8 @@ function ml_index() {
         "'SUPERUSER'" => array("value" => "Utilisateur acrédité", "checked" => "checked"),
         "'ADMINISTRATOR'" => array("value" => "Administrateur", "checked" => "checked"));
     $tpl->assign("group_list", $groups);
+    
+    $tpl->assign('users', array());
     // $api = new GoogleApi();
     // $rlst = $api->getGroupsList();
 
@@ -36,39 +38,75 @@ function ml_index() {
     //$tpl->display('mail_send.tpl');
 }
 
+function send_mail($s, $valid) {
+    global $tpl;
+    
+    $tpl->assign('user', $s);
+    if (isset($_POST["send"])) {
+        $mail = getMailer();
+        $mail->AddAddress($s->user_email);
+        $mail->Subject = '[intra LATEB] '.$_POST['title'];
+        $mail->Body = $tpl->fetch('mail_send.tpl');
+        if ($mail->Send() == false) {
+            $valid[] = $s->user_email;   
+        }
+    }
+    return $valid;
+}
+
 function ml_send() {
     global $tpl, $pdo;
 
     $tpl->assign("title", $_POST['title']);
     $tpl->assign("content", $_POST['content']);
-    //var_dump($_POST["group"]);
-    $group = implode(",", $_POST["group"]);
-//SELECT u.user_email, u.user_name FROM user_sections as s, users as u where s.us_section = 2 and s.us_type != 'rejected' and s.us_user = u.user_id;
-    $query = 'SELECT * FROM users WHERE user_name != "admin" and user_newsletter = "SUBSCRIBED" and user_role in ('.$group.')';
-    //var_dump($query);
+
     $users = array();
     $valid = array();
-    
+    $mail_send = array();
 
-    $sql = $pdo->query($query);
-    while ($s = $sql->fetch(PDO::FETCH_OBJ)) {
-        if ($s->user_email) {
-            $users[] = $s;
-            $tpl->assign('user', $s);
-            if (isset($_POST["send"])) {
-                $mail = getMailer();
-                $mail->AddAddress($s->user_email);
-                $mail->Subject = '[intra LATEB] '.$_POST['title'];
-                $mail->Body = $tpl->fetch('mail_send.tpl');
-                if ($mail->Send() == false) {
-                    $valid[] = $s->user_email;   
+    if (isset($_POST["group"])) {
+        $group = implode(",", $_POST["group"]);
+    //SELECT u.user_email, u.user_name FROM user_sections as s, users as u where s.us_section = 2 and s.us_type != 'rejected' and s.us_user = u.user_id;
+        $query = 'SELECT * FROM users WHERE user_name != "admin" and user_newsletter = "SUBSCRIBED" and user_role in ('.$group.')';
+        //var_dump($query);
+
+        
+        $sql = $pdo->query($query);
+        while ($s = $sql->fetch(PDO::FETCH_OBJ)) {
+            if ($s->user_email) {
+                $users[] = $s;
+                send_mail($s, $valid);
+                $mail_send[] = $s->user_email;
+            }
+            //var_dump($mail->ErrorInfo);
+        }
+    }
+        
+    
+    if (isset($_POST['users'])) {
+        $mails = explode(";", $_POST['users']);
+        foreach ($mails as $mail) {
+            if (!in_array($mail, $mail_send)) {
+                
+                $sql = $pdo->prepare('SELECT * FROM trip_contacts, users, trip_userfiles'
+                    . ' WHERE ta_user = user_id'
+                    . ' AND ((ta_id = tu_participant AND ta_mail = :mail) OR (tu_participant = 0 AND tu_user = user_id AND user_email = :mail))');
+                $sql->bindValue(':mail', $mail);
+                $sql->execute();
+                
+                while ($line = $sql->fetch(PDO::FETCH_OBJ)) {
+                    $users[] = $line;
+                    send_mail($line, $valid);
                 }
+                $mail_send[] = $mail;
             }
         }
-        //var_dump($mail->ErrorInfo);
     }
+    
+    
     $err = "";
     $tpl->assign('users', $users);
+    $tpl->assign('mails', $mail_send);
     if (count($valid) > 0) {
         $err = "Impossible d'envoyer des mails aux adresses suivantes: " . implode(", ", $valid);
     }

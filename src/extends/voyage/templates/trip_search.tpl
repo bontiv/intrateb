@@ -17,7 +17,7 @@
 
     <form class="form-inline" method="POST" action="{mkurl action="trip" page="search" trip=$trip->tr_id}">
       <div class="form-group">
-        <input type="search" name="search" placeholder="Recherche" class="form-control" />
+        <input type="search" name="search" placeholder="Recherche" class="form-control" value="{$search}"/>
       </div>
       <div class="form-group">
         <div class="btn-group">
@@ -28,12 +28,17 @@
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu">
-            <li><a href="{mkurl action="trip" trip=$trip->tr_id page="search" field="tu_caution" value="0"}">Sans caution</a></li>
-            <li><a href="{mkurl action="trip" trip=$trip->tr_id page="search" field="tu_payment" value="0"}">Sans paiement</a></li>
-            <li><a href="{mkurl action="trip" trip=$trip->tr_id page="search" field="tu_responsability_agreement" value="0"}">Sans décharge</a></li>
+            <li><a href="{mkurl action="trip" trip=$trip->tr_id page="search" field="tu_caution" value="NO"}">Sans caution</a></li>
+            <li><a href="{mkurl action="trip" trip=$trip->tr_id page="search" field="tu_payment" value="NO"}">Sans paiement</a></li>
+            <li><a href="{mkurl action="trip" trip=$trip->tr_id page="search" field="tu_responsability_agreement" value="NO"}">Sans décharge</a></li>
             <li><a href="#">Mineurs</a></li>
-            <li><a href="{mkurl action="trip" trip=$trip->tr_id page="search" field="tu_step" value="10"}">Dossiers complets</a></li>
+            <li><a href="{mkurl action="trip" trip=$trip->tr_id page="search" field="tu_step" value="9"}">Dossiers complets</a></li>
           </ul>
+          <input type="hidden" name="field" value="{$field}"/>
+          <input type="hidden" name="value" value="{$value}"/>
+          <button type="submit" name="mailing" class="form-actions btn btn-info">
+            <span class="glyphicon glyphicon-envelope"></span>
+          </button>
         </div>
       </div>
     </form>
@@ -55,9 +60,9 @@
                   <td>
                     <a href="{mkurl action="tripadm" file=$ufile.tu_id}">
                       {if $ufile.tu_participant==0}
-                          {$_user.user_firstname|escape} {$_user.user_lastname|escape}
+                          {$ufile.user_firstname|escape} {$ufile.user_lastname|escape}
                       {else}
-                          {$ufile.ca_firstname} {$ufile.ca_lastname}
+                          {$ufile.ta_firstname|escape} {$ufile.ta_lastname|escape}
                       {/if}
                   </td>
                   <td>
