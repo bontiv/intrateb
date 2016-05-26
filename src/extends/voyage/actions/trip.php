@@ -522,7 +522,7 @@ function trip_opt_edit() {
     display();
 }
 
-function search_user($search_string, $search_field, $search_value) {
+function _trip_search_user($search_string, $search_field, $search_value) {
     global $pdo, $tpl;
     
     $sql = 'SELECT * FROM trip_userfiles'
@@ -554,7 +554,7 @@ function search_user($search_string, $search_field, $search_value) {
 function trip_mail() {
     global $tpl;
     
-    $search = search_user($_GET['search'], $_GET['field'], $_GET['value']);
+    $search = _trip_search_user($_GET['search'], $_GET['field'], $_GET['value']);
     
     while ($line = $search->fetch(PDO::FETCH_OBJ)) {
         $tpl->append('users', $line);
@@ -573,7 +573,7 @@ function trip_search() {
     if (isset($_POST['mailing'])) {
         redirect('trip', 'mail', array('search' => $_POST['search'], 'field' => $_POST['field'], 'value' => $_POST['value']));
     } else {
-        $search = search_user($_POST['search'], $_POST['field'], $_POST['value']);
+        $search = _trip_search_user($_POST['search'], $_POST['field'], $_POST['value']);
         while ($line = $search->fetch()) {
             $tpl->append('ufiles', $line);
         }

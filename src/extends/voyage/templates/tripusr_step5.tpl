@@ -63,10 +63,12 @@
     {* Panel Footer *}
     <div class="panel panel-default">
       <div class="panel-footer">
+        {if $delete}
         <a href="{mkurl action="tripusr" page="delete" file=$ufile->tu_id}" class="btn btn-danger" onclick="return confirm('Supprimer totalement la candidature ?');">
           <span class="glyphicon glyphicon-trash"></span>
           Supprimer
         </a>
+        {/if}
       </div>
     </div>
     {* / Panel Footer *}
