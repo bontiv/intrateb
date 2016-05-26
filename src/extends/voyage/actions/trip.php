@@ -529,22 +529,23 @@ function _trip_search_user($search_string, $search_field, $search_value) {
     
     $sql = 'SELECT * FROM trip_userfiles'
                 . ' LEFT JOIN users ON tu_user = user_id AND tu_participant = 0'
-                . ' LEFT JOIN trip_contacts ON tu_participant = ta_id';
-
-    if (!empty($search_string)) {
-        $sql .=   ' WHERE user_lastname LIKE :search'
+                . ' LEFT JOIN trip_contacts ON tu_participant = ta_id'
+                . ' WHERE (user_lastname LIKE :search'
                 . ' OR user_name LIKE :search'
                 . ' OR user_firstname LIKE :search'
                 . ' OR user_email LIKE :search'
                 . ' OR ta_firstname LIKE :search'
                 . ' OR ta_lastname LIKE :search'
-                . ' OR ta_mail LIKE :search';
+                . ' OR ta_mail LIKE :search)';
+
+    if (!empty($search_field) && !empty($search_value)) {
+        $sql .= ' AND '. $search_field . ' = :value';
     }
-    
     $search = $pdo->prepare($sql);
     
-    if (!empty($search_string))
-        $search->bindValue(':search', '%'.$search_string.'%');
+    $search->bindValue(':search', '%'.$search_string.'%');
+     if (!empty($search_field) && !empty($search_value))
+        $search->bindValue(':value', $search_value);
 
     $search->execute();
     
@@ -571,15 +572,17 @@ function trip_search() {
     $mdl = new Modele('trips');
     $mdl->fetch($_GET['trip']);
     $mdl->assignTemplate('trip');
-
+    
     if (isset($_POST['mailing'])) {
         redirect('trip', 'mail', array('search' => $_POST['search'], 'field' => $_POST['field'], 'value' => $_POST['value']));
     } else {
-        $search = _trip_search_user($_POST['search'], $_POST['field'], $_POST['value']);
+        $search = _trip_search_user($_POST['search'], $_GET['field'], $_GET['value']);
         while ($line = $search->fetch()) {
             $tpl->append('ufiles', $line);
         }
         $tpl->assign('search', $_POST['search']);
+        $tpl->assign('field', $_GET['field']);
+        $tpl->assign('value', $_GET['value']);
     }
 
     display();
