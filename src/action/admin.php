@@ -6,6 +6,7 @@
  * @package Epicenote
  */
 
+
 /**
  * Controleur page d'index admin
  * Permet l'affichage de la page d'administration des droits d'accès.
