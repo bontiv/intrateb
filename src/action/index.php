@@ -94,6 +94,18 @@ function index_logout() {
     redirect('index');
 }
 
+function index_mail_subscribe($user_name, $user_email) {
+    global $tpl, $pdo;
+    
+    $tpl->assign('user_name', $user_name);
+    $mail = getMailer();
+    $mail->AddAddress($user_emaill);
+    $mail->Subject = '[Intra LATEB] Inscription';
+    $mail->Body = $tpl->fetch('mail_subscribe.tpl');
+    $valid = $mail->Send();
+    $tpl->assign('succes', $valid);
+}
+
 /**
  * Inscrire un nouvel utilisateur
  * Cette page permet à un visiteur de s'inscrire sur le site.
@@ -120,7 +132,7 @@ function index_create() {
                         'user_pass' => $pass,
                         'user_role' => 'GUEST',
                     ))) {
-                $tpl->assign('succes', true);
+                index_mail_subscribe($_POST['user_name'], $_POST['user_email']);
             } else {
                 $tpl->assign('error', 'Erreur SQL...');
             }
