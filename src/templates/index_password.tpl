@@ -46,12 +46,7 @@
     <div class="form-group{if isset($error_captcha) && $error_captcha} has-error{/if}">
       <label class="col-md-4 control-label" for="captcha_code">Vérification Captcha</label>
       <div class="col-md-4">
-        <img id="captcha" src="{mkurl action="index" page="securimage_show"}" alt="CAPTCHA Image" />
-        <a href="#" class="btn btn-default btn-sm" onclick="document.getElementById('captcha').src = '{mkurl action="index" page="securimage_show"}&' + Math.random();
-                        return false"><span class="glyphicon glyphicon-refresh"></span><span class="sr-only"> Refresh</span></a>
-
-        <input id="captcha_code" name="captcha_code" placeholder="" class="form-control input-md" required="" type="text">
-        <span class="help-block">Entrez le code visible sur l'image ci-dessus</span>
+        <div class="g-recaptcha" data-sitekey="{$siteKey}"></div>
       </div>
     </div>
 

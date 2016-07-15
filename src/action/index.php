@@ -497,8 +497,11 @@ function index_securimage_show() {
 }
 
 function index_password() {
-    global $tpl;
+    global $tpl, $config;
 
+    $cfg = $config['recaptcha'];
+    $tpl->assign('siteKey', $cfg['siteKey']);
+    
     if (isset($_POST['valider'])) {
         $securimage = new Securimage();
         if ($securimage->check($_POST['captcha_code']) == false) {
