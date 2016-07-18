@@ -694,6 +694,15 @@ class Modele {
     }
 
     /**
+     * Vérifie l'existance d'une propriété avancée
+     * @param type $name
+     * @return type
+     */
+    function __isset($name) {
+        return isset($this->desc['fields'][$name]) || isset($this->instance[$name]);
+    }
+
+    /**
      * Récupère la valeur d'un champ
      * @param type $name
      */
