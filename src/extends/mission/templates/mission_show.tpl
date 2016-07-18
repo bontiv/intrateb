@@ -29,10 +29,12 @@
     <span class="glyphicon glyphicon-user"></span>
     Réponses
   </a>
-  <a href="#" class="btn btn-warning">
-    <span class="glyphicon glyphicon-lock"></span>
-    Verrouiller
-  </a>
+  {if $mission->raw_m_state=="OPEN"}
+      <a href="{mkurl action="mission" page="close" id=$mission->m_id}" class="btn btn-warning">
+        <span class="glyphicon glyphicon-lock"></span>
+        Verrouiller
+      </a>
+  {/if}
 </div>
 
 {if isset($dispos)}
@@ -47,7 +49,9 @@
           <th>Téléphone</th>
           <th>Email</th>
           <th>Dispo</th>
-          <th>Action</th>
+            {if $mission->raw_m_state=="OPEN"}
+            <th>Action</th>
+            {/if}
         </tr>
       </thead>
       <tbody>
@@ -59,17 +63,19 @@
               <td><a href="tel:{$dispo->md_user->user_phone|escape}">{$dispo->md_user->user_phone|escape}</a></td>
               <td><a href="mailto:{$dispo->md_user->user_email|escape}">{$dispo->md_user->user_email|escape}</a></td>
               <td>{$dispo->md_dispo}</td>
-              <td>
-                {if $dispo->raw_md_dispo eq "AVAILABLE"}
-                    <a href="#" class="btn btn-danger btn-xs">
-                      <span class="glyphicon glyphicon-ban-circle"></span> Refuser
-                    </a>
-                {elseif $dispo->raw_md_dispo eq "REFUSED"}
-                    <a href="#" class="btn btn-success btn-xs">
-                      <span class="glyphicon glyphicon-ok-circle"></span> Accepter
-                    </a>
-                {/if}
-              </td>
+              {if $mission->raw_m_state=="OPEN"}
+                  <td>
+                    {if $dispo->raw_md_dispo eq "AVAILABLE"}
+                        <a href="#" class="btn btn-danger btn-xs">
+                          <span class="glyphicon glyphicon-ban-circle"></span> Refuser
+                        </a>
+                    {elseif $dispo->raw_md_dispo eq "REFUSED"}
+                        <a href="#" class="btn btn-success btn-xs">
+                          <span class="glyphicon glyphicon-ok-circle"></span> Accepter
+                        </a>
+                    {/if}
+                  </td>
+              {/if}
             </tr>
         {/foreach}
       </tbody>

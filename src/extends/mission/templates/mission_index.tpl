@@ -48,11 +48,11 @@
                 <td>{$mission->m_date_end|date_format:'%d/%m/%Y %H:%I'}</td>
                 {acl level=USER}
                 <td>
-                  <input type="radio" value="BUSY" name="DISPO_{$mission->m_id}" id="mission_{$mission->m_id}_no" {if $mission->raw_md_dispo=="BUSY"}checked="checked"{/if} />
+                  <input type="radio" value="BUSY" name="DISPO_{$mission->m_id}" id="mission_{$mission->m_id}_no" {if isset($mission->md_dispo) and $mission->raw_md_dispo=="BUSY"}checked="checked"{/if} />
                   <label for="mission_{$mission->m_id}_no"><div class="label label-danger">Non</div></label>
-                  <input type="radio" value="UNKNOW" name="DISPO_{$mission->m_id}" id="mission_{$mission->m_id}_maybe" {if $mission->raw_md_dispo=="UNKNOW"}checked="checked"{/if} />
+                  <input type="radio" value="UNKNOW" name="DISPO_{$mission->m_id}" id="mission_{$mission->m_id}_maybe" {if isset($mission->md_dispo) and $mission->raw_md_dispo=="UNKNOW"}checked="checked"{/if} />
                   <label for="mission_{$mission->m_id}_maybe"><div class="label label-warning">Si nécessaire</div></label>
-                  <input type="radio" value="AVAILABLE" name="DISPO_{$mission->m_id}" id="mission_{$mission->m_id}_yes" {if $mission->raw_md_dispo=="AVAILABLE"}checked="checked"{/if} />
+                  <input type="radio" value="AVAILABLE" name="DISPO_{$mission->m_id}" id="mission_{$mission->m_id}_yes" {if isset($mission->md_dispo) and $mission->raw_md_dispo=="AVAILABLE"}checked="checked"{/if} />
                   <label for="mission_{$mission->m_id}_yes"><div class="label label-success">Oui</div></label>
 
                 </td>

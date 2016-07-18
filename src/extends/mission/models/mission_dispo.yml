@@ -8,15 +8,15 @@ fields:
     type: external
     table: mission
     display: %m_name%
-    label: "Nom de mission"
+    label: "Mission"
   md_user:
       type: external
       table: users
       display: %user_name%
-      label: "Description de la mission"
+      label: "Utilisateur"
   md_dispo:
       type: enum
-      label: "Début de la mission"
+      label: "Disponibilité"
       default: NO_ANSWER
       items:
           NO_ANSWER: Pas de réponse

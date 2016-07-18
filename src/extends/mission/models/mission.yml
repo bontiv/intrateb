@@ -21,8 +21,7 @@ fields:
       label: Nombre nécessaire
   m_state:
       type: enum
-      default: CLOSE
-      visible: false
+      default: OPEN
       items:
           CLOSE: Fermé
           OPEN: Ouvert

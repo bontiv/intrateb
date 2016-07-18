@@ -50,7 +50,13 @@ function mission_create() {
 
     $mdl = new Modele('mission');
 
-    $tpl->assign('create_form', $mdl->edit());
+    $tpl->assign('create_form', $mdl->edit(array(
+                'm_name',
+                'm_desc',
+                'm_date_start',
+                'm_date_end',
+                'm_wanted',
+    )));
 
     if (isset($_POST['submit'])) {
         $from = new DateTime($_POST['m_date_start']);
@@ -81,4 +87,12 @@ function mission_show() {
     $dispo->appendTemplate("dispos");
 
     display();
+}
+
+function mission_close() {
+    $mdl = new Modele("mission");
+    $mdl->fetch($_GET['id']);
+    $mdl->m_state = 'CLOSE';
+
+    redirect("mission", "show", array('id' => $mdl->getKey()));
 }
