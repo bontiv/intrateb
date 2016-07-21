@@ -22,7 +22,7 @@
   <form method="POST" action="{mkurl action="index" page="create"}">
     <div class="col-lg-3">
       <div class="input-group">
-        <span class="input-group-addon">Pseud (*)</span>
+        <span class="input-group-addon">Pseudo (*)</span>
         <input class="form-control" type="text" name="user_name" value="{$user['user_name']}" required/>
       </div>
       <br/>
