@@ -18,6 +18,7 @@
     <script src="js/jquery-ui-1.10.4.custom.min.js"></script>
     <script src="js/datetime-picker.min.js"></script>
     <script src="//cdn.ckeditor.com/4.5.7/full/ckeditor.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     <!-- /Scripts -->
 
     <title>Intranet LATEB</title>

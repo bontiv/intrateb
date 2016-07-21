@@ -94,41 +94,86 @@ function index_logout() {
     redirect('index');
 }
 
+function index_mail_subscribe($user_name, $user_email) {
+    global $tpl, $pdo;
+    
+    $tpl->assign('user_name', $user_name);
+    $mail = getMailer();
+    $mail->AddAddress($user_email);
+    $mail->Subject = '[Intra LATEB] Inscription';
+    $mail->Body = $tpl->fetch('mail_subscribe.tpl');
+    return ($mail->Send());
+}
+
+function _index_create_user() {
+    global $tpl, $pdo, $config;
+
+    if(isset($_POST['g-recaptcha-response'])) {
+        $captcha=$_POST['g-recaptcha-response'];
+    }
+    if (!$captcha) {
+       $tpl->assign('error', 'Captcha erreur, veuillez resaisir les informations.');
+       return false;
+    }
+    $cfg = $config['recaptcha'];
+
+    $secretKey = $cfg['secretKey'];
+    $ip = $_SERVER['REMOTE_ADDR'];
+    $response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey."&response=".$captcha."&remoteip=".$ip);
+    $responseKeys = json_decode($response,true);
+    
+    if(intval($responseKeys["success"]) !== 1) {
+       $tpl->assign('error', 'Erreur de captcha, veuillez resaisir les informations.');
+       return false;
+    }
+    $pass = md5($_POST['user_name'] . ':' . $_POST['user_pass']);
+
+    $stm = $pdo->prepare('SELECT COUNT(*) FROM users WHERE user_name LIKE ?');
+    $stm->bindValue(1, $_POST['user_name']);
+    $stm->execute();
+    $rst = $stm->fetch();
+    if ($rst[0] == 0) {
+        
+        if (strlen($_POST['user_pass']) < 4) {
+            $tpl->assign('error', 'Mot de passes pas assez long...');
+        } elseif ($_POST['user_pass'] != $_POST['confirmPassword']) {
+            $tpl->assign('error', 'Mot de passes différents...');
+        } elseif (autoInsert('users', 'user_', array(
+                    'user_pass' => $pass,
+                    'user_role' => 'GUEST',
+                ))) {
+            if (index_mail_subscribe($_POST['user_name'], $_POST['user_email']))
+                return true;
+            $tpl->assign('error', 'Erreur lors de l\'envoi du mail, mais l\'utilisateur est inscrit');   
+        } else {
+            $tpl->assign('error', 'Erreur SQL...');
+        }
+    } else {
+        //Block d'erreur utilisateur existant
+        $tpl->assign('error', "Ce nom d'utilisateur est déjà utilisé.");
+    }
+    return (false);
+}
 /**
  * Inscrire un nouvel utilisateur
  * Cette page permet à un visiteur de s'inscrire sur le site.
  */
 function index_create() {
-    global $tpl, $pdo;
+    global $tpl, $pdo, $config;
+    
+    $cfg = $config['recaptcha'];
+    $tpl->assign('siteKey', $cfg['siteKey']);
     $tpl->assign('error', false);
     $tpl->assign('succes', false);
-
-    if (isset($_POST['user_name'])) {
-        $pass = md5($_POST['user_name'] . ':' . $_POST['user_pass']);
-
-        $stm = $pdo->prepare('SELECT COUNT(*) FROM users WHERE user_name LIKE ?');
-        $stm->bindValue(1, $_POST['user_name']);
-        $stm->execute();
-        $rst = $stm->fetch();
-        if ($rst[0] == 0) {
-
-            if (strlen($_POST['user_pass']) < 4) {
-                $tpl->assign('error', 'Mot de passes pas assez long...');
-            } elseif ($_POST['user_pass'] != $_POST['confirmPassword']) {
-                $tpl->assign('error', 'Mot de passes différents...');
-            } elseif (autoInsert('users', 'user_', array(
-                        'user_pass' => $pass,
-                        'user_role' => 'GUEST',
-                    ))) {
-                $tpl->assign('succes', true);
-            } else {
-                $tpl->assign('error', 'Erreur SQL...');
-            }
-        } else {
-            //Block d'erreur utilisateur existant
-            $tpl->assign('error', "Ce nom d'utilisateur est déjà utilisé.");
-        }
+    
+    if (isset($_POST['Inscription'])) {
+        $valid = _index_create_user();
+        $tpl->assign('succes', $valid);
+        if ($valid)
+            $_POST = array();
     }
+
+    $tpl->assign('user', $_POST);
 
     $sql = $pdo->prepare('SELECT * FROM user_types');
     $sql->execute();
@@ -452,8 +497,11 @@ function index_securimage_show() {
 }
 
 function index_password() {
-    global $tpl;
+    global $tpl, $config;
 
+    $cfg = $config['recaptcha'];
+    $tpl->assign('siteKey', $cfg['siteKey']);
+    
     if (isset($_POST['valider'])) {
         $securimage = new Securimage();
         if ($securimage->check($_POST['captcha_code']) == false) {
