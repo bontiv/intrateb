@@ -32,6 +32,11 @@
       <td><div class="btn-group-xs btn-group">
           <a href="{mkurl action="admin_modeles" page="delinst" modele=$mandate.name key=$line.{$mandate.key}}" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></a>
           <a href="{mkurl action="admin_modeles" page="modinst" modele=$mandate.name key=$line.{$mandate.key}}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>
+          {if $line.mandate_select == "FALSE"}
+              <a href="{mkurl action="mandate" page="change" mandate=$line.mandate_id}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-ok"></span></a>
+          {else}
+              <a href="{mkurl action="mandate" page="change" mandate=$line.mandate_id}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></a>
+          {/if}
       </div></td>
     </tr>
 {/foreach}

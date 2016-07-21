@@ -6,6 +6,14 @@ fields:
   mandate_id:
     type: auto_int
 
+  mandate_select:
+    type: enum
+    default: 'FALSE'
+    label: Mandat actif
+    items:
+      TRUE: Oui
+      FALSE: Non
+  
   mandate_label:
     type: var
     size: 20

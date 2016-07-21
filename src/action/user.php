@@ -408,7 +408,7 @@ function user_add_mandate($user, $mandate) {
 		'um_user' => $usr->getKey(),
 		'um_mandate' => $mdt->getKey(),
 	)) && $lnk->count() > 0) {
-		return true;
+		return 'L\'utilisateur a déjà un mandat, changez ces privilèges manuellement';
 	}
 
 	$succ = $lnk->addFrom(array(
@@ -427,7 +427,7 @@ function user_addmember() {
 	global $tpl;
 
 	$mdt = new Modele('mandate');
-	$mdt->find(false, 'mandate_end DESC');
+	$mdt->find(array('mandate_select' => 'TRUE'));
 
 	$last_mandate = $mdt->next();
 
@@ -442,7 +442,7 @@ function user_check() {
 	global $tpl;
 
 	$mdt = new Modele('mandate');
-	$mdt->find(false, 'mandate_end DESC');
+	$mdt->find(array('mandate_select' => 'TRUE'));
 
 	$tpl->assign('mandates', array());
 
