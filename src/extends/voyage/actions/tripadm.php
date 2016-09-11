@@ -4,6 +4,9 @@
  * Fichier pour la gestion des dossiers participants
  */
 
+#Requis pour les maj status
+require dirname(dirname(__FILE__)) . DS . 'libs' . DS . 'common.php';
+
 function _tripadm_load() {
     $ufile = new Modele('trip_userfiles');
 
@@ -60,14 +63,13 @@ function tripadm_index() {
         if ($ufile->modFrom($data)) {
             if ($ufile->raw_tu_payment == "YES" && $ufile->raw_tu_caution == "YES" && $ufile->raw_tu_responsability_agreement == "YES") {
                 if (!$ufile->modFrom(array(
-                        'tu_complete' => (new DateTime("now"))->format('Y-m-d H:i:s'),
-                        "tu_step" => 9
-                    )))
-                    {
-                        $tpl->assign('hsuccess', false);
-                    } else {
-                         $tpl->assign('hsuccess', true);
-                    }
+                            'tu_complete' => (new DateTime("now"))->format('Y-m-d H:i:s'),
+                            "tu_step" => 9
+                        ))) {
+                    $tpl->assign('hsuccess', false);
+                } else {
+                    $tpl->assign('hsuccess', true);
+                }
             } else {
                 $tpl->assign('hsuccess', true);
             }
@@ -115,13 +117,12 @@ function tripadm_order() {
     ));
     while ($chq->next()) {
         $tpl->append('chqs', new Modele($chq));
-        if ($chq->raw_cq_type == 'PAYMENT') {
-            $totalPay += $chq->cq_amount;
+        if ($chq->raw_tq_type == 'PAYMENT') {
+            $totalPay += $chq->tq_amount;
         } else {
-            $totalCaution += $chq->cq_amount;
+            $totalCaution += $chq->tq_amount;
         }
     }
-
 
     $tpl->assign('total', $total);
     $tpl->assign('paiement', $totalPay);
@@ -130,13 +131,51 @@ function tripadm_order() {
 }
 
 function tripadm_add_pay() {
+    global $tpl;
+
     $ufile = _tripadm_load();
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $mod = new Modele("trip_cheq");
+
+        $args = array_merge($_POST, array(
+            'tq_file' => $ufile->getKey(),
+            'tq_type' => 'PAYMENT',
+            'tq_date' => strftime('%F %T'),
+        ));
+
+        if ($mod->addFrom($args)) {
+            _trip_update($ufile);
+            redirect('tripadm', 'order', array('file' => $ufile->getKey(), 'hsuccess' => 1));
+        } else {
+            $tpl->assign('hsuccess', false);
+        }
+    }
 
     display();
 }
 
 function tripadm_add_caution() {
+    global $tpl;
+
     $ufile = _tripadm_load();
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $mod = new Modele("trip_cheq");
+
+        $args = array_merge($_POST, array(
+            'tq_file' => $ufile->getKey(),
+            'tq_type' => 'CAUTION',
+            'tq_date' => strftime('%F %T'),
+        ));
+
+        if ($mod->addFrom($args)) {
+            _trip_update($ufile);
+            redirect('tripadm', 'order', array('file' => $ufile->getKey(), 'hsuccess' => 1));
+        } else {
+            $tpl->assign('hsuccess', false);
+        }
+    }
 
     display();
 }

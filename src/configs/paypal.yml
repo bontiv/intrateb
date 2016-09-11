@@ -1,0 +1,22 @@
+## PHP Mailer config
+---
+
+name: PayPal
+label: PayPal
+fields:
+    enable:
+        type: enum
+        items:
+            no: Non
+            prod: Production
+            sandbox: Sandbox
+        label: Serveur
+        default: "no"
+    client_id:
+        type: var
+        label: Client API ID
+        default: "AYSq3RDGsmBLJE-otTkBtM-jBRd1TCQwFf9RGfwddNXWz0uFU9ztymylOhRS"
+    client_secret:
+        type: var
+        label: Secret API
+        default: "EGnHDxD_qRPdaLdZz8iCr8N7_MzF-YHPTkjs6NKYQvQSBngp4PTTVWkPZRbL"

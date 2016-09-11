@@ -50,6 +50,7 @@
       <thead>
         <tr>
           <th>Type</th>
+          <th>Methode</th>
           <th>Emétteur</th>
           <th>Banque</th>
           <th>Numéro</th>
@@ -63,18 +64,19 @@
             {foreach $chqs as $chq}
                 <tr>
                   <td>{$chq->tq_type}</td>
+                  <td>{$chq->tq_method}</td>
                   <td>{$chq->tq_from}</td>
                   <td>{$chq->tq_bank}</td>
                   <td>{$chq->tq_number}</td>
                   <td>N/A</td>
                   <td>
-                    {if $chq->raw_tq_type=='PAIEMENT'}
-                        {$chq->tq_amount}
+                    {if $chq->raw_tq_type=='PAYMENT'}
+                        {$chq->tq_amount} €
                     {/if}
                   </td>
                   <td>
-                    {if $chq->raw_tq_type<>'PAIEMENT'}
-                        {$chq->tq_amount}
+                    {if $chq->raw_tq_type<>'PAYMENT'}
+                        {$chq->tq_amount} €
                     {/if}
                   </td>
                 </tr>
@@ -86,6 +88,11 @@
               </td>
             </tr>
         {/if}
+        <tr class="info">
+          <th colspan="6">TOTAL</th>
+          <th>{$paiement} €</th>
+          <th>{$caution} €</th>
+        </tr>
       </tbody>
     </table>
   </div>

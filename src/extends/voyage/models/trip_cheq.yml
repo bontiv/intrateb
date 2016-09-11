@@ -27,6 +27,13 @@ fields:
       items:
           PAYMENT: Paiement
           CAUTION: Caution
+  tq_method:
+      type: enum
+      label: Methode de paiement
+      items:
+          CHEQ: Chèque
+          CASH: Espèces
+          PAYPAL: PayPal
   tq_date:
       type: date
       label: Date de réception

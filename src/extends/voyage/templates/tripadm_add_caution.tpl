@@ -12,7 +12,7 @@
 <h2>Dossier participant {$ufile->tu_id}</h2>
 <h3>Ajout d'une caution</h3>
 
-<form class="form-horizontal" method="POST" action="{mkurl action="tripadm" page="add_pay" file=$ufile->tu_id}">
+<form class="form-horizontal" method="POST" action="{mkurl action="tripadm" page="add_caution" file=$ufile->tu_id}">
   <div class="panel-group">
 
     <div class="panel panel-default">
