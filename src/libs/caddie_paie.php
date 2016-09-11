@@ -85,7 +85,8 @@ class Paiement {
         }
 
         $approvalUrl = $payment->getApprovalLink();
-        echo $approvalUrl;
+        header('Location: ' . $approvalUrl);
+        quit();
     }
 
     private function getApiContext($clientId, $clientSecret) {
