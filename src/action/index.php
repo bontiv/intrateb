@@ -34,6 +34,7 @@ function index_index() {
     $tpl->assign('nbFtp', $nbFtp[0]);
 
     $tpl->assign('isMember', hasAcl(ACL_USER));
+    $tpl->assign('completed', isset($_SESSION['user']) && $_SESSION['user']['user_type'] !== 0);
     $tpl->display('index.tpl');
     quit();
 }
@@ -587,5 +588,68 @@ function index_password_change() {
 function index_error403() {
     header("HTTP/1.1 403 Unauthorized");
 
+    display();
+}
+
+function _index_wizard_edit(Modele &$mdl, &$fields) {
+    global $tpl;
+
+    if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+        return;
+    }
+
+    $insert = array();
+
+    foreach ($fields as $field) {
+        $insert[$field] = $_POST[$field];
+    }
+
+    if ($mdl->modFrom($insert)) {
+        $fields = null;
+    } else {
+        $tpl->assign('hsuccess', false);
+    }
+}
+
+function index_wizard() {
+    global $tpl;
+
+    $mdl = new Modele('users');
+    $mdl->fetch($_SESSION['user']['user_id']);
+    $fields = null;
+
+    if ($mdl->user_born == null) {
+        $fields = array(
+            'user_phone',
+            'user_sexe',
+            'user_born',
+        );
+        $tpl->assign('pcent', 25);
+        _index_wizard_edit($mdl, $fields);
+    }
+
+    if ($fields == null && $mdl->raw_user_type == 0) {
+        $fields = array(
+            'user_type',
+        );
+        $tpl->assign('pcent', 50);
+        _index_wizard_edit($mdl, $fields);
+    }
+
+    if ($fields == null && stripos($mdl->user_type->ut_name, 'EXTERNE') === false && $mdl->user_promo == 0) {
+        $fields = array(
+            'user_promo',
+            'user_login',
+        );
+        $tpl->assign('pcent', 85);
+        _index_wizard_edit($mdl, $fields);
+    }
+
+    if ($fields == null) {
+        // tous les champs sont OK
+        redirect('index', 'index', array('hsuccess' => 1));
+    }
+
+    $tpl->assign('form', $mdl->edit($fields));
     display();
 }
