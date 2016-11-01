@@ -42,13 +42,15 @@
         <span class="help-block">Entrez votre adresse email</span>
       </div>
     </div>
-    <!-- Text input-->
-    <div class="form-group{if isset($error_captcha) && $error_captcha} has-error{/if}">
-      <label class="col-md-4 control-label" for="captcha_code">Vérification Captcha</label>
-      <div class="col-md-4">
-        <div class="g-recaptcha" data-sitekey="{$siteKey}"></div>
-      </div>
-    </div>
+    {if $siteKey}
+        <!-- Text input-->
+        <div class="form-group{if isset($error_captcha) && $error_captcha} has-error{/if}">
+          <label class="col-md-4 control-label" for="captcha_code">Vérification Captcha</label>
+          <div class="col-md-4">
+            <div class="g-recaptcha" data-sitekey="{$siteKey}"></div>
+          </div>
+        </div>
+    {/if}
 
     <!-- Button -->
     <div class="form-group">
