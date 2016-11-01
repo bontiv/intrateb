@@ -34,6 +34,7 @@ function index_index() {
     $tpl->assign('nbFtp', $nbFtp[0]);
 
     $tpl->assign('isMember', hasAcl(ACL_USER));
+    $tpl->assign('completed', isset($_SESSION['user']) && $_SESSION['user']['user_type'] !== 0);
     $tpl->display('index.tpl');
     quit();
 }
@@ -96,7 +97,7 @@ function index_logout() {
 
 function index_mail_subscribe($user_name, $user_email) {
     global $tpl, $pdo;
-    
+
     $tpl->assign('user_name', $user_name);
     $mail = getMailer();
     $mail->AddAddress($user_email);
@@ -108,24 +109,24 @@ function index_mail_subscribe($user_name, $user_email) {
 function _index_create_user() {
     global $tpl, $pdo, $config;
 
-    if(isset($_POST['g-recaptcha-response'])) {
-        $captcha=$_POST['g-recaptcha-response'];
+    if (isset($_POST['g-recaptcha-response'])) {
+        $captcha = $_POST['g-recaptcha-response'];
     }
-    if (!$captcha) {
-       $tpl->assign('error', 'Captcha erreur, veuillez resaisir les informations.');
-       return false;
-    }
-    $cfg = $config['recaptcha'];
 
+    $cfg = $config['recaptcha'];
     $secretKey = $cfg['secretKey'];
-    $ip = $_SERVER['REMOTE_ADDR'];
-    $response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey."&response=".$captcha."&remoteip=".$ip);
-    $responseKeys = json_decode($response,true);
-    
-    if(intval($responseKeys["success"]) !== 1) {
-       $tpl->assign('error', 'Erreur de captcha, veuillez resaisir les informations.');
-       return false;
+
+    if ($secretKey) {
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=" . $secretKey . "&response=" . $captcha . "&remoteip=" . $ip);
+        $responseKeys = json_decode($response, true);
+
+        if (!$captcha || intval($responseKeys["success"]) !== 1) {
+            $tpl->assign('error', 'Erreur de captcha, veuillez resaisir les informations.');
+            return false;
+        }
     }
+
     $pass = md5($_POST['user_name'] . ':' . $_POST['user_pass']);
 
     $stm = $pdo->prepare('SELECT COUNT(*) FROM users WHERE user_name LIKE ?');
@@ -133,7 +134,7 @@ function _index_create_user() {
     $stm->execute();
     $rst = $stm->fetch();
     if ($rst[0] == 0) {
-        
+
         if (strlen($_POST['user_pass']) < 4) {
             $tpl->assign('error', 'Mot de passes pas assez long...');
         } elseif ($_POST['user_pass'] != $_POST['confirmPassword']) {
@@ -144,7 +145,7 @@ function _index_create_user() {
                 ))) {
             if (index_mail_subscribe($_POST['user_name'], $_POST['user_email']))
                 return true;
-            $tpl->assign('error', 'Erreur lors de l\'envoi du mail, mais l\'utilisateur est inscrit');   
+            $tpl->assign('error', 'Erreur lors de l\'envoi du mail, mais l\'utilisateur est inscrit');
         } else {
             $tpl->assign('error', 'Erreur SQL...');
         }
@@ -154,26 +155,26 @@ function _index_create_user() {
     }
     return (false);
 }
+
 /**
  * Inscrire un nouvel utilisateur
  * Cette page permet à un visiteur de s'inscrire sur le site.
  */
 function index_create() {
     global $tpl, $pdo, $config;
-    
+
     $cfg = $config['recaptcha'];
     $tpl->assign('siteKey', $cfg['siteKey']);
     $tpl->assign('error', false);
     $tpl->assign('succes', false);
-    
-    if (isset($_POST['Inscription'])) {
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $valid = _index_create_user();
         $tpl->assign('succes', $valid);
-        if ($valid)
-            $_POST = array();
+        if (!$valid) {
+            $tpl->assign('user', $_POST);
+        }
     }
-
-    $tpl->assign('user', $_POST);
 
     $sql = $pdo->prepare('SELECT * FROM user_types');
     $sql->execute();
@@ -501,49 +502,55 @@ function index_password() {
 
     $cfg = $config['recaptcha'];
     $tpl->assign('siteKey', $cfg['siteKey']);
-    
+
     if (isset($_POST['valider'])) {
         if (isset($_POST['g-recaptcha-response'])) {
-            $captcha=$_POST['g-recaptcha-response'];
+            $captcha = $_POST['g-recaptcha-response'];
         }
-        if (!$captcha) {
-            $tpl->assign('msg', 'Erreur de captcha, veuillez resaisir les informations.');
-            $tpl->assign('error_captcha', true);
-        } else {
-            $cfg = $config['recaptcha'];
-        
-            $secretKey = $cfg['secretKey'];
+
+        $cfg = $config['recaptcha'];
+        $secretKey = $cfg['secretKey'];
+
+        if ($secretKey) {
+            if (!$captcha) {
+                $tpl->assign('msg', 'Erreur de captcha, veuillez resaisir les informations.');
+                $tpl->assign('error_captcha', true);
+                display();
+                return;
+            }
             $ip = $_SERVER['REMOTE_ADDR'];
-            $response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey."&response=".$captcha."&remoteip=".$ip);
-            $responseKeys = json_decode($response,true);
-            
+            $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=" . $secretKey . "&response=" . $captcha . "&remoteip=" . $ip);
+            $responseKeys = json_decode($response, true);
+
             if (intval($responseKeys["success"]) !== 1) {
                 $tpl->assign('msg', 'Erreur de captcha, veuillez resaisir les informations.');
                 $tpl->assign('error_captcha', true);
-            } else {
-                // Recherche du membre
-                $mdl = new Modele('users');
-                $mdl->find(array('user_email' => $_POST['mail']));
-                if (!$mdl->next()) {
-                    $tpl->assign('msg', 'L\'adresse email est introuvable');
-                    $tpl->assign('error_mail', true);
-    
-                    // Membre existe
-                } else {
-                    $_SESSION['index_password_code'] = uniqid();
-                    $_SESSION['index_password_email'] = $_POST['mail'];
-                    $schema = isset($_SERVER['REQUEST_SCHEME']) ? $_SERVER['REQUEST_SCHEME'] : 'http';
-                    $tpl->assign('url', $schema . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . mkurl('index', 'password_change', array(
-                                session_name() => session_id(),
-                                'valid' => $_SESSION['index_password_code'],
-                    )));
-                    $mail = getMailer();
-                    $mail->AddAddress($_SESSION['index_password_email']);
-                    $mail->Subject = '[intra LATEB] mot de passe perdu';
-                    $mail->Body = $tpl->fetch('mail_password.tpl');
-                    $tpl->assign('msuccess', $mail->Send());
-                }
+                display();
+                return;
             }
+        }
+
+        // Recherche du membre
+        $mdl = new Modele('users');
+        $mdl->find(array('user_email' => $_POST['mail']));
+        if (!$mdl->next()) {
+            $tpl->assign('msg', 'L\'adresse email est introuvable');
+            $tpl->assign('error_mail', true);
+
+            // Membre existe
+        } else {
+            $_SESSION['index_password_code'] = uniqid();
+            $_SESSION['index_password_email'] = $_POST['mail'];
+            $schema = isset($_SERVER['REQUEST_SCHEME']) ? $_SERVER['REQUEST_SCHEME'] : 'http';
+            $tpl->assign('url', $schema . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . mkurl('index', 'password_change', array(
+                        session_name() => session_id(),
+                        'valid' => $_SESSION['index_password_code'],
+            )));
+            $mail = getMailer();
+            $mail->AddAddress($_SESSION['index_password_email']);
+            $mail->Subject = '[intra LATEB] mot de passe perdu';
+            $mail->Body = $tpl->fetch('mail_password.tpl');
+            $tpl->assign('msuccess', $mail->Send());
         }
     }
 
@@ -581,5 +588,68 @@ function index_password_change() {
 function index_error403() {
     header("HTTP/1.1 403 Unauthorized");
 
+    display();
+}
+
+function _index_wizard_edit(Modele &$mdl, &$fields) {
+    global $tpl;
+
+    if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+        return;
+    }
+
+    $insert = array();
+
+    foreach ($fields as $field) {
+        $insert[$field] = $_POST[$field];
+    }
+
+    if ($mdl->modFrom($insert)) {
+        $fields = null;
+    } else {
+        $tpl->assign('hsuccess', false);
+    }
+}
+
+function index_wizard() {
+    global $tpl;
+
+    $mdl = new Modele('users');
+    $mdl->fetch($_SESSION['user']['user_id']);
+    $fields = null;
+
+    if ($mdl->user_born == null) {
+        $fields = array(
+            'user_phone',
+            'user_sexe',
+            'user_born',
+        );
+        $tpl->assign('pcent', 25);
+        _index_wizard_edit($mdl, $fields);
+    }
+
+    if ($fields == null && $mdl->raw_user_type == 0) {
+        $fields = array(
+            'user_type',
+        );
+        $tpl->assign('pcent', 50);
+        _index_wizard_edit($mdl, $fields);
+    }
+
+    if ($fields == null && stripos($mdl->user_type->ut_name, 'EXTERNE') === false && $mdl->user_promo == 0) {
+        $fields = array(
+            'user_promo',
+            'user_login',
+        );
+        $tpl->assign('pcent', 85);
+        _index_wizard_edit($mdl, $fields);
+    }
+
+    if ($fields == null) {
+        // tous les champs sont OK
+        redirect('index', 'index', array('hsuccess' => 1));
+    }
+
+    $tpl->assign('form', $mdl->edit($fields));
     display();
 }
