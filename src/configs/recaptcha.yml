@@ -1,6 +1,9 @@
 name: recaptcha
 label: Configuration ReCaptcha
 fields:
+    siteKey:
+        type: text
+        label: Clé du site
     secretKey:
         type: text
         label: Clé secrète
