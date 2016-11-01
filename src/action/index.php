@@ -503,34 +503,46 @@ function index_password() {
     $tpl->assign('siteKey', $cfg['siteKey']);
     
     if (isset($_POST['valider'])) {
-        $securimage = new Securimage();
-        if ($securimage->check($_POST['captcha_code']) == false) {
-            $tpl->assign('msg', 'Le captcha est incorrect');
+        if (isset($_POST['g-recaptcha-response'])) {
+            $captcha=$_POST['g-recaptcha-response'];
+        }
+        if (!$captcha) {
+            $tpl->assign('msg', 'Erreur de captcha, veuillez resaisir les informations.');
             $tpl->assign('error_captcha', true);
-
-            //catcha valide
         } else {
-            // Recherche du membre
-            $mdl = new Modele('users');
-            $mdl->find(array('user_email' => $_POST['mail']));
-            if (!$mdl->next()) {
-                $tpl->assign('msg', 'L\'adresse email est introuvable');
-                $tpl->assign('error_mail', true);
-
-                // Membre existe
+            $cfg = $config['recaptcha'];
+        
+            $secretKey = $cfg['secretKey'];
+            $ip = $_SERVER['REMOTE_ADDR'];
+            $response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey."&response=".$captcha."&remoteip=".$ip);
+            $responseKeys = json_decode($response,true);
+            
+            if (intval($responseKeys["success"]) !== 1) {
+                $tpl->assign('msg', 'Erreur de captcha, veuillez resaisir les informations.');
+                $tpl->assign('error_captcha', true);
             } else {
-                $_SESSION['index_password_code'] = uniqid();
-                $_SESSION['index_password_email'] = $_POST['mail'];
-                $schema = isset($_SERVER['REQUEST_SCHEME']) ? $_SERVER['REQUEST_SCHEME'] : 'http';
-                $tpl->assign('url', $schema . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . mkurl('index', 'password_change', array(
-                            session_name() => session_id(),
-                            'valid' => $_SESSION['index_password_code'],
-                )));
-                $mail = getMailer();
-                $mail->AddAddress($_SESSION['index_password_email']);
-                $mail->Subject = '[intra LATEB] mot de passe perdu';
-                $mail->Body = $tpl->fetch('mail_password.tpl');
-                $tpl->assign('msuccess', $mail->Send());
+                // Recherche du membre
+                $mdl = new Modele('users');
+                $mdl->find(array('user_email' => $_POST['mail']));
+                if (!$mdl->next()) {
+                    $tpl->assign('msg', 'L\'adresse email est introuvable');
+                    $tpl->assign('error_mail', true);
+    
+                    // Membre existe
+                } else {
+                    $_SESSION['index_password_code'] = uniqid();
+                    $_SESSION['index_password_email'] = $_POST['mail'];
+                    $schema = isset($_SERVER['REQUEST_SCHEME']) ? $_SERVER['REQUEST_SCHEME'] : 'http';
+                    $tpl->assign('url', $schema . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . mkurl('index', 'password_change', array(
+                                session_name() => session_id(),
+                                'valid' => $_SESSION['index_password_code'],
+                    )));
+                    $mail = getMailer();
+                    $mail->AddAddress($_SESSION['index_password_email']);
+                    $mail->Subject = '[intra LATEB] mot de passe perdu';
+                    $mail->Body = $tpl->fetch('mail_password.tpl');
+                    $tpl->assign('msuccess', $mail->Send());
+                }
             }
         }
     }
