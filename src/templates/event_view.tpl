@@ -48,7 +48,7 @@
                       {if $i.cdat.est_status=="OK"}<span class="label label-success">Accepté</span>{elseif $i.cdat.est_status=="NO"}<span class="label label-danger">Refusé</span>{else}<span class="label label-default">Candidat</span>{/if}
                   {/if}
                 </td>
-                {acl level="USER"}
+                {acl level="GUEST"}
                   <td>
                     {acl level="ADMINISTRATOR"}
                       <a class="btn btn-danger" href="{mkurl action="event" page="delsection" event=$event.event_id admsec=$i.section_id}">

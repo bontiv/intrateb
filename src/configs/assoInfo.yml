@@ -1,0 +1,6 @@
+name: assoInfo
+label: Informations sur l'association
+fields:
+    assoId:
+        type: text
+        label: Id de l'asso (de 01 à 39)
