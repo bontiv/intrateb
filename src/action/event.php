@@ -399,7 +399,7 @@ function event_addpoints() {
 
         if (!$mdl->addFrom($data))
             redirect('section', 'details', array('section' => $section->section_id, 'hsuccess' => '0'));
-        $sql = $pdo->prepare('SELECT * FROM event_staff LEFT JOIN users ON user_id =est_user WHERE est_section = ? AND est_event = ?');
+        $sql = $pdo->prepare('SELECT * FROM event_staff LEFT JOIN users ON user_id = est_user WHERE est_section = ? AND est_event = ?');
         $sql->bindValue(1, $section->getKey());
         $sql->bindValue(2, $event->getKey());
         $sql->execute();
@@ -417,6 +417,7 @@ function event_addpoints() {
             if ($markOk == 'YES') {
                 $dataMark['mark_user'] = $user['user_id'];
                 $dataMark['mark_period'] = $markPeriod;
+                $dataMark['mark_mark'] = $markMark;
                 $mdlMark->addFrom($dataMark);
             }
         }
