@@ -5,6 +5,14 @@
 
 <h1>Events</h1>
 <im>Pour créer un event, passez par la page de votre section.</im>
+
+<p>
+  <ul class="nav nav-pills">
+    <li role="presentation"{if $smarty.request.page!="archive"} class="active"{/if}><a href="{mkurl action="event"}">A venir</a></li>
+    <li role="presentation"{if $smarty.request.page=="archive"} class="active"{/if}><a href="{mkurl action="event" page="archive"}">Passé</a></li>
+  </ul>
+</p>
+
 <table class="table table-striped table-hover">
   <thead>
     <tr>

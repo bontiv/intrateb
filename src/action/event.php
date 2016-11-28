@@ -47,9 +47,17 @@ function event_security($page, $params) {
 function event_index() {
     global $tpl;
 
-    $p = new SimplePager('events');
+    $p = new SimplePager('events', 'WHERE `event_end` >= NOW()');
     $p->run($tpl);
 
+    $tpl->display('event_index.tpl');
+    quit();
+}
+
+function event_archive() {
+    global $tpl;
+    $p = new SimplePager('events', 'WHERE `event_end` < NOW()');
+    $p->run($tpl);
     $tpl->display('event_index.tpl');
     quit();
 }
